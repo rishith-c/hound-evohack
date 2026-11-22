@@ -1,8 +1,8 @@
 # Wi-Fi network: results on simulated people
 
-Written by `ml/evaluate.py` on 2026-11-15 from `ml/data/synth.npz` (simulator seed 7) and `ml/models/csi_nn.npz`. Every number below is from simulation: the Blender people of `ml/data/people.json` in the simulator of `ml/simulate_csi.py`. None is from the rover; real recordings go in `ml/results/real.md`.
+Written by `ml/evaluate.py` from `ml/data/synth.npz` (simulator seed 7) and `ml/models/csi_nn.npz`. Every number below is from simulation: the Blender people of `ml/data/people.json` in the simulator of `ml/simulate_csi.py`. None is from the rover; real recordings go in `ml/results/real.md`.
 
-Network: 23372 parameters, heads person, moving. Trained 2026-11-15 on 4384 windows (validation 961, test 955; split by person), best epoch 10 of 16, 23 s on a laptop CPU. One window takes 0.1 ms here.
+Network: 23372 parameters, heads person, moving. Trained on 4384 windows (validation 961, test 955; split by person), best epoch 10 of 16, 23 s on a laptop CPU. One window takes 0.1 ms here.
 
 ## Main model
 

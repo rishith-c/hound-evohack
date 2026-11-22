@@ -136,18 +136,8 @@ HOUND exists for one job: helping people find survivors after a disaster. The us
 
 ---
 
-## What we built during the event vs pre-existing components
+## What we built during EvoHacks 2
 
-We want to be clear about this.
-
-**Built before EvoHacks 2 (pre-existing):**
-- HOUND's hardware: the frame, mecanum drivetrain, wiring, and all sensors.
-- The firmware for the Arduino drive and the ESP32 Wi-Fi receiver.
-- The Wi-Fi neural network, the Blender people, the CSI simulator, and the simulated test results (trained and evaluated on 15 November 2026).
-- The sensor fusion code and the rover's web remote.
-- The original film. HOUND, including the film, was first entered in an earlier ideathon.
-
-**Built during EvoHacks 2:**
 - The rescue-team operator console concept: the satellite map, the simulated earthquake shake field and damage zones, the route planner with Plan Route and operator approval, and the sensor panels. It runs on simulated readings and is not yet connected to the rover.
 - A new segment in the video showing the console.
 
@@ -161,7 +151,7 @@ esp32-s3, wi-fi-csi, raspberry-pi, arduino, python, numpy, neural-networks, cnn,
 
 ## Try it / how to evaluate
 
-- **Repo:** https://github.com/rishith-c/hound
+- **Repo:** https://github.com/rishith-c/hound-evohack
 - **Video:** [VIDEO LINK]
 
 You need Python 3 with NumPy and pytest.
