@@ -1,0 +1,25 @@
+{
+  "status": "PRELIMINARY; no build gate passed",
+  "rotating_payload_mass_limit_kg": 0.05,
+  "all_payload_within_radius_m": 0.03,
+  "inertia_upper_bound_kg_m2": 4.4999999999999996e-05,
+  "angular_acceleration_rad_s2": 0.5,
+  "inertial_torque_Nm": 2.2499999999999998e-05,
+  "weight_axial_N": 0.49050000000000005,
+  "pan_speed_deg_s": 30,
+  "nominal_travel_deg": [
+    -60,
+    60
+  ],
+  "microstepping": 8,
+  "pulses_s": 133.33333333333331,
+  "unverified": [
+    "actual payload mass and inertia including hub",
+    "cable drag and bearing friction",
+    "available motor running torque",
+    "allowable shaft axial load",
+    "hub and fastener strength at jam",
+    "homing repeatability",
+    "stops and collision clearance"
+  ]
+}

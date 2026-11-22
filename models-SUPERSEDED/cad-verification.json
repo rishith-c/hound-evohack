@@ -1,0 +1,160 @@
+{
+  "cad_checks_passed": true,
+  "physical_build_gate": "NOT PASSED",
+  "detection_validation": "NOT RUN",
+  "checks": [
+    {
+      "check": "all generated solids valid",
+      "passed": true,
+      "solid_count": 241
+    },
+    {
+      "check": "motor_mount is one valid solid",
+      "passed": true,
+      "volume_mm3": 37237.67260963705
+    },
+    {
+      "check": "wheel_hub is one valid solid",
+      "passed": true,
+      "volume_mm3": 6000.576888036959
+    },
+    {
+      "check": "deck_tile is one valid solid",
+      "passed": true,
+      "volume_mm3": 102850.84606840553
+    },
+    {
+      "check": "battery_cradle is one valid solid",
+      "passed": true,
+      "volume_mm3": 42927.99999999998
+    },
+    {
+      "check": "corner_gusset is one valid solid",
+      "passed": true,
+      "volume_mm3": 4127.896307134001
+    },
+    {
+      "check": "mast_column is one valid solid",
+      "passed": true,
+      "volume_mm3": 34027.256673234675
+    },
+    {
+      "check": "sensor_carriage is one valid solid",
+      "passed": true,
+      "volume_mm3": 33669.15045613622
+    },
+    {
+      "check": "electronics_tray is one valid solid",
+      "passed": true,
+      "volume_mm3": 33350.45653336485
+    },
+    {
+      "check": "deck_joiner is one valid solid",
+      "passed": true,
+      "volume_mm3": 6271.320364908965
+    },
+    {
+      "check": "front_left_motor / front_left_mount no material overlap",
+      "passed": true,
+      "overlap_mm3": 0.0,
+      "distance_mm": 0.0
+    },
+    {
+      "check": "front_left_motor / 2020_side_1 no material overlap",
+      "passed": true,
+      "overlap_mm3": 0.0,
+      "distance_mm": 3.8500000000000227
+    },
+    {
+      "check": "front_left_mount / front_left_mecanum no material overlap",
+      "passed": true,
+      "overlap_mm3": 0.0,
+      "distance_mm": 14.064971157455602
+    },
+    {
+      "check": "front_right_motor / front_right_mount no material overlap",
+      "passed": true,
+      "overlap_mm3": 0.0,
+      "distance_mm": 0.0
+    },
+    {
+      "check": "front_right_motor / 2020_side_-1 no material overlap",
+      "passed": true,
+      "overlap_mm3": 0.0,
+      "distance_mm": 3.8500000000000227
+    },
+    {
+      "check": "fifth_motor_sweep / sweep_bridge_sheet_or_split_print no material overlap",
+      "passed": true,
+      "overlap_mm3": 0.0,
+      "distance_mm": 9.849999999999994
+    },
+    {
+      "check": "sweep_motor_support / sweep_bridge_sheet_or_split_print no material overlap",
+      "passed": true,
+      "overlap_mm3": 0.0,
+      "distance_mm": 0.0
+    },
+    {
+      "check": "idler_support / sweep_bridge_sheet_or_split_print no material overlap",
+      "passed": true,
+      "overlap_mm3": 0.0,
+      "distance_mm": 0.0
+    },
+    {
+      "check": "sensor_carriage / MGN12H_carriage_envelope no material overlap",
+      "passed": true,
+      "overlap_mm3": 0.0,
+      "distance_mm": 0.0
+    },
+    {
+      "check": "head clearance at sweep -100mm",
+      "passed": true,
+      "worst_overlap_mm3": 0.0
+    },
+    {
+      "check": "head clearance at sweep 0mm",
+      "passed": true,
+      "worst_overlap_mm3": 0.0
+    },
+    {
+      "check": "head clearance at sweep 100mm",
+      "passed": true,
+      "worst_overlap_mm3": 0.0
+    },
+    {
+      "check": "model nominal envelope",
+      "passed": true,
+      "min": [
+        -175.0,
+        -255.9350288425444,
+        -1.7763568394002505e-15
+      ],
+      "max": [
+        175.0,
+        255.9350288425444,
+        277.0
+      ],
+      "size": [
+        350.0,
+        511.8700576850888,
+        277.0
+      ]
+    },
+    {
+      "check": "STEP roundtrip has valid solids",
+      "passed": true,
+      "solid_count": 241
+    },
+    {
+      "check": "STEP roundtrip occurrence volumes match source",
+      "passed": true,
+      "difference_mm3": -9.313225746154785e-10
+    }
+  ],
+  "limits": [
+    "Targeted pairs only, not exhaustive interference checking",
+    "Wheel rollers, bearings and purchased interfaces are illustrative",
+    "Motor dynamic torque, electronics, battery, FDM and sensing are unverified"
+  ]
+}

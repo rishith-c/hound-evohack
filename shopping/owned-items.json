@@ -1,0 +1,82 @@
+[
+ [
+  "JK42HS40-1704-13A NEMA 17 stepper",
+  "5",
+  "Four drive wheels, fifth spare. 0.41 N\u00b7m holding, 1.7 A, 240 g each, 5 mm flatted shaft."
+ ],
+ [
+  "Arduino UNO R4 WiFi (from Walleye)",
+  "1",
+  "The CNC Shield V3 stacks on the R4's headers; 5 V logic, same pinout. Custom timer-ISR firmware, not GRBL. Frees up when the Walleye rail retires."
+ ],
+ [
+  "TB6600 stepper driver",
+  "1",
+  "Spare. No fifth axis in this design."
+ ],
+ [
+  "11.1 V gel-blaster LiPo + its charger",
+  "1",
+  "Read the label: mAh, C rating, connector (the pigtails here are Deans T-plug). Needs \u2265 4 A continuous \u2014 any C \u2265 4 on 1000 mAh does it. Charge only with a balance charger; if yours is a two-wire wall brick, that is the first thing to replace, not the pack."
+ ],
+ [
+  "USB power bank for the Pi \u2014 compact, \u2264 130 g, 5 V \u2265 3 A output",
+  "1",
+  "WEIGH IT. A 5,000 mAh bank (~130 g) fits the mass budget only with the drivers at 1.7 A and the fan running; a 10,000\u201320,000 mAh brick (300\u2013400 g) fails the ramp case at every current. Needs a real 3 A output or the Pi throws undervoltage with the camera and thermal array on. Keeps the Pi isolated from motor-bus noise and from a mis-set buck."
+ ],
+ [
+  "DROK LM2596 adjustable buck converters, pack of 5 (3.2\u201335 V in, 1.25\u201334 V out)",
+  "5",
+  "One used, set to 6.0 V for the servos (PCA9685 V+); four spare. SET THE VOLTAGE WITH A MULTIMETER BEFORE CONNECTING \u2014 these ship at a random output. A second one trimmed to 5.10 V is the fallback Pi supply if the power bank ever drops out."
+ ],
+ [
+  "Three-pin switch",
+  "1",
+  "Not wired in until its DC rating is read and is \u2265 10 A. Until then the T-plug is the switch."
+ ],
+ [
+  "Raspberry Pi",
+  "1",
+  "Camera, radar processing, servo control, interface. Model still unknown \u2014 affects the 5 V budget."
+ ],
+ [
+  "Your USB webcam (C920-class, ~162 g) on the Ceres tilt bracket",
+  "1",
+  "The turret was built for it. Person detection with MobileNet-SSD on the Pi at ~25 fps. If it turns out heavier than 170 g, the ELP board camera (B00KA80N9U, 50 g, $22.49) is the fallback."
+ ],
+ [
+  "HLK-LD2410C 24 GHz radar",
+  "2",
+  "Primary presence sensor; sees a motionless person. One on the post, one spare."
+ ],
+ [
+  "HLK-LD2450 24 GHz radar",
+  "1",
+  "x/y of moving targets only. On the post 100 mm from the LD2410C."
+ ],
+ [
+  "ESP32-S3 DevKitC (N16R8)",
+  "3",
+  "One bridges both radar UARTs to the Pi over USB. Two free for WiFi CSI experiments."
+ ],
+ [
+  "CP2102 USB-UART",
+  "1",
+  "Bench setup only. Check it is 3.3 V logic before touching a radar."
+ ],
+ [
+  "Ceres pan/tilt turret: 2\u00d7 MG996R-class servos + bracket + 100 \u00d7 60 base",
+  "1",
+  "From the farm rover. Bolts to the front deck tile at X +110. Camera on the tilt bracket."
+ ],
+ [
+  "PCA9685 16-channel servo driver (Ceres)",
+  "1",
+  "I2C 0x40 from the Pi. Tilt ch 0, pan ch 2, as in turret_duet.ino."
+ ],
+ [
+  "Dupont leads, 22 AWG wire",
+  "stock",
+  "Everything, including the power branches: the wire calc puts 22 AWG at a 7 A limit against a 4 A burst \u2014 18 AWG was comfort, not need. I2C, UART, XSHUT, motor lead extensions."
+ ]
+]

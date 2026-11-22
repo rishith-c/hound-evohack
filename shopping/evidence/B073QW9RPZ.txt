@@ -1,0 +1,10 @@
+ASIN B073QW9RPZ — Anndason NEMA 17 steel L-bracket, 6 pcs with M3 screws, $16.99, delivery Tue Sep 8
+Checked 2026-09-06 from the listing's dimension drawing (image 41fNRHJJnfL):
+  plate width 50; face 51 tall (bend line to top edge); 4× M3 on 31 mm square; bore Ø22; bore centre ≈30 from the bend line (scaled from the drawing)
+  foot 51 long; two slots 4.3 wide × 34 ±1 long, 25.73 apart (centres), slot starts 9 from the free edge = 8 from the bend line; 3 mm steel; 90°
+  photos: plain bent L, NO gussets (bullet "welding on both sides" is not what is pictured). Weight 1.45 lb / 6 = ~110 g each.
+Fit verdict: NEMA 17 pattern exact. Foot slots are M4 clearance (4.3) — use the T-nut kit's M4 T-nuts + M4×10, not M5.
+  Inverted under the 2020 side rail: rail bottom slot centre is 10 mm from the outer face; foot slot spans 8–42 from the bend → screw lands at the slot's inner end. OK; slide bracket 1–2 mm inboard if it does not reach.
+  Motor body in the L's corner: top of motor Z 61.15 vs foot underside Z 68 → 7 mm clear. Leg bottom Z 20 vs motor bottom 18.9.
+  Bending stress at the bend from the wheel load: 12.6 N × 23.5 mm = 0.30 N·m on a 50×3 section (Z = 75 mm³) → 4 MPa. Nothing.
+  Verify on receipt: bore slips over the Ø22 boss; axle-to-foot offset (31 assumed); included M3 screw length (≤6 mm through 3 mm plate, or add a washer).

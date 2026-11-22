@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "bom-site",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8765", "--directory", "bom-site"],
+      "port": 8765
+    },
+    {
+      "name": "remote-stub",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["tests/remote_stub.py", "8099"],
+      "port": 8099
+    }
+  ]
+}

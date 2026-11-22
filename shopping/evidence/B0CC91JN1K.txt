@@ -1,0 +1,6 @@
+ASIN B0CC91JN1K — HOOVO 3S LiPo 80C 2200 mAh 11.1 V Shorty, T-plug (Deans), softcase, 2-pack
+Checked 2026-09-06 on amazon.com (logged-in session). $33.99 for 2 ($17.00 each), "Only 19 left", FREE delivery tomorrow Sep 7.
+Listing bullets: 75 × 33.8 × 26.4 mm (L×W×H), 138 g each ("Battery Weight 140 g" in details), cell voltage 3.2–4.2 V, discharge plug T connector, softcase.
+No XT60 variant on this listing (no twister). Rating 4.6 (145).
+Fit: cradle re-drawn to 75 × 33.8 × 26.4 in assembly.py (was 106 × 34 × 24 Gens ace). Mass item 0.140 kg in drivetrain.py (was 0.190). Margins after: A/B/C/D 2.33/2.02/1.28/1.68 at 1.5 A DRV8825; 0 collisions.
+Connector mismatch with the XT60 harness → resolved by switching the harness to Deans (see B07QN7PNWF), not by an adapter.

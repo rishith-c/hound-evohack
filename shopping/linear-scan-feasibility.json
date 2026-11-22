@@ -1,0 +1,32 @@
+{
+  "status": "PRELIMINARY; no physical gate passed",
+  "configuration": "fixed front webcam; translating LD2410C; fifth motor and TB6600",
+  "carriage_mass_allocation_kg": 0.25,
+  "acceleration_m_s2": 0.2,
+  "assumed_guide_and_cable_drag_N": 5,
+  "belt_efficiency_assumption": 0.85,
+  "pulley_pitch_diameter_mm": 12.732395447351628,
+  "torque_required_Nm": 0.03782270412301513,
+  "torque_with_1_5_allowance_Nm": 0.056734056184522694,
+  "travel_mm": 200,
+  "guide_mm": 300,
+  "nominal_H_block_length_mm": 45.4,
+  "nominal_end_room_mm": 27.3,
+  "speed_mm_s": 50,
+  "motor_rpm": 75.0,
+  "microstepping": 8,
+  "step_pulses_s": 2000.0,
+  "nominal_steps_over_200mm": 8000.0,
+  "possible_static_belt_pull_at_0_412Nm_N": 55.00928736435726,
+  "not_verified": [
+    "actual carriage mass",
+    "actual guide/cable drag",
+    "TB6600 running torque and current convention",
+    "idlers and shaft retention",
+    "PLA clamp under jam load",
+    "PLA heat and creep",
+    "frame joint stiffness",
+    "rail and webcam clearance",
+    "repeatability and sensing performance"
+  ]
+}

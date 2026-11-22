@@ -1,0 +1,341 @@
+{
+ "n_per_scenario": 120,
+ "scenarios": {
+  "empty room": {
+   "labels": {
+    "NOTHING": 1.0
+   },
+   "person_reported": 0.0,
+   "truth": "no person"
+  },
+  "empty room + fan": {
+   "labels": {
+    "MACHINE-LIKE PERIODICITY": 0.658,
+    "NOTHING": 0.275,
+    "RF ACTIVITY": 0.042,
+    "BREATHING-LIKE PERIODICITY": 0.025
+   },
+   "person_reported": 0.025,
+   "truth": "no person"
+  },
+  "empty room + HVAC rumble": {
+   "labels": {
+    "NOTHING": 1.0
+   },
+   "person_reported": 0.0,
+   "truth": "no person"
+  },
+  "hot radiator, visible": {
+   "labels": {
+    "NOTHING": 1.0
+   },
+   "person_reported": 0.0,
+   "truth": "no person"
+  },
+  "warm laptop, visible": {
+   "labels": {
+    "NOTHING": 1.0
+   },
+   "person_reported": 0.0,
+   "truth": "no person"
+  },
+  "sunlit wall patch, visible": {
+   "labels": {
+    "NOTHING": 1.0
+   },
+   "person_reported": 0.0,
+   "truth": "no person"
+  },
+  "person visible 2 m standing": {
+   "labels": {
+    "PERSON VISIBLE": 1.0
+   },
+   "person_reported": 1.0,
+   "truth": "person"
+  },
+  "person visible 4 m lying": {
+   "labels": {
+    "PERSON VISIBLE": 1.0
+   },
+   "person_reported": 1.0,
+   "truth": "person"
+  },
+  "person visible, dark": {
+   "labels": {
+    "PERSON VISIBLE": 0.883,
+    "BREATHING-LIKE PERIODICITY": 0.05,
+    "RF CORROBORATED": 0.033,
+    "NOTHING": 0.033
+   },
+   "person_reported": 0.967,
+   "truth": "person"
+  },
+  "behind drywall 2 m standing": {
+   "labels": {
+    "BREATHING-LIKE PERIODICITY": 0.417,
+    "NOTHING": 0.258,
+    "RF ACTIVITY": 0.233,
+    "RF CORROBORATED": 0.075,
+    "MACHINE-LIKE PERIODICITY": 0.017
+   },
+   "person_reported": 0.492,
+   "truth": "person"
+  },
+  "behind drywall 3 m sitting": {
+   "labels": {
+    "NOTHING": 0.708,
+    "RF ACTIVITY": 0.175,
+    "BREATHING-LIKE PERIODICITY": 0.1,
+    "RF CORROBORATED": 0.017
+   },
+   "person_reported": 0.117,
+   "truth": "person"
+  },
+  "behind drywall 4 m lying": {
+   "labels": {
+    "NOTHING": 0.883,
+    "RF ACTIVITY": 0.108,
+    "BREATHING-LIKE PERIODICITY": 0.008
+   },
+   "person_reported": 0.008,
+   "truth": "person"
+  },
+  "behind drywall 3 m + fan": {
+   "labels": {
+    "MACHINE-LIKE PERIODICITY": 0.342,
+    "BREATHING-LIKE PERIODICITY": 0.267,
+    "NOTHING": 0.175,
+    "RF ACTIVITY": 0.142,
+    "RF CORROBORATED": 0.075
+   },
+   "person_reported": 0.342,
+   "truth": "person"
+  },
+  "behind drywall, CSI uncal.": {
+   "labels": {
+    "NOTHING": 0.625,
+    "RF ACTIVITY": 0.217,
+    "BREATHING-LIKE PERIODICITY": 0.15,
+    "RF CORROBORATED": 0.008
+   },
+   "person_reported": 0.158,
+   "truth": "person"
+  }
+ },
+ "summary": {
+  "false_alarm_rate_no_person": 0.004,
+  "detection_behind_drywall": 0.223,
+  "detection_visible": 0.989
+ },
+ "breathing_roc": {
+  "15": {
+   "0.5": 0.0,
+   "1.0": 0.0,
+   "1.5": 0.0,
+   "2.0": 0.0,
+   "3.0": 0.0,
+   "4.0": 0.0,
+   "6.0": 0.0,
+   "false_alarm_empty": 0.0
+  },
+  "30": {
+   "0.5": 0.0,
+   "1.0": 0.383,
+   "1.5": 0.617,
+   "2.0": 0.65,
+   "3.0": 0.85,
+   "4.0": 0.817,
+   "6.0": 0.75,
+   "false_alarm_empty": 0.0
+  },
+  "45": {
+   "0.5": 0.017,
+   "1.0": 0.45,
+   "1.5": 0.65,
+   "2.0": 0.833,
+   "3.0": 0.833,
+   "4.0": 0.817,
+   "6.0": 0.867,
+   "false_alarm_empty": 0.0
+  }
+ },
+ "fan_discrimination": {
+  "fan only": {
+   "none": 0.0,
+   "breathing-like": 0.15,
+   "machine": 0.85
+  },
+  "person only": {
+   "none": 0.0,
+   "breathing-like": 0.988,
+   "machine": 0.013
+  },
+  "person + fan": {
+   "none": 0.1,
+   "breathing-like": 0.9,
+   "machine": 0.0
+  }
+ },
+ "thermal_vs_range": {
+  "stand": {
+   "1": 1.0,
+   "2": 1.0,
+   "3": 1.0,
+   "4": 1.0,
+   "5": 1.0,
+   "6": 1.0
+  },
+  "lie": {
+   "1": 1.0,
+   "2": 1.0,
+   "3": 1.0,
+   "4": 1.0,
+   "5": 1.0,
+   "6": 1.0
+  },
+  "false_positive": {
+   "radiator": 0.0,
+   "laptop": 0.525,
+   "sun": 1.0
+  }
+ },
+ "mission": {
+  "rooms": 4,
+  "stations": 9,
+  "station_s": 60,
+  "travel_m": 36,
+  "total_min": 10.5,
+  "pack_min": 43,
+  "fits": true,
+  "with_second_angle_min": 19.5
+ },
+ "calibration": {
+  "radar_conf": {
+   "edges": [
+    0.0,
+    2.0,
+    3.0,
+    4.0,
+    5.0,
+    6.0,
+    7.0,
+    8.0,
+    9.0,
+    10.01
+   ],
+   "llr": [
+    -0.710449463962774,
+    0.2452289484608252,
+    0.8886872901054567,
+    1.5227325320950726,
+    1.7427618626299697,
+    1.5881217846824622,
+    0.6613344456894982,
+    -0.16181814963349694,
+    2.2204460492503128e-16
+   ]
+  },
+  "radar_presence": {
+   "edges": [
+    0.0,
+    30.0,
+    40.0,
+    50.0,
+    60.0,
+    101.0
+   ],
+   "llr": [
+    -2.5111788632935244,
+    -0.7819535183352669,
+    0.6056582258354635,
+    2.7823069717087026,
+    0.05077232537342314
+   ]
+  },
+  "csi_presence": {
+   "edges": [
+    0.0,
+    0.9,
+    1.1,
+    1.3,
+    1.6,
+    2.5,
+    5.0,
+    1000000000.0
+   ],
+   "llr": [
+    -2.2204460492503136e-16,
+    0.0805354970160692,
+    1.407746287837842,
+    -2.2204460492503136e-16,
+    -2.2204460492503136e-16,
+    -2.2204460492503136e-16,
+    -2.2335922215070942
+   ]
+  },
+  "csi_conf": {
+   "edges": [
+    0.0,
+    2.0,
+    3.0,
+    4.0,
+    5.0,
+    6.0,
+    7.0,
+    8.0,
+    10.01
+   ],
+   "llr": [
+    -1.1482838984653474,
+    -1.5827412671665726,
+    -0.15758090525246207,
+    1.105171464647355,
+    0.9843130359741893,
+    1.4904455377739096,
+    0.7880781055953364,
+    -2.2204460492503136e-16
+   ]
+  },
+  "camera": {
+   "edges": [
+    0.0,
+    0.2,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    1.01
+   ],
+   "llr": [
+    -2.933010283342818,
+    -0.4338823208317415,
+    0.0,
+    -0.10763066419236544,
+    0.40465374903728496,
+    2.1722232751308024,
+    3.0
+   ]
+  },
+  "thermal": {
+   "edges": [
+    0.0,
+    0.05,
+    0.2,
+    0.35,
+    0.5,
+    0.8,
+    1.01
+   ],
+   "llr": [
+    -3.0,
+    0.0,
+    -0.6855425811747259,
+    0.0,
+    0.0,
+    1.7228854402155436
+   ]
+  }
+ },
+ "seconds": 122.2
+}

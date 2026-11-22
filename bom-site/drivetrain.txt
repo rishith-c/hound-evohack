@@ -1,0 +1,110 @@
+
+MECANUM DRIVETRAIN — four JK42HS40-1704-13A, direct drive, 80 mm wheels
+==============================================================================
+
+MASS BUDGET
+  4x JK42HS40 motors                            0.960 kg  MEASURED
+  4x 350 mm 2020 V-slot @ 0.50 kg/m             0.700 kg  ALLOCATED
+  4x 80 mm mecanum wheel + 5 mm coupling        0.600 kg  ALLOCATED
+  4x steel NEMA 17 bracket                      0.452 kg  MEASURED
+  Pan/tilt turret: 2x MG996R-class servo + bracket + PCA9685  0.250 kg  ALLOCATED
+  XL4015 5 A buck (owned): 5.0 V servo + fan rail  0.030 kg  ALLOCATED
+  USB power bank for Pi, compact 5000 mAh — WEIGH IT  0.130 kg  ALLOCATED
+  8x 2020 corner bracket + T-nuts               0.096 kg  ALLOCATED
+  Uno + CNC Shield + 4 drivers + fan            0.117 kg  ALLOCATED
+  Raspberry Pi + case                           0.070 kg  ALLOCATED
+  HOOVO 3S 2200 mAh 80C shorty LiPo             0.140 kg  ALLOCATED
+  2x LD2410C + LD2450 + ESP32-S3 #3 CSI node    0.060 kg  ALLOCATED
+  Second USB bank (ESP32 #3 only) — WEIGH IT    0.090 kg  ALLOCATED
+  4-port USB hub + 2x CP2102                    0.050 kg  ALLOCATED
+  Owned USB webcam (C920-class)                 0.162 kg  ALLOCATED
+  2x VL53L1X                                    0.010 kg  ALLOCATED
+  MLX90640 thermal + SCD41 CO2 + INMP441 mic    0.025 kg  ALLOCATED
+  Printed parts: 4 tiles, cradle, post, bridge, clips, lock  0.550 kg  ALLOCATED
+  Cable ties, tape                              0.030 kg  ALLOCATED
+  22 AWG wiring + connectors                    0.080 kg  ALLOCATED
+  fasteners + wiring allowance 15%              0.690 kg  ALLOCATED
+  DESIGN MASS                                   5.292 kg
+  ceiling for sensitivity                       6.000 kg
+
+REQUIRED TORQUE PER WHEEL   (T = F · r · √2 / (4 · η) + J·a/r,  η = 0.85,  J = wheel ring + rotor 2.45e-04 kg·m²)
+  load case                         F total N  T @ design   T @ 6 kg
+  A  level cruise, a=0.1                 6.76      0.1131     0.1281
+  B  level responsive, a=0.3             7.82      0.1319     0.1493
+  C  5° ramp, a=0.3                     12.32      0.2068     0.2342
+  D  strafe on carpet, a=0.3             9.38      0.1578     0.1787
+  firmware ramps (braking: T = F · r · √2 · η / 4 + J·a/r — losses help a stop):
+  E  level start, fw a=0.6               9.41      0.1602     0.1811
+  F  strafe start, fw a=0.6             10.96      0.1861     0.2105
+  G  5° ramp start, fw a=0.6            13.91      0.2351     0.2660
+  H  level stop, fw a=1.8                3.30      0.0507     0.0560
+  I  5° downhill stop, fw a=1.8          7.84      0.1053     0.1180
+  J  strafe stop, fw a=1.8               1.74      0.0319     0.0347
+
+AVAILABLE TORQUE   (T_hold 0.4119 N·m × I/1.7 × k_dyn 0.7)
+  driver / current setting           I A  T avail  margins A / B / C / D at design mass   verdict
+  A4988, no cooling                 1.00   0.1696  1.50 / 1.29 / 0.82 / 1.07   FAIL   (6 kg worst 0.64)
+                                                   firmware E / F / G / H / I / J: 1.06 / 0.91 / 0.72 / 3.35 / 1.61 / 5.31
+  A4988, heatsink + fan             1.20   0.2035  1.80 / 1.54 / 0.98 / 1.29   FAIL   (6 kg worst 0.77)
+                                                   firmware E / F / G / H / I / J: 1.27 / 1.09 / 0.87 / 4.02 / 1.93 / 6.37
+  DRV8825, no cooling               1.50   0.2544  2.25 / 1.93 / 1.23 / 1.61   FAIL   (6 kg worst 0.96)
+                                                   firmware E / F / G / H / I / J: 1.59 / 1.37 / 1.08 / 5.02 / 2.41 / 7.96
+  DRV8825, heatsink + fan           1.70   0.2883  2.55 / 2.19 / 1.39 / 1.83   FAIL   (6 kg worst 1.08)
+                                                   firmware E / F / G / H / I / J: 1.80 / 1.55 / 1.23 / 5.69 / 2.74 / 9.03
+
+SPEED–TORQUE VALIDITY   (k_dyn assumes operation well below the corner speed)
+  I = 1.0 A: full-current corner    342 rpm   vs operating 24–127 rpm (firmware cap 0.53 m/s)   ratio ≥ 2.7
+  I = 1.5 A: full-current corner    228 rpm   vs operating 24–127 rpm (firmware cap 0.53 m/s)   ratio ≥ 1.8
+  I = 1.7 A: full-current corner    201 rpm   vs operating 24–127 rpm (firmware cap 0.53 m/s)   ratio ≥ 1.6
+  back-EMF at 0.53 m/s: 3.21 V of 10.5 V bus — negligible
+
+STEP RATE   (1/32 — caps on MS1 + MS3 — 30 kHz step ISR → 15000 steps/s per axis, firmware cap 13500)
+  0.100 m/s =  23.9 rpm →   2546 steps/s per wheel,  10186 total   OK (17% of the ISR's 15000)
+  0.415 m/s =  99.1 rpm →  10568 steps/s per wheel,  42272 total   OK (70% of the ISR's 15000)
+  0.530 m/s = 126.5 rpm →  13496 steps/s per wheel,  53985 total   OK (90% of the ISR's 15000)
+
+TRACTION   (per-wheel ground force F·√2/4 vs μ·N on the least-loaded wheel; weight transfer m·a·h/L,
+  h = 0.1 m, wheelbase 0.25 m, track 0.431 m; margin required 1.25)
+  μ 0.50 rubber-faced rollers                 start, forward 5.50  stop, forward 1.64  stop, strafe 1.76  stop, 5° downhill 1.02 LOW
+  μ 0.30 hard plastic rollers, smooth floor   start, forward 3.30  stop, forward 0.99 FAIL  stop, strafe 1.06 LOW  stop, 5° downhill 0.61 FAIL
+  μ needed with no margin at the worst of these: 0.49. Below it the wheels slide on every stop, and
+  unevenly (different loads and roller wear), which turns a stop into a yaw or a sideways slip.
+
+POWER AND ENDURANCE   (HOOVO 3S 2200 mAh shorty, 80% usable, bus 10.5 V)
+  I = 1.0 A: copper   6.0 W + mech  1.3 W + driver  2.6 W =   9.9 W → 0.94 A →  1.9 h motors only
+  I = 1.5 A: copper  13.5 W + mech  1.3 W + driver  5.8 W =  20.6 W → 1.96 A →  0.9 h motors only
+  Holding at rest draws the copper + driver terms with zero motion. Cut ENABLE (D8)
+  when parked; mecanum wheels on a level floor do not roll away.
+
+SHAFT RADIAL LOAD   (NEMA 17 typical rating 28 N at 20 mm from the flange — ASSUMED, unverified for this motor)
+  static 13.0 N/wheel at 23.5 mm overhang; ×1.5 indoor floors, small bumps = 22.9 N-equivalent   margin 1.22  PASS
+  static 13.0 N/wheel at 23.5 mm overhang; ×2.0 kerbs, thresholds          = 30.5 N-equivalent   margin 0.92  FAIL
+  ← thinnest margin in the design. Indoor floors pass; a 20 mm threshold does not. Keep the wheel tight to the leg.
+  Mount the wheel as close to the motor face as the coupling allows.
+
+STATIC STABILITY   (h_CG ≈ 0.1 m with battery on the deck — ALLOCATED)
+  pitch tip 51°,  roll tip 65°   PASS
+
+==============================================================================
+VERDICT
+  As built (DRV8825, no cooling, 1.5 A) at the design mass 5.29 kg:
+  every level-floor case passes — worst F (strafe start, fw a=0.6) at 1.37.
+  Below the 1.25 screening margin: C 1.23, G 1.08 — the 5° ramp starts. G governs and is still ≥ 1.0: it should climb, with no reserve for the unmeasured k_dyn.
+  G reaches 1.25 at ≤ 4.57 kg at 1.5 A.
+  G reaches 1.25 at ≤ 5.19 kg at 1.7 A.
+  Most of the mass is ALLOCATED, not weighed: weighing the rover moves this verdict more than any other number.
+  Traction: the firmware stops at 1.8 m/s². Rubber-faced rollers (μ 0.5) hold a level stop with
+  1.64; hard rollers on a smooth floor (μ 0.3) sit at 0.99 — the wheels slide at
+  every stop. That fits the end-of-move veer reported on 2026-09-24; it does not prove it.
+
+  What fails first: a start up a 5° carpet ramp at the firmware's 0.6 m/s². The motors stall
+  silently — steppers do not slow down, they stop and lose position with no error.
+  Next, in order: weigh the rover; measure μ (tilt a board under it until it slides, μ = tan θ);
+  measure pull-out torque at 24 rpm, 1.5 A, on the real battery with a lever arm and the hanging
+  scale. Those three numbers retire the allocations, MU_ROLLER and K_DYN.
+
+NOT ANALYSED: fatigue, buckling, impact, vibration, roller wear, uneven floors,
+  wheel unloading beyond rigid weight transfer, combined-slip mecanum behaviour (which way a sliding
+  stop veers), thermal equilibrium of motors or drivers, battery sag under stall, firmware timing.
+  None of this is a substitute for the three measurements above.
+

@@ -1,0 +1,9 @@
+ASIN B0C2CTZPMZ
+Gens ace G-Tech Bashing 2200mAh 11.1V 35C 3S Lipo Battery with XT60 Plug
+Observed 2026-09-05 on Amazon US search results, page 1, query "Gens ace 2200mAh 3S 25C 11.1V lipo XT60"
+Price: $25.99
+Delivery: FREE delivery Thu, Sep 10
+Rating: 4.7 out of 5 stars (29)
+Why selected: user asked for a good pack and is willing to pay. Gens ace is a reputable hobby-LiPo brand; XT60 is the robust standard connector; 35C = 77 A continuous vs a 4 A need; G-Tech tag exposes cell health. The 25C XT60 sibling (B0C2CVNXJC, $26.79) ships Sep 21-Oct 13; the 60C is EC3 ($40.19). Tattu listings were all <= 1800 mAh.
+Mass: not on the listing; Gens ace 2200 3S packs are ~178-195 g. Budgeted 190 g, VERIFY on receipt.
+Replaces: OVONIC B08CZF373Y (Deans T-plug). Connector lines revert to XT60 (B07BF8154S pigtails, B09CT5VGPW extensions).

@@ -1,0 +1,1 @@
+"inv": [0, 0, 0, 0] "ms": 32 "maxmm": 530 "k": 13500 "a": 15278 "pct": 78  · caps M0+M2 (1/32) · web slider default 415 mm/s · body-vector ramp 600 mm/s² accel, 3× decel · 30 kHz ISR, 13500 steps/s, 800 mm/s ceiling · Pi rover/ at commit d306b4e

@@ -1,0 +1,202 @@
+metadata:
+  title: 'Hound 5 — LD2410C radars: four wires each to their own CP2102, and the USB tree (the LD2450 is on sheet 4)'
+connectors:
+  PI_USB:
+    type: Raspberry Pi 4 — USB-A ports
+    pinlabels:
+    - 'USB 1: webcam'
+    - 'USB 2: hub'
+    - 'USB 3: free'
+    - 'USB 4: free'
+    notes: 1.2 A shared across all four ports; peak here 0.8 A (webcam 0.3, R4 0.2, hub + two adapters + two LD2410Cs 0.28). Webcam on its own port, everything else through the hub.
+  HUB:
+    type: 4-port USB hub (unpowered)
+    pinlabels:
+    - upstream
+    - 'port 1: UNO R4'
+    - 'port 2: CP2102 no.1'
+    - 'port 3: CP2102 no.2'
+    - 'port 4: free'
+  CAM:
+    type: Webcam (C920-class) — captive 1.5 m cable
+    pinlabels:
+    - USB-A
+    notes: On the turret beside the thermal array. If it drops out at 1080p, run 720p.
+  R4_USB:
+    type: UNO R4 WiFi — USB-C
+    pinlabels:
+    - USB-C
+    notes: 'USB CDC serial to the Pi: /dev/serial/by-id/*Arduino*'
+  CP1:
+    type: CP2102 USB-UART no.1 → LD2410C LEFT
+    pinlabels:
+    - 3V3
+    - 5V
+    - GND
+    - TXD
+    - RXD
+    - DTR
+    notes: '3.3 V-logic adapter (meter TXD at idle: 3.3 V). Four wires to the radar: +5V → VCC (the 3V3 pin stays empty), GND → GND, TXD → radar RX, RXD → radar TX. The 5V pin is USB power passed through
+      (≤ 500 mA). Label the adapter body: LD2410C LEFT.'
+  CP2:
+    type: CP2102 USB-UART no.2 → LD2410C RIGHT
+    pinlabels:
+    - 3V3
+    - 5V
+    - GND
+    - TXD
+    - RXD
+    - DTR
+    notes: '3.3 V-logic adapter (meter TXD at idle: 3.3 V). Four wires to the radar: +5V → VCC (the 3V3 pin stays empty), GND → GND, TXD → radar RX, RXD → radar TX. The 5V pin is USB power passed through
+      (≤ 500 mA). Label the adapter body: LD2410C RIGHT.'
+  LDL:
+    type: HLK-LD2410C LEFT (toed +30° out, deck Y +50)
+    pinlabels:
+    - 1 TX
+    - 2 RX
+    - 3 OUT
+    - 4 GND
+    - 5 VCC
+    notes: 'Pins per Hi-Link manual table 1: 1 UART_Tx, 2 UART_Rx, 3 OUT, 4 GND, 5 VCC (5–12 V, 5 V advised). IO 3.3 V, 256000 baud. OUT unused.'
+  LDR:
+    type: HLK-LD2410C RIGHT (toed −30° out, deck Y −50)
+    pinlabels:
+    - 1 TX
+    - 2 RX
+    - 3 OUT
+    - 4 GND
+    - 5 VCC
+    notes: 'Pins per Hi-Link manual table 1: 1 UART_Tx, 2 UART_Rx, 3 OUT, 4 GND, 5 VCC (5–12 V, 5 V advised). IO 3.3 V, 256000 baud. OUT unused.'
+cables:
+  W_CAM:
+    gauge: 28 AWG
+    length: 1.5
+    colors:
+    - WH
+    category: bundle
+    notes: captive
+  W_HUB:
+    gauge: 28 AWG
+    length: 0.3
+    colors:
+    - WH
+    category: bundle
+  W_R4:
+    gauge: 28 AWG
+    length: 0.3
+    colors:
+    - WH
+    category: bundle
+    notes: USB-A → USB-C
+  W_CPA:
+    gauge: 28 AWG
+    length: 0.15
+    colors:
+    - WH
+    category: bundle
+  W_CPB:
+    gauge: 28 AWG
+    length: 0.15
+    colors:
+    - WH
+    category: bundle
+  W_LDL:
+    gauge: 26 AWG
+    length: 0.25
+    colors:
+    - GN
+    - WH
+    - BK
+    - RD
+    category: bundle
+    notes: TX, RX, GND, VCC — one 4-wire Dupont lead per radar
+  W_LDR:
+    gauge: 26 AWG
+    length: 0.25
+    colors:
+    - GN
+    - WH
+    - BK
+    - RD
+    category: bundle
+connections:
+- - PI_USB:
+    - 'USB 1: webcam'
+  - W_CAM:
+    - 1
+  - CAM:
+    - USB-A
+- - PI_USB:
+    - 'USB 2: hub'
+  - W_HUB:
+    - 1
+  - HUB:
+    - upstream
+- - HUB:
+    - 'port 1: UNO R4'
+  - W_R4:
+    - 1
+  - R4_USB:
+    - USB-C
+- - HUB:
+    - 'port 2: CP2102 no.1'
+  - W_CPA:
+    - 1
+  - CP1:
+    - 5V
+- - HUB:
+    - 'port 3: CP2102 no.2'
+  - W_CPB:
+    - 1
+  - CP2:
+    - 5V
+- - LDL:
+    - 1 TX
+  - W_LDL:
+    - 1
+  - CP1:
+    - RXD
+- - LDL:
+    - 2 RX
+  - W_LDL:
+    - 2
+  - CP1:
+    - TXD
+- - CP1:
+    - GND
+  - W_LDL:
+    - 3
+  - LDL:
+    - 4 GND
+- - CP1:
+    - 5V
+  - W_LDL:
+    - 4
+  - LDL:
+    - 5 VCC
+- - LDR:
+    - 1 TX
+  - W_LDR:
+    - 1
+  - CP2:
+    - RXD
+- - LDR:
+    - 2 RX
+  - W_LDR:
+    - 2
+  - CP2:
+    - TXD
+- - CP2:
+    - GND
+  - W_LDR:
+    - 3
+  - LDR:
+    - 4 GND
+- - CP2:
+    - 5V
+  - W_LDR:
+    - 4
+  - LDR:
+    - 5 VCC
+options:
+  bgcolor: '#ffffff'

@@ -1,0 +1,27 @@
+{
+  "status": "CALCULATION ONLY; PHYSICAL VERIFICATION NOT PASSED",
+  "assumptions": {
+    "total_mass_kg": 6,
+    "wheel_radius_m": 0.04,
+    "speed_m_s": 0.1,
+    "acceleration_m_s2": 0.1,
+    "rolling_coefficient": 0.08,
+    "drive_efficiency": 0.65,
+    "torque_reserve_ratio": 1.5
+  },
+  "required_running_torque_Nm": 0.08167384615384614,
+  "required_with_reserve_Nm": 0.1225107692307692,
+  "motor_speed_rpm": 23.8732414637843,
+  "published_holding_torque_Nm": 0.4118793,
+  "static_load_per_wheel_N": 14.715,
+  "motor_mass_total_kg": 1.2,
+  "unknown": [
+    "actual mass",
+    "dynamic torque at battery voltage and driver setting",
+    "shaft bearing radial rating",
+    "wheel load rating",
+    "lateral rolling resistance",
+    "impact fatigue buckling dynamics",
+    "thermal equilibrium"
+  ]
+}

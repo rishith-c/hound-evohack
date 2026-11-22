@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Hound Assembly Manual</title>
+<style>
+body{margin:0;background:#fff;color:#202124;font:16px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:900px;margin:40px auto;padding:0 24px 80px}
+h1{font-size:30px;line-height:1.2;margin:0 0 4px}h2{font-size:22px;margin:40px 0 8px;border-bottom:2px solid #202124;padding-bottom:4px}h3{font-size:17px;margin:24px 0 6px}
+p{margin:10px 0;max-width:72ch}li{margin:4px 0;max-width:72ch}
+table{border-collapse:collapse;width:100%;font-size:14px;margin:12px 0}th,td{border:1px solid #d0d5da;padding:6px 9px;text-align:left;vertical-align:top}th{background:#f3f5f7}
+code{background:#f3f4f5;padding:1px 4px;border-radius:3px;font-size:.92em}
+.warn{border-left:4px solid #c9430a;background:#fbe9df;padding:10px 14px;margin:14px 0;max-width:72ch}
+.stop{border-left:4px solid #c9430a;padding-left:10px}
+.small{font-size:13px;color:#555}
+@media print{main{margin:0;max-width:none}h2{page-break-after:avoid}table{page-break-inside:avoid}}
+</style></head><body><div id="wiring-v4-banner" style="background:#fff3bf;border:1px solid #e67700;color:#5c3d00;padding:10px 14px;margin:12px;border-radius:8px;font:14px system-ui,sans-serif"><b>Updated for v4.1 on 2026-09-25.</b> Sections 6–12 now match the rover as built: one XL4015 at 5.0 V feeding the PCA9685 on the R4's I2C (tilt ch 3, pan ch 2), drivers at 1/32 (caps on MS1 + MS3), motors X = RL, Y = FL, Z = RR, A = FR, the LD2410Cs on two CP2102s and the LD2450 on the Pi's own UART. For every pin, the <a href="wiring.html">wiring page</a> is the reference; the <a href="rover3d/">3D rover</a> shows where each part sits.</div><main>
+<h1>Hound Assembly Manual</h1>
+<p class="small">Hound, the human-finding mecanum rover · every position from <code>assembly.py</code> (51 placements, 0 collisions), every wire from <code>wiring.py</code>, every part from the BOM at rover-amazon-bom.vercel.app · 2026-09-08</p>
+
+<h2>0. Read this first</h2>
+<h3>Directions and names</h3>
+<p>Put the rover on the floor and stand behind it. <b>Forward is +X</b>, <b>left is +Y</b>, <b>up is +Z</b>. The origin is the centre of the chassis at floor level, so every number in this manual is millimetres from that point. The four corners are FL, FR, RL, RR (front-left, front-right, rear-left, rear-right). At the CNC shield they are wired X = RL, Y = FL, Z = RR, A = FR (as the firmware maps them).</p>
+<h3>The frame in one paragraph</h3>
+<p>Two side rails run front-to-back along X with their outer faces at Y = ±195. Two cross rails run left-to-right along Y, butted between the side rails, outer faces at X = ±175. All four rails sit with their undersides at Z = 71 and tops at Z = 91. The deck sits on the rail tops, so the deck top is Z = 96. The motors hang below the side rails on steel L-brackets; the wheels are outboard of the rails at Y = ±215.5 with their axles at Z = 40. Overall width over the wheels is 462 mm, ground clearance 18.9 mm at the motor bodies.</p>
+<h3>Fasteners you will handle</h3>
+<table>
+<tr><th>Name</th><th>What it is</th><th>Key</th><th>Comes from</th></tr>
+<tr><td>M5 × 8 socket cap</td><td>5 mm thread, 8 mm long, cylindrical head with a hex socket</td><td>4 mm hex</td><td>Corner kit (40)</td></tr>
+<tr><td>M5 sliding T-nut</td><td>Rectangular nut that slides into a rail slot from the end and locks when the screw pulls it against the slot lips</td><td>—</td><td>Corner kit (40)</td></tr>
+<tr><td>M4 × 10, M4 × 12 hex socket</td><td>4 mm thread</td><td>3 mm hex</td><td>T-nut kit (20 + 20)</td></tr>
+<tr><td>M4 T-nut</td><td>As above, 4 mm thread. The T-nut kit's may be drop-in style; either works</td><td>—</td><td>T-nut kit (40)</td></tr>
+<tr><td>M3 × 6 / 8 / 10 / 12 / 16 / 20 socket cap + M3 nuts</td><td>3 mm thread, black alloy steel</td><td>2.5 mm hex, 5.5 mm nut driver or pliers</td><td>M3 kit</td></tr>
+<tr><td>M2 × 20 button head + M2 nuts</td><td>2 mm thread, low domed head</td><td>1.5 mm hex, 4 mm nut</td><td>M2 kit</td></tr>
+<tr><td>Grub (set) screw</td><td>Headless screw in the wheel coupler that bites the motor shaft's flat</td><td>2 mm hex, typically</td><td>Wheel kit</td></tr>
+<tr><td>Blue threadlocker</td><td>Loctite 242 or equivalent, one drop, on grub screws only</td><td>—</td><td>Consumables</td></tr>
+</table>
+<h3>Torque without a torque wrench</h3>
+<p>The numbers below come from the design files. Without a wrench, use these cues, and never use the short leg of a hex key as a lever on anything under 2.0 N·m.</p>
+<table>
+<tr><th>Torque</th><th>Where</th><th>Feel</th></tr>
+<tr><td>3.0 N·m</td><td>M5 corner brackets into T-nuts</td><td>Firm two-finger pull on the short leg of the 4 mm key until it stops, then one-eighth turn more. More than this strips 2020 T-nuts.</td></tr>
+<tr><td>2.0 N·m</td><td>M4 motor brackets and post flange into T-nuts</td><td>Snug on the short leg of the 3 mm key, then one-eighth turn.</td></tr>
+<tr><td>1.5 N·m</td><td>M5 deck screws into PLA counterbores</td><td>Stop the instant the head seats. PLA crushes.</td></tr>
+<tr><td>1.0 N·m</td><td>M3 with nuts through printed parts</td><td>Snug with the long leg of the 2.5 mm key.</td></tr>
+<tr><td>0.8 N·m</td><td>M3 × 6 into the motors' aluminium threads</td><td>Snug with the long leg only. Stripping a NEMA 17 thread is permanent.</td></tr>
+<tr><td>1.5 N·m</td><td>Coupler grub screw on the shaft flat</td><td>Firm on the long leg of the 2 mm key, with threadlocker.</td></tr>
+<tr><td>hand-tight</td><td>Everything on bosses and cable ties</td><td>Snug. These carry no load worth talking about.</td></tr>
+</table>
+<h3>Tools</h3>
+<p>Hex keys 1.5, 2, 2.5, 3, 4 mm (the kits include them); small pliers; tape measure; calipers if you have them; multimeter (owned); wire strippers for 22 and 14 AWG; a plastic trimmer tool for the driver pots; cable ties (in the kit); blue threadlocker; a printer with PLA and PETG.</p>
+<div class="warn"><b>LiPo rules for the whole build.</b> Charge at 2.2 A on tile or concrete, never in the rover, never unattended. Meter the pack before and after every run; stop at 11.1 V, never below 10.5. Unplug the T-plug when the rover is parked for more than a few minutes. Mark the two packs A and B. There is no fuse on this rover by your choice: the T-plug on the deck top is the only disconnect, so keep the pack leads short and away from rail edges.</div>
+
+<h2>1. Printed parts</h2>
+<p>Print the first deck tile and the Pi bosses first and test-fit them before the rest. Total is about 20 printer-hours.</p>
+<p><b>Files:</b> deck tiles <a href="cad/deck_FL.stl">FL</a> · <a href="cad/deck_FR.stl">FR</a> · <a href="cad/deck_RL.stl">RL</a> · <a href="cad/deck_RR.stl">RR</a> (STL, each fits a 220 mm bed; bosses for the R4 and Pi are on the RL and RR tiles) · whole deck as one plate: <a href="cad/deck_full.dxf">DXF</a> for laser cutting, <a href="cad/deck_full.svg">1:1 SVG drill template</a> (print at 100 %, check the outline measures 350 × 390 mm). Source: cad/deck.py.</p>
+<table>
+<tr><th>Part</th><th>Size (mm)</th><th>Material</th><th>Qty</th><th>Notes</th></tr>
+<tr><td>Deck quadrant tile</td><td>175 × 195 × 5</td><td>PLA</td><td>4</td><td>Half-thickness lap (15 mm tongue and rebate) on the two centreline edges, tongues facing +X and +Y. Counterbores at every M5 hole so the 8 mm screw reaches the T-nut. 20 × 8 mm wire slots beside each motor corner and one at the rear centre for the pack lead. Flat, 4 perimeters, 20% infill; the CAD volumes give 87 g (FL), 93 g (FR), 94 g (RL, with the R4 bosses), 101 g (RR, with the Pi bosses) — 375 g for the set, 55 g over the 320 g budget, which the torque margins absorb. RL and RR are 190 mm wide with their tongues; RR is 210 mm long: all four fit an Ender 3.</td></tr>
+<tr><td>Battery cradle</td><td>83 × 40 × 32</td><td>PETG</td><td>1</td><td>Open at both ends. Four M3 holes at X ±46, Y ±14 matching the tile above it.</td></tr>
+<tr><td>Cradle retaining bar</td><td>140 × 12 × 6</td><td>PETG</td><td>2</td><td>Print two; one is a spare.</td></tr>
+<tr><td>Radar post</td><td>40 × 40 × 200 U-channel</td><td>PETG</td><td>1</td><td>Print flat as a 3-wall channel, open side rearward as the cable run. Separate 60 × 60 × 6 flange plate, 2 × M3 × 10 + nut to the post. Post and flange counterbored 3 mm at the M4 holes, which sit at Y ±20.</td></tr>
+<tr><td>Radar bar</td><td>120 × 20 × 8</td><td>PETG</td><td>1</td><td>Sits on the post top, held by 2 × M3 × 10 + nut through the post wall.</td></tr>
+<tr><td>Fan bridge</td><td>spans the shield</td><td>PETG</td><td>1</td><td>PETG because the heatsinks under it reach 60 °C. Two M3 × 8 into deck bosses.</td></tr>
+<tr><td>Bosses</td><td>10 mm (R4, ESP32, bucks, PCA9685), 8 mm (Pi, 58 × 49 pattern)</td><td>PLA</td><td>—</td><td>Printed onto the tiles or as separate pucks glued down.</td></tr>
+<tr><td>ToF bumper clips</td><td>—</td><td>PLA</td><td>2</td><td>Module on edge, recessed 2 mm behind a lip. One M5 × 8 into the rail's outer-face slot.</td></tr>
+<tr><td>Thermal saddle, T-plug saddle, bank lip (the pan lock and Wago clip of earlier versions are not needed)</td><td>—</td><td>PLA</td><td>1 each</td><td>Small parts; print with the tiles.</td></tr>
+</table>
+
+<h2>2. Frame</h2>
+<div class="warn"><b>Load every T-nut before any corner closes.</b> The corner kit's nuts are sliding nuts. Once a cross rail is bolted between the side rails, the slot ends are sealed. Miss one and the frame comes apart again.</div>
+<h3>2.1 T-nut loading table</h3>
+<p>Each 2020 rail has four slots: top, bottom, and two side faces. Lay the four rails on the bench in their final positions and load them exactly as below. Push each nut in from a rail end and slide it roughly to where it will be used.</p>
+<table>
+<tr><th>Rail</th><th>Slot</th><th>Nuts</th><th>For</th></tr>
+<tr><td>Side rail, left</td><td>Top</td><td>6 × M5</td><td>Deck tiles, 3 per tile</td></tr>
+<tr><td>Side rail, left</td><td>Bottom</td><td>4 × M4</td><td>Two motor brackets, 2 each</td></tr>
+<tr><td>Side rail, left</td><td>Inner face</td><td>2 × M5</td><td>Corner brackets, one per end</td></tr>
+<tr><td>Side rail, right</td><td>Top · Bottom · Inner</td><td>6 × M5 · 4 × M4 · 2 × M5</td><td>Same as left</td></tr>
+<tr><td>Cross rail, front</td><td>Top</td><td>4 × M5</td><td>Deck tiles, 2 per tile</td></tr>
+<tr><td>Cross rail, front</td><td>Inner face</td><td>2 × M5</td><td>Corner brackets</td></tr>
+<tr><td>Cross rail, front</td><td>Outer face</td><td>1 × M5</td><td>Front ToF clip</td></tr>
+<tr><td>Cross rail, rear</td><td>Top</td><td>4 × M5 + 2 × M4</td><td>Deck tiles, plus the radar post flange at Y ±20</td></tr>
+<tr><td>Cross rail, rear</td><td>Inner face</td><td>2 × M5</td><td>Corner brackets</td></tr>
+<tr><td>Cross rail, rear</td><td>Outer face</td><td>1 × M5</td><td>Rear ToF clip</td></tr>
+</table>
+<p>Totals: 30 M5 T-nuts of the corner kit's 40, and 10 M4 T-nuts of the T-nut kit's 40. Count them back before the next step.</p>
+<h3>2.2 Corner brackets (the L-connectors)</h3>
+<ol>
+<li>Stand the two side rails 350 mm apart, outer faces at Y = ±195. Set the front cross rail between them at the front end so its outer face is flush with the side rails' ends (X = +175). Same at the rear.</li>
+<li>A corner bracket is a 17 × 20 mm black aluminium L. It goes in the <b>inside</b> corner of each joint: one leg against the side rail's inner face, one leg against the cross rail's inward-facing face. One bracket per corner, four total.</li>
+<li>Through each bracket leg: one M5 × 8 socket cap screw into the M5 T-nut you loaded in that face's slot. Start both screws by hand, pull the joint tight and square with your fingers, then tighten to 3.0 N·m.</li>
+<li>Check square: tape measure across both diagonals from outer corner to outer corner. Equal within 1 mm. If not, loosen one corner, pull it, retighten.</li>
+</ol>
+<p class="small">Why inside corners: the outside faces of the side rails are where the motor bracket legs hang, and the tops are where the deck goes. Inside is the only face with nothing else on it.</p>
+
+<h2>3. Drive</h2>
+<h3>3.1 Motor brackets</h3>
+<p>The bracket is a 3 mm steel L, 50 wide, with a 51 mm foot that has two 4.3 mm slots and a 51 mm face plate with four M3 holes on a 31 mm square around a Ø22 bore.</p>
+<ol>
+<li>Turn the bracket upside down: foot flat against the <b>underside</b> of a side rail, face plate hanging straight down with its outside flush with the rail's outer face. The foot extends inboard under the rail and past it. The bore's centre must be at X = ±125.</li>
+<li>Two M4 × 10 hex socket screws down through the foot slots into the two M4 T-nuts in the rail's bottom slot. Each screw lands at the inner end of its slot because the rail slot centre is 10 mm in from the outer face. If a screw will not reach, slide the whole bracket 1 to 2 mm inboard; nothing else cares. Tighten to 2.0 N·m. M5 will not pass these slots.</li>
+<li>Repeat for all four: FL and RL under the left rail, FR and RR under the right rail. The four bores should sit on two lines at X = +125 and X = −125.</li>
+</ol>
+<h3>3.2 Motors</h3>
+<ol>
+<li>The motor goes inside the corner of the L, below the foot, with its flange against the face plate's inboard side and its shaft pointing outboard through the Ø22 bore. Its leads exit inboard. There is 7 mm between the motor's top and the foot.</li>
+<li>Four M3 × 6 socket cap screws from the outboard side through the face plate into the motor's tapped holes, 0.8 N·m. The motor's threads are about 4.5 mm deep; a 6 mm screw through 3 mm of steel engages 3 mm. If the screws that came with the brackets are 8 mm, add a washer under each head or use the M3 kit's 6 mm.</li>
+<li>Before the next step, find each motor's coil pairs with the multimeter: the two leads that read about 2 Ω together are one coil. Mark them.</li>
+</ol>
+<h3>3.3 Couplers and wheels</h3>
+<ol>
+<li>Slide the 5 mm metal coupler onto the motor shaft with the grub screw over the shaft's flat. Push it as close to the bracket face as it will go without rubbing: every millimetre of overhang adds bearing load. One drop of blue threadlocker on the grub screw, tighten to 1.5 N·m.</li>
+<li>Bolt each wheel to its coupler with the kit's hardware. The wheel's inner face should end up 5 mm outboard of the bracket leg, at Y = ±200, giving a 431 mm track.</li>
+<li>Handedness: mecanum wheels come as two left-hand and two right-hand. Diagonal pairs match, FL with RR and FR with RL. Seen from above, the rollers touching the floor should form an X pointing at the rover's centre. Decide by test, not by the diagram: in the wheels-up test, drive all four forward; a rover that crabs or spins has two wheels on one axle swapped.</li>
+</ol>
+
+<h2>4. Deck</h2>
+<ol>
+<li>Lay the four tiles on the rail tops, one per quadrant, centres at (±87.5, ±97.5). The half-thickness laps overlap at the two centre seams so the top surface stays flush; tongues face +X and +Y.</li>
+<li>Each tile takes 3 × M5 × 8 into the side rail's top-slot T-nuts and 2 × M5 × 8 into the cross rail's, through the counterbores, at 1.5 N·m. Stop the moment the head seats.</li>
+<li>Each lap seam takes 3 × M3 × 8 with nuts underneath, 1.0 N·m.</li>
+<li>Check that a wire slot sits beside each motor corner and one at the rear centre. Every under-deck wire comes up through these.</li>
+</ol>
+
+<h2>5. Under the deck</h2>
+<ol>
+<li>Battery cradle: four M3 × 12 down through the deck at X ±46, Y ±14 into the cradle's holes, M3 nuts below, 1.0 N·m. The cradle hangs centred under the deck with its bottom at Z = 59, 61 mm off the floor.</li>
+<li>Pack: slide in long axis along X with the Deans lead exiting rearward. Retaining bar across the open bottom on two cable ties through its slots. Balance lead tucked beside the pack.</li>
+<li>Motor leads: cable mounts on the deck underside, leads routed to the nearest wire slot. The FR motor's run to the shield is about 400 mm; expect to extend with 22 AWG and crimp a 4-pin housing.</li>
+</ol>
+
+<h2>6. Deck top</h2>
+<p>All positions are part centres, X, Y in mm. Bosses are printed onto the tiles.</p>
+<table>
+<tr><th>Part</th><th>Centre</th><th>Mounting</th><th>Orientation and notes</th></tr>
+<tr><td>UNO R4 + CNC shield stack</td><td>−116, +87</td><td>10 mm bosses, 4 × M3 × 20 + nut through the R4's holes</td><td>USB-C faces rearward. Board spans X −150 to −81, Y +60 to +113. Fan bridge over it on 2 × M3 × 8, fan tied to the bridge, blowing down on the four heatsinks.</td></tr>
+<tr><td>Raspberry Pi</td><td>−108, −88</td><td>8 mm bosses on a 58 × 49 pattern, 4 × M2 × 20 + nut</td><td>USB ports face rearward. Spans X −150 to −65, Y −116 to −60.</td></tr>
+<tr><td>PCA9685</td><td>+30, −75</td><td>Bosses, 2 × M2 + nut</td><td>Front-right, beside the turret base. V+ terminal from the XL4015; logic header from the shield's SDA/SCL/5V/GND comms header. Tilt on channel 3, pan on 2, fan on 15.</td></tr>
+<tr><td>Power bank</td><td>0, 0</td><td>Printed lip + 2 cable ties</td><td>Centred over the cradle to keep the CG on the axis. Weigh it: 130 g or less.</td></tr>
+<tr><td>XL4015 (5.0 V servo + fan rail)</td><td>−44.5, +110.5</td><td>Bosses + 2 cable ties</td><td>Heatsink up. IN from the shield's VMOT/GND screws; OUT to the PCA9685 terminal.</td></tr>
+<tr><td>Deans e-stop</td><td>−140, −132</td><td>Printed saddle + 1 cable tie on the fixed half</td><td>The pack lead comes up through the rear slot to here. Pulling it apart from above is the emergency stop.</td></tr>
+<tr><td>USB hub</td><td>−95, −165</td><td>Velcro</td><td>Rear-right corner. The R4 and the two CP2102s plug in here; 0.3 m cable to the Pi.</td></tr>
+<tr><td>CP2102 × 2</td><td>−30, −160</td><td>Cable tie</td><td>Rear edge. Label them LEFT and RIGHT — one per LD2410C.</td></tr>
+<tr><td>ESP32-S3 #3 (CSI receiver)</td><td>+60, +120</td><td>Bosses + 2 cable ties</td><td>Front-left, antenna forward, nothing metal within 20 mm. Powered only by its own small bank.</td></tr>
+<tr><td>Second bank (ESP32 #3 only)</td><td>+60, +165</td><td>Velcro strap</td><td>Outboard of ESP32 #3. Nothing else plugs into it.</td></tr>
+</table>
+
+<h2>7. Turret, post and sensors</h2>
+<h3>7.1 Ceres turret</h3>
+<ol>
+<li>Turret base plate (100 × 60 × 6) centred at X +110 on the front tiles across the seam. 4 × M3 × 16 through the base's existing holes and the deck, M3 nuts below, 1.0 N·m.</li>
+<li>Pan stage free. The Ceres pan servo is continuous-rotation and cannot hold an angle: it plugs into PCA9685 channel 2 and the firmware turns it by timed nudges. Set the turret to the pose you want by hand — nothing moves it at power-up, and every move is relative to where it starts.</li>
+<li>Webcam into the Ceres camera clamp, lens forward at tilt 0, two cable ties as backup. Lens centre lands at about Z = 212.</li>
+<li>Thermal saddle on top of the clamp, MLX90640 on it with 2 × M2 + nut, boresight parallel to the camera. Its ribbon runs with the camera USB through the tilt axis.</li>
+</ol>
+<h3>7.2 Radar post</h3>
+<ol>
+<li>Bolt the flange plate to the post foot with 2 × M3 × 10 + nut.</li>
+<li>Stand the post on the rear tile at X = −165, centred on Y = 0, open side of the channel facing rearward. 2 × M4 × 12 down through the flange and the deck into the two M4 T-nuts in the rear cross rail's top slot at Y ±20, 2.0 N·m.</li>
+<li>Radar bar across the post top, 2 × M3 × 10 + nut through the post wall. The bar's face is at Z = 300.</li>
+<li>On the bar: LD2410C LEFT at Y +50 and LD2410C RIGHT at Y −50, each on a printed 30° wedge toed outward; the LD2450 between them at Y 0, facing straight ahead. 2 × M2 each or a printed clip. Nothing metal within 10 mm of any antenna face. INMP441 mic on the post's front face, 120 mm up, on one M2. The optional SCD41 goes on the post's left face 150 mm up, sensing face rearward.</li>
+<li>The two LD2410C leads run down the channel to their CP2102s at the rear edge; the LD2450's four wires run to the Pi header.</li>
+</ol>
+<h3>7.3 ToF bumpers</h3>
+<p>Each VL53L1X sits on edge in its printed clip, emitter facing outward, recessed 2 mm behind the lip: it is the first thing that touches a wall. Clip to the cross rail's outer-face slot with 1 × M5 × 8 into the T-nut you loaded there; module to the clip with 2 × M2. Front at X +179, rear at X −179, both at Z 81.</p>
+
+<h2>8. Electronics on the bench</h2>
+<p>All of this happens with no motor plugged in.</p>
+<ol>
+<li><b>Jumper caps.</b> With the drivers out, put caps on MS1 and MS3 under each of the four driver sockets. MS2 stays open. That is 1/32 microstepping on a DRV8825 — the as-built v1.0 drive. Put jumpers on D12 and D13 of the A-axis header. Leave EN/GND open. Ten jumpers total.</li>
+<li><b>Drivers.</b> Each DRV8825 goes in with its EN pin over the socket's EN label. Backwards is a dead driver at first power with no warning. Stick the heatsinks on the chips.</li>
+<li><b>No EN pull-up (by choice).</b> While the R4 resets — about a second at boot and at every upload — all four drivers are enabled at full holding current. So the pack is unplugged whenever the R4 is being flashed or reset. (A 10 kΩ from EN to the 5 V header pin would keep them off; the as-built rover does not have one.)</li>
+<li><b>Bulk capacitor.</b> 1000 µF, 25 V, across the shield's VMOT terminal, stripe to GND. Reversed, it vents.</li>
+<li class="stop"><b>Vref.</b> Connect the pack to VMOT with no motors. Meter from a driver's pot to GND and set it with a plastic trimmer tool: 0.75 V if the sense resistors read R100, 1.50 V if R200. All four. A metal screwdriver slipping onto VMOT kills the driver, and Vref reads nonsense on USB power alone. Disconnect the pack.</li>
+<li><b>Buck.</b> Solder 22 AWG leads to the XL4015's pads. Pack on its input, trim its output to 5.00 V with nothing connected to it (the pot turns counter-clockwise to lower). Disconnect.</li>
+<li><b>Motor cables.</b> Crimp a 4-pin housing per motor so one coil is on 1A/1B and the other on 2A/2B.</li>
+<li><b>Deans lead.</b> One OliRC extension stays whole. Cut the other in the middle; strip both halves 11 mm. The half whose plug mates with the battery is the harness pigtail.</li>
+</ol>
+
+<h2>9. Wiring</h2>
+<p>Every pin, wire colour and length is on the <a href="wiring.html">wiring page</a>, drawn from the netlist in <code>wiring.py</code> and cross-checked against it. This section is the order of work and the rules; when the two ever disagree, the wiring page wins.</p>
+<h3>9.1 How the connectors work</h3>
+<ul>
+<li><b>Dupont 2.54 mm.</b> Crimped female contacts in a plastic housing that push onto the shield's 4-pin motor headers and the board headers. Rated 2 A; the motors run 1.5 A, so a good crimp is the whole margin. One female per pin — never two on one pin.</li>
+<li><b>JST 1.25 mm.</b> The radars' own tiny connectors and pigtails.</li>
+<li><b>Deans (T-plug).</b> Polarised, 50 A. Wide flat blade is positive.</li>
+<li><b>Screw terminals.</b> Shield VMOT/GND and the PCA9685's V+/GND. Tinned or bare stranded wire, screw down, tug test. Two wires share each shield screw: twist them together before inserting.</li>
+<li><b>Solder pads.</b> The XL4015 has four big pads, no terminals: tin them and solder the 22 AWG leads.</li>
+</ul>
+<h3>9.2 Every run</h3>
+<table>
+<tr><th>From</th><th>To</th><th>Wire</th><th>Rule</th></tr>
+<tr><td>HOOVO pack</td><td>Deans e-stop on the deck top</td><td>OliRC 14 AWG, 30 cm</td><td>Up through the rear centre slot.</td></tr>
+<tr><td>E-stop (rover half)</td><td>Shield VMOT / GND terminal</td><td>14 AWG</td><td>1000 µF 25 V across the terminal, stripe to GND. The shield GND screw is the star ground.</td></tr>
+<tr><td>Shield VMOT / GND (second wire in each screw)</td><td>XL4015 IN+ / IN−</td><td>22 AWG, 150 mm</td><td>The only pack splice.</td></tr>
+<tr><td>XL4015 OUT+ / OUT−</td><td>PCA9685 V+ / GND terminal</td><td>22 AWG, 150 mm</td><td>Servo and fan current returns on this pair, never through the Pi or a logic pin.</td></tr>
+<tr><td>Shield comms header SDA / SCL / 5V / GND</td><td>PCA9685 SDA / SCL / VCC / GND</td><td>4 Dupont</td><td>5 V I2C from the R4. Never also on the Pi's SDA/SCL.</td></tr>
+<tr><td>PCA9685 channels 3 / 2 / 15</td><td>Tilt servo / pan servo / fan (V+ and GND only)</td><td>Their own leads</td><td>Brown or black to the GND row.</td></tr>
+<tr><td>Shield X / Y / Z / A sockets</td><td>Motors RL / FL / RR / FR</td><td>4-pin Dupont</td><td>Never plug or unplug with VMOT live.</td></tr>
+<tr><td>Power bank</td><td>Pi USB-C</td><td>≤ 0.2 m, 22 AWG or heavier power conductors</td><td>A 1 m phone cable browns the Pi out.</td></tr>
+<tr><td>Pi USB-A</td><td>Webcam (own port); USB hub → UNO R4 + CP2102 #1 + CP2102 #2</td><td>Their cables</td><td>The R4 by /dev/serial/by-id; the two CP2102s by /dev/serial/by-path, since cheap ones share serial 0001 and by-id then shows only one. Left/right follows the hub socket: keep each adapter in its socket.</td></tr>
+<tr><td>CP2102 #1 / #2 +5V, GND, TXD, RXD</td><td>LD2410C LEFT / RIGHT VCC, GND, RX, TX</td><td>4 Dupont each</td><td>TX and RX crossed. The adapter's 3V3 pin stays empty. Meter TXD first: 3.3 V at idle.</td></tr>
+<tr><td>Pi pins 4 (5V), 34 (GND), 10 (RXD), 8 (TXD)</td><td>LD2450 5V, GND, TX, RX</td><td>4 Dupont</td><td>The Pi's own UART, after <code>enable_gpio_uart.sh</code>. 5 V on pin 4 only — never on 8 or 10.</td></tr>
+<tr><td>Pi 3V3 (1, 17), SDA 3, SCL 5, GND</td><td>MLX90640 and both VL53L1X</td><td>Dupont, chained through the boards' second headers</td><td>I2C-1, all on 3.3 V. The thermal lead goes through the tilt axis with a service loop.</td></tr>
+<tr><td>Pi pin 15 (BCM 22), pin 13 (BCM 27)</td><td>VL53L1X front / rear XSHUT</td><td>Dupont</td><td>Lets the software give them different addresses at boot.</td></tr>
+<tr><td>Pi pins 12 / 35 / 38, 3V3, GND</td><td>INMP441 SCK / WS / SD, VDD, GND; L/R to GND</td><td>Dupont</td><td>I2S.</td></tr>
+<tr><td>Second bank</td><td>ESP32-S3 #3 USB-C</td><td>Short USB cable</td><td>Nothing on the rover wires to it.</td></tr>
+</table>
+<h3>9.3 Ground rules</h3>
+<ul>
+<li>One star: the shield's GND screw. Motor return goes there; servo and fan return goes PCA9685 terminal → XL4015 OUT− → the same screw. Neither ever through a board's GND pin or a USB cable.</li>
+<li>The Pi and its USB devices are one ground island on the bank; the pack side is the other. They meet through the R4's USB cable (the PCA9685's logic ground comes from the shield, on the R4's side). The LD2410Cs return through their adapters and the LD2450 through Pi pin 34 — all on the Pi's side. Do not add another bridge.</li>
+<li>Tie every run down with the cable mounts. Label the pack side and the bank side with tape.</li>
+</ul>
+<div class="warn"><b>Power-up order, every time:</b> bank → Pi → R4 over USB, then the pack at the T-plug. Power down in reverse. With the R4 unpowered, VMOT alone drives four motors at full holding current with nothing commanding them.</div>
+
+<h2>10. First power-up</h2>
+<ol>
+<li>Wheels up on a box. Power-up order as above. Command each wheel forward and back in turn, then all four. A wheel that hums but does not turn: check its Vref and the MS1/MS3 caps. A wheel spinning the wrong way: its coil pair is swapped in the housing, not the firmware.</li>
+<li>Ten minutes at cruise. A finger on each heatsink and each motor connector. Warm is fine; too hot to hold is a bad crimp or a Vref set too high.</li>
+<li>Floor: forward, reverse, strafe, spin, stop. Strafe drift means a mismatched diagonal wheel pair — or wheels sliding at the 1.8 m/s² stops on a smooth floor (drivetrain.txt, traction).</li>
+<li>Torque test: wheels up, a lever on one shaft, a hanging scale on the lever, drive at 24 rpm and load it until it skips. Torque is force times arm. The design assumes 0.254 N·m at 1.5 A; a start up a 5° ramp needs about 0.235.</li>
+<li>Sensors one at a time: one radar powered, then all three, then a person behind a door. Thermal and camera on a walking person at 4 m. Mic with motors off.</li>
+</ol>
+
+<h2>11. Fastener count</h2>
+<table>
+<tr><th>Fastener</th><th>Used</th><th>Where</th><th>Kit and supply</th></tr>
+<tr><td>M5 × 8 socket cap + M5 T-nut</td><td>30</td><td>8 corners, 20 deck, 2 ToF clips</td><td>Corner kit, 40 of each</td></tr>
+<tr><td>M4 × 10 + M4 T-nut</td><td>8</td><td>Motor brackets</td><td>T-nut kit, 20 screws / 40 nuts</td></tr>
+<tr><td>M4 × 12 + M4 T-nut</td><td>2</td><td>Radar post flange</td><td>T-nut kit, 20 / 40</td></tr>
+<tr><td>M3 × 6</td><td>16</td><td>Motors</td><td>M3 kit (or the brackets' own if 6 mm)</td></tr>
+<tr><td>M3 × 8 + nut</td><td>12 + 2</td><td>Deck lap seams, fan bridge</td><td>M3 kit</td></tr>
+<tr><td>M3 × 10 + nut</td><td>4</td><td>Post flange, radar bar</td><td>M3 kit</td></tr>
+<tr><td>M3 × 12 + nut</td><td>4</td><td>Battery cradle</td><td>M3 kit</td></tr>
+<tr><td>M3 × 16 + nut</td><td>4</td><td>Turret base</td><td>M3 kit</td></tr>
+<tr><td>M3 × 20 + nut</td><td>4</td><td>R4 stack</td><td>M3 kit</td></tr>
+<tr><td>M2 × 20 + nut</td><td>4</td><td>Pi</td><td>M2 kit</td></tr>
+<tr><td>M2 + nut, short</td><td>2 + 2 + 6 + 1 + 4</td><td>PCA9685, thermal, three radars, mic, ToF modules</td><td>M2 kit</td></tr>
+<tr><td>Cable ties</td><td>~32</td><td>Everything on bosses, wire runs</td><td>Tie kit, 100</td></tr>
+<tr><td>Coupler grub screws</td><td>4</td><td>Wheels</td><td>Wheel kit</td></tr>
+</table>
+
+<h2>12. If something is wrong</h2>
+<table>
+<tr><th>Symptom</th><th>Cause</th><th>Fix</th></tr>
+<tr><td>Frame will not square</td><td>A cross rail not fully home against the side rail</td><td>Loosen that corner, push the rails together, retighten.</td></tr>
+<tr><td>Bracket screw cannot reach its T-nut</td><td>Foot slot ends 8 mm from the bend, rail slot is 10 mm in</td><td>Slide the bracket 1 to 2 mm inboard.</td></tr>
+<tr><td>Motor boss will not enter the bracket bore</td><td>Ø22 nominal on Ø22</td><td>Sandpaper in the bore, ten seconds.</td></tr>
+<tr><td>Motor screw spins without clamping</td><td>8 mm screw bottoming in a 4.5 mm hole</td><td>M3 × 6, or a washer under the head.</td></tr>
+<tr><td>Deck screw head sinks into the tile</td><td>Overtightened PLA</td><td>Stop at 1.5 N·m; a washer under the head if the counterbore is damaged.</td></tr>
+<tr><td>Driver dead on first power</td><td>Inserted backwards, or metal touched VMOT while trimming</td><td>Replace the driver; the TB6600 is the emergency fourth driver, with a buffer on its inputs.</td></tr>
+<tr><td>Wheel hums, does not turn</td><td>Vref too low, MS caps wrong, or coil pair split</td><td>Check Vref, the MS1/MS3 caps, then the 2 Ω pairs.</td></tr>
+<tr><td>Rover crabs when told to go straight</td><td>Two wheels on one axle swapped</td><td>Swap them.</td></tr>
+<tr><td>Serial link to the R4 drops when the servo moves</td><td>Servo current returning through a USB ground</td><td>The PCA9685's V+/GND terminal must go to the XL4015 OUT pads; its logic header carries no servo current.</td></tr>
+<tr><td>Radar frames garbage while parked</td><td>TX/RX not crossed, a 5 V-logic adapter, or (LD2450) the UART still owned by Bluetooth or the console</td><td>Swap TX/RX; meter the adapter's TXD (3.3 V); run enable_gpio_uart.sh and reboot. While driving, radar data is ignored anyway.</td></tr>
+<tr><td>Pi shows the lightning bolt</td><td>Bank cable too thin or too long, or bank not a 3 A bank</td><td>≤ 0.2 m cable with 22 AWG power conductors; load-test the bank at 2.5 A.</td></tr>
+<tr><td>Thermal array not found on I2C</td><td>A broken link in the 3V3/SDA/SCL chain, or I2C off</td><td><code>i2cdetect -y 1</code> must show 0x33; check 3.3 V at the board and the chain through the second headers; setup_pi.sh turns I2C on.</td></tr>
+</table>
+<p class="small">Not analysed anywhere in the design: fatigue, impact, roller wear, uneven floors, motor and driver thermal equilibrium, PETG pull-out, deck deflection under the turret, the motor bearing's radial rating (assumed 28 N, the thinnest margin). No physical test has been run before yours.</p>
+</main></body></html>

@@ -1,0 +1,1009 @@
+{
+ "rails": [
+  {
+   "id": "PACK",
+   "desc": "HOOVO 3S 2200 mAh 80C, T-plug",
+   "v_nom": 11.1,
+   "v_min": 10.5,
+   "v_max": 12.6,
+   "i_cont": 44.0,
+   "i_peak": 100.0,
+   "src": null,
+   "note": "2200 mAh × 20C = 44 A continuous, taken as the honest figure, not 80C. (LISTING/ALLOC)"
+  },
+  {
+   "id": "V_SERVO",
+   "desc": "XL4015 trimmed to 5.0 V → PCA9685 V+ terminal (tilt ch 3, pan ch 2, fan on ch 15's V+/GND pins)",
+   "v_nom": 5.0,
+   "v_min": 4.85,
+   "v_max": 5.15,
+   "i_cont": 4.0,
+   "i_peak": 5.0,
+   "src": "PACK",
+   "note": "5 A module derated to 4 A continuous with the heatsink. 5.0 V instead of 6.0 V so a 5 V fan and the ESP32's 5V pin can share it: MG996R runs 4.8–7.2 V (DS), tilt load is tiny. (LISTING/DS)"
+  },
+  {
+   "id": "V5_BANK2",
+   "desc": "second USB power bank → ESP32-S3 #3 USB-C",
+   "v_nom": 5.0,
+   "v_min": 4.75,
+   "v_max": 5.25,
+   "i_cont": 1.0,
+   "i_peak": 2.0,
+   "src": null,
+   "note": "Any small bank (≥ 1 A). Its only load is the CSI node, so the rover's own power never touches it. (ALLOC)"
+  },
+  {
+   "id": "V5_BANK",
+   "desc": "USB power bank → Pi USB-C",
+   "v_nom": 5.0,
+   "v_min": 4.75,
+   "v_max": 5.25,
+   "i_cont": 3.0,
+   "i_peak": 3.0,
+   "src": null,
+   "note": "Must be a genuine 5 V / 3 A bank; 2.4 A banks fail this file. (ALLOC)"
+  },
+  {
+   "id": "V5_PI_USB",
+   "desc": "Pi 4 downstream USB (4 ports, shared)",
+   "v_nom": 5.0,
+   "v_min": 4.75,
+   "v_max": 5.25,
+   "i_cont": 1.2,
+   "i_peak": 1.2,
+   "src": "V5_BANK",
+   "note": "Pi 4 shares 1.2 A across all four ports (DS). Pi 5 defaults to 0.6 A unless usb_max_current_enable=1."
+  },
+  {
+   "id": "V3_PI",
+   "desc": "Pi 3.3 V header pin",
+   "v_nom": 3.3,
+   "v_min": 3.2,
+   "v_max": 3.4,
+   "i_cont": 0.5,
+   "i_peak": 0.8,
+   "src": "V5_BANK",
+   "note": "Pi 4 3.3 V rail budget for HATs/peripherals ≈ 0.5 A. (DS)"
+  }
+ ],
+ "loads": [
+  {
+   "name": "4× DRV8825 + JK42HS40 motors (bus side)",
+   "rail": "PACK",
+   "vin": [
+    8.2,
+    45.0
+   ],
+   "i_avg": 1.96,
+   "i_peak": 4.0,
+   "connector": "screw terminal 5.08",
+   "source": "DT: 20.5 W at 10.5 V cruise; 4 A allocated for a ramp burst"
+  },
+  {
+   "name": "XL4015 input (second wires in the shield's power screws)",
+   "rail": "PACK",
+   "vin": [
+    4.0,
+    38.0
+   ],
+   "i_avg": null,
+   "i_peak": null,
+   "connector": "screw terminal 5.08",
+   "source": "LISTING; current computed from its load"
+  },
+  {
+   "name": "MG996R tilt servo on PCA9685 channel 3",
+   "rail": "V_SERVO",
+   "vin": [
+    4.8,
+    7.2
+   ],
+   "i_avg": 0.3,
+   "i_peak": 2.1,
+   "connector": "header 2.54",
+   "source": "DS: stall ≈ 2.5 A at 6 V → ~2.1 A at 5 V"
+  },
+  {
+   "name": "MG996R pan servo on PCA9685 channel 2",
+   "rail": "V_SERVO",
+   "vin": [
+    4.8,
+    7.2
+   ],
+   "i_avg": 0.3,
+   "i_peak": 2.1,
+   "connector": "header 2.54",
+   "source": "DS: same servo class; the Ceres pan unit worked in its demo (user), driven as angle or timed nudge"
+  },
+  {
+   "name": "40 mm 5 V fan on PCA9685 channel 15's V+/GND pins",
+   "rail": "V_SERVO",
+   "vin": [
+    4.5,
+    5.5
+   ],
+   "i_avg": 0.15,
+   "i_peak": 0.2,
+   "connector": "header 2.54",
+   "source": "LISTING: 5 V 0.15 A"
+  },
+  {
+   "name": "PCA9685 logic (VCC from the shield's 5V pin)",
+   "rail": "V5_PI_USB",
+   "vin": [
+    2.3,
+    5.5
+   ],
+   "i_avg": 0.01,
+   "i_peak": 0.01,
+   "connector": "header 2.54",
+   "source": "DS; rides on the R4's USB 5 V"
+  },
+  {
+   "name": "ESP32-S3 #3 CSI receiver (USB-C from its own power bank)",
+   "rail": "V5_BANK2",
+   "vin": [
+    4.75,
+    5.25
+   ],
+   "i_avg": 0.25,
+   "i_peak": 0.5,
+   "connector": "USB-C",
+   "source": "DS: WiFi bursts to ~500 mA; csi_rx_udp firmware"
+  },
+  {
+   "name": "Raspberry Pi 4 itself",
+   "rail": "V5_BANK",
+   "vin": [
+    4.75,
+    5.25
+   ],
+   "i_avg": 0.7,
+   "i_peak": 1.2,
+   "connector": "USB-C",
+   "source": "DS: idle 0.6 A, loaded 1.2 A without USB peripherals"
+  },
+  {
+   "name": "Webcam (C920-class, 1080p)",
+   "rail": "V5_PI_USB",
+   "vin": [
+    4.75,
+    5.25
+   ],
+   "i_avg": 0.25,
+   "i_peak": 0.3,
+   "connector": "USB-A",
+   "source": "MEASURED-class: a C920 draws ~240 mA; its 500 mA descriptor is the enumeration allowance, not draw (peak taken as 0.30 A)"
+  },
+  {
+   "name": "UNO R4 WiFi + shield logic",
+   "rail": "V5_PI_USB",
+   "vin": [
+    4.75,
+    5.25
+   ],
+   "i_avg": 0.15,
+   "i_peak": 0.2,
+   "connector": "USB-A",
+   "source": "DS: radio off"
+  },
+  {
+   "name": "2× CP2102 USB-serial adapters + 4-port hub",
+   "rail": "V5_PI_USB",
+   "vin": [
+    4.75,
+    5.25
+   ],
+   "i_avg": 0.045,
+   "i_peak": 0.075,
+   "connector": "USB-A",
+   "source": "DS: ~15 mA (25 mA peak) each + the hub's own ~15 mA"
+  },
+  {
+   "name": "LD2410C radar LEFT (VCC from its CP2102's 5V pin)",
+   "rail": "V5_PI_USB",
+   "vin": [
+    4.5,
+    5.5
+   ],
+   "i_avg": 0.08,
+   "i_peak": 0.1,
+   "connector": "JST 1.25",
+   "source": "DS: ≤ 80 mA"
+  },
+  {
+   "name": "LD2410C radar RIGHT (VCC from its CP2102's 5V pin)",
+   "rail": "V5_PI_USB",
+   "vin": [
+    4.5,
+    5.5
+   ],
+   "i_avg": 0.08,
+   "i_peak": 0.1,
+   "connector": "JST 1.25",
+   "source": "DS: ≤ 80 mA"
+  },
+  {
+   "name": "LD2450 radar (5V from the Pi header pin 4)",
+   "rail": "V5_BANK",
+   "vin": [
+    4.5,
+    5.5
+   ],
+   "i_avg": 0.1,
+   "i_peak": 0.2,
+   "connector": "header 2.54",
+   "source": "DS: ≤ 200 mA. The header 5 V pins sit on the Pi's input net: this load is on the bank, outside the 1.2 A USB budget"
+  },
+  {
+   "name": "MLX90640 thermal array",
+   "rail": "V3_PI",
+   "vin": [
+    3.0,
+    3.6
+   ],
+   "i_avg": 0.023,
+   "i_peak": 0.025,
+   "connector": "header 2.54",
+   "source": "DS: 23 mA"
+  },
+  {
+   "name": "VL53L1X ToF front",
+   "rail": "V3_PI",
+   "vin": [
+    2.6,
+    3.6
+   ],
+   "i_avg": 0.02,
+   "i_peak": 0.04,
+   "connector": "header 2.54",
+   "source": "DS"
+  },
+  {
+   "name": "VL53L1X ToF rear",
+   "rail": "V3_PI",
+   "vin": [
+    2.6,
+    3.6
+   ],
+   "i_avg": 0.02,
+   "i_peak": 0.04,
+   "connector": "header 2.54",
+   "source": "DS"
+  },
+  {
+   "name": "INMP441 microphone",
+   "rail": "V3_PI",
+   "vin": [
+    1.8,
+    3.6
+   ],
+   "i_avg": 0.0015,
+   "i_peak": 0.002,
+   "connector": "header 2.54",
+   "source": "DS"
+  },
+  {
+   "name": "SCD41 CO2 (optional)",
+   "rail": "V3_PI",
+   "vin": [
+    2.4,
+    5.5
+   ],
+   "i_avg": 0.018,
+   "i_peak": 0.205,
+   "connector": "header 2.54",
+   "source": "DS: 205 mA peak during a measurement"
+  }
+ ],
+ "wires": [
+  {
+   "name": "pack lead: HOOVO T-plug → OliRC extension (the pull-plug disconnect on the deck) → shield VMOT/GND terminal",
+   "awg": 14,
+   "length_m": 0.45,
+   "connector": "screw terminal 5.08",
+   "i_avg": 2.36,
+   "i_peak": 6.46
+  },
+  {
+   "name": "shield VMOT/GND screws (second wire) → XL4015 IN",
+   "awg": 22,
+   "length_m": 0.15,
+   "connector": "screw terminal 5.08",
+   "i_avg": 0.4,
+   "i_peak": 2.46
+  },
+  {
+   "name": "XL4015 OUT pads → PCA9685 V+ / GND screw terminal",
+   "awg": 22,
+   "length_m": 0.15,
+   "connector": "screw terminal 5.08",
+   "i_avg": 0.75,
+   "i_peak": 4.4
+  },
+  {
+   "name": "shield driver socket → 4-pin motor cable → motor (per phase)",
+   "awg": 26,
+   "length_m": 0.4,
+   "connector": "Dupont 2.54",
+   "i_avg": 1.06,
+   "i_peak": 1.5
+  },
+  {
+   "name": "bank → Pi USB-C cable (SPEC: ≤ 0.2 m, 22 AWG or heavier power conductors)",
+   "awg": 22,
+   "length_m": 0.2,
+   "connector": "USB-C",
+   "i_avg": 1.48,
+   "i_peak": 2.41
+  },
+  {
+   "name": "bank 2 → ESP32-S3 #3 USB-C",
+   "awg": 28,
+   "length_m": 0.3,
+   "connector": "USB-C",
+   "i_avg": 0.25,
+   "i_peak": 0.5
+  },
+  {
+   "name": "Pi USB-A → webcam (captive cable, 1.5 m)",
+   "awg": 28,
+   "length_m": 1.5,
+   "connector": "USB-A",
+   "i_avg": 0.25,
+   "i_peak": 0.3
+  },
+  {
+   "name": "Pi USB-A → UNO R4 USB-C",
+   "awg": 28,
+   "length_m": 0.3,
+   "connector": "USB-A",
+   "i_avg": 0.15,
+   "i_peak": 0.2
+  },
+  {
+   "name": "Pi USB-A → hub → 2× CP2102 (the LD2410Cs' power rides on these)",
+   "awg": 28,
+   "length_m": 0.3,
+   "connector": "USB-A",
+   "i_avg": 0.21,
+   "i_peak": 0.28
+  },
+  {
+   "name": "CP2102 +5V/GND/TXD/RXD → LD2410C (4 wires, 0.25 m)",
+   "awg": 26,
+   "length_m": 0.25,
+   "connector": "Dupont 2.54",
+   "i_avg": 0.08,
+   "i_peak": 0.1
+  },
+  {
+   "name": "Pi header pins 4 (5V) / 34 (GND) / 8 (TXD) / 10 (RXD) → LD2450 (4 wires, 0.25 m)",
+   "awg": 26,
+   "length_m": 0.25,
+   "connector": "Dupont 2.54",
+   "i_avg": 0.1,
+   "i_peak": 0.2
+  }
+ ],
+ "signals": [
+  {
+   "driver": "UNO R4 (5 V logic)",
+   "pins": "D2/D5 D3/D6 D4/D7 D12/D13 STEP/DIR, D8 EN",
+   "v_out": 5.0,
+   "receiver": "DRV8825 ×4",
+   "rpins": "STEP DIR nENABLE",
+   "v_in_max": 5.25,
+   "v_ih": 2.2,
+   "bus": "R4"
+  },
+  {
+   "driver": "LD2410C left TX (3.3 V)",
+   "pins": "TX",
+   "v_out": 3.3,
+   "receiver": "CP2102 #1",
+   "rpins": "RXD (3.3 V logic)",
+   "v_in_max": 3.6,
+   "v_ih": 2.0,
+   "bus": "USB"
+  },
+  {
+   "driver": "CP2102 #1 TXD",
+   "pins": "TXD",
+   "v_out": 3.3,
+   "receiver": "LD2410C left",
+   "rpins": "RX",
+   "v_in_max": 3.6,
+   "v_ih": 2.0,
+   "bus": "USB"
+  },
+  {
+   "driver": "LD2410C right TX (3.3 V)",
+   "pins": "TX",
+   "v_out": 3.3,
+   "receiver": "CP2102 #2",
+   "rpins": "RXD",
+   "v_in_max": 3.6,
+   "v_ih": 2.0,
+   "bus": "USB"
+  },
+  {
+   "driver": "CP2102 #2 TXD",
+   "pins": "TXD",
+   "v_out": 3.3,
+   "receiver": "LD2410C right",
+   "rpins": "RX",
+   "v_in_max": 3.6,
+   "v_ih": 2.0,
+   "bus": "USB"
+  },
+  {
+   "driver": "LD2450 TX (3.3 V)",
+   "pins": "TX",
+   "v_out": 3.3,
+   "receiver": "Pi BCM 15 (UART0 RXD, header pin 10)",
+   "rpins": "RXD",
+   "v_in_max": 3.6,
+   "v_ih": 2.0,
+   "bus": "UART"
+  },
+  {
+   "driver": "Pi BCM 14 (UART0 TXD, header pin 8)",
+   "pins": "TXD",
+   "v_out": 3.3,
+   "receiver": "LD2450",
+   "rpins": "RX",
+   "v_in_max": 3.6,
+   "v_ih": 2.0,
+   "bus": "UART"
+  },
+  {
+   "driver": "Pi I2C-1 (BCM 2/3, pull-ups 3.3 V)",
+   "pins": "SDA/SCL",
+   "v_out": 3.3,
+   "receiver": "MLX90640 0x33, VL53L1X 0x29→0x30, SCD41 0x62",
+   "rpins": "SDA/SCL",
+   "v_in_max": 3.6,
+   "v_ih": 2.3,
+   "bus": "I2C1"
+  },
+  {
+   "driver": "UNO R4 Wire (A4/A5 on the shield's SDA/SCL comms header, 5 V I2C, PCA9685's own 10 kΩ pull-ups)",
+   "pins": "SDA/SCL",
+   "v_out": 5.0,
+   "receiver": "PCA9685 0x40",
+   "rpins": "SDA/SCL",
+   "v_in_max": 5.5,
+   "v_ih": 3.0,
+   "bus": "R4I2C"
+  },
+  {
+   "driver": "PCA9685 (VCC 5 V) channels 3 / 2",
+   "pins": "PWM3 PWM2",
+   "v_out": 5.0,
+   "receiver": "MG996R tilt / pan servos",
+   "rpins": "signal",
+   "v_in_max": 5.5,
+   "v_ih": 2.4,
+   "bus": "PCA"
+  },
+  {
+   "driver": "Pi BCM 22 / 27",
+   "pins": "XSHUT out",
+   "v_out": 3.3,
+   "receiver": "VL53L1X front / rear",
+   "rpins": "XSHUT (pull-up to VIN = 3.3)",
+   "v_in_max": 3.6,
+   "v_ih": 1.2,
+   "bus": "GPIO"
+  },
+  {
+   "driver": "Pi I2S (BCM 18/19/20)",
+   "pins": "BCLK/LRCLK/DIN",
+   "v_out": 3.3,
+   "receiver": "INMP441",
+   "rpins": "SCK/WS/SD",
+   "v_in_max": 3.6,
+   "v_ih": 2.3,
+   "bus": "I2S"
+  },
+  {
+   "driver": "Pi ↔ UNO R4",
+   "pins": "USB CDC",
+   "v_out": 5.0,
+   "receiver": "UNO R4",
+   "rpins": "USB",
+   "v_in_max": 5.25,
+   "v_ih": 0,
+   "bus": "USB"
+  },
+  {
+   "driver": "Pi ↔ 2× CP2102",
+   "pins": "USB → /dev/serial/by-path (by hub socket: cheap CP2102s share serial 0001, so by-id shows one)",
+   "v_out": 5.0,
+   "receiver": "LD2410C left/right at 256000 baud",
+   "rpins": "USB",
+   "v_in_max": 5.25,
+   "v_ih": 0,
+   "bus": "USB"
+  },
+  {
+   "driver": "ESP32-S3 #2 csi_tx, OFF the rover 3 m along the wall on any USB 5 V: 100 Hz ESP-NOW probes, channel 6",
+   "pins": "radio",
+   "v_out": 0,
+   "receiver": "ESP32-S3 #3 csi_rx_udp on the rover: CSI of every probe → UDP to the Pi hotspot (channel 6) port 5005",
+   "rpins": "wlan0",
+   "v_in_max": 0,
+   "v_ih": 0,
+   "bus": "WIFI"
+  }
+ ],
+ "checks": [
+  {
+   "level": "WARN",
+   "id": "I-budget",
+   "text": "V_SERVO (XL4015 trimmed to 5.0 V → PCA9685 V+ terminal (tilt ch 3, pan ch 2, fan on ch 15's V+/GND pins)): avg 0.75 A of 4.0 A (19%), peak 4.40 A of 5.0 A (88%)"
+  },
+  {
+   "level": "WARN",
+   "id": "V-chain",
+   "text": "webcam sees 4.53 V at its 500 mA descriptor (4.57 V at a typical 250 mA) through its own captive 1.5 m cable; USB floor 4.75 V, most cameras run to ~4.4 V. If it drops out at 1080p, run 720p — its cable cannot be shortened"
+  },
+  {
+   "level": "WARN",
+   "id": "V-chain",
+   "text": "A 1 m 28 AWG phone cable to the Pi would drop 1.03 V → 3.87 V at the Pi = brownout. The bank cable is a spec: ≤ 0.2 m with 22 AWG or heavier power conductors (a short '3 A fast-charge' cable)"
+  },
+  {
+   "level": "WARN",
+   "id": "connector",
+   "text": "Motor phases run 1.5 A through Dupont 2.54 contacts rated 2.0 A — inside rating but the crimp quality is the margin. A contact that heats in the wheels-up test gets re-crimped or soldered."
+  },
+  {
+   "level": "WARN",
+   "id": "connector",
+   "text": "Both servos stalling together = 4.4 A on the XL4015 (5 A peak, 4 A continuous) and 2.1 A per PCA9685 channel header (rated 2.0 A): momentary by nature; keep stalls short with the firmware limits (tilt 78–150°) and release the servos ('t -1', 'p -1') between stations"
+  },
+  {
+   "level": "WARN",
+   "id": "enable",
+   "text": "No EN pull-up fitted: during an R4 reset (~1 s at boot, every sketch upload) all four drivers are ENABLED at full holding current. Harmless for a second; NOT harmless if you flash repeatedly with the pack plugged in (drivers heat). So: pack unplugged whenever the USB cable is doing anything but driving."
+  },
+  {
+   "level": "WARN",
+   "id": "protection",
+   "text": "No fuse, no cell alarm, no voltage divider (all declined for simplicity): nothing stops the pack from over-discharging. Rule: a full pack (12.6 V) gives ~45 min of driving — set a 30-minute timer, then meter the pack; stop at 11.1 V, never below 10.5 V. A pack that reads 6–7 V is dead (pack A)."
+  },
+  {
+   "level": "WARN",
+   "id": "usb",
+   "text": "Pi 5 only: default 600 mA USB cap → set usb_max_current_enable=1, or use the Pi 4 this file assumes."
+  },
+  {
+   "level": "WARN",
+   "id": "wire",
+   "text": "bank → Pi USB-C cable (SPEC: ≤ 0.2 m, 22 AWG or heavier power conductors): 22 AWG × 0.2 m, peak 2.41 A (ampacity 7 A, USB-C 3.0 A), round-trip drop 51 mV = 1.0%"
+  },
+  {
+   "level": "WARN",
+   "id": "wire",
+   "text": "Pi USB-A → webcam (captive cable, 1.5 m): 28 AWG × 1.5 m, peak 0.30 A (ampacity 1.4 A, USB-A 1.5 A), round-trip drop 192 mV = 3.8%"
+  },
+  {
+   "level": "VERIFY",
+   "id": "bank",
+   "text": "Load-test the bank at 2.5 A for 60 s with the meter on the Pi's 5 V pin: below 4.8 V the bank is not a 3 A bank."
+  },
+  {
+   "level": "VERIFY",
+   "id": "bank-cable",
+   "text": "If the bank's output is USB-C and the Pi 4 is an early board (pre-2020, rev 1.1), an e-marked C-to-C cable will not power it — use an A-to-C cable or a plain C-to-C. Later Pi 4s and all Pi 5s are fine"
+  },
+  {
+   "level": "VERIFY",
+   "id": "i2c",
+   "text": "Before connecting SDA/SCL: power each I2C module alone and meter SDA to GND — it must read ≤ 3.3 V. A module whose pull-ups go to 5 V goes on 3.3 V power or not on the Pi."
+  },
+  {
+   "level": "VERIFY",
+   "id": "i2c1",
+   "text": "One I2C bus for everything: the Pi's 1.8 kΩ pull-ups plus the boards' own 10 kΩ. i2cdetect -y 1 must show 0x33 (thermal) and 0x29 (rear ToF); the front ToF appears at 0x30 only after sensing/tof.py re-addresses it (both XSHUT low, FRONT alone → 0x30, then REAR). If the SCD41 is fitted the bus drops to 100 kHz — fine for 4 fps thermal."
+  },
+  {
+   "level": "VERIFY",
+   "id": "tilt-servo",
+   "text": "The tilt servo must be a 180° (positional) MG996R: with the remote, set a tilt and let go — it must stop dead. A 360° servo keeps turning under a tilt command (it reads the pulse as speed), cannot hold the camera, and winds one way under the show. TowerPro sells both with the same case"
+  },
+  {
+   "level": "PROCEDURE",
+   "id": "cap-polarity",
+   "text": "1000 µF electrolytic across VMOT: stripe = negative, to the GND terminal. Reversed, it vents on the first power-up"
+  },
+  {
+   "level": "PROCEDURE",
+   "id": "csi-nodes",
+   "text": "CSI v2: ESP32 #2 runs csi_tx OFF the rover (dropped as far along the wall as the room allows, any USB 5 V, channel 6, 100 Hz probes). ESP32 #3 runs csi_rx_udp ON the rover from its OWN small power bank on its USB-C — nothing else plugs into it, no wire touches the rover's electronics. It streams the CSI of every probe to the Pi hotspot (channel 6), UDP port 5005. ESP32 #1 is the spare."
+  },
+  {
+   "level": "PROCEDURE",
+   "id": "driver-orient",
+   "text": "DRV8825 into the shield socket with its EN pin over the socket's EN label (the trimpot ends up toward the shield's power terminal on genuine Pololu layouts; clones vary — go by the label). Backwards = dead driver on power-up, no warning"
+  },
+  {
+   "level": "PROCEDURE",
+   "id": "fan",
+   "text": "The 40 mm 5 V fan plugs onto the PCA9685's channel-15 header: red → the middle (V+) pin, black → the bottom (GND) pin. The XL4015 is set to 5.0 V for exactly this; the tilt servo is fine at 5 V."
+  },
+  {
+   "level": "PROCEDURE",
+   "id": "ground",
+   "text": "Servo/fan return: XL4015 OUT−, which is the same node as IN− (a buck shares its negative) and so the shield GND screw — the D11 signal is referenced to it automatically. The LD2410Cs return through their adapters (USB side), the LD2450 through the Pi header's pin 34. Pack current never flows through a board GND pin or a USB cable."
+  },
+  {
+   "level": "PROCEDURE",
+   "id": "i2c-chain",
+   "text": "The Pi header has two 3V3 pins and one SDA/SCL pair, but four boards want 3V3 and three want SDA/SCL — one Dupont female per pin. Chain through the boards' second header/STEMMA port (Adafruit-pattern MLX/ToF boards have one), or use a mini breadboard as the 3V3/SDA/SCL splitter. Never force two females onto one pin."
+  },
+  {
+   "level": "PROCEDURE",
+   "id": "microstep",
+   "text": "AS BUILT (v1.0 best drive): DRV8825 1/32 = M0 + M2 → caps on MS1 and MS3 under each driver, MS2 open (eight caps), plus the D12 and D13 jumpers on the A header = ten jumpers total. Caps go on before the drivers. 1/16 (one cap, MS3 only, firmware m 16) is the faster alternative — a drive-setting change, ask first."
+  },
+  {
+   "level": "PROCEDURE",
+   "id": "pack-splice",
+   "text": "The shield's VMOT/GND screw terminal is the only pack splice: the 14 AWG pack lead and the 22 AWG XL4015 input wire share each screw (2.4 mm² total, inside the 5.08 mm terminal's range). Strip 7 mm, twist the two conductors together before inserting, tug-test both."
+  },
+  {
+   "level": "PROCEDURE",
+   "id": "phases",
+   "text": "Motor coil pairs by multimeter: the two leads that show ~2 Ω are one coil. A coil split across the 2B/2A–1A/1B header halves makes a motor buzz and not turn."
+  },
+  {
+   "level": "PROCEDURE",
+   "id": "radar-power",
+   "text": "Each LD2410C is a 4-wire job to its own CP2102: VCC → the adapter's +5V pin (never 3V3 — too weak, and the radar needs 5 V), GND → GND, TX → RXD, RX → TXD. They add 160 mA to the Pi's USB budget (checked above). The adapter must be a 3.3 V-logic type: meter its TXD pin at idle — 3.3 V, not 5 V. The LD2450 (100 mA) takes no adapter: 5V → Pi pin 4, GND → pin 34 (pin 6 also works — any Pi GND pin), TX → pin 10, RX → pin 8"
+  },
+  {
+   "level": "PROCEDURE",
+   "id": "sequence",
+   "text": "Power-up: bank → Pi → R4 (USB) FIRST, then the pack at the T-plug. Power-down and BEFORE every flash/reset of the R4: pull the pack plug first. Reason: DRV8825 nENABLE has a pull-down, so while the R4 is dead or resetting all four drivers sit at full holding current (no pull-up resistor fitted — by choice; the plug order replaces it)."
+  },
+  {
+   "level": "PROCEDURE",
+   "id": "servos",
+   "text": "PCA9685 on the CNC shield's comms header: shield SDA → PCA SDA, SCL → SCL, 5V → VCC, GND → GND (5 V I2C from the R4). XL4015 OUT+/OUT− → the PCA9685's V+/GND screw terminal. TILT servo on channel 3 (positional MG996R), PAN servo on channel 2 (continuous-rotation); brown toward the board edge = GND row. Fan red/black onto channel 15's V+ and GND pins. Firmware: nothing is driven at boot — the turret starts wherever it was set by hand. Tilt 't <deg>' 78–150 (600 + 10 µs/°), 't -1' = limp; pan only by timed eased nudges 'n -1 300' / 'n 1 300' (this servo turns right below 1500 µs, so PAN_SIGN = −1), 'p' = stop, 'T <µs>' trims the stop pulse (saved on the Pi, set with the remote's hold-still test), 'H <ms>' holds the stop pulse; 'K 1' runs the show about the start pose and 'K 0' returns to it. Status 'pca' = 1 when the board answers."
+  },
+  {
+   "level": "PROCEDURE",
+   "id": "uart",
+   "text": "The LD2450 on the Pi's own UART, once: raspi-config nonint do_serial_cons 1 (no login console on it), do_serial_hw 0, add dtoverlay=disable-bt to /boot/firmware/config.txt, systemctl disable hciuart, reboot (pi/enable_gpio_uart.sh). It then reads as /dev/ttyAMA0 at 256000 baud: put that path in ~/rover/radars.json as \"ld2450\". Nothing on the rover uses Bluetooth. Never land a 5 V wire on pins 8/10"
+  },
+  {
+   "level": "PROCEDURE",
+   "id": "vref",
+   "text": "Read the sense resistor on one driver: R100 → Vref = 0.75 V for 1.5 A; R200 → 1.50 V. Set all four with the multimeter, motors unplugged, before any motor is connected."
+  },
+  {
+   "level": "PASS",
+   "id": "I-budget",
+   "text": "PACK (HOOVO 3S 2200 mAh 80C, T-plug): avg 2.36 A of 44.0 A (5%), peak 6.46 A of 100.0 A (6%)"
+  },
+  {
+   "level": "PASS",
+   "id": "I-budget",
+   "text": "V5_BANK2 (second USB power bank → ESP32-S3 #3 USB-C): avg 0.25 A of 1.0 A (25%), peak 0.50 A of 2.0 A (25%)"
+  },
+  {
+   "level": "PASS",
+   "id": "I-budget",
+   "text": "V5_BANK (USB power bank → Pi USB-C): avg 1.48 A of 3.0 A (49%), peak 2.41 A of 3.0 A (80%)"
+  },
+  {
+   "level": "PASS",
+   "id": "I-budget",
+   "text": "V5_PI_USB (Pi 4 downstream USB (4 ports, shared)): avg 0.61 A of 1.2 A (51%), peak 0.79 A of 1.2 A (65%)"
+  },
+  {
+   "level": "PASS",
+   "id": "I-budget",
+   "text": "V3_PI (Pi 3.3 V header pin): avg 0.08 A of 0.5 A (16%), peak 0.31 A of 0.8 A (39%)"
+  },
+  {
+   "level": "PASS",
+   "id": "V-chain",
+   "text": "Pi input 4.78 V from a bank holding 4.9 V under load through a 22 AWG × 0.2 m cable (+30 mΩ of USB contacts); the Pi's under-voltage warning is 4.63 V"
+  },
+  {
+   "level": "PASS",
+   "id": "V-window",
+   "text": "4× DRV8825 + JK42HS40 motors (bus side): 10.5–12.6 V inside 8.2–45.0 V"
+  },
+  {
+   "level": "PASS",
+   "id": "V-window",
+   "text": "XL4015 input (second wires in the shield's power screws): 10.5–12.6 V inside 4.0–38.0 V"
+  },
+  {
+   "level": "PASS",
+   "id": "V-window",
+   "text": "MG996R tilt servo on PCA9685 channel 3: 4.85–5.15 V inside 4.8–7.2 V"
+  },
+  {
+   "level": "PASS",
+   "id": "V-window",
+   "text": "MG996R pan servo on PCA9685 channel 2: 4.85–5.15 V inside 4.8–7.2 V"
+  },
+  {
+   "level": "PASS",
+   "id": "V-window",
+   "text": "40 mm 5 V fan on PCA9685 channel 15's V+/GND pins: 4.85–5.15 V inside 4.5–5.5 V"
+  },
+  {
+   "level": "PASS",
+   "id": "V-window",
+   "text": "PCA9685 logic (VCC from the shield's 5V pin): 4.75–5.25 V inside 2.3–5.5 V"
+  },
+  {
+   "level": "PASS",
+   "id": "V-window",
+   "text": "ESP32-S3 #3 CSI receiver (USB-C from its own power bank): 4.75–5.25 V inside 4.75–5.25 V"
+  },
+  {
+   "level": "PASS",
+   "id": "V-window",
+   "text": "Raspberry Pi 4 itself: 4.75–5.25 V inside 4.75–5.25 V"
+  },
+  {
+   "level": "PASS",
+   "id": "V-window",
+   "text": "Webcam (C920-class, 1080p): 4.75–5.25 V inside 4.75–5.25 V"
+  },
+  {
+   "level": "PASS",
+   "id": "V-window",
+   "text": "UNO R4 WiFi + shield logic: 4.75–5.25 V inside 4.75–5.25 V"
+  },
+  {
+   "level": "PASS",
+   "id": "V-window",
+   "text": "2× CP2102 USB-serial adapters + 4-port hub: 4.75–5.25 V inside 4.75–5.25 V"
+  },
+  {
+   "level": "PASS",
+   "id": "V-window",
+   "text": "LD2410C radar LEFT (VCC from its CP2102's 5V pin): 4.75–5.25 V inside 4.5–5.5 V"
+  },
+  {
+   "level": "PASS",
+   "id": "V-window",
+   "text": "LD2410C radar RIGHT (VCC from its CP2102's 5V pin): 4.75–5.25 V inside 4.5–5.5 V"
+  },
+  {
+   "level": "PASS",
+   "id": "V-window",
+   "text": "LD2450 radar (5V from the Pi header pin 4): 4.75–5.25 V inside 4.5–5.5 V"
+  },
+  {
+   "level": "PASS",
+   "id": "V-window",
+   "text": "MLX90640 thermal array: 3.2–3.4 V inside 3.0–3.6 V"
+  },
+  {
+   "level": "PASS",
+   "id": "V-window",
+   "text": "VL53L1X ToF front: 3.2–3.4 V inside 2.6–3.6 V"
+  },
+  {
+   "level": "PASS",
+   "id": "V-window",
+   "text": "VL53L1X ToF rear: 3.2–3.4 V inside 2.6–3.6 V"
+  },
+  {
+   "level": "PASS",
+   "id": "V-window",
+   "text": "INMP441 microphone: 3.2–3.4 V inside 1.8–3.6 V"
+  },
+  {
+   "level": "PASS",
+   "id": "V-window",
+   "text": "SCD41 CO2 (optional): 3.2–3.4 V inside 2.4–5.5 V"
+  },
+  {
+   "level": "PASS",
+   "id": "bulk-cap",
+   "text": "1000 µF 25 V across VMOT at the shield terminal (consumables) — protects the drivers from the pack lead's inductance on connect."
+  },
+  {
+   "level": "PASS",
+   "id": "dropout",
+   "text": "XL4015 needs Vin ≥ 6.0 V; pack minimum 10.5 V"
+  },
+  {
+   "level": "PASS",
+   "id": "endurance",
+   "text": "pack draw avg 2.36 A, peak 6.46 A → 45 min per 2200 mAh pack (80 % usable)"
+  },
+  {
+   "level": "PASS",
+   "id": "ground",
+   "text": "star = the shield's GND screw (pack −, XL4015 IN− and the motor return all land there). Peak drop per branch: shield GND screw (pack −; the R4's USB GND ties it to the Pi) 0 mV, servo/fan return at the XL4015 OUT− pad (via IN− from the shield GND screw) 20 mV → ≤ 20 mV between attachment points, ~49 mA circulating through USB grounds (limit 100 mV)"
+  },
+  {
+   "level": "PASS",
+   "id": "i2c",
+   "text": "I2C1: MLX90640 0x33, VL53L1X front (re-addressed) 0x30, VL53L1X rear 0x29, SCD41 (optional) 0x62 — no clashes; bus speed limited to 100 kHz by the slowest part"
+  },
+  {
+   "level": "PASS",
+   "id": "i2c",
+   "text": "R4 Wire: PCA9685 0x40 — no clashes; bus speed limited to 400 kHz by the slowest part"
+  },
+  {
+   "level": "PASS",
+   "id": "level",
+   "text": "UNO R4 (5 V logic) D2/D5 D3/D6 D4/D7 D12/D13 STEP/DIR, D8 EN → DRV8825 ×4 STEP DIR nENABLE: 5.0 V out, 2.2–5.25 V accepted"
+  },
+  {
+   "level": "PASS",
+   "id": "level",
+   "text": "LD2410C left TX (3.3 V) TX → CP2102 #1 RXD (3.3 V logic): 3.3 V out, 2.0–3.6 V accepted"
+  },
+  {
+   "level": "PASS",
+   "id": "level",
+   "text": "CP2102 #1 TXD TXD → LD2410C left RX: 3.3 V out, 2.0–3.6 V accepted"
+  },
+  {
+   "level": "PASS",
+   "id": "level",
+   "text": "LD2410C right TX (3.3 V) TX → CP2102 #2 RXD: 3.3 V out, 2.0–3.6 V accepted"
+  },
+  {
+   "level": "PASS",
+   "id": "level",
+   "text": "CP2102 #2 TXD TXD → LD2410C right RX: 3.3 V out, 2.0–3.6 V accepted"
+  },
+  {
+   "level": "PASS",
+   "id": "level",
+   "text": "LD2450 TX (3.3 V) TX → Pi BCM 15 (UART0 RXD, header pin 10) RXD: 3.3 V out, 2.0–3.6 V accepted"
+  },
+  {
+   "level": "PASS",
+   "id": "level",
+   "text": "Pi BCM 14 (UART0 TXD, header pin 8) TXD → LD2450 RX: 3.3 V out, 2.0–3.6 V accepted"
+  },
+  {
+   "level": "PASS",
+   "id": "level",
+   "text": "Pi I2C-1 (BCM 2/3, pull-ups 3.3 V) SDA/SCL → MLX90640 0x33, VL53L1X 0x29→0x30, SCD41 0x62 SDA/SCL: 3.3 V out, 2.3–3.6 V accepted"
+  },
+  {
+   "level": "PASS",
+   "id": "level",
+   "text": "UNO R4 Wire (A4/A5 on the shield's SDA/SCL comms header, 5 V I2C, PCA9685's own 10 kΩ pull-ups) SDA/SCL → PCA9685 0x40 SDA/SCL: 5.0 V out, 3.0–5.5 V accepted"
+  },
+  {
+   "level": "PASS",
+   "id": "level",
+   "text": "PCA9685 (VCC 5 V) channels 3 / 2 PWM3 PWM2 → MG996R tilt / pan servos signal: 5.0 V out, 2.4–5.5 V accepted"
+  },
+  {
+   "level": "PASS",
+   "id": "level",
+   "text": "Pi BCM 22 / 27 XSHUT out → VL53L1X front / rear XSHUT (pull-up to VIN = 3.3): 3.3 V out, 1.2–3.6 V accepted"
+  },
+  {
+   "level": "PASS",
+   "id": "level",
+   "text": "Pi I2S (BCM 18/19/20) BCLK/LRCLK/DIN → INMP441 SCK/WS/SD: 3.3 V out, 2.3–3.6 V accepted"
+  },
+  {
+   "level": "PASS",
+   "id": "level",
+   "text": "Pi ↔ UNO R4 USB CDC → UNO R4 USB: 5.0 V out, 0–5.25 V accepted"
+  },
+  {
+   "level": "PASS",
+   "id": "level",
+   "text": "Pi ↔ 2× CP2102 USB → /dev/serial/by-path (by hub socket: cheap CP2102s share serial 0001, so by-id shows one) → LD2410C left/right at 256000 baud USB: 5.0 V out, 0–5.25 V accepted"
+  },
+  {
+   "level": "PASS",
+   "id": "level",
+   "text": "ESP32-S3 #2 csi_tx, OFF the rover 3 m along the wall on any USB 5 V: 100 Hz ESP-NOW probes, channel 6 → ESP32-S3 #3 csi_rx_udp on the rover: CSI of every probe → UDP to the Pi hotspot (channel 6) port 5005: radio link, no wire"
+  },
+  {
+   "level": "PASS",
+   "id": "pins",
+   "text": "Pi BCM: 9 pins, all distinct"
+  },
+  {
+   "level": "PASS",
+   "id": "pins",
+   "text": "UNO R4 / shield: 11 pins, all distinct, none on [9, 10, 11, 14, 15, 16, 17]"
+  },
+  {
+   "level": "PASS",
+   "id": "splice",
+   "text": "No lever nuts, no resistor boards, one buck at 5.0 V: pack → shield terminal → (second wires) XL4015 → PCA9685 V+ terminal; servos and fan plug onto the PCA9685's headers; the PCA9685 is driven by the R4 over the shield's SDA/SCL pins; the LD2410Cs from their USB adapters, the LD2450 from the Pi header; the ESP32 from its own bank; everything else from the Pi"
+  },
+  {
+   "level": "PASS",
+   "id": "usb",
+   "text": "Pi USB: 3 plugs in 4 ports (Webcam, UNO R4 WiFi + shield logic, 2× CP2102 USB-serial adapters + 4-port hub); the LD2410Cs ride the hub"
+  },
+  {
+   "level": "PASS",
+   "id": "usb",
+   "text": "The two LD2410Cs are powered through their CP2102 adapters (80 + 80 mA on the hub), the LD2450 (200 mA) from the Pi header's 5 V pin, outside the USB budget; the webcam keeps its own port; ESP32 #3 is on its own bank, not on the Pi, the main bank or the servo rail"
+  },
+  {
+   "level": "PASS",
+   "id": "wire",
+   "text": "pack lead: HOOVO T-plug → OliRC extension (the pull-plug disconnect on the deck) → shield VMOT/GND terminal: 14 AWG × 0.45 m, peak 6.46 A (ampacity 32 A, screw terminal 5.08 10 A), round-trip drop 48 mV = 0.4%"
+  },
+  {
+   "level": "PASS",
+   "id": "wire",
+   "text": "shield VMOT/GND screws (second wire) → XL4015 IN: 22 AWG × 0.15 m, peak 2.46 A (ampacity 7 A, screw terminal 5.08 10 A), round-trip drop 39 mV = 0.4%"
+  },
+  {
+   "level": "PASS",
+   "id": "wire",
+   "text": "XL4015 OUT pads → PCA9685 V+ / GND screw terminal: 22 AWG × 0.15 m, peak 4.40 A (ampacity 7 A, screw terminal 5.08 10 A), round-trip drop 70 mV = 1.2%"
+  },
+  {
+   "level": "PASS",
+   "id": "wire",
+   "text": "shield driver socket → 4-pin motor cable → motor (per phase): 26 AWG × 0.4 m, peak 1.50 A (ampacity 2.2 A, Dupont 2.54 2.0 A), round-trip drop 161 mV = 1.4%"
+  },
+  {
+   "level": "PASS",
+   "id": "wire",
+   "text": "bank 2 → ESP32-S3 #3 USB-C: 28 AWG × 0.3 m, peak 0.50 A (ampacity 1.4 A, USB-C 3.0 A), round-trip drop 64 mV = 1.3%"
+  },
+  {
+   "level": "PASS",
+   "id": "wire",
+   "text": "Pi USB-A → UNO R4 USB-C: 28 AWG × 0.3 m, peak 0.20 A (ampacity 1.4 A, USB-A 1.5 A), round-trip drop 26 mV = 0.5%"
+  },
+  {
+   "level": "PASS",
+   "id": "wire",
+   "text": "Pi USB-A → hub → 2× CP2102 (the LD2410Cs' power rides on these): 28 AWG × 0.3 m, peak 0.28 A (ampacity 1.4 A, USB-A 1.5 A), round-trip drop 35 mV = 0.7%"
+  },
+  {
+   "level": "PASS",
+   "id": "wire",
+   "text": "CP2102 +5V/GND/TXD/RXD → LD2410C (4 wires, 0.25 m): 26 AWG × 0.25 m, peak 0.10 A (ampacity 2.2 A, Dupont 2.54 2.0 A), round-trip drop 7 mV = 0.1%"
+  },
+  {
+   "level": "PASS",
+   "id": "wire",
+   "text": "Pi header pins 4 (5V) / 34 (GND) / 8 (TXD) / 10 (RXD) → LD2450 (4 wires, 0.25 m): 26 AWG × 0.25 m, peak 0.20 A (ampacity 2.2 A, Dupont 2.54 2.0 A), round-trip drop 13 mV = 0.3%"
+  }
+ ],
+ "summary": {
+  "pack_avg": 2.36,
+  "pack_peak": 6.46,
+  "bank_avg": 1.48,
+  "bank_peak": 2.41,
+  "pi_usb_peak": 0.79,
+  "minutes": 45,
+  "v_pi": 4.78,
+  "v_cam": 4.53,
+  "n_loads": 19,
+  "n_wires": 11,
+  "n_signals": 15,
+  "counts": {
+   "FAIL": 0,
+   "WARN": 10,
+   "VERIFY": 5,
+   "PROCEDURE": 14,
+   "PASS": 60
+  }
+ }
+}

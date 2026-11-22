@@ -1,0 +1,627 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!-- Generator: Adobe Illustrator 24.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg xmlns="http://www.w3.org/2000/svg"  id="Layer_1" viewBox="0 0 78.1719 50.4" height="0.7in" gorn="0" x="0px" y="0px" xml:space="preserve" version="1.1" width="1.08572in" enable-background="new 0 0 78.1719 50.4" xmlns:xml="http://www.w3.org/XML/1998/namespace">
+    <desc>
+        <referenceFile>MLX90640 Rev A_breadboard.svg</referenceFile>
+    </desc>
+    <g >
+        <g  id="icon" gorn="0.0.0">
+            <path  d="M3.0806,7.2c0-3.9765,3.2235-7.2,7.2-7.2c0,0,0,0,0,0h57.6c3.9764,0,7.2,3.2236,7.2,7.2v36c0,3.9764-3.2235,7.2-7.2,7.2h-57.6c-3.9765,0-7.2-3.2235-7.2-7.2c0,0,0,0,0,0V7.2 M41.405,17.5465c-0.0011,0.4697,0.3787,0.8513,0.8483,0.8525c0.4697,0.0011,0.8513-0.3787,0.8525-0.8483c0-0.0014,0-0.0028,0-0.0041c0.0011-0.4697-0.3787-0.8513-0.8483-0.8525c-0.4697-0.0011-0.8513,0.3787-0.8525,0.8483C41.405,17.5437,41.405,17.5451,41.405,17.5465z M41.405,32.8535c-0.0011,0.4697,0.3787,0.8513,0.8483,0.8525c0.4697,0.0011,0.8513-0.3787,0.8525-0.8483c0-0.0014,0-0.0028,0-0.0041c0.0011-0.4697-0.3787-0.8513-0.8483-0.8525c-0.4697-0.0011-0.8513,0.3787-0.8525,0.8483C41.405,32.8507,41.405,32.8521,41.405,32.8535z M35.0554,32.8535c-0.0011,0.4697,0.3787,0.8513,0.8483,0.8525c0.4697,0.0011,0.8513-0.3787,0.8525-0.8483c0-0.0014,0-0.0028,0-0.0041c0.0009-0.4697-0.3791-0.8511-0.8488-0.852s-0.8511,0.3791-0.852,0.8488C35.0554,32.8513,35.0554,32.8524,35.0554,32.8535z M35.0554,17.5465c-0.0011,0.4697,0.3787,0.8513,0.8483,0.8525c0.4697,0.0011,0.8513-0.3787,0.8525-0.8483c0-0.0014,0-0.0028,0-0.0041c0.0009-0.4697-0.3791-0.8511-0.8488-0.852s-0.8511,0.3791-0.852,0.8488C35.0554,17.5443,35.0554,17.5454,35.0554,17.5465z M52.0633,43.2c0,0.7828,0.6346,1.4173,1.4173,1.4173c0.7828,0,1.4173-0.6346,1.4173-1.4173s-0.6346-1.4173-1.4173-1.4173S52.0634,42.4172,52.0633,43.2z M44.8633,43.2c0,0.7828,0.6346,1.4173,1.4173,1.4173S47.698,43.9828,47.698,43.2s-0.6346-1.4173-1.4173-1.4173S44.8633,42.4172,44.8633,43.2z M37.6633,43.2c0,0.7828,0.6346,1.4173,1.4173,1.4173c0.7828,0,1.4173-0.6346,1.4173-1.4173s-0.6346-1.4173-1.4173-1.4173S37.6633,42.4172,37.6633,43.2z M30.4633,43.2c0,0.7828,0.6346,1.4173,1.4173,1.4173c0.7828,0,1.4173-0.6346,1.4173-1.4173s-0.6346-1.4173-1.4173-1.4173C31.0979,41.7827,30.4633,42.4172,30.4633,43.2z M23.2633,43.2c0,0.7828,0.6346,1.4173,1.4173,1.4173c0.7828,0,1.4173-0.6346,1.4173-1.4173s-0.6346-1.4173-1.4173-1.4173C23.8979,41.7827,23.2633,42.4172,23.2633,43.2z M6.7373,7.2c-0.0033,1.9569,1.5804,3.546,3.5373,3.5493s3.546-1.5804,3.5493-3.5373c0-0.004,0-0.008,0-0.012c0.0033-1.9569-1.5804-3.546-3.5374-3.5493c-1.9569-0.0033-3.546,1.5804-3.5493,3.5374C6.7373,7.1921,6.7373,7.196,6.7373,7.2z M64.3373,7.2c-0.0034,1.9569,1.5802,3.5461,3.5371,3.5495c1.9569,0.0034,3.5461-1.5802,3.5495-3.5371c0-0.0041,0-0.0083,0-0.0124c0.0034-1.9569-1.5802-3.5461-3.5371-3.5495C65.93,3.647,64.3408,5.2306,64.3373,7.1876C64.3373,7.1917,64.3373,7.1958,64.3373,7.2z M6.7373,43.2c-0.0033,1.9569,1.5804,3.546,3.5373,3.5493c1.9569,0.0033,3.546-1.5804,3.5493-3.5373c0-0.004,0-0.008,0-0.012c0.0033-1.9569-1.5804-3.546-3.5374-3.5493s-3.546,1.5804-3.5493,3.5374C6.7373,43.1921,6.7373,43.196,6.7373,43.2z M64.3373,43.2c-0.0034,1.9569,1.5802,3.5461,3.5371,3.5495c1.9569,0.0034,3.5461-1.5802,3.5495-3.5371c0-0.0042,0-0.0083,0-0.0125c0.0034-1.9569-1.5802-3.5461-3.5371-3.5495s-3.5461,1.5802-3.5495,3.5371C64.3373,43.1917,64.3373,43.1959,64.3373,43.2z"/>
+            <g >
+                <title >layer 21</title>
+                <g >
+                    <title >text:VIN</title>
+                    <g  transform="matrix(1 0 0 1 50.7262 48.9283)">
+                        <text  font-family="'OCRA'" font-size="2.13808" fill="#FFFFFF">VIN</text>
+                    </g>
+                </g>
+                <g >
+                    <title >text:3Vo</title>
+                    <g  transform="matrix(1 0 0 1 43.7422 40.5763)">
+                        <text  font-family="'OCRA'" font-size="2.13808" fill="#FFFFFF">3Vo</text>
+                    </g>
+                </g>
+                <g >
+                    <title >text:GND</title>
+                    <g  transform="matrix(1 0 0 1 36.1534 48.8275)">
+                        <text  font-family="'OCRA'" font-size="2.13808" fill="#FFFFFF">GND</text>
+                    </g>
+                </g>
+                <g >
+                    <title >text:SCL</title>
+                    <g  transform="matrix(1 0 0 1 29.3422 40.5763)">
+                        <text  font-family="'OCRA'" font-size="2.13808" fill="#FFFFFF">SCL</text>
+                    </g>
+                </g>
+                <g >
+                    <title >text:SDA</title>
+                    <g  transform="matrix(1 0 0 1 22.1422 48.8275)">
+                        <text  font-family="'OCRA'" font-size="2.13808" fill="#FFFFFF">SDA</text>
+                    </g>
+                </g>
+                <g >
+                    <title >text:MLX90640</title>
+                    <g  transform="matrix(1 0 0 1 25.7961 5.1768)">
+                        <text  font-family="'OCRA'" font-size="3.67488" fill="#FFFFFF">MLX90640</text>
+                    </g>
+                </g>
+                <g >
+                    <title >text:32x24 IR Camera</title>
+                    <g  transform="matrix(1 0 0 1 18.7009 9.468)">
+                        <text  font-family="'OCRA'" font-size="3.00672" fill="#FFFFFF">32x24 IR Camera</text>
+                    </g>
+                </g>
+                <g >
+                    <title >text:on</title>
+                    <g  transform="matrix(1 0 0 1 4.8806 14.76)">
+                        <text  font-family="'OCRA'" font-size="2.13808" fill="#FFFFFF">on</text>
+                    </g>
+                </g>
+                <g >
+                    <title >text:I2C Addr: 0x33</title>
+                    <g  transform="matrix(1 0 0 1 22.173 13.5216)">
+                        <text  font-family="'OCRA'" font-size="2.67264" fill="#FFFFFF">I2C Addr: 0x33</text>
+                    </g>
+                </g>
+                <g >
+                    <title >element:C1</title>
+                    <g >
+                        <title >package:0603-NO</title>
+                        <line  y1="23.8861" y2="26.1539" stroke-width="0.864" x1="39.2606" fill="none" x2="39.2606" stroke="#FFFFFF" stroke-linecap="round"/>
+                    </g>
+                </g>
+                <g >
+                    <title >element:C2</title>
+                    <g >
+                        <title >package:0805-NO</title>
+                        <line  y1="36" y2="33.12" stroke-width="0.864" x1="53.4806" fill="none" x2="53.4806" stroke="#FFFFFF" stroke-linecap="round"/>
+                    </g>
+                </g>
+                <g >
+                    <title >element:C3</title>
+                    <g >
+                        <title >package:0805-NO</title>
+                        <line  y1="15.12" y2="18" stroke-width="0.864" x1="52.4006" fill="none" x2="52.4006" stroke="#FFFFFF" stroke-linecap="round"/>
+                    </g>
+                </g>
+                <g >
+                    <title >element:CONN3</title>
+                    <g >
+                        <title >package:JST_SH4</title>
+                        <line  y1="33.7039" y2="33.7039" stroke-width="0.432" x1="68.9748" fill="none" x2="61.6047" stroke="#FFFFFF" stroke-linecap="round"/>
+                        <line  y1="33.7039" y2="30.5858" stroke-width="0.432" x1="61.6047" fill="none" x2="61.6047" stroke="#FFFFFF" stroke-linecap="round"/>
+                        <line  y1="19.8142" y2="16.4126" stroke-width="0.432" x1="61.6047" fill="none" x2="61.6047" stroke="#FFFFFF" stroke-linecap="round"/>
+                        <line  y1="16.4126" y2="16.4126" stroke-width="0.432" x1="61.6047" fill="none" x2="68.9748" stroke="#FFFFFF" stroke-linecap="round"/>
+                        <line  y1="31.1527" y2="19.2473" stroke-width="0.432" x1="73.7937" fill="none" x2="73.7937" stroke="#FFFFFF" stroke-linecap="round"/>
+                    </g>
+                </g>
+                <g >
+                    <title >element:CONN4</title>
+                    <g >
+                        <title >package:JST_SH4</title>
+                        <line  y1="16.6961" y2="16.6961" stroke-width="0.432" x1="9.1865" fill="none" x2="16.5565" stroke="#FFFFFF" stroke-linecap="round"/>
+                        <line  y1="16.6961" y2="19.8142" stroke-width="0.432" x1="16.5565" fill="none" x2="16.5565" stroke="#FFFFFF" stroke-linecap="round"/>
+                        <line  y1="30.5858" y2="33.9874" stroke-width="0.432" x1="16.5565" fill="none" x2="16.5565" stroke="#FFFFFF" stroke-linecap="round"/>
+                        <line  y1="33.9874" y2="33.9874" stroke-width="0.432" x1="16.5565" fill="none" x2="9.1865" stroke="#FFFFFF" stroke-linecap="round"/>
+                        <line  y1="19.2473" y2="31.1527" stroke-width="0.432" x1="4.3676" fill="none" x2="4.3676" stroke="#FFFFFF" stroke-linecap="round"/>
+                    </g>
+                </g>
+                <g >
+                    <title >element:D1</title>
+                    <g >
+                        <title >package:CHIPLED_0603_NOOUTLINE</title>
+                        <g >
+                            <title >polygon</title>
+                            <path  stroke-width="0.432" fill="none" stroke="#FFFFFF" stroke-linecap="round" d="M12.7646,14.76l0.9-0.72v1.44L12.7646,14.76"/>
+                        </g>
+                        <g  transform="matrix(0, -1, 1, 0, 9.504, 14.76)">
+                            <g >
+                                <g  transform="matrix(-2.535182e-06 -1 1 -2.535182e-06 -3.0806 3.0807)">
+                                    <rect  height="2.16" x="-0.18" y="2.0006" fill="#FFFFFF" width="0.36"/>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+                <g >
+                    <title >element:FID3</title>
+                    <g >
+                        <title >package:FIDUCIAL_1MM</title>
+                    </g>
+                </g>
+                <g >
+                    <title >element:FID4</title>
+                    <g >
+                        <title >package:FIDUCIAL_1MM</title>
+                    </g>
+                </g>
+                <g >
+                    <title >element:IC1</title>
+                    <g >
+                        <title >package:MLX90640</title>
+                    </g>
+                </g>
+                <g >
+                    <title >element:JP2</title>
+                    <g >
+                        <title >package:1X05_ROUND</title>
+                    </g>
+                </g>
+                <g >
+                    <title >element:Q2</title>
+                    <g >
+                        <title >package:SOT363</title>
+                        <line  y1="35.6981" y2="35.6981" stroke-width="0.576" x1="24.845" fill="none" x2="27.3962" stroke="#FFFFFF" stroke-linecap="round"/>
+                        <line  y1="29.4619" y2="29.4619" stroke-width="0.576" x1="24.845" fill="none" x2="27.3962" stroke="#FFFFFF" stroke-linecap="round"/>
+                        <circle  cx="27.1128" stroke-width="0.576" cy="36.832" fill="none" r="0.2835" stroke="#FFFFFF"/>
+                    </g>
+                </g>
+                <g >
+                    <title >element:R1</title>
+                    <g >
+                        <title >package:0603-NO</title>
+                        <line  y1="14.1552" y2="14.1552" stroke-width="0.864" x1="20.4433" fill="none" x2="18.1755" stroke="#FFFFFF" stroke-linecap="round"/>
+                    </g>
+                </g>
+                <g >
+                    <title >element:R3</title>
+                    <g >
+                        <title >package:RESPACK_4X0603</title>
+                        <line  y1="22.3285" y2="14.3915" stroke-width="0.576" x1="22.0524" fill="none" x2="22.0524" stroke="#FFFFFF" stroke-linecap="round"/>
+                        <line  y1="14.3915" y2="22.3285" stroke-width="0.576" x1="32.824" fill="none" x2="32.824" stroke="#FFFFFF" stroke-linecap="round"/>
+                    </g>
+                </g>
+                <g >
+                    <title >element:U$1</title>
+                    <g >
+                        <title >package:MOUNTINGHOLE_2.5_PLATED</title>
+                        <circle  cx="10.2806" stroke-width="0.576" cy="7.2" fill="none" r="5.6693" stroke="#FFFFFF"/>
+                    </g>
+                </g>
+                <g >
+                    <title >element:U$4</title>
+                    <g >
+                        <title >package:ADAFRUIT_3.5MM</title>
+                    </g>
+                </g>
+                <g >
+                    <title >element:U$17</title>
+                    <g >
+                        <title >package:MOUNTINGHOLE_2.5_PLATED</title>
+                        <circle  cx="67.8806" stroke-width="0.576" cy="7.2" fill="none" r="5.6693" stroke="#FFFFFF"/>
+                    </g>
+                </g>
+                <g >
+                    <title >element:U$19</title>
+                    <g >
+                        <title >package:MOUNTINGHOLE_2.5_PLATED</title>
+                        <circle  cx="10.2806" stroke-width="0.576" cy="43.2" fill="none" r="5.6693" stroke="#FFFFFF"/>
+                    </g>
+                </g>
+                <g >
+                    <title >element:U$21</title>
+                    <g >
+                        <title >package:MOUNTINGHOLE_2.5_PLATED</title>
+                        <circle  cx="67.8806" stroke-width="0.576" cy="43.2" fill="none" r="5.6693" stroke="#FFFFFF"/>
+                    </g>
+                </g>
+                <g >
+                    <title >element:U$22</title>
+                    <g >
+                        <title >package:ADAFRUIT_3.5MM</title>
+                    </g>
+                </g>
+                <g >
+                    <title >element:U$25</title>
+                    <g >
+                        <title >text:A</title>
+                        <g  transform="matrix(1 0 0 1 17.7687 40.032)">
+                            <text  font-family="'OCRA'" font-size="2.67264" fill="#FFFFFF">A</text>
+                        </g>
+                    </g>
+                    <g >
+                        <title >package:PCBFEAT-REV-040</title>
+                        <circle  cx="18.7766" stroke-width="0.864" cy="38.592" fill="none" r="2.5455" stroke="#FFFFFF"/>
+                    </g>
+                </g>
+                <g >
+                    <title >element:U$30</title>
+                    <g >
+                        <title >package:STEMMAQT</title>
+                    </g>
+                </g>
+                <g >
+                    <title >element:U$31</title>
+                    <g >
+                        <title >package:STEMMAQT</title>
+                    </g>
+                </g>
+                <g >
+                    <title >element:U2</title>
+                    <g >
+                        <title >package:SOT23-5</title>
+                        <line  y1="23.6523" y2="28.1877" stroke-width="0.576" x1="48.4434" fill="none" x2="48.4434" stroke="#FFFFFF" stroke-linecap="round"/>
+                        <line  y1="23.6523" y2="28.1877" stroke-width="0.576" x1="57.7978" fill="none" x2="57.7978" stroke="#FFFFFF" stroke-linecap="round"/>
+                        <line  y1="22.9436" y2="22.9436" stroke-width="0.576" x1="51.9867" fill="none" x2="54.2545" stroke="#FFFFFF" stroke-linecap="round"/>
+                    </g>
+                </g>
+            </g>
+            <rect  id="connector5pin" height="2.8347" gorn="0.0.0.2" x="35.3275" y="23.6027" fill="#9A916C" width="3.0472"/>
+            <rect  id="connector6pin" height="2.8347" gorn="0.0.0.3" x="40.1464" y="23.6027" fill="#9A916C" width="3.0472"/>
+            <g  transform="matrix(-1, 0, 0, -1, 106.186, 69.12)">
+                <g >
+                    <rect  id="connector7pin" height="4.252" gorn="0.0.0.4.0.0" x="48.2548" y="32.434" fill="#9A916C" width="3.515"/>
+                </g>
+            </g>
+            <g  transform="matrix(-1, 0, 0, -1, 95.4144, 69.12)">
+                <g >
+                    <rect  id="connector8pin" height="4.252" gorn="0.0.0.5.0.0" x="42.869" y="32.434" fill="#9A916C" width="3.515"/>
+                </g>
+            </g>
+            <rect  id="connector9pin" height="4.252" gorn="0.0.0.6" x="47.9502" y="14.434" fill="#9A916C" width="3.515"/>
+            <rect  id="connector10pin" height="4.252" gorn="0.0.0.7" x="53.336" y="14.434" fill="#9A916C" width="3.515"/>
+            <g  transform="matrix(-1, 0, 0, -1, 115.348, 58.9039)">
+                <g >
+                    <rect  height="1.7008" gorn="0.0.0.8.0.0" x="52.3963" y="28.6016" fill="#9A916C" width="4.3937"/>
+                </g>
+            </g>
+            <g  transform="matrix(-1, 0, 0, -1, 115.348, 53.2346)">
+                <g >
+                    <rect  height="1.7008" gorn="0.0.0.9.0.0" x="52.3963" y="25.7669" fill="#9A916C" width="4.3937"/>
+                </g>
+            </g>
+            <g  transform="matrix(-1, 0, 0, -1, 115.348, 47.5654)">
+                <g >
+                    <rect  height="1.7008" gorn="0.0.0.10.0.0" x="52.3963" y="22.9323" fill="#9A916C" width="4.3937"/>
+                </g>
+            </g>
+            <g  transform="matrix(-1, 0, 0, -1, 115.348, 41.8961)">
+                <g >
+                    <rect  height="1.7008" gorn="0.0.0.11.0.0" x="52.3963" y="20.0976" fill="#9A916C" width="4.3937"/>
+                </g>
+            </g>
+            <g  transform="matrix(-1, 0, 0, -1, 137.457, 66.274)">
+                <g >
+                    <rect  id="connector15pin" height="3.4016" gorn="0.0.0.12.0.0" x="63.097" y="31.4362" fill="#9A916C" width="5.1024"/>
+                </g>
+            </g>
+            <g  transform="matrix(-1, 0, 0, -1, 137.457, 34.526)">
+                <g >
+                    <rect  id="connector16pin" height="3.4016" gorn="0.0.0.13.0.0" x="63.097" y="15.5622" fill="#9A916C" width="5.1024"/>
+                </g>
+            </g>
+            <rect  height="1.7008" gorn="0.0.0.14" x="15.2101" y="20.0976" fill="#9A916C" width="4.3937"/>
+            <rect  height="1.7008" gorn="0.0.0.15" x="15.2101" y="22.9323" fill="#9A916C" width="4.3937"/>
+            <rect  height="1.7008" gorn="0.0.0.16" x="15.2101" y="25.7669" fill="#9A916C" width="4.3937"/>
+            <rect  height="1.7008" gorn="0.0.0.17" x="15.2101" y="28.6016" fill="#9A916C" width="4.3937"/>
+            <rect  id="connector21pin" height="3.4016" gorn="0.0.0.18" x="3.8006" y="15.5622" fill="#9A916C" width="5.1024"/>
+            <rect  id="connector22pin" height="3.4016" gorn="0.0.0.19" x="3.8006" y="31.4362" fill="#9A916C" width="5.1024"/>
+            <g  transform="matrix(0, -1, 1, 0, -2.55401, 26.966)">
+                <g >
+                    <g  transform="matrix(-2.535182e-06 -1 1 -2.535182e-06 -5.6345 30.0467)">
+                        <rect  id="connector23pin" height="2.2677" gorn="0.0.0.20.0.0.0" x="11.0722" y="16.7067" fill="#9A916C" width="2.2677"/>
+                    </g>
+                </g>
+            </g>
+            <g  transform="matrix(0, -1, 1, 0, -6.80599, 22.714)">
+                <g >
+                    <g  transform="matrix(-2.535182e-06 -1 1 -2.535182e-06 -9.8866 25.7947)">
+                        <rect  id="connector24pin" height="2.2677" gorn="0.0.0.21.0.0.0" x="6.8202" y="16.7067" fill="#9A916C" width="2.2677"/>
+                    </g>
+                </g>
+            </g>
+            <path  id="connector25pin" gorn="0.0.0.22" fill="#9A916C" d="M59.4135,44.7851L59.4135,44.7851c0.7828,0,1.4173,0.6346,1.4173,1.4173v0c0,0.7828-0.6346,1.4173-1.4173,1.4173h0c-0.7828,0-1.4173-0.6346-1.4173-1.4173v0C57.9961,45.4197,58.6307,44.7851,59.4135,44.7851z"/>
+            <path  id="connector26pin" gorn="0.0.0.23" fill="#9A916C" d="M18.3879,1.2683L18.3879,1.2683c0.7828,0,1.4173,0.6346,1.4173,1.4173v0c0,0.7828-0.6346,1.4173-1.4173,1.4173h0c-0.7828,0-1.4173-0.6346-1.4173-1.4173v0C16.9705,1.9028,17.6051,1.2683,18.3879,1.2683z"/>
+            <circle  id="connector27pin" gorn="0.0.0.24" cx="42.2554" stroke-width="1.1656" cy="17.5465" fill="none" r="1.4332" stroke="#9A916C"/>
+            <circle  id="connector28pin" gorn="0.0.0.25" cx="42.2554" stroke-width="1.1656" cy="32.8535" fill="none" r="1.4332" stroke="#9A916C"/>
+            <circle  id="connector29pin" gorn="0.0.0.26" cx="35.9058" stroke-width="1.1656" cy="32.8535" fill="none" r="1.4332" stroke="#9A916C"/>
+            <circle  id="connector30pin" gorn="0.0.0.27" cx="35.9058" stroke-width="1.1656" cy="17.5465" fill="none" r="1.4332" stroke="#9A916C"/>
+            <circle  id="connector31pin" gorn="0.0.0.28" cx="53.4806" stroke-width="0.9587" cy="43.2" fill="none" r="1.8967" stroke="#9A916C"/>
+            <circle  id="connector32pin" gorn="0.0.0.29" cx="46.2806" stroke-width="0.9587" cy="43.2" fill="none" r="1.8967" stroke="#9A916C"/>
+            <circle  id="connector33pin" gorn="0.0.0.30" cx="39.0806" stroke-width="0.9587" cy="43.2" fill="none" r="1.8967" stroke="#9A916C"/>
+            <circle  id="connector34pin" gorn="0.0.0.31" cx="31.8806" stroke-width="0.9587" cy="43.2" fill="none" r="1.8967" stroke="#9A916C"/>
+            <circle  id="connector35pin" gorn="0.0.0.32" cx="24.6806" stroke-width="0.9587" cy="43.2" fill="none" r="1.8967" stroke="#9A916C"/>
+            <g  transform="matrix(0, -1, 1, 0, -9.11477, 60.2972)">
+                <g >
+                    <g  transform="matrix(-2.535182e-06 -1 1 -2.535182e-06 -12.1953 63.378)">
+                        <rect  id="connector36pin" height="1.4173" gorn="0.0.0.33.0.0.0" x="24.8826" y="37.0779" fill="#9A916C" width="1.4173"/>
+                    </g>
+                </g>
+            </g>
+            <g  transform="matrix(0, -1, 1, 0, -6.98882, 58.1712)">
+                <g >
+                    <g  transform="matrix(-2.535182e-06 -1 1 -2.535182e-06 -10.0694 61.2518)">
+                        <rect  id="connector37pin" height="1.1339" gorn="0.0.0.34.0.0.0" x="24.8825" y="35.0937" fill="#9A916C" width="1.4173"/>
+                    </g>
+                </g>
+            </g>
+            <g  transform="matrix(0, -1, 1, 0, -4.86284, 56.0452)">
+                <g >
+                    <g  transform="matrix(-2.535182e-06 -1 1 -2.535182e-06 -7.9434 59.1261)">
+                        <rect  id="connector38pin" height="1.4173" gorn="0.0.0.35.0.0.0" x="24.8826" y="32.826" fill="#9A916C" width="1.4173"/>
+                    </g>
+                </g>
+            </g>
+            <g  transform="matrix(0, -1, 1, 0, -9.96523, 50.9428)">
+                <g >
+                    <g  transform="matrix(-2.535182e-06 -1 1 -2.535182e-06 -13.0459 54.0236)">
+                        <rect  id="connector39pin" height="1.4173" gorn="0.0.0.36.0.0.0" x="19.7801" y="32.826" fill="#9A916C" width="1.4173"/>
+                    </g>
+                </g>
+            </g>
+            <g  transform="matrix(0, -1, 1, 0, -12.0912, 53.0688)">
+                <g >
+                    <g  transform="matrix(-2.535182e-06 -1 1 -2.535182e-06 -15.1717 56.1495)">
+                        <rect  id="connector40pin" height="1.1339" gorn="0.0.0.37.0.0.0" x="19.7802" y="35.0937" fill="#9A916C" width="1.4173"/>
+                    </g>
+                </g>
+            </g>
+            <g  transform="matrix(0, -1, 1, 0, -14.2172, 55.1948)">
+                <g >
+                    <g  transform="matrix(-2.535182e-06 -1 1 -2.535182e-06 -17.2978 58.2755)">
+                        <rect  id="connector41pin" height="1.4173" gorn="0.0.0.38.0.0.0" x="19.7801" y="37.0779" fill="#9A916C" width="1.4173"/>
+                    </g>
+                </g>
+            </g>
+            <g  transform="matrix(0, 1, -1, 0, 27.9745, -4.48304)">
+                <g >
+                    <g  transform="matrix(2.535182e-06 1 -1 2.535182e-06 24.8939 -7.5638)">
+                        <rect  id="connector42pin" height="3.0472" gorn="0.0.0.39.0.0.0" x="14.8115" y="7.1415" fill="#9A916C" width="2.8347"/>
+                    </g>
+                </g>
+            </g>
+            <g  transform="matrix(0, 1, -1, 0, 32.7935, 0.335853)">
+                <g >
+                    <g  transform="matrix(2.535182e-06 1 -1 2.535182e-06 29.7129 -2.7448)">
+                        <rect  id="connector43pin" height="3.0472" gorn="0.0.0.40.0.0.0" x="14.8115" y="11.9605" fill="#9A916C" width="2.8347"/>
+                    </g>
+                </g>
+            </g>
+            <g  transform="matrix(-1, 0, 0, -1, 56.0853, 31.9011)">
+                <g >
+                    <rect  id="connector44pin" height="2.5512" gorn="0.0.0.41.0.0" x="24.3243" y="14.675" fill="#9A916C" width="1.2756"/>
+                </g>
+            </g>
+            <g  transform="matrix(-1, 0, 0, -1, 50.9829, 31.9011)">
+                <g >
+                    <rect  id="connector45pin" height="2.5512" gorn="0.0.0.42.0.0" x="21.7731" y="14.675" fill="#9A916C" width="1.2756"/>
+                </g>
+            </g>
+            <g  transform="matrix(-1, 0, 0, -1, 46.4475, 31.9011)">
+                <g >
+                    <rect  id="connector46pin" height="2.5512" gorn="0.0.0.43.0.0" x="19.5054" y="14.675" fill="#9A916C" width="1.2756"/>
+                </g>
+            </g>
+            <g  transform="matrix(-1, 0, 0, -1, 41.3451, 31.9011)">
+                <g >
+                    <rect  id="connector47pin" height="2.5512" gorn="0.0.0.44.0.0" x="16.9542" y="14.675" fill="#9A916C" width="1.2756"/>
+                </g>
+            </g>
+            <g  transform="matrix(-1, 0, 0, -1, 41.3451, 41.5389)">
+                <g >
+                    <rect  id="connector48pin" height="2.5512" gorn="0.0.0.45.0.0" x="16.9542" y="19.4939" fill="#9A916C" width="1.2756"/>
+                </g>
+            </g>
+            <g  transform="matrix(-1, 0, 0, -1, 46.4475, 41.5389)">
+                <g >
+                    <rect  id="connector49pin" height="2.5512" gorn="0.0.0.46.0.0" x="19.5054" y="19.4939" fill="#9A916C" width="1.2756"/>
+                </g>
+            </g>
+            <g  transform="matrix(-1, 0, 0, -1, 50.9829, 41.5389)">
+                <g >
+                    <rect  id="connector50pin" height="2.5512" gorn="0.0.0.47.0.0" x="21.7731" y="19.4939" fill="#9A916C" width="1.2756"/>
+                </g>
+            </g>
+            <g  transform="matrix(-1, 0, 0, -1, 56.0853, 41.5389)">
+                <g >
+                    <rect  id="connector51pin" height="2.5512" gorn="0.0.0.48.0.0" x="24.3243" y="19.4939" fill="#9A916C" width="1.2756"/>
+                </g>
+            </g>
+            <circle  id="connector52pin" gorn="0.0.0.49" cx="10.2806" stroke-width="1.44" cy="7.2" fill="none" r="4.2633" stroke="#9A916C"/>
+            <circle  id="connector53pin" gorn="0.0.0.50" cx="67.8807" stroke-width="1.44" cy="7.2" fill="none" r="4.2633" stroke="#9A916C"/>
+            <circle  id="connector54pin" gorn="0.0.0.51" cx="10.2806" stroke-width="1.44" cy="43.2" fill="none" r="4.2633" stroke="#9A916C"/>
+            <circle  id="connector55pin" gorn="0.0.0.52" cx="67.8807" stroke-width="1.44" cy="43.2" fill="none" r="4.2633" stroke="#9A916C"/>
+            <rect  id="connector56pin" height="3.4016" gorn="0.0.0.53" x="49.6482" y="27.9045" fill="#9A916C" width="1.5591"/>
+            <rect  id="connector57pin" height="3.4016" gorn="0.0.0.54" x="52.3411" y="27.9045" fill="#9A916C" width="1.5591"/>
+            <rect  id="connector58pin" height="3.4016" gorn="0.0.0.55" x="55.034" y="27.9045" fill="#9A916C" width="1.5591"/>
+            <rect  id="connector59pin" height="3.4016" gorn="0.0.0.56" x="55.034" y="20.5339" fill="#9A916C" width="1.5591"/>
+            <rect  id="connector60pin" height="3.4016" gorn="0.0.0.57" x="49.6482" y="20.5339" fill="#9A916C" width="1.5591"/>
+        </g>
+        <g  transform="matrix(1, 0, 0, 1, 33.9125, 23.886)">
+            <g  id="_x30_603-cap" gorn="0.0.1.0">
+                <path  fill="#DCDCDC" d="M7.3256,2.268h-3.955c-0.16,0-0.29-0.13-0.29-0.291V0.29c0-0.16,0.13-0.29,0.29-0.29h3.955c0.16,0,0.29,0.13,0.29,0.29v1.687C7.6156,2.138,7.4856,2.268,7.3256,2.268z"/>
+                <rect  height="2.268" x="4.2146" y="0" fill="#6E554B" width="2.268"/>
+            </g>
+        </g>
+        <g  transform="matrix(1, 0, 0, 1, 47.5655, 32.7885)">
+            <g  id="_x30_805-cap" gorn="0.0.2.0">
+                <g  transform="matrix(-1, 0, 0, -1, 5.669, 3.543)">
+                    <g >
+                        <path  fill="#DCDCDC" d="M2.3054,3.543h-5.103c-0.156,0-0.283-0.127-0.283-0.283V0.283c0-0.156,0.127-0.283,0.283-0.283h5.102c0.157,0,0.283,0.127,0.283,0.283V3.26C2.5884,3.416,2.4614,3.543,2.3054,3.543z"/>
+                        <rect  height="3.543" x="-2.0176" y="0" fill="#6E554B" width="3.543"/>
+                    </g>
+                </g>
+            </g>
+        </g>
+        <g  transform="matrix(1, 0, 0, 1, 46.4855, 14.7885)">
+            <g  id="_x30_805-cap_1_" gorn="0.0.3.0">
+                <path  fill="#DCDCDC" d="M8.4666,3.543h-5.103c-0.156,0-0.283-0.127-0.283-0.283V0.283C3.0806,0.127,3.2076,0,3.3636,0h5.102c0.157,0,0.283,0.127,0.283,0.283V3.26C8.7496,3.416,8.6226,3.543,8.4666,3.543z"/>
+                <rect  height="3.543" x="4.1436" y="0" fill="#6E554B" width="3.543"/>
+            </g>
+        </g>
+        <g  transform="matrix(1, 0, 0, 1, 54.5625, 16.0925)">
+            <g  id="jst_sh4" gorn="0.0.4.0">
+                <g  transform="matrix(0, -1, 1, 0, -0.291564, 17.9233)">
+                    <g >
+                        <path  id="polygon5" gorn="0.0.4.0.0.0.0" fill="#666666" d="M1.7572,7.9569l14.1872-0.017l0.0019,1.4315l1.4185-0.0017l0.0136,10.0208L0.3546,19.4109L0.341,9.3901l1.418-0.0017L1.7572,7.9569z"/>
+                        <g  transform="matrix(-0.0068 -1 1 -0.0068 1.7552 27.4886)">
+                            <rect  id="rect7" height="1.4185" gorn="0.0.4.0.0.0.1.0" x="12.3426" y="12.1634" width="4.3718"/>
+                        </g>
+                        <g  transform="matrix(-0.0068 -1 1 -0.0068 -9.7455 16.2206)">
+                            <rect  id="rect9" height="1.4185" gorn="0.0.4.0.0.0.2.0" x="0.9965" y="12.2407" width="4.3718"/>
+                        </g>
+                        <g  transform="matrix(-0.0068 -1 1 -0.0068 4.6481 24.5327)">
+                            <rect  id="rect11" height="1.4185" gorn="0.0.4.0.0.0.3.0" x="13.7783" y="9.2489" fill="#333333" width="1.4574"/>
+                        </g>
+                        <g  transform="matrix(-0.0068 -1 1 -0.0068 -6.8527 13.2647)">
+                            <rect  id="rect13" height="1.4185" gorn="0.0.4.0.0.0.4.0" x="2.4322" y="9.3262" fill="#333333" width="1.4574"/>
+                        </g>
+                        <g  transform="matrix(-0.0068 -1 1 -0.0068 5.7419 20.5378)">
+                            <rect  id="rect19" height="0.9927" gorn="0.0.4.0.0.0.5.0" x="11.2484" y="6.9211" fill="#DCDCDC" width="3.6433"/>
+                        </g>
+                        <g  transform="matrix(-0.0068 -1 1 -0.0068 2.8669 17.721)">
+                            <rect  id="rect21" height="0.9927" gorn="0.0.4.0.0.0.6.0" x="8.4121" y="6.9404" fill="#DCDCDC" width="3.6433"/>
+                        </g>
+                        <g  transform="matrix(-0.0068 -1 1 -0.0068 2.8669 17.721)">
+                            <rect  id="rect4164" height="0.9927" gorn="0.0.4.0.0.0.7.0" x="8.4121" y="6.9404" fill="#DCDCDC" width="3.6433"/>
+                        </g>
+                        <g  transform="matrix(-0.0068 -1 1 -0.0068 -0.0084 14.9039)">
+                            <rect  id="rect4188" height="0.9927" gorn="0.0.4.0.0.0.8.0" x="5.5755" y="6.9598" fill="#DCDCDC" width="3.6433"/>
+                        </g>
+                        <g  transform="matrix(-0.0068 -1 1 -0.0068 -2.8836 12.0869)">
+                            <rect  id="rect4143" height="0.9927" gorn="0.0.4.0.0.0.9.0" x="2.7389" y="6.9791" fill="#DCDCDC" width="3.6433"/>
+                        </g>
+                        <path  id="path594" gorn="0.0.4.0.0.0.10" d="M0.355,14.5239c0-2.6862-0.0043-4.9385-0.0095-5.0052L0.3361,9.3975h0.7148h0.7148V8.6776V7.9577h1.1437h1.1436l0.0097,0.3416c0.0053,0.1879,0.0097,0.492,0.0097,0.6758l0,0.3342l0.2241,0c0.1232,0,0.348-0.0044,0.4995-0.0097l0.2755-0.0096V8.6239V7.9577H5.98h0.9086l0.0096,0.2314c0.0053,0.1273,0.0096,0.4248,0.0096,0.6612l0,0.4297l0.4996,0H7.907V8.6189V7.9577h0.9109h0.9109l0.0018,0.1102c0.001,0.0606,0.0035,0.1168,0.0055,0.1249c0.002,0.0081,0.0045,0.2528,0.0055,0.5438l0.0018,0.5291l0.5007-0.0039L10.745,9.258l-0.0018-0.6501l-0.0018-0.6501h0.9099c0.8162,0,0.9108,0.0024,0.9188,0.0232c0.0049,0.0128,0.0089,0.3037,0.0089,0.6465v0.6232h0.3062c0.1684,0,0.3949-0.0042,0.5032-0.0094l0.197-0.0094l-0.0044-0.6444L13.5767,7.943h1.1834h1.1834v0.7199v0.7199h0.7028h0.7028l0.0098,1.6553c0.0054,0.9104,0.0098,3.1616,0.0098,5.0027v3.3474l-3.2507,0c-1.7879,0-5.6159,0.0044-8.5068,0.0098l-5.2562,0.0098L0.355,14.5239z M3.9107,14.8373c0.0002-0.545-0.0289-4.2541-0.0384-4.9092L3.863,9.2908L3.1559,9.3015C2.767,9.3075,2.4469,9.314,2.4447,9.3161C2.4392,9.3213,2.4683,13.583,2.4798,14.448l0.0092,0.6942h0.7108h0.7108L3.9107,14.8373L3.9107,14.8373z M15.248,15.0492c0.0116-0.0116-0.0206-5.4879-0.0335-5.6931L15.206,9.2192l-0.7026,0.0047c-0.3864,0.0026-0.7058,0.008-0.7097,0.012c-0.0067,0.0069,0.0045,1.8862,0.0275,4.6263l0.0102,1.2104l0.7033-0.0067C14.9215,15.0622,15.2425,15.0547,15.248,15.0492z"/>
+                        <path  id="path596" gorn="0.0.4.0.0.0.11" d="M2.4507,10.6758c-0.005-0.0525-0.0091-0.3774-0.0091-0.722L2.4414,9.3273l0.0551-0.0071c0.0736-0.0095,0.4796-0.0168,0.9673-0.0176l0.398-0.0006L3.871,9.8236c0.005,0.2869,0.0051,0.6157,0.0001,0.7307l-0.009,0.2091l-0.7012,0.004l-0.7012,0.004L2.4507,10.6758z"/>
+                        <path  id="path598" gorn="0.0.4.0.0.0.12" d="M13.8081,10.4898c-0.0053-0.1104-0.0096-0.4376-0.0096-0.7273l0.0001-0.5266l0.1065-0.0034c0.0586-0.0019,0.3759-0.0035,0.7052-0.0037l0.5986-0.0002l0.0016,0.0955c0.0009,0.0525,0.0026,0.3814,0.0038,0.7309l0.0022,0.6354l-0.6993,0l-0.6993,0L13.8081,10.4898z"/>
+                        <g  transform="matrix(-2.535182e-06 -1 1 -2.535182e-06 -19.602 23.9874)">
+                            <ellipse  id="connector11pin" gorn="0.0.4.0.0.0.13.0" cx="2.1927" cy="21.7947" rx="2.0127" ry="2.0127"/>
+                        </g>
+                        <g  transform="matrix(-2.535182e-06 -1 1 -2.535182e-06 -15.0665 28.5228)">
+                            <ellipse  id="connector12pin" gorn="0.0.4.0.0.0.14.0" cx="6.7281" cy="21.7947" fill="#FF0000" rx="2.0127" ry="2.0127"/>
+                        </g>
+                        <g  transform="matrix(-2.535182e-06 -1 1 -2.535182e-06 -10.5311 33.0582)">
+                            <ellipse  id="connector13pin" gorn="0.0.4.0.0.0.15.0" cx="11.2635" cy="21.7947" fill="#0000FF" rx="2.0127" ry="2.0127"/>
+                        </g>
+                        <g  transform="matrix(-2.535182e-06 -1 1 -2.535182e-06 -5.9957 37.5936)">
+                            <ellipse  id="connector14pin" gorn="0.0.4.0.0.0.16.0" cx="15.7989" cy="21.7947" fill="#FFFF00" rx="2.0127" ry="2.0127"/>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+        <g  transform="matrix(1, 0, 0, 1, -0.194322, 16.0925)">
+            <g  id="jst_sh4_1_" gorn="0.0.5.0">
+                <g  transform="matrix(0, 1, -1, 0, 17.9233, 0.291564)">
+                    <g >
+                        <path  id="polygon5_1_" gorn="0.0.5.0.0.0.0" fill="#666666" d="M1.7532,1.7995l14.1872-0.017l0.0019,1.4315l1.4185-0.0017l0.0136,10.0208L0.3506,13.2535L0.337,3.2327l1.418-0.0017L1.7532,1.7995z"/>
+                        <g  transform="matrix(0.0068 1 -1 0.0068 21.1406 -7.8547)">
+                            <rect  id="rect7_1_" height="1.4185" gorn="0.0.5.0.0.0.1.0" x="12.3386" y="6.006" width="4.3718"/>
+                        </g>
+                        <g  transform="matrix(0.0068 1 -1 0.0068 9.9491 3.5679)">
+                            <rect  id="rect9_1_" height="1.4185" gorn="0.0.5.0.0.0.2.0" x="0.9925" y="6.0833" width="4.3718"/>
+                        </g>
+                        <g  transform="matrix(0.0068 1 -1 0.0068 18.2048 -10.7279)">
+                            <rect  id="rect11_1_" height="1.4185" gorn="0.0.5.0.0.0.3.0" x="13.7743" y="3.0914" fill="#333333" width="1.4574"/>
+                        </g>
+                        <g  transform="matrix(0.0068 1 -1 0.0068 7.0133 0.6947)">
+                            <rect  id="rect13_1_" height="1.4185" gorn="0.0.5.0.0.0.4.0" x="2.4282" y="3.1688" fill="#333333" width="1.4574"/>
+                        </g>
+                        <g  transform="matrix(0.0068 1 -1 0.0068 14.237 -11.8143)">
+                            <rect  id="rect19_1_" height="0.9927" gorn="0.0.5.0.0.0.5.0" x="11.2444" y="0.7637" fill="#DCDCDC" width="3.6433"/>
+                        </g>
+                        <g  transform="matrix(0.0068 1 -1 0.0068 11.4393 -8.9589)">
+                            <rect  id="rect21_1_" height="0.9927" gorn="0.0.5.0.0.0.6.0" x="8.4081" y="0.783" fill="#DCDCDC" width="3.6433"/>
+                        </g>
+                        <g  transform="matrix(0.0068 1 -1 0.0068 11.4393 -8.9589)">
+                            <rect  id="rect4164_1_" height="0.9927" gorn="0.0.5.0.0.0.7.0" x="8.4081" y="0.783" fill="#DCDCDC" width="3.6433"/>
+                        </g>
+                        <g  transform="matrix(0.0068 1 -1 0.0068 8.6414 -6.1031)">
+                            <rect  id="rect4188_1_" height="0.9927" gorn="0.0.5.0.0.0.8.0" x="5.5714" y="0.8023" fill="#DCDCDC" width="3.6433"/>
+                        </g>
+                        <g  transform="matrix(0.0068 1 -1 0.0068 5.8435 -3.2474)">
+                            <rect  id="rect4143_1_" height="0.9927" gorn="0.0.5.0.0.0.9.0" x="2.7349" y="0.8217" fill="#DCDCDC" width="3.6433"/>
+                        </g>
+                        <path  id="path594_1_" gorn="0.0.5.0.0.0.10" d="M0.351,8.3665c0-2.6862-0.0043-4.9385-0.0095-5.0052L0.3321,3.2401h0.7148h0.7148V2.5202V1.8003h1.1437h1.1436l0.0097,0.3416c0.0053,0.1879,0.0097,0.492,0.0097,0.6758l0,0.3342l0.2241,0c0.1232,0,0.348-0.0044,0.4995-0.0097l0.2755-0.0096V2.4665V1.8003h0.9086h0.9086l0.0096,0.2314C6.8994,2.159,6.9038,2.4565,6.9038,2.6928l0,0.4297l0.4996,0H7.903V2.4614V1.8003h0.9109h0.9109l0.0018,0.1102c0.001,0.0606,0.0035,0.1168,0.0055,0.1249c0.002,0.0081,0.0045,0.2528,0.0055,0.5438l0.0018,0.5291l0.5007-0.0039l0.5007-0.0039l-0.0018-0.6501l-0.0018-0.6501h0.9099c0.8162,0,0.9108,0.0024,0.9188,0.0232c0.0049,0.0128,0.0089,0.3037,0.0089,0.6465v0.6232h0.3062c0.1684,0,0.3949-0.0042,0.5032-0.0094l0.197-0.0094L13.5771,2.43l-0.0044-0.6444h1.1834h1.1834v0.7199v0.7199h0.7028h0.7028l0.0098,1.6553c0.0054,0.9104,0.0098,3.1616,0.0098,5.0027v3.3474l-3.2507,0c-1.7879,0-5.6159,0.0044-8.5068,0.0098l-5.2562,0.0098L0.351,8.3665z M3.9067,8.6799c0.0002-0.545-0.0289-4.2541-0.0384-4.9091L3.859,3.1334L3.1519,3.1441C2.763,3.1501,2.4429,3.1566,2.4407,3.1587C2.4352,3.1639,2.4643,7.4255,2.4758,8.2906L2.485,8.9848h0.7108h0.7108L3.9067,8.6799L3.9067,8.6799z M15.244,8.8918c0.0116-0.0116-0.0206-5.4878-0.0335-5.6931L15.202,3.0618l-0.7026,0.0047c-0.3864,0.0026-0.7058,0.008-0.7097,0.012c-0.0067,0.0069,0.0045,1.8862,0.0275,4.6263l0.0102,1.2104l0.7033-0.0067C14.9175,8.9048,15.2385,8.8973,15.244,8.8918z"/>
+                        <path  id="path596_1_" gorn="0.0.5.0.0.0.11" d="M2.4466,4.5184c-0.005-0.0525-0.0091-0.3774-0.0091-0.722L2.4374,3.1699l0.0551-0.0071C2.5661,3.1534,2.9721,3.146,3.4598,3.1452l0.398-0.0006l0.0091,0.5216C3.872,3.9531,3.872,4.2819,3.8671,4.3969L3.8581,4.606l-0.7012,0.004l-0.7012,0.004L2.4466,4.5184z"/>
+                        <path  id="path598_1_" gorn="0.0.5.0.0.0.12" d="M13.8041,4.3324c-0.0053-0.1104-0.0096-0.4376-0.0096-0.7273l0.0001-0.5266l0.1065-0.0034c0.0586-0.0019,0.3759-0.0035,0.7052-0.0037l0.5986-0.0002l0.0016,0.0955c0.0009,0.0525,0.0026,0.3814,0.0038,0.7309l0.0022,0.6354l-0.6993,0l-0.6993,0L13.8041,4.3324z"/>
+                        <g  transform="matrix(2.535182e-06 1 -1 2.535182e-06 17.8259 13.4485)">
+                            <ellipse  id="connector17pin" gorn="0.0.5.0.0.0.13.0" cx="2.1887" cy="15.6372" rx="2.0127" ry="2.0127"/>
+                        </g>
+                        <g  transform="matrix(2.535182e-06 1 -1 2.535182e-06 22.3613 8.9131)">
+                            <ellipse  id="connector18pin" gorn="0.0.5.0.0.0.14.0" cx="6.7241" cy="15.6372" fill="#FF0000" rx="2.0127" ry="2.0127"/>
+                        </g>
+                        <g  transform="matrix(2.535182e-06 1 -1 2.535182e-06 26.8967 4.3777)">
+                            <ellipse  id="connector19pin" gorn="0.0.5.0.0.0.15.0" cx="11.2595" cy="15.6372" fill="#0000FF" rx="2.0127" ry="2.0127"/>
+                        </g>
+                        <g  transform="matrix(2.535182e-06 1 -1 2.535182e-06 31.4321 -0.1577)">
+                            <ellipse  id="connector20pin" gorn="0.0.5.0.0.0.16.0" cx="15.7949" cy="15.6372" fill="#FFFF00" rx="2.0127" ry="2.0127"/>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+        <g  transform="matrix(1, 0, 0, 1, 8.946, 12.4925)">
+            <g  id="_x30_603-led-green" gorn="0.0.6.0">
+                <g  transform="matrix(0, -1, 1, 0, -1.1335, 3.4015)">
+                    <g >
+                        <path  fill="#DCDCDC" d="M2.268,3.3706v3.955c0,0.16-0.13,0.29-0.29,0.29H0.29c-0.16,0-0.29-0.13-0.29-0.29v-3.955c0-0.16,0.13-0.29,0.29-0.29h1.687C2.138,3.0806,2.268,3.2106,2.268,3.3706z"/>
+                        <g  transform="matrix(-2.535182e-06 -1 1 -2.535182e-06 -4.2141 6.4824)">
+                            <rect  height="2.268" x="0.0001" y="4.2142" fill="#00FF00" width="2.268"/>
+                        </g>
+                        <circle  cx="1.134" cy="5.3486" fill="#00B400" r="0.354"/>
+                    </g>
+                </g>
+            </g>
+        </g>
+        <g  transform="matrix(1, 0, 0, 1, 19.4965, 30.3121)">
+            <g  id="sot363" gorn="0.0.7.0">
+                <g  transform="matrix(0, -1, 1, 0, 0.567, 6.52)">
+                    <g >
+                        <g >
+                            <g  transform="matrix(-2.535182e-06 -1 1 -2.535182e-06 -1.8046 10.3097)">
+                                <rect  height="0.709" x="1.276" y="5.7026" fill="#DCDCDC" width="5.953"/>
+                            </g>
+                            <g  transform="matrix(-2.535182e-06 -1 1 -2.535182e-06 0.0384 12.1527)">
+                                <rect  height="0.709" x="3.119" y="5.7026" fill="#DCDCDC" width="5.953"/>
+                            </g>
+                            <g  transform="matrix(-2.535182e-06 -1 1 -2.535182e-06 -3.6466 8.4677)">
+                                <rect  height="0.709" x="-0.566" y="5.7026" fill="#DCDCDC" width="5.953"/>
+                            </g>
+                            <g  transform="matrix(-2.535182e-06 -1 1 -2.535182e-06 -1.8046 10.3097)">
+                                <rect  height="5.669" x="2.481" y="3.2226" fill="#303030" width="3.543"/>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+        <g  transform="matrix(1, 0, 0, 1, 13.9613, 13.0212)">
+            <g  id="_x30_603-res" gorn="0.0.8.0">
+                <g  transform="matrix(0, 1, -1, 0, 3.4015, -1.1335)">
+                    <g >
+                        <path  fill="#DCDCDC" d="M4.245-0.8126H0.29c-0.16,0-0.29-0.13-0.29-0.291v-1.687c0-0.16,0.13-0.29,0.29-0.29h3.955c0.16,0,0.29,0.13,0.29,0.29v1.687C4.535-0.9426,4.405-0.8126,4.245-0.8126z"/>
+                        <g  transform="matrix(2.535182e-06 1 -1 2.535182e-06 0.3213 -4.2146)">
+                            <rect  height="2.268" x="1.134" y="-3.0806" fill="#333333" width="2.268"/>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+        <g  transform="matrix(1, 0, 0, 1, 19.8221, 16.0925)">
+            <g  id="respack_4x0603" gorn="0.0.9.0">
+                <g  transform="matrix(-1, 0, 0, -1, 9.07099, 4.535)">
+                    <g >
+                        <g >
+                            <rect  height="4.535" x="-3.0806" y="0" fill="#DCDCDC" width="1.843"/>
+                            <rect  height="4.535" x="-0.3876" y="0" fill="#DCDCDC" width="1.417"/>
+                            <rect  height="4.535" x="1.8804" y="0" fill="#DCDCDC" width="1.417"/>
+                            <rect  height="4.535" x="4.1474" y="0" fill="#DCDCDC" width="1.843"/>
+                            <rect  height="2.835" x="-3.0806" y="0.85" fill="#303030" width="9.071"/>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+        <g  transform="matrix(1, 0, 0, 1, 45.93, 22.093)">
+            <g  id="sot23-5" gorn="0.0.10.0">
+                <g >
+                    <rect  height="7.654" x="3.9306" y="0" fill="#DCDCDC" width="1.134"/>
+                    <rect  height="7.654" x="9.3166" y="0" fill="#DCDCDC" width="1.134"/>
+                    <rect  height="3.118" x="6.6236" y="4.535" fill="#DCDCDC" width="1.134"/>
+                    <rect  height="4.535" x="3.0806" y="1.559" fill="#303030" width="8.22"/>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

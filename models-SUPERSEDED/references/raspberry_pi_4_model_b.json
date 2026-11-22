@@ -1,0 +1,33 @@
+{
+  "id": "raspberry_pi_4_model_b",
+  "name": "Raspberry Pi 4 Model B",
+  "description": "Raspberry Pi 4 Model B single-board computer.",
+  "category": "electronics",
+  "family": "raspberry-pi",
+  "tags": [
+    "board",
+    "single-board-computer",
+    "sbc"
+  ],
+  "aliases": [
+    "Pi 4B",
+    "RPi 4B",
+    "Raspberry Pi 4B"
+  ],
+  "attributes": {
+    "manufacturer": "Raspberry Pi",
+    "model": "Raspberry Pi 4 Model B",
+    "formFactor": "credit-card-sbc",
+    "boardLengthMm": 85,
+    "boardWidthMm": 56,
+    "gpioHeader": "40-pin",
+    "wireless": true
+  },
+  "stepUrl": "https://media.githubusercontent.com/media/earthtojake/step.parts/c6113328a5695b976a010a203a90fe86191769bf/catalog/step/raspberry_pi_4_model_b.step",
+  "glbUrl": "https://8ljrorjug0ps5al0.public.blob.vercel-storage.com/preview/glb/raspberry_pi_4_model_b-1906d615405ba20aaaf5b4bdcd41f19fe49b8e82a87ab1387e0f1d1abfe6bbbe.glb",
+  "pngUrl": "https://8ljrorjug0ps5al0.public.blob.vercel-storage.com/preview/png/raspberry_pi_4_model_b-1906d615405ba20aaaf5b4bdcd41f19fe49b8e82a87ab1387e0f1d1abfe6bbbe.png",
+  "byteSize": 52486607,
+  "sha256": "1906d615405ba20aaaf5b4bdcd41f19fe49b8e82a87ab1387e0f1d1abfe6bbbe",
+  "pageUrl": "https://www.step.parts/parts/raspberry_pi_4_model_b",
+  "apiUrl": "https://api.step.parts/v1/parts/raspberry_pi_4_model_b"
+}

@@ -1,0 +1,639 @@
+{
+ "meta": {
+  "title": "Hound — indoor search rover, practical BOM",
+  "intro": "The complete build: one list of everything on the rover including what you already own, each part tied to its position in millimetres and the fastener that holds it, the four-motor torque check, the wiring, the pin map, the build order, and a total. Owned rows are pre-ticked and cost $0; the buy list is only what the rover cannot work without, and every screw on it comes from two kits. Prices observed September 4–5, 2026. Physical validation is still outstanding.",
+  "margin_note": "Margin = torque available ÷ torque required; acceptance ≥ 1.25 because the running torque is calculated, not measured. At 5.12 kg — Gens ace 2200 mAh pack, ~130 g power bank, your C920-class webcam — the ramp margin at 1.5 A is 1.28: passing, with about 80 g to spare. Weigh the bank and the webcam. If either is heavier than budgeted, run 1.7 A with the fan (1.46) or swap to the 50 g ELP camera. The one measurement that matters most: pull-out torque at 24 rpm, 1.5 A, on the real battery.",
+  "price_date": "Sept 4–5, 2026",
+  "not_analysed": "Fatigue, buckling, impact, vibration, roller wear, uneven floors and wheel unloading, combined-slip mecanum behaviour, motor and driver thermal equilibrium, battery sag under stall, firmware timing, fastener pull-out in PETG, deck deflection under the turret, servo torque with the camera fitted, motor-bearing radial rating (assumed 28 N — thinnest margin in the design), and radar detection at 300 mm height (Walleye measured floor-level radar as blind; this is a compromise to test). No physical test has been run."
+ },
+ "prose": {
+  "design": [
+   "Four independently driven 80 mm mecanum wheels on the four owned NEMA 17 steppers, a low 350 × 390 mm 2020 frame, the battery slung under the deck for a low centre of gravity, the Ceres pan/tilt turret at the front carrying your webcam and a thermal array so it can look around and track, and three radars — two LD2410Cs toed 30° out and an LD2450 between them — on a bar at the top of a 200 mm post at the rear, looking forward over the turret. Two short-range ToF sensors guard front and rear. The fifth motor and TB6600 stay spare.",
+   "No kit does this. Every mecanum chassis kit on Amazon is built for TT or DC gearmotors; none has a NEMA 17 mount. Steel L-brackets under the rails are the cleanest way to put your steppers on mecanum wheels, and the 5 mm couplers in the wheel set match the 5 mm flatted shaft on your motors.",
+   "Power is one HOOVO 3S 2200 mAh shorty LiPo for the motors and servos — through one of your XL4015 5 A bucks set to 5.0 V for the servos and the fan — and a small USB power bank for the Pi, which keeps the computer isolated from motor-bus noise. The bank's mass is the price: with a compact 5,000 mAh unit a start up a 5° ramp at the firmware's 0.6 m/s² sits at 1.08 — under the 1.25 screen, which is why weighing the real rover comes first; a 300 g brick makes it worse at any current.",
+   "Finding people is a four-sensor job, and that is how professional search-and-rescue kit is built: CO2 to narrow the area, thermal to confirm a body, a microphone for voice and knocking, radar for behind obstacles. The rover had only the radar leg. So the pan/tilt turret now carries a thermal array beside the camera — a warm body is unmistakable in 768 pixels, in the dark or in smoke, and thermal-plus-visible on one sweep is the strongest line-of-sight detector on the vehicle. A CO2 sensor rides the radar post for closed rooms, and an I2S microphone listens when the motors are stopped. The Pi runs MobileNet-SSD person detection on the camera at roughly 10 frames per second (TFLite at 300 px on a Pi 4; a Coral stick would triple it); fusing that with the thermal blob is the visible-track demo. The hidden track is the radar's breathing-like periodicity plus WiFi CSI — and the word for it is periodicity, not life.",
+   "LD2410C is the primary presence sensor for anyone the camera cannot see: stationary or micro-moving people behind a door or a stud wall, plus breathing. LD2450 adds positions and speeds of moving targets and loses motionless bodies beyond about 2 m; it is not the primary detector for an immobile person. Neither outputs heartbeat measurements — and the 60 GHz breathing/heartbeat modules on the market were skipped: their heart-rate figure benchmarks at a 0.33 correlation against a chest strap, and the owned LD2410C already covers breathing. Start with one radar powered; test the two radar types separately, then together for interference. These sensors are not validated here for finding a motionless person behind concrete, rubble, fire or smoke. No detection must never be interpreted as proof that nobody is present. One more constraint the geometry forces: the turret sits 270 mm ahead of and 60 mm below the radar boresight — inside the beam. Read the radars only with the turret parked and the motors stopped, and discard LD2450 targets closer than 0.5 m; otherwise every pan registers as a moving person. After the rover stops, wait about five seconds before trusting the LD2410C — it needs a still platform to settle. And configure it: the LD2410C's gates 0–1 (0–1.5 m) look straight at the turret's metal servo and camera clamp and will report a stationary person forever; set those two gates' sensitivity to 100 (ignore) with the HLK config command — Walleye's ld2410.py already speaks it."
+  ],
+  "power": [
+   "Pack → Deans pull-plug on the deck (the e-stop: pull it apart and everything on the pack side dies; the Pi keeps running on its bank) → the CNC shield's VMOT/GND screw terminal, 14 AWG, with the 1000 µF 25 V cap across it, stripe to GND. That terminal is the only pack splice: the XL4015's 22 AWG input wires share its two screws, twisted with the pack leads and tug-tested. No fuse, no lever nuts, no resistor boards (v3.1). A fuse and a cell alarm were declined and are listed under Safety as the reviewer's recommendation.",
+   "Power-up ORDER: bank → Pi → R4 first, THEN the pack. Power-down in reverse. With the R4 unpowered the DRV8825 enable pins float low — enabled — so VMOT alone puts full holding current into four motors with nothing to stop it.",
+   "Power bank → Pi USB-C through a cable ≤ 0.2 m with 22 AWG or heavier power conductors (a 1 m phone cable browns the Pi out). The bank must hold 5 V at 3 A: load-test it at 2.5 A before trusting it. Pi USB-A → hub → UNO R4 USB-C for logic power and serial. Fallback if the bank misbehaves: a buck trimmed to 5.10 V on PHYSICAL HEADER PIN 2 (5 V) and pin 6 (GND) — physical pin numbers, not BCM GPIO numbers; pin 4 is the LD2450's supply — and never with the bank connected at the same time; two supplies in parallel fight.",
+   "XL4015 trimmed to 5.0 V → the PCA9685's V+ screw terminal: the tilt servo (channel 3), the pan servo (channel 2) and the 40 mm fan (channel 15's V+/GND pins) all run from it. 5.0 V, not 6, so the 5 V fan can share the rail; the MG996R runs 4.8–7.2 V. 4 A continuous / 5 A peak covers one servo stalling (~2.1 A at 5 V); both stalling at once is momentary. Servo current returns through the PCA9685 terminal to the XL4015's OUT−, never through a USB ground.",
+   "Pi USB (1.2 A shared by all four ports): the webcam on its own port, and a 4-port hub carrying the R4 (radio off) and the two CP2102 adapters that power the LD2410Cs — 0.79 A peak (wiring.py). The LD2450 (≤ 200 mA) takes its 5 V from header pin 4, which sits on the bank's input net, outside the USB budget. ESP32 #3 has its own small bank. On a Pi 5 the default 600 mA USB cap must be lifted in config.txt.",
+   "Radars: each LD2410C is four wires to its own CP2102 — +5V → VCC (never the adapter's 3V3 pin), GND → GND, TXD → radar RX, RXD → radar TX. The LD2450 needs no adapter: 5V → Pi pin 4, GND → pin 34, its TX → pin 10, its RX → pin 8, and pi/enable_gpio_uart.sh moves Bluetooth off that UART once. All three talk 3.3 V UART at 256000 baud and take 5 V power.",
+   "Two VL53L1X share I2C-1 with the MLX90640 only after XSHUT (BCM GPIO 22 and 27) assigns unique addresses at boot. Power every I2C module from the Pi's 3.3 V pins, never 5 V: their pull-ups follow VIN, and a 5 V pull-up on a Pi GPIO damages it. The PCA9685 is NOT on the Pi's bus: it hangs on the CNC shield's 5 V I2C (the R4's A4/A5). If the optional SCD41 is fitted, I2C-1 runs at 100 kHz — that sensor's I2C maximum.",
+   "Single common ground at the shield GND terminal. Never put LiPo voltage on a logic rail."
+  ],
+  "power_after": [
+   "Motors at 1.5 A per phase draw about 2 A from the pack at cruise — copper loss dominates, not motion — so the pack averages ~2.4 A with the servos and fan (wiring.py). One 2200 mAh HOOVO gives about 45 minutes at 80 % usable; the second pack doubles that. There is no alarm on the balance lead: set a 30-minute timer, meter the pack, stop at 11.1 V, never go below 10.5 V. Holding current at rest costs the same as moving, so the firmware drops ENABLE (D8) after 3 s parked unless 'hold drivers' is ticked; mecanum wheels on a level floor do not roll away.",
+   "The owned three-pin switch is not in the load path until its DC rating is read off the body and is at least 10 A.",
+   "One star ground at the shield's GND screw. The Pi sits on its own bank and reaches that ground through the R4's USB cable (the PCA9685's logic GND comes from the shield's own header). Keep the servo power return short and heavy — PCA9685 terminal → XL4015 OUT− → shield GND screw — or servo current finds the USB cable and corrupts the serial link. That exact fault took down the Ceres rover once.",
+   "Pull the Deans plug when the rover is parked for more than a few minutes. Cutting ENABLE stops the motor current, but the shield and the XL4015 idle at tens of milliamps and will take the pack below 3.0 V/cell overnight, which ends it.",
+   "Ground clearance is 18.9 mm at the motor bodies. A door threshold or rug edge above ~15 mm stops this rover; plan the demo route around them — the 80 mm mecanum wheels climb about 10 mm.",
+   "Grounds, honestly: the R4's USB cable is a parallel ground path whether we like it or not. Motor and servo return currents go straight to the shield's GND screw — never through a board's GND pin — so that USB ground carries only signal reference."
+  ],
+  "fit": [
+   "Frame: two side rails along X with outer faces at Y = ±195; two cross rails along Y butted between them with outer faces at X = ±175. Rails sit at Z 71–91. FOUR corner brackets, one per joint on the two inner faces — a 2020 inner corner has room for exactly one 17 × 20 bracket, and a second on the top faces would sit under the deck. The deck tiles, bolted to all four rails, are the second shear plane. M5 T-nuts at 3.0 N·m maximum or the slot deforms. Measure the four rails first: the longer pair become the side rails, because a cross rail even 1 mm over 350 will not fit between them.",
+   "Drive: each steel L-bracket goes inverted under a side rail near its end, foot against the rail underside on two M4 T-nuts, leg hanging down flush with the rail's outer face. The motor bolts to the inboard side of the leg with four M3×6 at 0.8 N·m (aluminium threads — the full 1.1 N·m an M3 can take will strip the flange). Shaft through the leg, coupler on the flat with blue threadlocker, wheel on the coupler. Axle at X = ±125, Z = 40. Motor body bottom at Z = 18.9 mm: that is your ground clearance.",
+   "Mecanum handedness: front-left and rear-right take the left-hand wheels, front-right and rear-left the right-hand. Check from above — the rollers on top of each wheel should point toward the chassis centre, forming an X.",
+   "Deck: four printed quadrant tiles 170 × 195 × 5 — a full-width 390 mm tile fits no common print bed — each bolted to one side rail (3× M5) and one cross rail (2× M5), lapped at the centreline seams with 15 mm tongues and M3×8 + nuts, held by the corner kit's M5×8 screws into M5 T-nuts — the screw holes are counterbored so only 3 mm of tile sits under each head and the 8 mm screw still gets 5 mm of T-nut. Every board sits on 10 mm bosses printed into the tile and is held by cable ties through printed slots (the Pi and PCA9685 take M2 screws, their holes being 2.7 mm). Battery cradle hangs under the deck centre on four M3×12 with nuts from the M3 kit — 179 g is nothing for four M3s — with a printed retaining bar and two cable ties instead of a strap; battery bottom at Z 65. R4/shield stack rear-left, Pi rear-right, XL4015 ahead of the R4, PCA9685 beside the Pi, ESP32 rear-centre, power bank centred over the cradle. Turret base at X = +110 on four M3×16, pan stage locked. Wheels sit 5 mm outboard of the bracket legs — every millimetre of overhang multiplies the motor-bearing load. Radar post on two M4×12 into M4 T-nuts in the rear rail, flange and tile counterbored so the 12 mm screw reaches. Thermal array in a printed saddle on the camera clamp. Every screw on the rover comes from the two kits already on the list. Four PLA quadrants lapped and screwed are not one plate: the corner brackets carry squareness, the deck adds stiffness that has not been quantified, and PLA creeps under the turret's bolts over weeks — retorque before the demo."
+  ],
+  "compute": [
+   "Load cases at the design mass, 80 mm wheels, mecanum roller factor √2, mechanical efficiency 0.85, carpet rolling coefficient 0.12, wheel and rotor inertia included: level cruise, level at 0.3 m/s², strafing, a 5° carpet ramp at 0.3 m/s², and the firmware's own ramps — every start at 0.6 m/s² (level, strafe, 5° ramp) and every stop at 1.8 m/s² (level, strafe, 5° downhill). A start up the 5° ramp governs. Available torque is holding torque × (I / 1.7 A) × 0.70, where 0.70 is a conservative low-speed pull-out factor that has not been measured. Traction is checked separately: at the 1.8 m/s² stops, hard plastic rollers on a smooth floor (μ ≈ 0.3) are at the slip limit. Full arithmetic, every input tagged measured / allocated / assumed / firmware, is in drivetrain.txt; every placement is in assembly.csv.",
+   "At 1/32 microstepping (caps on MS1 + MS3) the wheels need 25.46 steps per mm: the 415 mm/s default is ~10,600 steps/s per wheel and the 530 mm/s cap is 13,500 — 90 % of the 15,000 steps/s per axis that the R4's 30 kHz step interrupt can pulse. Custom four-axis firmware on the UNO R4: timer interrupt, body-vector ramps (600 mm/s² speeding up, 3× that slowing down), shared enable and a 400 ms communication watchdog; GRBL is unsuitable and would not run on the R4 anyway. Motor order at the shield: X = BL, Y = FL, Z = BR, A = FR with the D12/D13 jumpers fitted.",
+   "Set DRV8825 current with Vref = 5 × Rsense × I. With 0.100 Ω sense resistors, 1.5 A is 0.75 V; read the actual resistor first. Start at 1.5 A with heatsinks and the fan; 1.7 A is the reserve, not the default.",
+   "Before calling it working: caliper every part marked VERIFY before drilling the deck; measure pull-out torque at 24 rpm and 1.5 A on the real battery with a lever arm and the hanging scale; then all four wheel directions raised; loaded forward, reverse, strafe, turn; watchdog stop; temperature after 10 minutes; radar trials one at a time then together; turret tracking with the camera fitted; marked-route obstacle stops. None of these tests has been performed."
+  ],
+  "build": [
+   "Caliper every part marked VERIFY: bracket foot and slots, wheel width, coupler length, webcam mass, board hole patterns, Ceres base holes. Adjust the tile files before printing anything.",
+   "Print: four deck quadrants (220 mm bed), battery cradle and retaining bar, radar post FLAT as a U-channel plus its bar (200 mm as drawn; anything taller has to be printed in segments — a 256 mm bed's diagonal is 362 mm), fan bridge in PETG (the heatsinks below it reach 60 °C and PLA softens there), two ToF clips, thermal saddle (or skip it and VHB the array to the tilt bracket beside the clamp), pan lock. PLA for everything else. Counterbores as drawn. Start printing the day the order goes in: four tiles plus cradle, post, bridge and clips is roughly 20 hours of printer time. Before anything else, open every sensor box: MLX90640, VL53L1X, INMP441 and SCD41 breakouts routinely ship with header strips loose in the bag — if yours do, the soldering iron stops being optional.",
+   "Frame. FIRST slide every T-nut into its slot — the kits' nuts are sliding, not drop-in, and a butt-jointed frame closes every slot end: per side rail 4 in the bottom slot (two motor brackets) and 6 in the top slot (deck); per cross rail 4 in the top slot (deck), 2 more in the rear one (post), and 1 in each outer face (ToF clips). Then butt the cross rails between the side rails, outer faces at X ±175 and Y ±195, one corner bracket per joint on the inner faces, 3.0 N·m. Check square with a tape across both diagonals — equal within 1 mm.",
+   "Drive: four steel brackets inverted under the side rails, feet on two M4 T-nuts each at 2.0 N·m, legs flush with the outer faces, axle holes at X ±125. Motors to the legs with the four M3×6 that ship with the brackets, 0.8 N·m, leads inboard. Couplers on the flats with blue threadlocker. Wheels: diagonal pairs match (FL = RR, FR = RL); confirm by the drive-forward test, not by the diagram. Coupler: if its bore is a D, the flat depth must match the shaft's; if it is round with a grub screw, threadlocker is not optional.",
+   "Shield: caps on MS1 and MS3 (DRV8825 1/32 — MS2 stays open) under each of the four sockets with the drivers OUT. Drivers in, EN to EN. Jumpers on D12 and D13 of the A header. EN/GND open. Then, WITH VMOT CONNECTED and no motors plugged in, trim each Vref to 0.75 V (1.5 A at 0.100 Ω — read your sense resistor first) using a plastic trimmer tool: a metal screwdriver slipping off the pot onto VMOT kills the driver, and Vref reads nonsense with only USB power. Never plug or unplug a motor while VMOT is live. There is no EN pull-up (by choice): the drivers are enabled while the R4 resets, so the pack is unplugged whenever the R4 is flashed or reset.",
+   "Turret base on the front tile, M3×16. Camera into the Ceres clamp, thermal saddle on top. Radar post through the rear tile into the rail, bar on: LD2410C LEFT at Y +50 toed 30° out, LD2410C RIGHT at Y −50 toed 30° out, LD2450 in the centre, mic on the post's front face, SCD41 on the rear face.",
+   "XL4015: trim to 5.0 V with a multimeter, unloaded, then wire OUT to the PCA9685's V+ terminal; the servos and the fan run from it, nothing else. Charge the pack on a concrete or tile surface, never on carpet or a bench full of parts — there is no fire bag.",
+   "Wiring, in this order (wiring.html has every pin): motor leads to the four sockets (X = BL, Y = FL, Z = BR, A = FR) — the shield sockets are 4-pin 2.54 mm male headers, so the motor leads need 4-pin Dupont housings or stepper cables; pack → Deans plug → shield VMOT/GND with the XL4015's input wires in the same two screws; XL4015 OUT → PCA9685 V+; four Dupont wires from the shield's SDA/SCL/5V/GND comms header to the PCA9685's logic header; tilt servo on channel 3, pan on channel 2, fan on channel 15's V+/GND; bank → Pi; webcam and the hub (R4 + two CP2102s) into the Pi's USB; each LD2410C to its adapter; the LD2450 onto Pi pins 4/34/10/8; thermal array and both ToFs on I2C-1 with XSHUT on pins 15 and 13; mic on I2S. Tie everything down.",
+   "Wheels-up test before the floor: each wheel forward and back in turn, then all four (the remote's motor test panel). A wheel that hums but does not turn is a stalled driver — check Vref and the MS1/MS3 caps. Then the floor: forward, reverse, strafe, spin, stop. Then ten minutes at cruise with a finger on each heatsink.",
+   "Firmware before the floor: the R4 ramps every speed change (600 mm/s² speeding up, 3× that slowing down) — a stepper commanded from rest straight to 10,000 steps/s skips and stalls; the pan servo is continuous-rotation, so its bearing is timed, not measured, and it drifts until its stop pulse is trimmed; the tilt never goes below 78°, where the head meets the platform; a dropped serial link stops the motors within 400 ms.",
+   "The torque test: wheels up, lever on one shaft, hanging scale on the lever, drive at 24 rpm and load it until it skips. T = F × arm. Compare with 0.254 N·m. This retires the biggest assumption in the design.",
+   "Sensors: one radar powered at a time first, then all three, then a person walking, standing, lying behind a door. Thermal and camera on a walking person from 4 m. CO2 in a closed room over ten minutes. Mic with the motors off."
+  ],
+  "pins": [
+   "R4 / CNC Shield (as the firmware maps them) — X (BL): STEP D2, DIR D5 · Y (FL): STEP D3, DIR D6 · Z (BR): STEP D4, DIR D7 · A (FR): STEP D12, DIR D13 (D12/D13 jumpers on the A header) · ENABLE all four: D8 (LOW = on) · A4/A5 via the shield's SDA/SCL comms header (5 V I2C) → PCA9685 0x40.",
+   "Pi I2C-1 (BCM GPIO 2/3 = header pins 3/5, 400 kHz): MLX90640 0x33, VL53L1X front (re-addressed to 0x30) and rear 0x29 — XSHUT on BCM 22 (pin 15) and 27 (pin 13) — and the optional SCD41 0x62 (caps the bus at 100 kHz). All powered from the Pi's 3.3 V pins 1 and 17, chained through the boards' second headers — one female per Pi pin. The PCA9685 is not on this bus.",
+   "Pi I2S (BCM 18 BCLK, 19 LRCLK, 20 DIN = pins 12/35/38): INMP441 (an i2s-mic overlay). Pi UART (BCM 14/15 = pins 8/10): the LD2450 at 256000 baud, /dev/ttyAMA0 once pi/enable_gpio_uart.sh has run. Pi USB: the webcam, and a hub with the R4 and the two CP2102s — addressed by /dev/serial/by-id, never by /dev/ttyACMn; ~/rover/radars.json names which adapter is LEFT and RIGHT. Pi power: bank on USB-C. Pi 5 note: with a 3 A supply the Pi 5 caps USB peripherals at 600 mA by default — set usb_max_current_enable=1 in config.txt (then the bank must genuinely hold 3 A) or use a Pi 4.",
+   "Radars: LD2410C LEFT → CP2102 #1 and RIGHT → CP2102 #2 (four wires each, TX/RX crossed, +5V from the adapter), LD2450 → the Pi's UART (pins 4/34/10/8). 3.3 V signalling, 5 V power, nothing metal within 10 mm of the antenna faces. The LD2450 shares the LD2410Cs' 24 GHz band: it stays powered off except for the moving-target demo until the two have been tested together.",
+   "PCA9685 (0x40, VCC 5 V from the shield): tilt servo on channel 3 (positional — it must be the 180° MG996R; a 360° one cannot hold the camera), pan servo on channel 2 (continuous-rotation: timed nudges only, trimmed once with the remote's hold-still test), fan on channel 15's V+/GND pins. V+ from the XL4015 at 5.0 V. Nothing is driven at boot: the turret starts wherever it was set by hand.",
+   "ESP32-S3 #3 rides the rover on its own small power bank (USB-C only, no wire to the rover's electronics) running csi_rx_udp: it joins the Pi's hotspot on channel 6 and streams the CSI of every probe to the Pi as UDP port 5005. ESP32-S3 #2 is OFF the rover, dropped ~3 m along the wall on any USB 5 V source, running csi_tx: 100 Hz ESP-NOW probes on channel 6. ESP32-S3 #1 is the spare."
+  ],
+  "review": [
+   "Microstepping jumpers sit under the driver sockets — caps, not wires, and they go on before the drivers. I first said Dupont leads would do; you caught it.",
+   "Four screw lengths I specified were in no kit on the list: M5×10, M5×20, M4×16 with nyloc, M3×30. Fixed with counterbores in the printed parts so the corner kit's M5×8 and the T-nut kit's M4×12 reach, the cradle and turret moved to M3 from the M3 kit, and the fan to cable ties. Zero purchases added.",
+   "When the 5 V buck left the list, the fan and the radars lost their 5 V source. Both now run on USB pass-through from the Pi, with the Pi's 1.2 A USB budget written out above.",
+   "Motor lead length has never been documented. The far-corner motor needs about 400 mm to reach the shield; plan to extend with your 22 AWG and crimp Dupont housings.",
+   "The design mass crept from 4.84 to 5.41 kg through three honest corrections — brackets at 113 g not 60, a 162 g webcam, the power bank — and failed the ramp at 1.5 A before the 2200 mAh pack brought it back to 5.11 kg. Every gram from here spends margin.",
+   "The frame drawing had two corner brackets per joint 'one top, one bottom'. A 2020 inner corner holds exactly one 20 mm bracket, and one on the top faces would sit under the deck. Fixed: four brackets, deck tiles as the second shear plane.",
+   "The deck tiles were drawn 350 mm wide with six M5s 'into the side-rail top slots'. A 350 mm tile reaches the side rails' inner faces at Y ±175 — the top slots are at Y ±185. It could never have been bolted down. Fixed: 390 mm tiles.",
+   "The build order assembled the frame before the motor brackets. The kits' T-nuts are sliding, not drop-in, and a butt-jointed frame closes every slot end. Fixed: every T-nut goes in before the corners close.",
+   "The thermal array was put on a bit-banged i2c-gpio bus 'at 1 MHz'. Software I2C on a Pi manages ~100–200 kHz; the MLX90640 would have run at ~3 fps. Fixed: hardware second bus (i2c3 on a Pi 4) at 400 kHz.",
+   "The Pi's USB budget counted the webcam at 250 mA. A C920 draws ~500 mA at 1080p and the R4 WiFi's radio ~150 mA; with fan and radars on USB pass-through it was over 1.2 A. Fixed: fan and radars on an LM2596 at 5.0 V, R4 radio off.",
+   "The turret is inside the radar beam — 270 mm ahead, 60 mm below boresight. Not a wiring fix: the radars are read only with the turret parked, and LD2450 targets under 0.5 m are discarded.",
+   "Nothing on the list could split the T-plug into three branches, hold a coupler on a shaft, or connect motor leads to the shield's 4-pin headers. Added a parts-box-first consumables group: threadlocker, Wago 221s, stepper cables, a 1000 µF cap for the servo rail, a plastic trimmer tool.",
+   "Two 390 mm deck tiles fit no common print bed. Now four 170 × 195 quadrants with tongue-and-rebate seams.",
+   "The wheels sat 25 mm outboard of the bracket legs (a fudge in the formula). Every millimetre multiplies the motor-bearing load; now 5 mm, and the bearing check uses the real overhang: indoor floors pass, a 20 mm threshold does not.",
+   "The Ceres pan servo is continuous-rotation — it cannot hold or report an angle, so the camera would have had no known bearing. Pan is now the rover rotating on its wheels with odometry; the pan stage is locked; tilt keeps its mechanical floor.",
+   "The radar bar called for heat-set inserts that nothing on the list supplies. Through-bolted with M3 + nuts.",
+   "The bracket's bundled screws are probably M3×8: through a 3 mm leg into a ~4.5 mm flange hole they bottom out and never clamp. Use M3×6 from the kit.",
+   "The sense-resistor code on the DRV8825 carriers decides Vref; assuming R100 on an R220 board gives 0.68 A and a rover that stalls. Read the code first.",
+   "Person detection was quoted at 25 fps; a Pi 4 running TFLite MobileNet-SSD at 300 px does ~10 fps. Corrected.",
+   "The LD2450 shares the 24 GHz band with the LD2410C 100 mm away and their interference is untested. It now defaults off.",
+   "The front ToF at 81 mm sees the floor beyond ~0.34 m through a 27° cone. ROI narrowed or clip tilted up.",
+   "The kit ships exactly four drivers. The owned TB6600 is now the documented emergency fourth axis.",
+   "Nothing said to unplug the pack when parked: idle draw from three regulators kills a LiPo overnight.",
+   "The deck tiles were 170 long; the cross-rail top slot sits at X ±165 and a 9 mm M5 counterbore centred there needs 4.5 mm of tile beyond it. It had 0.5 mm. Tiles are now 175.",
+   "Power-up order was never stated. VMOT with the R4 unpowered leaves every DRV8825 enabled at full holding current. Logic first, pack second; reverse to shut down.",
+   "The LD2410C's nearest gates look straight at the turret's metal. Unmasked, it reports a stationary person for the life of the rover. Gates 0–1 are now set to ignore.",
+   "Deck screws were specified at the corner brackets' 3.0 N·m, into 3 mm of PLA under the head. 1.5 N·m.",
+   "VL53L1X modules powered at 5 V would put 5 V pull-ups on Pi GPIO pins. 3.3 V.",
+   "The XT60 disconnect was under the deck. It is now brought up to the rear edge as a one-handed emergency stop.",
+   "The optional SCD41's I2C tops out at 100 kHz; fitted, it slows the shared bus. Stated.",
+   "Every under-deck wire needs a way through a full-coverage deck. Pass-through slots added.",
+   "The SCD41 sat on the post's rear face, which became the open side of the flat-printed U-channel. Moved to a side face.",
+   "Fastener counts were stale after the tile change (30 M5, not 22; 24 M3). Corrected; still inside both kits.",
+   "Two USB serial devices with the same /dev/ttyACM naming swap order between boots. Now addressed by serial-by-id; otherwise the first boot on stage sends step commands to the radar bridge.",
+   "The mecanum X/O rule is stated both ways by different vendors. Replaced with a drive-forward test that cannot be misread.",
+   "A top-heavy R4 + shield + four heatsinks was hanging on two cable ties. Now four M3×20 through the R4's mounting holes.",
+   "Sensor breakouts commonly ship with unsoldered headers while the iron was optional. Flagged at unboxing.",
+   "The front ToF module protruded 4 mm past the rail face as the rover's leading point. Now recessed in a printed bumper lip.",
+   "The Pi 5 uses a different i2c3 overlay name than the Pi 4. Both stated, since the Pi model is still unknown.",
+   "The second LM2596, the Wago block and the top-side T-plug e-stop were wired in the text and placed nowhere. Now placed: LM2596 outboard of the XL4015, Wago and the e-stop connector at the rear-right corner, clear of the Pi and the post flange.",
+   "The printed-parts mass allowance (0.5 kg) no longer covered four tiles plus post, bridge, clips and lock. Tiles now specified at 20% infill (~80 g) and the allowance raised to 0.55 kg; the ramp margin still clears 1.25.",
+   "The post's flange, printed with the channel lying flat, would stand vertical and need supports. It is now a separate plate.",
+   "The pack's ~100 mm lead cannot reach the rear-corner e-stop. The pigtail kit's second pair is now the extension.",
+   "Sixth pass found nothing structural. The design converged; what remains is measurement.",
+   "EXTERNAL REVIEW: Walleye's vitals.py scores repetition, not life — a 0.35 Hz sine reads 21 bpm at confidence 7.95 (reproduced). ALIVE removed from the fusion; the label is breathing-like periodicity, requiring a still platform, timestamps, and a stable rate over two windows.",
+   "EXTERNAL REVIEW: the fusion could confirm correlated interference and combine observations of different objects. Rewritten as two tracks — hidden (RF) and visible (optical) — associated by position; the camera never vetoes a hidden person.",
+   "EXTERNAL REVIEW: BCM GPIO 5 was assigned to both the thermal I2C bus and the front ToF's XSHUT. XSHUT moved to GPIO 22/27.",
+   "EXTERNAL REVIEW: 'GPIO 2/4 and 6' for the fallback Pi supply confused physical header pins with BCM numbers. Now stated as physical pins, never with the bank connected.",
+   "EXTERNAL REVIEW: ESP32 #3 was powered from its 5 V header while on USB, which Espressif forbids, and the plan said USB when the flashed RuView firmware streams UDP over WiFi. Now WiFi/UDP to a Pi hotspot, header power only.",
+   "EXTERNAL REVIEW: a Pi 5 on a 3 A supply caps USB peripherals at 600 mA by default. Stated, with the config.txt override.",
+   "EXTERNAL REVIEW: three 3-way Wagos cannot distribute one source to three branches per polarity. Two 5-way 221-415.",
+   "EXTERNAL REVIEW: M2×16 through 10 mm bosses + 5 mm deck left 1 mm for the Pi's board and nut. Bosses 8 mm, M2×20.",
+   "EXTERNAL REVIEW: the R4's 8 mA pins cannot drive a TB6600's optocouplers directly. The spare-driver fallback now needs a buffer.",
+   "EXTERNAL REVIEW: step counts are commanded heading, not measured; the radar bearing by rotation is ±20° at best. Stated.",
+   "EXTERNAL REVIEW: 'overall width 390' was the frame; over the wheels it is 462 mm. Both now reported.",
+   "EXTERNAL REVIEW: fuse and in-run cell monitoring were declined; the reviewer calls them unresolved requirements. Both restored as an optional Safety group so the decision is visible, not buried.",
+   "EXTERNAL REVIEW, pushed back: the 400 mm post was an option under test, not a commitment, and the bearing/torque assumptions were already labelled ASSUMED — those two are restated, not changed.",
+   "Battery swapped to the user's HOOVO 3S 2200 80C shorty 2-pack: it is Deans, not XT60. Rather than an adapter in the 4 A path, the T-plug pigtail line became two Deans 30 cm extensions (one whole for the pack lead, one cut into a pigtail of each gender). Cradle re-drawn 75 × 33.8 × 26.4, mass 190 → 140 g, ramp margin 1.27 → 1.28, 0 collisions. The optional XT60 extension went away with it.",
+   "Motor bracket checked against its drawing, not its bullets: foot is 50 × 51 (was guessed 42 × 35), slots are 4.3 mm wide (M4 only — an M5 T-nut screw would not pass), and each screw lands at the inner end of its slot because the rail's bottom slot sits 10 mm from the outer face. The Ø22 bore is nominal against a Ø22 boss (check it slips), the motor's tapped holes are ~4.5 mm deep so M3×6 not M3×8, and the axle-to-foot offset is 31 ±1.5 pending a ruler on the real part.",
+   "WIRING PASS 1 (wiring.py, netlist as code): the pin map put the fan on the shield's 5 V header and the radars on the ESP32 devkit's 5 V pin — both are the Pi's 1.2 A USB budget, and both contradict the power section that puts them on the LM2596. Pin map corrected; the netlist is now the single source.",
+   "WIRING PASS 1: the mesh section still re-addressed the ToF sensors via XSHUT on GPIO 5/6 after the pin map moved to BCM 22/27. Fixed — GPIO 5 is the thermal bus.",
+   "WIRING PASS 1: drivetrain.py budgeted step rates at 1/8 microstepping while the build order fits MS3 caps, which on a DRV8825 is 1/16. Settled on 1/16 (one cap per driver, six jumpers total); 0.3 m/s is 3,820 pulses/s per axis, inside the R4's budget.",
+   "WIRING PASS 1: the build order had the shield step twice, one version without the VMOT-connected Vref warning. Merged; the coupler note moved to the drive step.",
+   "WIRING PASS 2: DRV8825 nENABLE has an internal pull-down, so for the ~1 s the R4 sits in reset (boot, watchdog, upload) all four drivers are enabled. A 10 kΩ pull-up from EN to the shield's 5 V closes that window; the R4-unpowered case stays a power-up rule.",
+   "WIRING PASS 2: BCM 4/5 carry no on-board I2C pull-ups, unlike BCM 2/3. The thermal module must have its own or the second bus is dead — VERIFY on the module, 4.7 kΩ in the parts drawer.",
+   "WIRING PASS 2: the bank cable is a spec, not a cable. At the Pi's 2.5 A peak a 1 m phone cable drops over a volt; a 24 AWG 0.3 m cable drops 0.13 V. And the webcam on its captive 1.5 m lead can see 4.4 V at 1080p — if it resets, run 720p.",
+   "WIRING PASS 2: ESP32 #1 with WiFi left on puts the Pi USB at 1.2 A of 1.2 A. WiFi.mode(WIFI_OFF) is a requirement of its firmware, not a nicety.",
+   "WIRING PASS 2: the tilt servo gets 3.3 V PWM because the PCA9685's VCC must stay at 3.3 V (its I2C pull-ups follow VCC). Usually fine for an MG996R; the fix if not is a buffer, never a 5 V VCC.",
+   "WIRING PASS 3: the CSI plan had ESP32 #2 as a transmitting beacon and #3 as a receiver wired on the rover. Reading the firmware: Walleye's csi_rx outputs on Serial (needs a cable), and RuView nodes receive the access point's frames. So the Pi's hotspot on the rover is the transmitter and both nodes go OFF the rover as receivers on USB chargers. Removes a rail load, a dual-supply question and a USB-budget question in one move.",
+   "WIRING PASS 3: each radar's GND needs two wires — a power return to the LM2596 OUT− and the cable GND to ESP32 #1. With only the cable GND, 180 mA of radar current returns through the USB grounds and shifts every serial link by ~70 mV: the Ceres fault, again.",
+   "WIRING PASS 3: the LM2596 output was drawn as a daisy chain through Dupont pins. It gets its own pair of 5-way Wagos (four of the pack of ten used).",
+   "WIRING PASS 3: three build-day killers written down as procedure: driver orientation (EN over EN, backwards = dead), the 1000 µF cap's stripe to GND, and the fan's rated voltage checked against its rail. The fan listing says 5 V, 0.15 A — confirmed.",
+   "LISTING PASS (2026-09-07): every buy line re-read from its Amazon bullets in the logged-in session. Confirmed: 5 mm metal couplings on the wheels, 6.2 mm slot on the rails, SLIDING M5 T-nuts in the corner kit, 40 M4 T-nuts + M4×10/12 in the T-nut kit, DRV8825 (not A4988) in the shield kit, XSHUT and level conversion on the ToF modules, 3.3/5 V logic on the thermal module, M2×20 and M3×6 in the screw kits, 5 V on the fan, 75 × 33.8 × 26.4 on the HOOVO pack. Found: the wheels are down to 2 in stock. Not verifiable from a listing: wheel width, coupling grub-screw position, thermal-module pull-ups, sense-resistor code — those are the day-one caliper and meter steps."
+  ],
+  "mesh": [
+   "Motor shaft 5 mm with flat → wheel-kit 5 mm coupler (grub screw on the flat) → 80 mm mecanum hub. Same nominal bore on both sides; verify the coupler's set screw lands on the flat.",
+   "Motor 31 mm × 31 mm M3 pattern, 22 mm pilot → Anndason bracket (31 mm pattern, 3 mm steel, M3 screws in the box). Bracket 4.3 mm foot slots → M4×10 + M4 T-nut (T-nut kit) → 2020 rail 6 mm slot. M5 does not fit the bracket; M4 does.",
+   "2020 rail ↔ 2020 rail → TOCLUX 17×20 corner brackets, M5×8 + M5 T-nut (corner kit). Rail ↔ printed deck → M5×8 + M5 T-nut into the top slot, counterbored tiles. Rail ↔ printed radar post → M4×12 + M4 T-nut, counterbored flange.",
+   "Deck → boards: printed 10 mm bosses; Uno R4 and ESP32 held by cable ties through slots; Pi (2.7 mm holes) and PCA9685 by M2 + nut. Deck → battery cradle: M3×12 + nut. Deck → Ceres turret base: M3×16 + nut through the base's existing M3 clearance holes.",
+   "HOOVO T-plug → OliRC extension (its Deans pair on the deck is the pull-plug) → 14 AWG to the CNC Shield VMOT screw terminal (8–45 V, DRV8825 range); the XL4015's 22 AWG input (4–38 V) shares the same screws. A 12.6 V charged pack sits inside both windows.",
+   "XL4015 OUT 5.0 V → PCA9685 V+ terminal → MG996R servos (4.8–7.2 V) and the fan. PCA9685 VCC ← the shield's 5 V; I2C 0x40 ← R4 A4/A5 at 5 V through the shield's comms header. Nothing on this rail sees pack voltage.",
+   "Power bank 5 V/3 A → Pi USB-C. Pi USB-A → webcam. Pi USB-A → 4-port hub → UNO R4 USB-C (5 V logic, CNC Shield V3 is a 5 V shield: pinout matches) and two CP2102 USB-UART adapters. Two Pi ports used, 0.79 A peak of the 1.2 A budget.",
+   "CP2102 +5V → LD2410C VCC (80 mA each); Pi header pin 4 → LD2450 5V (≤ 200 mA). Radar UART is 3.3 V, matching the CP2102s and the Pi's GPIO: radar TX → adapter RXD / Pi RXD and vice versa, 256000 baud. Meter each adapter's TXD at idle before wiring: 3.3 V, not 5 V.",
+   "Pi I2C-1 (3.3 V, 400 kHz): MLX90640 0x33, VL53L1X ×2 at 0x29 → front re-addressed to 0x30 via XSHUT on BCM GPIO 22/27, SCD41 0x62 — no address clashes. All modules run on 3.3 V from the Pi header. The PCA9685 lives on the R4's 5 V bus, not this one.",
+   "Pi I2S GPIO 18/19/20 → INMP441 (3.3 V). Pi ↔ R4 serial over the same USB cable that powers it.",
+   "Firmware boundary: R4 runs the four-axis step generator (timer ISR, D2–D7 + D12/D13, enable D8) and takes velocity commands over serial; the Pi runs everything else. Nothing on the shield is driven by GRBL."
+  ],
+  "fusion": [
+   "Four ways of seeing a person, four different physics: the radar sees RF REFLECTED off a torso (range and periodic motion, through drywall); the ESP32 pair sees RF TRANSMITTED across a space and disturbed by a body (presence, through drywall, no range); the thermal array sees EMITTED heat (a warm blob, line of sight); the camera sees VISIBLE shape (a person-shaped box, line of sight). They fail differently, which is the point — but they also cannot all corroborate the same target: nothing optical sees through the wall.",
+   "So there are TWO TRACKS, never mixed. HIDDEN track (RF only): radar + CSI. VISIBLE track (optical only): camera + thermal, associated by position — a thermal blob and a person box count together only when they overlap in the image. A person the camera does not see is NOT vetoed by the camera; a radiator in this room and radar activity behind the wall are two observations, not one.",
+   "What the RF track can honestly claim: the radar reports periodic motion in the 0.13–0.60 Hz band with a confidence score; that score is a measure of REPETITION, not of life. Tested: a 0.35 Hz sine through the same code reads 21 breaths/min at 7.95/10. A fan, a curtain or a vibrating duct does the same. The label is therefore BREATHING-LIKE PERIODICITY, never ALIVE, and it needs: a still platform (windows during any rover or servo motion are discarded), timestamped samples (the tracker currently assumes 10 Hz), the same rate in two consecutive 30 s windows, and a range that stays put. Radar and CSI agreeing raises it to RF ACTIVITY, CORROBORATED — still not a person.",
+   "The CSI geometry (v2): ESP32 #2 runs csi_tx OFF the rover — dropped as far along the wall as the room allows, on any USB 5 V source — and sends 100 ESP-NOW probes a second on channel 6; ESP32 #3 rides the rover on its own small bank running csi_rx_udp, recording how the room bends every probe and streaming it to the Pi's hotspot as UDP. One bistatic link per stop, and its path crosses the space behind the wall. CSI needs an empty-room calibration for the geometry it is in; without one it reports change, not presence.",
+   "The station protocol: stop; motors off; turret left at its start pose; 5 s radar settle; two 30 s dwells running Walleye's vitals.py while ESP32 #3 streams CSI; then the turret steps the camera and thermal array across five bearings by timed pan nudges (~20° each — timed, not measured, so the bearings are coarse) with the rover still, and comes back; then report both tracks with their labels. About 65 s per station.",
+   "The sentence that survives a hard question: 'radar and WiFi both showed breathing-band periodicity 2 m behind that wall, stable for a minute; nothing optical could see it; go look.' Not 'the rover found a living person.'"
+  ]
+ },
+ "items": [
+  {
+   "id": "MOT",
+   "status": "owned",
+   "group": "Drivetrain",
+   "item": "JK42HS40-1704-13A NEMA 17 stepper",
+   "qty": 5,
+   "note": "Four drive wheels, fifth spare. 0.41 N·m holding, 1.7 A, 240 g each, 5 mm flatted shaft."
+  },
+  {
+   "id": "WHL",
+   "status": "buy",
+   "group": "Drivetrain",
+   "asin": "B0DWSWQV4T",
+   "item": "SmaringRobot 4× 80 mm mecanum wheels with 5 mm couplings",
+   "qty": 1,
+   "price": 29.99,
+   "note": "Two left-hand, two right-hand. The 5 mm coupler was made for DC gearmotor D-shafts: if its bore is a D, its flat depth must match the motor's flat; if it is a round bore with a grub screw, the screw goes on the flat with blue threadlocker. Do not print a hub. LISTING CHECK 2026-09-07: 4 wheels + 4 metal 5 mm couplings confirmed; kit 1 lb. ONLY 2 LEFT IN STOCK — order today."
+  },
+  {
+   "id": "BRK",
+   "status": "buy",
+   "group": "Drivetrain",
+   "asin": "B073QW9RPZ",
+   "item": "Anndason 6× steel NEMA 17 L-brackets with screws",
+   "qty": 1,
+   "price": 16.99,
+   "note": "Checked against the listing's dimension drawing: face 4× M3 on 31 mm + Ø22 bore = the NEMA 17 pattern; 3 mm steel plain L (no gussets, whatever the bullet says); foot 50 × 51 with two 4.3 × 34 mm slots 25.73 apart — that is an M4 slot, so the foot takes M4 T-nuts from the T-nut kit, not M5. Inverted under the side rail, leg flush with the outer face, motor in the corner of the L with 7 mm between its top and the foot. Six in the box, four used, two spare. Axle sits 31 ±1.5 mm below the rail: measure on receipt and set BRK_OFFSET."
+  },
+  {
+   "id": "RAIL",
+   "status": "buy",
+   "group": "Frame",
+   "asin": "B099M9DMSL",
+   "item": "VICHSAMWY 4× 350 mm 2020 V-slot aluminium extrusion",
+   "qty": 1,
+   "price": 16.59,
+   "note": "All four used at full length. Nothing to cut. LISTING CHECK: 2020V, 6.2 mm slot, 6063, 1.5 mm wall, 4 × 350 mm confirmed."
+  },
+  {
+   "id": "CNR",
+   "status": "buy",
+   "group": "Frame",
+   "asin": "B0F1B85397",
+   "item": "TOCLUX 20× 2020 corner brackets with M5 screws and T-nuts",
+   "qty": 1,
+   "price": 14.99,
+   "note": "Eight for the frame corners; the rest and the 40 M5 T-nuts cover deck and post attachment. LISTING CHECK: 20 brackets 17 × 20, 40 M5 SLIDING T-nuts, 40 M5 screws, wrench — sliding confirmed, so nuts go in before joints close."
+  },
+  {
+   "id": "TNUT",
+   "status": "buy",
+   "group": "Frame",
+   "asin": "B0FQ55VFDK",
+   "item": "Bemaka 2020 T-nut kit, M3/M4/M5, with M4×10 and M4×12 screws",
+   "qty": 1,
+   "price": 13.99,
+   "note": "The M4 T-nuts and M4×10 screws hold the motor brackets to the rails. LISTING CHECK: 40 M4 T-nuts + 20 M4×10 + 20 M4×12 confirmed (design needs 10 nuts, 8 ×10, 2 ×12). Its M5×16/20 are not deck screws — the deck uses the corner kit's M5×8."
+  },
+  {
+   "id": "UNO",
+   "status": "owned",
+   "group": "Motion control",
+   "item": "Arduino UNO R4 WiFi (from Walleye)",
+   "qty": 1,
+   "note": "The CNC Shield V3 stacks on the R4's headers; 5 V logic, same pinout. Custom timer-ISR firmware, not GRBL. Frees up when the Walleye rail retires."
+  },
+  {
+   "id": "SHIELD",
+   "status": "buy",
+   "group": "Motion control",
+   "asin": "B0B24YS695",
+   "item": "CNC Shield V3 kit with 4× DRV8825 drivers and heatsinks",
+   "qty": 1,
+   "price": 15.99,
+   "note": "Required, not optional: A4988 fails the ramp case. TEN JUMPERS (D12 + D13 on the A header, caps on MS1 + MS3 under each driver = 1/32): D12 and D13 on the A-axis header (gives the fourth wheel its own STEP/DIR — bridging X/Y/Z there clones another wheel instead); caps on MS1 + MS3 under each of the four drivers = 1/32 on DRV8825 (MS3 alone gives 1/16, the faster alternative; an A4988 needs all three for its 1/16 — most tutorials show that, and it is wrong for these). Leave EN/GND OFF so D8 controls enable. Insert each driver with its EN pin on the shield's EN mark — backwards destroys it; the trimpot sits on the opposite side from an A4988. Vref = 5 × Rsense × I — READ THE SENSE RESISTOR CODE on each carrier first: R100 → 0.75 V for 1.5 A; R200/R220 → 1.5/1.65 V. Setting 0.75 V on an R220 board gives 0.68 A and a rover that stalls. Check the kit includes jumper caps. LISTING CHECK: CNC Shield V3.0 + 4× DRV8825 + 4 heatsinks confirmed; 1/32-capable drivers with current limit and thermal protection. No jumper caps in the box — yours."
+  },
+  {
+   "id": "FAN",
+   "status": "buy",
+   "group": "Motion control",
+   "asin": "B0DY6GQMJX",
+   "item": "SIXQJZML 2× 40 × 40 × 10 mm 5 V fans",
+   "qty": 1,
+   "price": 5.99,
+   "note": "Listing confirms 5 V, 0.15 A, 2-pin. One over the drivers on a printed bridge, one spare. Powered from the XL4015 5.0 V output pads beside the servo leads."
+  },
+  {
+   "id": "TB6600",
+   "status": "owned",
+   "group": "Motion control",
+   "item": "TB6600 stepper driver",
+   "qty": 1,
+   "note": "Spare — and the emergency fourth driver, WITH A BUFFER: the R4's pins are rated 8 mA and a TB6600's optocoupler inputs want 8–15 mA, so drive PUL/DIR through a 74HCT125 or two NPN transistors, not straight from D12/D13. Common-anode at 5 V."
+  },
+  {
+   "id": "PACK",
+   "status": "owned",
+   "group": "Power",
+   "item": "11.1 V gel-blaster LiPo + its charger",
+   "qty": 1,
+   "note": "Backup pack. The HOOVO shorty is primary. If you ever run this one: read its label, confirm the connector, and never charge it on a two-wire wall brick."
+  },
+  {
+   "id": "BANK",
+   "status": "owned",
+   "group": "Power",
+   "item": "USB power bank for the Pi — compact, ≤ 130 g, 5 V ≥ 3 A output",
+   "qty": 1,
+   "note": "WEIGH IT (≤ 130 g). And check its output: most banks deliver 3 A only through USB-PD negotiation, which a Pi cannot do — a Pi 4 typically gets 2.4 A, and with a 500 mA webcam that is the lightning bolt. Use a short, thick USB-C cable. Have an LM2596 trimmed to 5.10 V wired and ready as plan B."
+  },
+  {
+   "id": "XL4015",
+   "status": "owned",
+   "group": "Power",
+   "item": "HiLetgo XL4015 5 A adjustable buck converters, 3 pcs (4–38 V in, 1.25–36 V out)",
+   "qty": 3,
+   "note": "One, trimmed to 5.0 V: tilt servo red/brown and fan leads soldered to its OUT pads; IN from the shield's VMOT/GND screws (second wire in each). 5 A rating derated to 4 A; servo stall 2.1 A + fan 0.2 A."
+  },
+  {
+   "id": "LM2596",
+   "status": "owned",
+   "group": "Power",
+   "item": "DROK LM2596 adjustable buck converters, pack of 5 (3.2–35 V in, 1.25–34 V out)",
+   "qty": 5,
+   "note": "Spare since v4: one XL4015 at 5.0 V now feeds the servo and the fan; the LD2410Cs are powered by their CP2102 adapters and the LD2450 from the Pi header; the ESP32 has its own small bank."
+  },
+  {
+   "id": "DMM",
+   "status": "owned",
+   "group": "Fasteners and assembly",
+   "item": "Multimeter (owned)",
+   "qty": 1,
+   "note": "Sets the XL4015 to 5.0 V before anything is connected, the four Vrefs to 0.75 V, and each CP2102's TXD (3.3 V at idle), and checks the pack: 12.6 V full, stop driving at 11.1 V (3.7 V/cell), never below 9.9 V. Check before and after every run — there is no alarm on the balance lead."
+  },
+  {
+   "id": "SW",
+   "status": "owned",
+   "group": "Power",
+   "item": "Three-pin switch",
+   "qty": 1,
+   "note": "Not wired in until its DC rating is read and is ≥ 10 A. Until then the T-plug is the switch."
+  },
+  {
+   "id": "LIPO",
+   "status": "buy",
+   "group": "Power",
+   "asin": "B0CC91JN1K",
+   "item": "HOOVO 3S 2200 mAh 11.1 V 80C shorty LiPo, T-plug (Deans), 2-pack",
+   "qty": 1,
+   "price": 33.99,
+   "note": "Your pick, checked: 75 × 33.8 × 26.4 mm, 138 g each, JST-XH balance lead, softcase. Two packs for the price of one Gens ace and a half — swap at the e-stop and the demo day doubles. 80C is a marketing number; what matters is a 4 A burst on a 2200 pack, which is under 2C. T-plug, not XT60, so the whole harness is Deans now. At ~2.7 A average one pack runs the rover about 39 minutes."
+  },
+  {
+   "id": "CHG",
+   "status": "owned",
+   "group": "Power",
+   "item": "Balance charger (owned)",
+   "qty": 1,
+   "note": "Yours. Charge the HOOVO at 2.2 A = 1 C (or 1.1 A = 0.5 C, gentler) on the LiPo program, 3S, with the JST-XH balance lead plugged in. If its output is banana plugs, you need an XT60 charge lead — that is the optional extension below."
+  },
+  {
+   "id": "XT60PIG",
+   "status": "buy",
+   "group": "Power",
+   "asin": "B07QN7PNWF",
+   "item": "OliRC 2× T-plug (Deans) male-to-female extension, 14 AWG, 30 cm",
+   "qty": 1,
+   "price": 7.59,
+   "note": "Replaces the T-plug pigtails (the pack is Deans). One whole extension is the lead from the pack under the deck to the e-stop mating pair on the deck top, rear-right — a 30 cm reach for a ~200 mm path. Cut the second one at the middle: two 15 cm pigtails, one of each gender, so the harness gender is never a guess. The pigtail whose plug MATES with the battery goes into the shield's VMOT/GND screw terminal; the other is a bench lead. No adapters in the 4 A path."
+  },
+  {
+   "id": "PI",
+   "status": "owned",
+   "group": "Sensing and compute",
+   "item": "Raspberry Pi",
+   "qty": 1,
+   "note": "Camera, radar processing, servo control, interface. Model still unknown — affects the 5 V budget."
+  },
+  {
+   "id": "CAM",
+   "status": "owned",
+   "group": "Sensing and compute",
+   "item": "Your USB webcam (C920-class, ~162 g) on the Ceres tilt bracket",
+   "qty": 1,
+   "note": "The turret was built for it. Person detection with MobileNet-SSD on the Pi at ~25 fps. If it turns out heavier than 170 g, the ELP board camera (B00KA80N9U, 50 g, $22.49) is the fallback."
+  },
+  {
+   "id": "LD2410C",
+   "status": "owned",
+   "group": "Sensing and compute",
+   "item": "HLK-LD2410C 24 GHz radar",
+   "qty": 2,
+   "note": "Primary through-wall sensor: reflected 24 GHz gives range and — with Walleye's vitals.py — a breathing rate and confidence. It measures breathing, not heartbeat; call it that. One on the post, one spare."
+  },
+  {
+   "id": "LD2450",
+   "status": "owned",
+   "group": "Sensing and compute",
+   "item": "HLK-LD2450 24 GHz radar",
+   "qty": 1,
+   "note": "x/y of moving targets only. On the radar bar between the two LD2410Cs, 50 mm from each, wired straight to the Pi's UART (header pins 4, 34, 10, 8) — same 24 GHz band, so it stays POWERED OFF by default and is switched on only for the moving-target demo; the two together have not been tested for interference."
+  },
+  {
+   "id": "ESP32",
+   "status": "owned",
+   "group": "Sensing and compute",
+   "item": "ESP32-S3 DevKitC (N16R8)",
+   "qty": 3,
+   "note": "Three roles: #3 rides the rover as the WiFi-CSI receiver (csi_rx_udp) on its own small power bank, streaming the CSI of every probe to the Pi's hotspot as UDP port 5005 — no wire to the rover's electronics. #2 is OFF the rover as the transmitter (csi_tx, 100 Hz ESP-NOW probes on channel 6), dropped ~3 m along the wall on any USB 5 V source. #1 is the spare: the radars reach the Pi through two CP2102s and the Pi's UART."
+  },
+  {
+   "id": "CP2102",
+   "status": "owned",
+   "group": "Sensing and compute",
+   "item": "CP2102 USB-UART",
+   "qty": 2,
+   "note": "TWO used, one per LD2410C: 3.3 V logic. Each LD2410C is a four-wire job to its adapter: +5V → VCC (the 3V3 pin stays empty — too weak, and the radar needs 5 V), GND, TXD → radar RX, RXD → radar TX. Adapters into a 4-port hub with the R4. The LD2450 needs no adapter: it goes on the Pi's own UART (header pins 4, 34, 10, 8)."
+  },
+  {
+   "id": "THERM",
+   "status": "buy",
+   "group": "Sensing and compute",
+   "asin": "B0FQHVSX91",
+   "item": "MLX90640-D55 thermal camera, 32×24, 55° FoV",
+   "qty": 1,
+   "price": 66.3,
+   "note": "The biggest gap in the design. A body is ~10 °C above a room and unmistakable in 768 pixels, in darkness or smoke. Rides beside the camera on the tilt bracket so the turret sweeps thermal and visible together. Cannot see through walls — that stays the radar's job. LISTING CHECK: I2C to 1 MHz, '3.3V/5V logic', 20 × 18 mm, < 23 mA confirmed. Still meter SDA at 3.3 V before it meets the Pi and confirm onboard pull-ups."
+  },
+  {
+   "id": "TOF",
+   "status": "buy",
+   "group": "Sensing and compute",
+   "asin": "B09V4DS888",
+   "item": "DWEII 2× VL53L1X time-of-flight distance modules",
+   "qty": 1,
+   "price": 14.99,
+   "note": "Two sensors: front and rear, each in a printed clip on the rail's outer slot. Side sensors were cut for cost — strafe only after the camera has seen that side clear. At 81 mm off the floor with a 27° cone the floor enters the field of view beyond ~0.34 m: set the ROI narrow or tilt the clip up 5°, or shiny floors will false-trigger stops. LISTING CHECK: 2 modules, 3.3–5 V, XSHUT broken out ('on/off via IO pins'), onboard level conversion — power from 3.3 V so the pull-ups sit at 3.3 V."
+  },
+  {
+   "id": "PT",
+   "status": "owned",
+   "group": "Turret (Ceres)",
+   "item": "Ceres pan/tilt turret: 2× MG996R-class servos + bracket + 100 × 60 base",
+   "qty": 1,
+   "note": "From the farm rover. Its PAN servo is continuous-rotation (turret_duet.ino nudges it in 300 ms pulses): it cannot hold or report an angle, so the camera would have no known bearing. Decision: pan by rotating the rover — the steppers' step count gives the heading — and pin the pan stage with a printed lock. Tilt stays on the MG996R, which has a mechanical floor near 62–70° per the Ceres notes: never command below it or it stalls and cooks. If you want a real pan later, one positional MG996R (~$10) replaces the continuous one."
+  },
+  {
+   "id": "PCA",
+   "status": "owned",
+   "group": "Turret (Ceres)",
+   "item": "PCA9685 16-channel servo driver (Ceres)",
+   "qty": 1,
+   "note": "USED (v4.1): on the CNC shield's SDA/SCL comms header (5 V I2C from the R4), V+ from the XL4015 at 5.0 V. Tilt ch 3 (positional — must be the 180° MG996R), pan ch 2 (continuous, timed nudges with a trimmed stop pulse), fan on ch 15's V+/GND pins. Never also on the Pi's I2C."
+  },
+  {
+   "id": "SERVO180",
+   "status": "optional",
+   "group": "Sensing and compute",
+   "asin": "B0FGP9ZPJN",
+   "item": "6× MG996R metal-gear servo, 180° (positional)",
+   "qty": 1,
+   "price": 21.99,
+   "note": "ONLY IF the tilt servo is a 360° one: set a tilt on the remote and let go — a 180° servo stops dead, a 360° one keeps turning (it reads the pulse as speed) and cannot hold the camera. TowerPro sells both in the same case, so buy a listing that says 180° and check the new one by hand, unpowered: it stops at about half a turn. The tilt goes on PCA9685 channel 3. LISTING CHECK 2026-09-25: 180° in the title, $3.67 each."
+  },
+  {
+   "id": "M3KIT",
+   "status": "buy",
+   "group": "Fasteners and assembly",
+   "asin": "B0FGV5FCBN",
+   "item": "Fgruh 750-piece M3 screw, nut and washer assortment",
+   "qty": 1,
+   "price": 9.99,
+   "note": "16× M3×6 motor screws, turret base bolts, buck and fan-bridge screws. LISTING CHECK: lengths 6–30 mm; M3×6 (motors), ×12 (cradle), ×16 (turret), ×20 (R4 stack) all in the box."
+  },
+  {
+   "id": "M2KIT",
+   "status": "buy",
+   "group": "Fasteners and assembly",
+   "asin": "B0DFWWFY4Q",
+   "item": "645-piece M2 stainless screw, nut and washer set, button head",
+   "qty": 1,
+   "price": 6.99,
+   "note": "Radar, ToF and camera boards have ~2 mm holes that no other kit covers. 16 screws used. LISTING CHECK: lengths 4–25 mm; M2×20 for the Pi stack is in the box."
+  },
+  {
+   "id": "TIES",
+   "status": "buy",
+   "group": "Fasteners and assembly",
+   "asin": "B0F9T5G2J5",
+   "item": "ALLWIN 100 cable mounts + 100 cable ties",
+   "qty": 1,
+   "price": 6.99,
+   "note": "Board retention through printed slots (no standoffs), motor leads under the deck, power branches on top, and two ties hold the battery in its printed cradle bar."
+  },
+  {
+   "id": "WIRE22",
+   "status": "owned",
+   "group": "Fasteners and assembly",
+   "item": "Dupont leads, 22 AWG wire",
+   "qty": "stock",
+   "note": "Everything, including the power branches: the wire calc puts 22 AWG at a 7 A limit against a 4 A burst — 18 AWG was comfort, not need. I2C, UART, XSHUT, motor lead extensions."
+  },
+  {
+   "id": "LOCTITE",
+   "item": "Blue threadlocker (Loctite 242/243 or equivalent)",
+   "price": 6.0,
+   "note": "Four coupler grub screws carry the whole drivetrain. Parts box first.",
+   "status": "optional",
+   "group": "Build-day consumables — check your parts box first",
+   "qty": 1,
+   "asin": ""
+  },
+  {
+   "id": "WAGO",
+   "item": "Wago 221-415 5-way lever nuts, pack of 10 (or solder + heat-shrink)",
+   "price": 12.0,
+   "note": "NOT NEEDED since v4: the shield's power screw terminal is the only pack splice (pack lead + XL4015 input share each screw).",
+   "status": "optional",
+   "group": "Build-day consumables — check your parts box first",
+   "qty": 1,
+   "asin": ""
+  },
+  {
+   "id": "STEPCABLE",
+   "item": "4× stepper motor cables, 4-pin 2.54 mm Dupont female at the shield end",
+   "price": 8.0,
+   "note": "The motor leads must land on the shield's 4-pin male headers. If the motors came with bare wires, crimp Dupont housings; if with a JST-XH, buy XH-to-Dupont stepper cables. ~400 mm reach needed for the far corner.",
+   "status": "optional",
+   "group": "Build-day consumables — check your parts box first",
+   "qty": 1,
+   "asin": ""
+  },
+  {
+   "id": "CAP",
+   "item": "1000 µF 10 V electrolytic capacitor across PCA9685 V+",
+   "price": 0.0,
+   "note": "Parts box. Two MG996R hitting a stop together sag the servo rail without it; the PCA9685 has an empty footprint for exactly this.",
+   "status": "optional",
+   "group": "Build-day consumables — check your parts box first",
+   "qty": 1,
+   "asin": ""
+  },
+  {
+   "id": "TRIMTOOL",
+   "item": "Plastic or ceramic trimmer screwdriver",
+   "price": 0.0,
+   "note": "For the DRV8825 Vref pots. A metal screwdriver slipping onto VMOT kills the driver.",
+   "status": "optional",
+   "group": "Build-day consumables — check your parts box first",
+   "qty": 1,
+   "asin": ""
+  },
+  {
+   "id": "PETG",
+   "status": "optional",
+   "group": "Only if you lack it",
+   "asin": "B07PGYHYV8",
+   "item": "OVERTURE black PETG 1 kg 1.75 mm",
+   "qty": 1,
+   "price": 14.69,
+   "note": "PLA you already have is fine for the deck, cradle, post and clips; PETG only if you have nothing loaded."
+  },
+  {
+   "id": "SD",
+   "status": "optional",
+   "group": "Only if you lack it",
+   "asin": "B07YGZQ4H8",
+   "item": "Kingston Canvas Select Plus 64 GB microSD, A1",
+   "qty": 1,
+   "price": 17.99,
+   "note": "Only if your Pi has no card."
+  },
+  {
+   "id": "SHRINK",
+   "status": "optional",
+   "group": "Only if you lack it",
+   "asin": "B01MFA3OFA",
+   "item": "Ginsco 580-piece heat-shrink assortment",
+   "qty": 1,
+   "price": 7.99,
+   "note": "Electrical tape works for a hackathon; this is nicer."
+  },
+  {
+   "id": "CO2",
+   "status": "optional",
+   "group": "Extra senses, if budget allows",
+   "asin": "B0F6MRMNLH",
+   "item": "SCD41 CO2 + temperature + humidity module, I2C",
+   "qty": 1,
+   "price": 26.99,
+   "note": "The SAR literature's area-narrowing sensor: a person in a closed room raises CO2 hundreds of ppm above 400 baseline. Slow (minutes) and only meaningful in enclosed spaces. On the rear of the radar post in free air."
+  },
+  {
+   "id": "MIC",
+   "status": "optional",
+   "group": "Extra senses, if budget allows",
+   "asin": "B0GSZJFJVM",
+   "item": "3× INMP441 I2S microphone modules with Dupont cables",
+   "qty": 1,
+   "price": 8.49,
+   "note": "Voice and knocking, the way rescue listening devices work. One mic gives energy only, no bearing; the other two in the pack could later give a left/right bearing. Stop-and-listen protocol: motors off, three-second capture."
+  },
+  {
+   "id": "FUSE",
+   "status": "optional",
+   "group": "Safety — reviewer recommended, your call",
+   "asin": "B0F6NPV287",
+   "item": "Anyongora 4× 16 AWG inline fuse holders with 3–15 A blade fuses",
+   "qty": 1,
+   "price": 7.99,
+   "note": "A 35C pack delivers over 70 A into a short. The T-plug is a disconnect, not protection. 10 A blade inline on the pack + lead, before the shield terminal. Declined earlier; the external reviewer put it back on the table."
+  },
+  {
+   "id": "ALARM",
+   "status": "optional",
+   "group": "Safety — reviewer recommended, your call",
+   "asin": "B07VR4SV8C",
+   "item": "AOICRIE 2× 1S–8S cell voltage alarms",
+   "qty": 1,
+   "price": 6.59,
+   "note": "A multimeter before and after a run does not see a weak cell sag mid-run. On the balance lead, it beeps at 3.6 V/cell while you are still driving. Declined earlier; reviewer disagrees."
+  },
+  {
+   "id": "SCALE",
+   "status": "optional",
+   "group": "Tools",
+   "asin": "B0GGHDNZWJ",
+   "item": "MEIYA hanging scale",
+   "qty": 1,
+   "price": 7.99,
+   "note": "The torque measurement: lever on the shaft, scale on the lever, T = F × arm."
+  },
+  {
+   "id": "CALIPER",
+   "status": "optional",
+   "group": "Tools",
+   "asin": "B08Y8M54M9",
+   "item": "Jiavarry 150 mm digital caliper",
+   "qty": 1,
+   "price": 21.98,
+   "note": "Needed for every VERIFY dimension before drilling the deck. Skip only if you own one."
+  },
+  {
+   "id": "IRON",
+   "status": "optional",
+   "group": "Tools",
+   "asin": "B087767KNW",
+   "item": "Q-MING soldering iron kit",
+   "qty": 1,
+   "price": 12.59,
+   "note": "Optional only if every sensor breakout arrives with headers soldered. The MLX90640, VL53L1X and INMP441 boards usually do not."
+  },
+  {
+   "id": "HEX",
+   "status": "optional",
+   "group": "Tools",
+   "asin": "B0CJBRYQF3",
+   "item": "AMTOVL metric hex key set",
+   "qty": 1,
+   "price": 9.99,
+   "note": "2.5 / 3 / 4 mm for M3 / M4 / M5, and 1.5–2 mm for the coupler grub screws. Buy unless you already own a metric set that goes down to 1.5 mm — the corner kit's single wrench is 4 mm only."
+  },
+  {
+   "id": "STRIP",
+   "status": "optional",
+   "group": "Tools",
+   "asin": "B08Y6GDS61",
+   "item": "DOWELL wire strippers",
+   "qty": 1,
+   "price": 9.99
+  }
+ ]
+}

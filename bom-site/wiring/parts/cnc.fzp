@@ -1,0 +1,1616 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<module referenceFile="generic_ic_dip_8_300mil.fzp" moduleId="Arduino_CNC_V3_ef6dd06d1ad99b62a815e0065942f1d0_2">
+ <version>4</version>
+ <author>Rabbit Hole</author>
+ <title>Arduino_CNC_V3.00 </title>
+ <label>Arduino CNC Shield V3.00 </label>
+ <date>Sun Jul 24 2016</date>
+ <tags>
+  <tag>Shield</tag>
+  <tag>Arduino</tag>
+  <tag>CNC</tag>
+ </tags>
+ <properties>
+  <property name="part number"></property>
+  <property name="family">Arduino Shield</property>
+  <property name="variant">variant 2</property>
+  <property name="layer"></property>
+ </properties>
+ <taxonomy>part.dip.8.pins</taxonomy>
+ <description>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
+&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
+p, li { white-space: pre-wrap; }
+&lt;/style>&lt;/head>&lt;body style=" font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;">
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Protoneer Arduino CNC Shield V3.00&lt;/p>
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">If using Grbl V0.9:&lt;/p>
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  The “A” axis can not be used (yet).&lt;/p>
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  The “SCL” (Arduino A5) pin is now used for 'Probing' input.&lt;/p>
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">  The “End Stops Z+ &amp;amp; Z-” (Arduino D11) and “SpnEn” (Arduino D12) have been switched!&lt;/p>&lt;/body>&lt;/html></description>
+ <views>
+  <iconView>
+   <layers image="icon/Arduino_CNC_V3_4aee69fcad44ee55374c126d08a871be_7_icon.svg">
+    <layer layerId="icon"/>
+   </layers>
+  </iconView>
+  <breadboardView>
+   <layers image="breadboard/Arduino_CNC_V3_4aee69fcad44ee55374c126d08a871be_7_breadboard.svg">
+    <layer layerId="breadboard"/>
+   </layers>
+  </breadboardView>
+  <schematicView>
+   <layers image="schematic/Arduino_CNC_V3_4aee69fcad44ee55374c126d08a871be_7_schematic.svg">
+    <layer layerId="schematic"/>
+   </layers>
+  </schematicView>
+  <pcbView>
+   <layers image="pcb/Arduino_CNC_V3_4aee69fcad44ee55374c126d08a871be_7_pcb.svg">
+    <layer layerId="silkscreen"/>
+    <layer layerId="copper0"/>
+    <layer layerId="copper1"/>
+   </layers>
+  </pcbView>
+ </views>
+ <connectors>
+  <connector id="connector1" name="EN(able)" type="male">
+   <description>Arduino D8&lt;p>(to disable drivers 10k to 5V)&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector1pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector1pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector1pin" layer="copper0"/>
+     <p svgId="connector1pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector2" name="GND" type="male">
+   <description>Arduino Gnd&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector2pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector2pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector2pin" layer="copper0"/>
+     <p svgId="connector2pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector3" name="X.STEP" type="male">
+   <description>Arduino D2&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector3pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector3pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector3pin" layer="copper0"/>
+     <p svgId="connector3pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector4" name="X.DIR" type="male">
+   <description>Arduino D5&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector4pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector4pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector4pin" layer="copper0"/>
+     <p svgId="connector4pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector5" name="Y.STEP" type="male">
+   <description>Arduino D3&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector5pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector5pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector5pin" layer="copper0"/>
+     <p svgId="connector5pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector6" name="Y.DIR" type="male">
+   <description>Arduino D6&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector6pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector6pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector6pin" layer="copper0"/>
+     <p svgId="connector6pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector7" name="Z.STEP" type="male">
+   <description>Arduino D4&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector7pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector7pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector7pin" layer="copper0"/>
+     <p svgId="connector7pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector8" name="Z.DIR" type="male">
+   <description>Arduino D7&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector8pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector8pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector8pin" layer="copper0"/>
+     <p svgId="connector8pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector9" name="A.STEP" type="male">
+   <description>A Step&lt;p>(see below)</description>
+   <views>
+    <breadboardView>
+     <p svgId="connector9pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector9pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector9pin" layer="copper0"/>
+     <p svgId="connector9pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector10" name="A.DIR" type="male">
+   <description>A Direction&lt;p>(see below)</description>
+   <views>
+    <breadboardView>
+     <p svgId="connector10pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector10pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector10pin" layer="copper0"/>
+     <p svgId="connector10pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector11" name="5V" type="male">
+   <description>Arduino 5V&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector11pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector11pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector11pin" layer="copper0"/>
+     <p svgId="connector11pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector12" name="GND" type="male">
+   <description>Arduino Gnd&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector12pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector12pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector12pin" layer="copper0"/>
+     <p svgId="connector12pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector13" name="X(1)" type="male">
+   <description>X.STEP&lt;p>(Arduino D2)&lt;p>(jumper to clone 'A' to 'X')&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector13pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector13pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector13pin" layer="copper0"/>
+     <p svgId="connector13pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector14" name="X(2)" type="male">
+   <description>A.STEP&lt;p>(jumper to clone 'A' to 'X')&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector14pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector14pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector14pin" layer="copper0"/>
+     <p svgId="connector14pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector15" name="X(3)" type="male">
+   <description>A.DIR&lt;p>(jumper to clone 'A' to 'X')&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector15pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector15pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector15pin" layer="copper0"/>
+     <p svgId="connector15pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector16" name="X(4)" type="male">
+   <description>X.DIR&lt;p>(Arduino D5)&lt;p>(jumper to clone 'A' to 'X')&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector16pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector16pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector16pin" layer="copper0"/>
+     <p svgId="connector16pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector17" name="Y(1)" type="male">
+   <description>Y.STEP&lt;p>(Arduino D3)&lt;p>(jumper to clone 'A' to 'Y')&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector17pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector17pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector17pin" layer="copper0"/>
+     <p svgId="connector17pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector18" name="Y(2)" type="male">
+   <description>A.STEP&lt;p>(jumper to clone 'A' to 'Y')&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector18pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector18pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector18pin" layer="copper0"/>
+     <p svgId="connector18pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector19" name="Y(3)" type="male">
+   <description>A.DIR&lt;p>(jumper to clone 'A' to 'Y')&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector19pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector19pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector19pin" layer="copper0"/>
+     <p svgId="connector19pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector20" name="Y(4)" type="male">
+   <description>Y.DIR&lt;p>(Arduino D6)&lt;p>(jumper to clone 'A' to 'Y')&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector20pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector20pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector20pin" layer="copper0"/>
+     <p svgId="connector20pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector21" name="Z(1)" type="male">
+   <description>Z.STEP&lt;p>(Arduino D4)&lt;p>(jumper to clone 'A' to 'Z')&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector21pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector21pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector21pin" layer="copper0"/>
+     <p svgId="connector21pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector22" name="Z(2)" type="male">
+   <description>A.STEP&lt;p>(jumper to clone 'A' to 'Z')&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector22pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector22pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector22pin" layer="copper0"/>
+     <p svgId="connector22pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector23" name="Z(3)" type="male">
+   <description>A.DIR&lt;p>(jumper to clone 'A' to 'Z')&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector23pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector23pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector23pin" layer="copper0"/>
+     <p svgId="connector23pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector24" name="Z(4)" type="male">
+   <description>Z.DIR&lt;p>(Arduino D7)&lt;p>(jumper to clone 'A' to 'Z')&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector24pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector24pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector24pin" layer="copper0"/>
+     <p svgId="connector24pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector25" name="D12" type="male">
+   <description>Arduino D12&lt;p>(jumper to use D12 as A.STEP)&lt;p>*** Grbl V0.9 Warning ***&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector25pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector25pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector25pin" layer="copper0"/>
+     <p svgId="connector25pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector26" name="A.STP" type="male">
+   <description>A Step&lt;p>(jumper to use D12 as A.STEP)&lt;p>*** Grbl V0.9 Warning ***&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector26pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector26pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector26pin" layer="copper0"/>
+     <p svgId="connector26pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector27" name="A.DIR" type="male">
+   <description>A Direction&lt;p>(jumper to use D13 as A.DIRECTION)&lt;p>*** Grbl V0.9 Warning ***&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector27pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector27pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector27pin" layer="copper0"/>
+     <p svgId="connector27pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector28" name="D13" type="male">
+   <description>Arduino D13&lt;p>(jumper to use D13 as A.DIRECTION)&lt;p>*** Grbl V0.9 Warning ***&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector28pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector28pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector28pin" layer="copper0"/>
+     <p svgId="connector28pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector29" name="POWER -" type="male">
+   <description>Stepper Motor Power&lt;p>*** A4988 12-24V *** DRV8825 12-36V ***&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector29pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector29pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector29pin" layer="copper0"/>
+     <p svgId="connector29pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector30" name="POWER +" type="male">
+   <description>Stepper Motor Power&lt;p>*** A4988 12-24V *** DRV8825 12-36V ***&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector30pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector30pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector30pin" layer="copper0"/>
+     <p svgId="connector30pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector31" name="X - M0" type="male">
+   <description>X-Axis MS1&lt;p>(Step Configuration - see http://blog.protoneer.co.nz/arduino-cnc-shield-v3-00-assembly-guide/#MicroStep)&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector31pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector31pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector31pin" layer="copper0"/>
+     <p svgId="connector31pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector32" name="X - M0 (5V)" type="male">
+   <description>Arduino 5V&lt;p>(Step Configuration - see http://blog.protoneer.co.nz/arduino-cnc-shield-v3-00-assembly-guide/#MicroStep)&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector32pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector32pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector32pin" layer="copper0"/>
+     <p svgId="connector32pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector33" name="X - M1" type="male">
+   <description>X-Axis MS2&lt;p>(Step Configuration - see http://blog.protoneer.co.nz/arduino-cnc-shield-v3-00-assembly-guide/#MicroStep)&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector33pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector33pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector33pin" layer="copper0"/>
+     <p svgId="connector33pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector34" name="X - M1 (5V)" type="male">
+   <description>Arduino 5V&lt;p>(Step Configuration - see http://blog.protoneer.co.nz/arduino-cnc-shield-v3-00-assembly-guide/#MicroStep)&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector34pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector34pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector34pin" layer="copper0"/>
+     <p svgId="connector34pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector35" name="X - M2" type="male">
+   <description>X-Axis MS3&lt;p>(Step Configuration - see http://blog.protoneer.co.nz/arduino-cnc-shield-v3-00-assembly-guide/#MicroStep)&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector35pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector35pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector35pin" layer="copper0"/>
+     <p svgId="connector35pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector36" name="X - M2 (5V)" type="male">
+   <description>Arduino 5V&lt;p>(Step Configuration - see http://blog.protoneer.co.nz/arduino-cnc-shield-v3-00-assembly-guide/#MicroStep)&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector36pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector36pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector36pin" layer="copper0"/>
+     <p svgId="connector36pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector37" name="X-MTR '1'" type="male">
+   <description>X Driver 2B&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector37pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector37pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector37pin" layer="copper0"/>
+     <p svgId="connector37pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector38" name="X-MTR '2'" type="male">
+   <description>X Driver 2A&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector38pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector38pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector38pin" layer="copper0"/>
+     <p svgId="connector38pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector39" name="X-MTR '3'" type="male">
+   <description>X Driver 1A&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector39pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector39pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector39pin" layer="copper0"/>
+     <p svgId="connector39pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector40" name="X-MTR '4'" type="male">
+   <description>X Driver 1B&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector40pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector40pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector40pin" layer="copper0"/>
+     <p svgId="connector40pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector41" name="Z - M0" type="male">
+   <description>Z-Axis MS1&lt;p>(Step Configuration - see http://blog.protoneer.co.nz/arduino-cnc-shield-v3-00-assembly-guide/#MicroStep)&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector41pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector41pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector41pin" layer="copper0"/>
+     <p svgId="connector41pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector42" name="Z - M0 (5V)" type="male">
+   <description>Arduino 5V&lt;p>(Step Configuration - see http://blog.protoneer.co.nz/arduino-cnc-shield-v3-00-assembly-guide/#MicroStep)&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector42pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector42pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector42pin" layer="copper0"/>
+     <p svgId="connector42pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector43" name="Z - M1" type="male">
+   <description>Z-Axis MS2&lt;p>(Step Configuration - see http://blog.protoneer.co.nz/arduino-cnc-shield-v3-00-assembly-guide/#MicroStep)&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector43pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector43pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector43pin" layer="copper0"/>
+     <p svgId="connector43pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector44" name="Z - M1 (5V)" type="male">
+   <description>Arduino 5V&lt;p>(Step Configuration - see http://blog.protoneer.co.nz/arduino-cnc-shield-v3-00-assembly-guide/#MicroStep)&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector44pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector44pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector44pin" layer="copper0"/>
+     <p svgId="connector44pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector45" name="Z - M2" type="male">
+   <description>Z-Axis MS3&lt;p>(Step Configuration - see http://blog.protoneer.co.nz/arduino-cnc-shield-v3-00-assembly-guide/#MicroStep)&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector45pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector45pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector45pin" layer="copper0"/>
+     <p svgId="connector45pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector46" name="Z - M2 (5V)" type="male">
+   <description>Arduino 5V&lt;p>(Step Configuration - see http://blog.protoneer.co.nz/arduino-cnc-shield-v3-00-assembly-guide/#MicroStep)&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector46pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector46pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector46pin" layer="copper0"/>
+     <p svgId="connector46pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector47" name="Z-MTR '1'" type="male">
+   <description>Z Driver 2B&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector47pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector47pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector47pin" layer="copper0"/>
+     <p svgId="connector47pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector48" name="Z-MTR '2'" type="male">
+   <description>Z Driver 2A&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector48pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector48pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector48pin" layer="copper0"/>
+     <p svgId="connector48pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector49" name="Z-MTR '3'" type="male">
+   <description>Z Driver 1A&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector49pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector49pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector49pin" layer="copper0"/>
+     <p svgId="connector49pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector50" name="Z-MTR '4'" type="male">
+   <description>Z Driver 1B&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector50pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector50pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector50pin" layer="copper0"/>
+     <p svgId="connector50pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector51" name="Y - M0" type="male">
+   <description>Y-Axis MS1&lt;p>(Step Configuration - see http://blog.protoneer.co.nz/arduino-cnc-shield-v3-00-assembly-guide/#MicroStep)&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector51pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector51pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector51pin" layer="copper0"/>
+     <p svgId="connector51pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector52" name="Y - M0 (5V)" type="male">
+   <description>Arduino 5V&lt;p>(Step Configuration - see http://blog.protoneer.co.nz/arduino-cnc-shield-v3-00-assembly-guide/#MicroStep)&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector52pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector52pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector52pin" layer="copper0"/>
+     <p svgId="connector52pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector53" name="Y - M1" type="male">
+   <description>Y-Axis MS2&lt;p>(Step Configuration - see http://blog.protoneer.co.nz/arduino-cnc-shield-v3-00-assembly-guide/#MicroStep)&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector53pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector53pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector53pin" layer="copper0"/>
+     <p svgId="connector53pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector54" name="Y - M1 (5V)" type="male">
+   <description>Arduino 5V&lt;p>(Step Configuration - see http://blog.protoneer.co.nz/arduino-cnc-shield-v3-00-assembly-guide/#MicroStep)&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector54pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector54pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector54pin" layer="copper0"/>
+     <p svgId="connector54pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector55" name="Y - M2" type="male">
+   <description>Y - M2&lt;p>(Step Configuration - see http://blog.protoneer.co.nz/arduino-cnc-shield-v3-00-assembly-guide/#MicroStep)&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector55pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector55pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector55pin" layer="copper0"/>
+     <p svgId="connector55pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector56" name="Y - M2 (5V)" type="male">
+   <description>Arduino 5V&lt;p>(Step Configuration - see http://blog.protoneer.co.nz/arduino-cnc-shield-v3-00-assembly-guide/#MicroStep)&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector56pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector56pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector56pin" layer="copper0"/>
+     <p svgId="connector56pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector57" name="Y-MTR '1'" type="male">
+   <description>Y Driver 2B&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector57pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector57pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector57pin" layer="copper0"/>
+     <p svgId="connector57pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector58" name="Y-MTR '2'" type="male">
+   <description>Y Driver 2A&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector58pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector58pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector58pin" layer="copper0"/>
+     <p svgId="connector58pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector59" name="Y-MTR '3'" type="male">
+   <description>Y Driver 1A&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector59pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector59pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector59pin" layer="copper0"/>
+     <p svgId="connector59pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector60" name="Y-MTR '4'" type="male">
+   <description>Y Driver 1B&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector60pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector60pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector60pin" layer="copper0"/>
+     <p svgId="connector60pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector61" name="A - M0" type="male">
+   <description>A-Axis MS1&lt;p>(Step Configuration - see http://blog.protoneer.co.nz/arduino-cnc-shield-v3-00-assembly-guide/#MicroStep)&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector61pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector61pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector61pin" layer="copper0"/>
+     <p svgId="connector61pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector62" name="A - M0 (5V)" type="male">
+   <description>Arduino 5V&lt;p>(Step Configuration - see http://blog.protoneer.co.nz/arduino-cnc-shield-v3-00-assembly-guide/#MicroStep)&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector62pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector62pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector62pin" layer="copper0"/>
+     <p svgId="connector62pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector63" name="A - M1" type="male">
+   <description>A-Axis MS2&lt;p>(Step Configuration - see http://blog.protoneer.co.nz/arduino-cnc-shield-v3-00-assembly-guide/#MicroStep)&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector63pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector63pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector63pin" layer="copper0"/>
+     <p svgId="connector63pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector64" name="A - M1 (5V)" type="male">
+   <description>Arduino 5V&lt;p>(Step Configuration - see http://blog.protoneer.co.nz/arduino-cnc-shield-v3-00-assembly-guide/#MicroStep)&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector64pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector64pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector64pin" layer="copper0"/>
+     <p svgId="connector64pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector65" name="A - M2" type="male">
+   <description>A-Axis MS3&lt;p>(Step Configuration - see http://blog.protoneer.co.nz/arduino-cnc-shield-v3-00-assembly-guide/#MicroStep)&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector65pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector65pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector65pin" layer="copper0"/>
+     <p svgId="connector65pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector66" name="A - M2 (5V)" type="male">
+   <description>Arduino 5V&lt;p>(Step Configuration - see http://blog.protoneer.co.nz/arduino-cnc-shield-v3-00-assembly-guide/#MicroStep)&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector66pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector66pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector66pin" layer="copper0"/>
+     <p svgId="connector66pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector67" name="A-MTR '1'" type="male">
+   <description>A Driver 2B&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector67pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector67pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector67pin" layer="copper0"/>
+     <p svgId="connector67pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector68" name="A-MTR '2'" type="male">
+   <description>A Driver 2A&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector68pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector68pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector68pin" layer="copper0"/>
+     <p svgId="connector68pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector69" name="A-MTR '3'" type="male">
+   <description>A Driver 1A&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector69pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector69pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector69pin" layer="copper0"/>
+     <p svgId="connector69pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector70" name="A-MTR '4'" type="male">
+   <description>A Driver 1B&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector70pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector70pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector70pin" layer="copper0"/>
+     <p svgId="connector70pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector71" name="RX" type="male">
+   <description>Arduino D0&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector71pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector71pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector71pin" layer="copper0"/>
+     <p svgId="connector71pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector72" name="SCL / Probe" type="male">
+   <description>Arduino A5&lt;p>*** Grbl V0.9 Warning *** “Probe”&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector72pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector72pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector72pin" layer="copper0"/>
+     <p svgId="connector72pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector73" name="TX" type="male">
+   <description>Arduino D1&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector73pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector73pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector73pin" layer="copper0"/>
+     <p svgId="connector73pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector74" name="SDA" type="male">
+   <description>Arduino A4&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector74pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector74pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector74pin" layer="copper0"/>
+     <p svgId="connector74pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector75" name="5V" type="male">
+   <description>Arduino 5V&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector75pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector75pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector75pin" layer="copper0"/>
+     <p svgId="connector75pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector76" name="GND" type="male">
+   <description>Arduino Gnd&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector76pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector76pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector76pin" layer="copper0"/>
+     <p svgId="connector76pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector77" name="3V3" type="male">
+   <description>Arduino 3.3V&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector77pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector77pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector77pin" layer="copper0"/>
+     <p svgId="connector77pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector78" name="RST" type="male">
+   <description>Arduino RESET&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector78pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector78pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector78pin" layer="copper0"/>
+     <p svgId="connector78pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector79" name="End Stops Z+ (and Z-) / SpnEn" type="male">
+   <description>Arduino D11&lt;p>*** Grbl V0.9 Warning *** “SpnEn”&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector79pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector79pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector79pin" layer="copper0"/>
+     <p svgId="connector79pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector80" name="End Stops Z+ (Gnd)" type="male">
+   <description>Arduino Gnd&lt;p>(End Stop Configuration - see http://blog.protoneer.co.nz/arduino-cnc-shield-v3-00-assembly-guide/#EndStops)&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector80pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector80pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector80pin" layer="copper0"/>
+     <p svgId="connector80pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector81" name="End Stops Z- (and Z+) / SpnEn" type="male">
+   <description>Arduino D11&lt;p>*** Grbl V0.9 Warning *** “SpnEn”&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector81pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector81pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector81pin" layer="copper0"/>
+     <p svgId="connector81pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector82" name="End Stops Z- (Gnd)" type="male">
+   <description>Arduino Gnd&lt;p>(End Stop Configuration - see http://blog.protoneer.co.nz/arduino-cnc-shield-v3-00-assembly-guide/#EndStops)&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector82pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector82pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector82pin" layer="copper0"/>
+     <p svgId="connector82pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector83" name="End Stops Y+ (and Y-)" type="male">
+   <description>Arduino D10&lt;p>(End Stop Configuration - see http://blog.protoneer.co.nz/arduino-cnc-shield-v3-00-assembly-guide/#EndStops)&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector83pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector83pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector83pin" layer="copper0"/>
+     <p svgId="connector83pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector84" name="End Stops Y+ (Gnd)" type="male">
+   <description>Arduino Gnd&lt;p>(End Stop Configuration - see http://blog.protoneer.co.nz/arduino-cnc-shield-v3-00-assembly-guide/#EndStops)&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector84pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector84pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector84pin" layer="copper0"/>
+     <p svgId="connector84pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector85" name="End Stops Y- (and Y+)" type="male">
+   <description>Arduino D10&lt;p>(End Stop Configuration - see http://blog.protoneer.co.nz/arduino-cnc-shield-v3-00-assembly-guide/#EndStops)&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector85pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector85pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector85pin" layer="copper0"/>
+     <p svgId="connector85pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector86" name="End Stops Y- (Gnd)" type="male">
+   <description>Arduino Gnd&lt;p>(End Stop Configuration - see http://blog.protoneer.co.nz/arduino-cnc-shield-v3-00-assembly-guide/#EndStops)&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector86pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector86pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector86pin" layer="copper0"/>
+     <p svgId="connector86pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector87" name="End Stops X+ (and X-)" type="male">
+   <description>Arduino D9&lt;p>(End Stop Configuration - see http://blog.protoneer.co.nz/arduino-cnc-shield-v3-00-assembly-guide/#EndStops)&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector87pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector87pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector87pin" layer="copper0"/>
+     <p svgId="connector87pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector88" name="End Stops X+ (Gnd)" type="male">
+   <description>Arduino Gnd&lt;p>(End Stop Configuration - see http://blog.protoneer.co.nz/arduino-cnc-shield-v3-00-assembly-guide/#EndStops)&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector88pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector88pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector88pin" layer="copper0"/>
+     <p svgId="connector88pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector89" name="End Stops X- (and X+)" type="male">
+   <description>Arduino D9&lt;p>(End Stop Configuration - see http://blog.protoneer.co.nz/arduino-cnc-shield-v3-00-assembly-guide/#EndStops)&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector89pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector89pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector89pin" layer="copper0"/>
+     <p svgId="connector89pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector90" name="End Stops X- (Gnd)" type="male">
+   <description>Arduino Gnd&lt;p>(End Stop Configuration - see http://blog.protoneer.co.nz/arduino-cnc-shield-v3-00-assembly-guide/#EndStops)&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector90pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector90pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector90pin" layer="copper0"/>
+     <p svgId="connector90pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector91" name="SpnEn / Z Limit" type="male">
+   <description>Arduino D12&lt;p>*** Grbl V0.9 Warning *** “Z Limit”&lt;p>(without 'A' driver)&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector91pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector91pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector91pin" layer="copper0"/>
+     <p svgId="connector91pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector92" name="SpnEn (Gnd)" type="male">
+   <description>Arduino Gnd&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector92pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector92pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector92pin" layer="copper0"/>
+     <p svgId="connector92pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector93" name="SpnDir" type="male">
+   <description>Arduino D13&lt;p>(without 'A' driver)&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector93pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector93pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector93pin" layer="copper0"/>
+     <p svgId="connector93pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector94" name="SpnDir (Gnd)" type="male">
+   <description>Arduino Gnd&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector94pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector94pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector94pin" layer="copper0"/>
+     <p svgId="connector94pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector95" name="CoolEn" type="male">
+   <description>Arduino A3&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector95pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector95pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector95pin" layer="copper0"/>
+     <p svgId="connector95pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector96" name="CoolEn (Gnd)" type="male">
+   <description>Arduino Gnd&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector96pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector96pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector96pin" layer="copper0"/>
+     <p svgId="connector96pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector97" name="Abort" type="male">
+   <description>Arduino A0&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector97pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector97pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector97pin" layer="copper0"/>
+     <p svgId="connector97pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector98" name="Abort (Gnd)" type="male">
+   <description>Arduino Gnd&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector98pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector98pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector98pin" layer="copper0"/>
+     <p svgId="connector98pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector99" name="Hold" type="male">
+   <description>Arduino A1&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector99pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector99pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector99pin" layer="copper0"/>
+     <p svgId="connector99pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector100" name="Hold (Gnd)" type="male">
+   <description>Arduino Gnd&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector100pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector100pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector100pin" layer="copper0"/>
+     <p svgId="connector100pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector101" name="Resume" type="male">
+   <description>Arduino A2&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector101pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector101pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector101pin" layer="copper0"/>
+     <p svgId="connector101pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector102" name="Resume (Gnd)" type="male">
+   <description>Arduino Gnd&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector102pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector102pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector102pin" layer="copper0"/>
+     <p svgId="connector102pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector103" name="E-STOP" type="male">
+   <description>Arduino RESET&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector103pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector103pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector103pin" layer="copper0"/>
+     <p svgId="connector103pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+  <connector id="connector104" name="E-STOP (Gnd)" type="male">
+   <description>Arduino Gnd&lt;p></description>
+   <views>
+    <breadboardView>
+     <p svgId="connector104pin" layer="breadboard"/>
+    </breadboardView>
+    <schematicView>
+     <p svgId="connector104pin" layer="schematic"/>
+    </schematicView>
+    <pcbView>
+     <p svgId="connector104pin" layer="copper0"/>
+     <p svgId="connector104pin" layer="copper1"/>
+    </pcbView>
+   </views>
+  </connector>
+ </connectors>
+ <url>http://blog.protoneer.co.nz/arduino-cnc-shield/</url>
+</module>

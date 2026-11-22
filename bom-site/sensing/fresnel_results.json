@@ -1,0 +1,55 @@
+{
+ "detection_probability": {
+  "static": 0.165,
+  "dither4": 0.325,
+  "dither8": 0.35
+ },
+ "zones": [
+  {
+   "tx_offset_along_wall_m": 1.0,
+   "person_depth_m": 1.0,
+   "fresnel_zone": 23
+  },
+  {
+   "tx_offset_along_wall_m": 2.0,
+   "person_depth_m": 1.0,
+   "fresnel_zone": 20
+  },
+  {
+   "tx_offset_along_wall_m": 3.0,
+   "person_depth_m": 1.0,
+   "fresnel_zone": 19
+  },
+  {
+   "tx_offset_along_wall_m": 1.0,
+   "person_depth_m": 2.0,
+   "fresnel_zone": 52
+  },
+  {
+   "tx_offset_along_wall_m": 2.0,
+   "person_depth_m": 2.0,
+   "fresnel_zone": 46
+  },
+  {
+   "tx_offset_along_wall_m": 3.0,
+   "person_depth_m": 2.0,
+   "fresnel_zone": 42
+  },
+  {
+   "tx_offset_along_wall_m": 1.0,
+   "person_depth_m": 3.0,
+   "fresnel_zone": 83
+  },
+  {
+   "tx_offset_along_wall_m": 2.0,
+   "person_depth_m": 3.0,
+   "fresnel_zone": 74
+  },
+  {
+   "tx_offset_along_wall_m": 3.0,
+   "person_depth_m": 3.0,
+   "fresnel_zone": 68
+  }
+ ],
+ "rule": "Sensitivity falls with zone number, and from one side of a wall the person is always far off the link line (zones 19\u201383 here), so drop the transmitter as FAR along the wall as the room allows (3 m: zones 19/42/68), keep the receiver on the rover, and dither it in 4 steps of \u03bb/4 = 3.1 cm at every station. CSI stays the corroborating vote; the radar is the one that reaches 3 m."
+}

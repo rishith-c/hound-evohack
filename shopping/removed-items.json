@@ -1,0 +1,142 @@
+[
+  {
+    "category": "Hardware",
+    "asin": "B0FHHLGSPK",
+    "item": "HanTof 299-piece M5 screw nut washer assortment",
+    "packs": 1,
+    "pack_price": "8.99",
+    "total": "8.99",
+    "url": "https://www.amazon.com/dp/B0FHHLGSPK",
+    "reason": "Additional M5 assortment omitted; corner kit and mixed T-nut kit already supply M5 fasteners."
+  },
+  {
+    "category": "Sweep",
+    "asin": "B0BGKD7RBW",
+    "item": "Yeebyee 1 m drag chain 7 x 7 mm internal R18",
+    "packs": 1,
+    "pack_price": "8.59",
+    "total": "8.59",
+    "url": "https://www.amazon.com/dp/B0BGKD7RBW",
+    "reason": "Optional drag chain omitted; provide a secured slack cable loop with end-to-end travel clearance."
+  },
+  {
+    "category": "Power",
+    "asin": "B0CRVW7N2J",
+    "item": "Klnuoxj USB-C 5 V converter one pack",
+    "packs": 1,
+    "pack_price": "8.99",
+    "total": "8.99",
+    "url": "https://www.amazon.com/dp/B0CRVW7N2J",
+    "reason": "Pi will be powered from the owned power bank."
+  },
+  {
+    "category": "Power",
+    "asin": "B07P663XJV",
+    "item": "DROK 8-35 V to 5 V 3 A bare-wire converter",
+    "packs": 1,
+    "pack_price": "9.99",
+    "total": "9.99",
+    "url": "https://www.amazon.com/dp/B07P663XJV",
+    "reason": "Auxiliary logic power moves to the power-bank arrangement; port budget and distribution unresolved."
+  },
+  {
+    "category": "Power",
+    "asin": "B0F6NPV287",
+    "item": "Anyongora four 16 AWG fuse holders and 3-15 A fuses",
+    "packs": 1,
+    "pack_price": "7.99",
+    "total": "7.99",
+    "url": "https://www.amazon.com/dp/B0F6NPV287",
+    "reason": "Bulk fuse pack removed at user request; suitable battery overcurrent protection remains unresolved."
+  },
+  {
+    "category": "Power",
+    "asin": "B07S2QJKTX",
+    "item": "DAIERTEK ten 12 V DC SPST rocker switches",
+    "packs": 1,
+    "pack_price": "7.99",
+    "total": "7.99",
+    "url": "https://www.amazon.com/dp/B07S2QJKTX",
+    "reason": "User owns a three-pin switch; DC rating and pinout unverified."
+  },
+  {
+    "category": "Control",
+    "asin": "B09YD2PNC5",
+    "item": "STARELO 22 mm 1NC mushroom button Type E",
+    "packs": 1,
+    "pack_price": "8.99",
+    "total": "8.99",
+    "url": "https://www.amazon.com/dp/B09YD2PNC5",
+    "reason": "Optional separate software-stop button omitted."
+  },
+  {
+    "category": "Wiring",
+    "asin": "B0C7T9KYND",
+    "item": "SCHDRA 22 AWG silicone wire six colors 13 ft each",
+    "packs": 1,
+    "pack_price": "10.76",
+    "total": "10.76",
+    "url": "https://www.amazon.com/dp/B0C7T9KYND",
+    "reason": "User owns 22 AWG wire."
+  },
+  {
+    "category": "Wiring",
+    "asin": "B0CJ5QF4Z2",
+    "item": "WAGO 221 twelve connector assortment",
+    "packs": 1,
+    "pack_price": "12.45",
+    "total": "12.45",
+    "url": "https://www.amazon.com/dp/B0CJ5QF4Z2",
+    "reason": "Distribution connector assortment omitted; use properly soldered and insulated wire junctions."
+  },
+  {
+    "category": "Wiring",
+    "asin": "B09TQS41MW",
+    "item": "Ten 470 uF 35 V electrolytic capacitors",
+    "packs": 1,
+    "pack_price": "4.99",
+    "total": "4.99",
+    "url": "https://www.amazon.com/dp/B09TQS41MW",
+    "reason": "Bulk capacitor pack removed at user request; verify adequate existing driver supply capacitors."
+  },
+  {
+    "category": "Wiring",
+    "asin": "B01EV70C78",
+    "item": "ELEGOO 120 jumper wires 20 cm",
+    "packs": 1,
+    "pack_price": "6.98",
+    "total": "6.98",
+    "url": "https://www.amazon.com/dp/B01EV70C78",
+    "reason": "User owns Dupont wires."
+  },
+  {
+    "category": "Wiring",
+    "asin": "B0G4QTPVZ8",
+    "item": "QSYZAIL perfboard headers terminals and jumpers kit",
+    "packs": 1,
+    "pack_price": "8.99",
+    "total": "8.99",
+    "url": "https://www.amazon.com/dp/B0G4QTPVZ8",
+    "reason": "General prototyping assortment omitted; use existing wiring supplies."
+  },
+  {
+    "category": "Wiring",
+    "asin": "B0GT94VGBC",
+    "item": "SOMELINE 2.54 mm connector and crimp-tool kit",
+    "packs": 1,
+    "pack_price": "27.98",
+    "total": "27.98",
+    "url": "https://www.amazon.com/dp/B0GT94VGBC",
+    "reason": "Duplicate connector/crimp assortment omitted; verify existing motor connector leads."
+  },
+  {
+    "category": "Control",
+    "asin": "B08SG7L54W",
+    "item": "EASON TB6600 driver omit if reusing existing driver",
+    "packs": 1,
+    "pack_price": "11.89",
+    "total": "11.89",
+    "url": "https://www.amazon.com/dp/B08SG7L54W",
+    "reason": "Reuse the TB6600 reported earlier; exact driver still requires verification."
+  }
+]

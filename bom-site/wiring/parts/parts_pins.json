@@ -1,0 +1,1983 @@
+{
+"cnc": {
+"key": "cnc",
+"w": 324.0,
+"h": 252.0,
+"pins": {
+"connector1": {
+"name": "EN(able)",
+"x": 51.8,
+"y": 47.7
+},
+"connector2": {
+"name": "GND",
+"x": 64.5,
+"y": 47.2
+},
+"connector3": {
+"name": "X.STEP",
+"x": 51.8,
+"y": 59.7
+},
+"connector4": {
+"name": "X.DIR",
+"x": 64.5,
+"y": 59.2
+},
+"connector5": {
+"name": "Y.STEP",
+"x": 51.8,
+"y": 71.7
+},
+"connector6": {
+"name": "Y.DIR",
+"x": 64.5,
+"y": 71.2
+},
+"connector7": {
+"name": "Z.STEP",
+"x": 51.8,
+"y": 83.7
+},
+"connector8": {
+"name": "Z.DIR",
+"x": 64.5,
+"y": 83.2
+},
+"connector9": {
+"name": "A.STEP",
+"x": 51.8,
+"y": 95.7
+},
+"connector10": {
+"name": "A.DIR",
+"x": 64.5,
+"y": 95.2
+},
+"connector11": {
+"name": "5V",
+"x": 51.8,
+"y": 107.7
+},
+"connector12": {
+"name": "GND",
+"x": 64.5,
+"y": 107.2
+},
+"connector13": {
+"name": "X(1)",
+"x": 16.6,
+"y": 120.7
+},
+"connector14": {
+"name": "X(2)",
+"x": 28.3,
+"y": 121.2
+},
+"connector15": {
+"name": "X(3)",
+"x": 39.6,
+"y": 121.2
+},
+"connector16": {
+"name": "X(4)",
+"x": 52.7,
+"y": 120.7
+},
+"connector17": {
+"name": "Y(1)",
+"x": 16.6,
+"y": 132.7
+},
+"connector18": {
+"name": "Y(2)",
+"x": 28.3,
+"y": 133.2
+},
+"connector19": {
+"name": "Y(3)",
+"x": 39.6,
+"y": 133.2
+},
+"connector20": {
+"name": "Y(4)",
+"x": 52.7,
+"y": 132.7
+},
+"connector21": {
+"name": "Z(1)",
+"x": 16.6,
+"y": 144.7
+},
+"connector22": {
+"name": "Z(2)",
+"x": 28.3,
+"y": 145.2
+},
+"connector23": {
+"name": "Z(3)",
+"x": 39.6,
+"y": 145.2
+},
+"connector24": {
+"name": "Z(4)",
+"x": 52.7,
+"y": 144.7
+},
+"connector25": {
+"name": "D12",
+"x": 16.6,
+"y": 156.7
+},
+"connector26": {
+"name": "A.STP",
+"x": 28.3,
+"y": 157.2
+},
+"connector27": {
+"name": "A.DIR",
+"x": 39.6,
+"y": 157.2
+},
+"connector28": {
+"name": "D13",
+"x": 52.7,
+"y": 156.7
+},
+"connector29": {
+"name": "POWER -",
+"x": 13.6,
+"y": 203.6
+},
+"connector30": {
+"name": "POWER +",
+"x": 37.3,
+"y": 203.6
+},
+"connector31": {
+"name": "X - M0",
+"x": 96.3,
+"y": 99.9
+},
+"connector32": {
+"name": "X - M0 (5V)",
+"x": 96.1,
+"y": 111.9
+},
+"connector33": {
+"name": "X - M1",
+"x": 108.4,
+"y": 100.1
+},
+"connector34": {
+"name": "X - M1 (5V)",
+"x": 107.7,
+"y": 112.2
+},
+"connector35": {
+"name": "X - M2",
+"x": 120.2,
+"y": 100.6
+},
+"connector36": {
+"name": "X - M2 (5V)",
+"x": 119.3,
+"y": 112.4
+},
+"connector37": {
+"name": "X-MTR '1'",
+"x": 156.8,
+"y": 51.3
+},
+"connector38": {
+"name": "X-MTR '2'",
+"x": 156.8,
+"y": 63.3
+},
+"connector39": {
+"name": "X-MTR '3'",
+"x": 156.8,
+"y": 75.3
+},
+"connector40": {
+"name": "X-MTR '4'",
+"x": 156.8,
+"y": 87.3
+},
+"connector41": {
+"name": "Z - M0",
+"x": 95.9,
+"y": 215.2
+},
+"connector42": {
+"name": "Z - M0 (5V)",
+"x": 95.7,
+"y": 227.1
+},
+"connector43": {
+"name": "Z - M1",
+"x": 107.9,
+"y": 215.2
+},
+"connector44": {
+"name": "Z - M1 (5V)",
+"x": 107.7,
+"y": 226.9
+},
+"connector45": {
+"name": "Z - M2",
+"x": 119.9,
+"y": 215.3
+},
+"connector46": {
+"name": "Z - M2 (5V)",
+"x": 119.8,
+"y": 226.9
+},
+"connector47": {
+"name": "Z-MTR '1'",
+"x": 157.3,
+"y": 166.6
+},
+"connector48": {
+"name": "Z-MTR '2'",
+"x": 157.3,
+"y": 178.6
+},
+"connector49": {
+"name": "Z-MTR '3'",
+"x": 157.3,
+"y": 190.6
+},
+"connector50": {
+"name": "Z-MTR '4'",
+"x": 157.3,
+"y": 202.6
+},
+"connector51": {
+"name": "Y - M0",
+"x": 195.1,
+"y": 100.5
+},
+"connector52": {
+"name": "Y - M0 (5V)",
+"x": 194.8,
+"y": 112.4
+},
+"connector53": {
+"name": "Y - M1",
+"x": 207.4,
+"y": 99.8
+},
+"connector54": {
+"name": "Y - M1 (5V)",
+"x": 207.6,
+"y": 111.9
+},
+"connector55": {
+"name": "Y - M2",
+"x": 219.5,
+"y": 100.5
+},
+"connector56": {
+"name": "Y - M2 (5V)",
+"x": 219.4,
+"y": 112.5
+},
+"connector57": {
+"name": "Y-MTR '1'",
+"x": 256.4,
+"y": 51.8
+},
+"connector58": {
+"name": "Y-MTR '2'",
+"x": 256.4,
+"y": 63.8
+},
+"connector59": {
+"name": "Y-MTR '3'",
+"x": 256.4,
+"y": 75.8
+},
+"connector60": {
+"name": "Y-MTR '4'",
+"x": 256.4,
+"y": 87.8
+},
+"connector61": {
+"name": "A - M0",
+"x": 195.3,
+"y": 214.7
+},
+"connector62": {
+"name": "A - M0 (5V)",
+"x": 195.3,
+"y": 226.7
+},
+"connector63": {
+"name": "A - M1",
+"x": 207.6,
+"y": 214.7
+},
+"connector64": {
+"name": "A - M1 (5V)",
+"x": 207.6,
+"y": 226.7
+},
+"connector65": {
+"name": "A - M2",
+"x": 219.8,
+"y": 214.7
+},
+"connector66": {
+"name": "A - M2 (5V)",
+"x": 219.8,
+"y": 226.7
+},
+"connector67": {
+"name": "A-MTR '1'",
+"x": 257.4,
+"y": 166.1
+},
+"connector68": {
+"name": "A-MTR '2'",
+"x": 257.4,
+"y": 178.1
+},
+"connector69": {
+"name": "A-MTR '3'",
+"x": 257.4,
+"y": 190.1
+},
+"connector70": {
+"name": "A-MTR '4'",
+"x": 257.4,
+"y": 202.1
+},
+"connector71": {
+"name": "RX",
+"x": 283.3,
+"y": 30.3
+},
+"connector72": {
+"name": "SCL / Probe",
+"x": 295.5,
+"y": 29.9
+},
+"connector73": {
+"name": "TX",
+"x": 283.3,
+"y": 42.3
+},
+"connector74": {
+"name": "SDA",
+"x": 295.5,
+"y": 41.9
+},
+"connector75": {
+"name": "5V",
+"x": 283.3,
+"y": 54.3
+},
+"connector76": {
+"name": "GND",
+"x": 295.5,
+"y": 53.9
+},
+"connector77": {
+"name": "3V3",
+"x": 283.3,
+"y": 66.3
+},
+"connector78": {
+"name": "RST",
+"x": 295.5,
+"y": 65.9
+},
+"connector79": {
+"name": "End Stops Z+ (and Z-) / SpnEn",
+"x": 301.3,
+"y": 78.4
+},
+"connector80": {
+"name": "End Stops Z+ (Gnd)",
+"x": 313.5,
+"y": 78.9
+},
+"connector81": {
+"name": "End Stops Z- (and Z+) / SpnEn",
+"x": 301.3,
+"y": 90.4
+},
+"connector82": {
+"name": "End Stops Z- (Gnd)",
+"x": 313.5,
+"y": 90.9
+},
+"connector83": {
+"name": "End Stops Y+ (and Y-)",
+"x": 301.3,
+"y": 102.4
+},
+"connector84": {
+"name": "End Stops Y+ (Gnd)",
+"x": 313.5,
+"y": 102.9
+},
+"connector85": {
+"name": "End Stops Y- (and Y+)",
+"x": 301.3,
+"y": 114.4
+},
+"connector86": {
+"name": "End Stops Y- (Gnd)",
+"x": 313.5,
+"y": 114.9
+},
+"connector87": {
+"name": "End Stops X+ (and X-)",
+"x": 301.3,
+"y": 126.4
+},
+"connector88": {
+"name": "End Stops X+ (Gnd)",
+"x": 313.5,
+"y": 126.9
+},
+"connector89": {
+"name": "End Stops X- (and X+)",
+"x": 301.3,
+"y": 138.4
+},
+"connector90": {
+"name": "End Stops X- (Gnd)",
+"x": 313.5,
+"y": 138.9
+},
+"connector91": {
+"name": "SpnEn / Z Limit",
+"x": 301.3,
+"y": 150.4
+},
+"connector92": {
+"name": "SpnEn (Gnd)",
+"x": 313.5,
+"y": 150.9
+},
+"connector93": {
+"name": "SpnDir",
+"x": 301.3,
+"y": 162.4
+},
+"connector94": {
+"name": "SpnDir (Gnd)",
+"x": 313.5,
+"y": 162.9
+},
+"connector95": {
+"name": "CoolEn",
+"x": 301.3,
+"y": 174.4
+},
+"connector96": {
+"name": "CoolEn (Gnd)",
+"x": 313.5,
+"y": 174.9
+},
+"connector97": {
+"name": "Abort",
+"x": 301.3,
+"y": 186.4
+},
+"connector98": {
+"name": "Abort (Gnd)",
+"x": 313.5,
+"y": 186.9
+},
+"connector99": {
+"name": "Hold",
+"x": 301.3,
+"y": 198.4
+},
+"connector100": {
+"name": "Hold (Gnd)",
+"x": 313.5,
+"y": 198.9
+},
+"connector101": {
+"name": "Resume",
+"x": 301.3,
+"y": 210.4
+},
+"connector102": {
+"name": "Resume (Gnd)",
+"x": 313.5,
+"y": 210.9
+},
+"connector103": {
+"name": "E-STOP",
+"x": 301.3,
+"y": 222.4
+},
+"connector104": {
+"name": "E-STOP (Gnd)",
+"x": 313.5,
+"y": 222.9
+}
+},
+"missing": []
+},
+"drv8825": {
+"key": "drv8825",
+"w": 79.4,
+"h": 102.0,
+"pins": {
+"connector130": {
+"name": "ENABLE",
+"x": 9.1,
+"y": 9.9
+},
+"connector141": {
+"name": "GROUND ST/ MT",
+"x": 68.8,
+"y": 21.9
+},
+"connector131": {
+"name": "MS1",
+"x": 9.1,
+"y": 21.9
+},
+"connector142": {
+"name": "OUT 2B",
+"x": 68.8,
+"y": 33.9
+},
+"connector132": {
+"name": "MS2",
+"x": 9.1,
+"y": 33.9
+},
+"connector143": {
+"name": "OUT 2A",
+"x": 68.8,
+"y": 45.9
+},
+"connector133": {
+"name": "MS3",
+"x": 9.1,
+"y": 45.9
+},
+"connector144": {
+"name": "OUT 1A",
+"x": 68.8,
+"y": 57.9
+},
+"connector134": {
+"name": "RESET",
+"x": 9.1,
+"y": 57.9
+},
+"connector145": {
+"name": "OUT 1B",
+"x": 68.8,
+"y": 69.9
+},
+"connector135": {
+"name": "SLEEP",
+"x": 9.1,
+"y": 69.9
+},
+"connector146": {
+"name": "VOLTAGE DD",
+"x": 68.8,
+"y": 81.9
+},
+"connector136": {
+"name": "STEP",
+"x": 9.1,
+"y": 81.9
+},
+"connector147": {
+"name": "GROUND LOG",
+"x": 68.8,
+"y": 93.9
+},
+"connector137": {
+"name": "DIRECTION",
+"x": 9.1,
+"y": 93.9
+},
+"connector140": {
+"name": "VOLTAGE ST/ MT",
+"x": 68.8,
+"y": 9.9
+}
+},
+"missing": []
+},
+"esp32c3": {
+"key": "esp32c3",
+"w": 120.0,
+"h": 207.3,
+"pins": {
+"connector0": {
+"name": "GND-1",
+"x": 114.1,
+"y": 197.9
+},
+"connector1": {
+"name": "19",
+"x": 114.1,
+"y": 185.9
+},
+"connector2": {
+"name": "18",
+"x": 114.1,
+"y": 173.9
+},
+"connector3": {
+"name": "GND-4",
+"x": 114.1,
+"y": 161.9
+},
+"connector4": {
+"name": "4",
+"x": 114.1,
+"y": 149.9
+},
+"connector5": {
+"name": "5",
+"x": 114.1,
+"y": 137.9
+},
+"connector6": {
+"name": "6",
+"x": 114.1,
+"y": 125.9
+},
+"connector7": {
+"name": "7",
+"x": 114.2,
+"y": 113.9
+},
+"connector8": {
+"name": "GND-9",
+"x": 114.1,
+"y": 101.9
+},
+"connector9": {
+"name": "8",
+"x": 114.1,
+"y": 89.9
+},
+"connector10": {
+"name": "9",
+"x": 114.1,
+"y": 77.9
+},
+"connector11": {
+"name": "GND-12",
+"x": 114.1,
+"y": 65.8
+},
+"connector12": {
+"name": "RX",
+"x": 114.1,
+"y": 53.8
+},
+"connector13": {
+"name": "TX",
+"x": 114.1,
+"y": 41.9
+},
+"connector14": {
+"name": "GND-15",
+"x": 114.1,
+"y": 29.9
+},
+"connector15": {
+"name": "GND-16",
+"x": 6.0,
+"y": 29.9
+},
+"connector16": {
+"name": "3V3-17",
+"x": 6.2,
+"y": 41.9
+},
+"connector17": {
+"name": "3V3-18",
+"x": 6.1,
+"y": 53.9
+},
+"connector18": {
+"name": "2",
+"x": 6.1,
+"y": 65.9
+},
+"connector19": {
+"name": "3",
+"x": 6.1,
+"y": 77.9
+},
+"connector20": {
+"name": "GND-21",
+"x": 6.1,
+"y": 89.9
+},
+"connector21": {
+"name": "RST",
+"x": 6.1,
+"y": 101.9
+},
+"connector22": {
+"name": "GND-23",
+"x": 6.1,
+"y": 113.9
+},
+"connector23": {
+"name": "0",
+"x": 6.1,
+"y": 125.9
+},
+"connector24": {
+"name": "1",
+"x": 6.1,
+"y": 137.9
+},
+"connector25": {
+"name": "10",
+"x": 6.1,
+"y": 149.9
+},
+"connector26": {
+"name": "GND-27",
+"x": 6.1,
+"y": 161.9
+},
+"connector27": {
+"name": "5V-28",
+"x": 6.1,
+"y": 173.9
+},
+"connector28": {
+"name": "5V-29",
+"x": 6.1,
+"y": 185.9
+},
+"connector29": {
+"name": "GND-30",
+"x": 6.0,
+"y": 197.9
+}
+},
+"missing": []
+},
+"estop": {
+"key": "estop",
+"w": 96.0,
+"h": 210.0,
+"pins": {
+"connector3": {
+"name": "no name yet",
+"x": 48.0,
+"y": 204.0
+},
+"connector4": {
+"name": "no name yet",
+"x": 60.0,
+"y": 204.0
+},
+"connector5": {
+"name": "no name yet",
+"x": 72.0,
+"y": 204.0
+},
+"connector1": {
+"name": "no name yet",
+"x": 24.0,
+"y": 204.0
+},
+"connector2": {
+"name": "no name yet",
+"x": 36.0,
+"y": 204.0
+}
+},
+"missing": []
+},
+"i2smic": {
+"key": "i2smic",
+"w": 78.0,
+"h": 60.0,
+"pins": {
+"connector17": {
+"name": "VDD",
+"x": 9.0,
+"y": 48.0
+},
+"connector19": {
+"name": "BCLK",
+"x": 33.0,
+"y": 48.0
+},
+"connector20": {
+"name": "DATA",
+"x": 45.0,
+"y": 48.0
+},
+"connector21": {
+"name": "WS",
+"x": 57.0,
+"y": 48.0
+},
+"connector22": {
+"name": "SELECT",
+"x": 69.0,
+"y": 48.0
+},
+"connector18": {
+"name": "GND",
+"x": 21.0,
+"y": 48.0
+}
+},
+"missing": []
+},
+"ld2410": {
+"key": "ld2410",
+"w": 103.9,
+"h": 75.7,
+"pins": {
+"connector0": {
+"name": "TX",
+"x": 27.2,
+"y": 6.0
+},
+"connector1": {
+"name": "RX",
+"x": 39.2,
+"y": 6.0
+},
+"connector2": {
+"name": "OUT",
+"x": 51.2,
+"y": 6.0
+},
+"connector3": {
+"name": "GND",
+"x": 63.2,
+"y": 6.0
+},
+"connector4": {
+"name": "VCC",
+"x": 75.2,
+"y": 6.0
+}
+},
+"missing": []
+},
+"lipo": {
+"key": "lipo",
+"w": 180.0,
+"h": 528.0,
+"pins": {
+"connector1": {
+"name": "positive",
+"x": 90.0,
+"y": 12.0
+},
+"connector2": {
+"name": "negative",
+"x": 102.0,
+"y": 12.0
+}
+},
+"missing": []
+},
+"lm2596": {
+"key": "lm2596",
+"w": 226.8,
+"h": 108.6,
+"pins": {
+"connector0": {
+"name": "Pin 1",
+"x": 7.3,
+"y": 7.2
+},
+"connector1": {
+"name": "Pin 2",
+"x": 7.4,
+"y": 101.0
+},
+"connector2": {
+"name": "Pin 3",
+"x": 219.6,
+"y": 7.3
+},
+"connector3": {
+"name": "Pin 4",
+"x": 219.6,
+"y": 101.3
+}
+},
+"missing": []
+},
+"mlx90640": {
+"key": "mlx90640",
+"w": 130.3,
+"h": 84.0,
+"pins": {
+"connector31": {
+"name": "VCC",
+"x": 89.1,
+"y": 72.0
+},
+"connector32": {
+"name": "3.3V",
+"x": 77.1,
+"y": 72.0
+},
+"connector18": {
+"name": "VCC",
+"x": 3.5,
+"y": 38.5
+},
+"connector12": {
+"name": "VCC",
+"x": 126.8,
+"y": 45.5
+},
+"connector34": {
+"name": "SCL",
+"x": 53.1,
+"y": 72.0
+},
+"connector20": {
+"name": "SCL",
+"x": 3.5,
+"y": 53.6
+},
+"connector14": {
+"name": "SCL",
+"x": 126.8,
+"y": 30.4
+},
+"connector35": {
+"name": "SDA",
+"x": 41.1,
+"y": 72.0
+},
+"connector19": {
+"name": "SDA",
+"x": 3.5,
+"y": 46.1
+},
+"connector13": {
+"name": "SDA",
+"x": 126.8,
+"y": 37.9
+},
+"connector33": {
+"name": "GND",
+"x": 65.1,
+"y": 72.0
+},
+"connector17": {
+"name": "GND",
+"x": 3.5,
+"y": 31.0
+},
+"connector11": {
+"name": "GND",
+"x": 126.8,
+"y": 53.0
+}
+},
+"missing": []
+},
+"pca9685": {
+"key": "pca9685",
+"w": 294.0,
+"h": 120.0,
+"pins": {
+"connector11": {
+"name": "PWRIN",
+"x": 138.5,
+"y": 18.0
+},
+"connector38": {
+"name": "VCC",
+"x": 9.0,
+"y": 77.4
+},
+"connector44": {
+"name": "VCC",
+"x": 285.0,
+"y": 77.4
+},
+"connector43": {
+"name": "5.0V",
+"x": 285.0,
+"y": 89.4
+},
+"connector29": {
+"name": "5.0V",
+"x": 57.0,
+"y": 101.4
+},
+"connector37": {
+"name": "5.0V",
+"x": 9.0,
+"y": 89.4
+},
+"connector32": {
+"name": "5.0V",
+"x": 45.0,
+"y": 101.4
+},
+"connector35": {
+"name": "5.0V",
+"x": 33.0,
+"y": 101.4
+},
+"connector50": {
+"name": "5.0V",
+"x": 261.0,
+"y": 101.4
+},
+"connector68": {
+"name": "5.0V",
+"x": 177.0,
+"y": 101.4
+},
+"connector53": {
+"name": "5.0V",
+"x": 249.0,
+"y": 101.4
+},
+"connector65": {
+"name": "5.0V",
+"x": 189.0,
+"y": 101.4
+},
+"connector59": {
+"name": "5.0V",
+"x": 225.0,
+"y": 101.4
+},
+"connector56": {
+"name": "5.0V",
+"x": 237.0,
+"y": 101.4
+},
+"connector62": {
+"name": "5.0V",
+"x": 201.0,
+"y": 101.4
+},
+"connector71": {
+"name": "5.0V",
+"x": 165.0,
+"y": 101.4
+},
+"connector20": {
+"name": "5.0V",
+"x": 105.0,
+"y": 101.4
+},
+"connector23": {
+"name": "5.0V",
+"x": 93.0,
+"y": 101.4
+},
+"connector14": {
+"name": "5.0V",
+"x": 129.0,
+"y": 101.4
+},
+"connector17": {
+"name": "5.0V",
+"x": 117.0,
+"y": 101.4
+},
+"connector26": {
+"name": "5.0V",
+"x": 69.0,
+"y": 101.4
+},
+"connector7": {
+"name": "5.0V",
+"x": 64.2,
+"y": 19.8
+},
+"connector45": {
+"name": "SDA",
+"x": 285.0,
+"y": 65.4
+},
+"connector39": {
+"name": "SDA",
+"x": 9.0,
+"y": 65.4
+},
+"connector46": {
+"name": "SCL",
+"x": 285.0,
+"y": 53.4
+},
+"connector40": {
+"name": "SCL",
+"x": 9.0,
+"y": 53.4
+},
+"connector47": {
+"name": "OE",
+"x": 285.0,
+"y": 41.4
+},
+"connector41": {
+"name": "OE",
+"x": 9.0,
+"y": 41.4
+},
+"connector34": {
+"name": "PWM0",
+"x": 33.0,
+"y": 89.4
+},
+"connector31": {
+"name": "PWM1",
+"x": 45.0,
+"y": 89.4
+},
+"connector28": {
+"name": "PWM2",
+"x": 57.0,
+"y": 89.4
+},
+"connector25": {
+"name": "PWM3",
+"x": 69.0,
+"y": 89.4
+},
+"connector22": {
+"name": "PWM4",
+"x": 93.0,
+"y": 89.4
+},
+"connector19": {
+"name": "PWM5",
+"x": 105.0,
+"y": 89.4
+},
+"connector16": {
+"name": "PWM6",
+"x": 117.0,
+"y": 89.4
+},
+"connector13": {
+"name": "PWM7",
+"x": 129.0,
+"y": 89.4
+},
+"connector70": {
+"name": "PWM8",
+"x": 165.0,
+"y": 89.4
+},
+"connector67": {
+"name": "PWM9",
+"x": 177.0,
+"y": 89.4
+},
+"connector64": {
+"name": "PWM10",
+"x": 189.0,
+"y": 89.4
+},
+"connector61": {
+"name": "PWM11",
+"x": 201.0,
+"y": 89.4
+},
+"connector58": {
+"name": "PWM12",
+"x": 225.0,
+"y": 89.4
+},
+"connector55": {
+"name": "PWM13",
+"x": 237.0,
+"y": 89.4
+},
+"connector52": {
+"name": "PWM14",
+"x": 249.0,
+"y": 89.4
+},
+"connector49": {
+"name": "PWM15",
+"x": 261.0,
+"y": 89.4
+},
+"connector8": {
+"name": "GND",
+"x": 47.4,
+"y": 19.8
+},
+"connector12": {
+"name": "GND",
+"x": 155.0,
+"y": 18.0
+},
+"connector15": {
+"name": "GND",
+"x": 129.0,
+"y": 113.4
+},
+"connector18": {
+"name": "GND",
+"x": 117.0,
+"y": 113.4
+},
+"connector21": {
+"name": "GND",
+"x": 105.0,
+"y": 113.4
+},
+"connector24": {
+"name": "GND",
+"x": 93.0,
+"y": 113.4
+},
+"connector27": {
+"name": "GND",
+"x": 69.0,
+"y": 113.4
+},
+"connector30": {
+"name": "GND",
+"x": 57.0,
+"y": 113.4
+},
+"connector33": {
+"name": "GND",
+"x": 45.0,
+"y": 113.4
+},
+"connector36": {
+"name": "GND",
+"x": 33.0,
+"y": 113.4
+},
+"connector42": {
+"name": "GND",
+"x": 9.0,
+"y": 29.4
+},
+"connector48": {
+"name": "GND",
+"x": 285.0,
+"y": 29.4
+},
+"connector51": {
+"name": "GND",
+"x": 261.0,
+"y": 113.4
+},
+"connector54": {
+"name": "GND",
+"x": 249.0,
+"y": 113.4
+},
+"connector57": {
+"name": "GND",
+"x": 237.0,
+"y": 113.4
+},
+"connector60": {
+"name": "GND",
+"x": 225.0,
+"y": 113.4
+},
+"connector63": {
+"name": "GND",
+"x": 201.0,
+"y": 113.4
+},
+"connector66": {
+"name": "GND",
+"x": 189.0,
+"y": 113.4
+},
+"connector69": {
+"name": "GND",
+"x": 177.0,
+"y": 113.4
+},
+"connector72": {
+"name": "GND",
+"x": 165.0,
+"y": 113.4
+}
+},
+"missing": []
+},
+"pi4": {
+"key": "pi4",
+"w": 411.6,
+"h": 273.7,
+"pins": {
+"connector0": {
+"name": "3V3",
+"x": 39.5,
+"y": 22.5
+},
+"connector1": {
+"name": "5V",
+"x": 39.5,
+"y": 10.5
+},
+"connector2": {
+"name": "GPIO2",
+"x": 51.5,
+"y": 22.5
+},
+"connector3": {
+"name": "5V",
+"x": 51.5,
+"y": 10.5
+},
+"connector4": {
+"name": "GPIO3",
+"x": 63.5,
+"y": 22.5
+},
+"connector5": {
+"name": "GND",
+"x": 63.5,
+"y": 10.5
+},
+"connector6": {
+"name": "GPIO4",
+"x": 75.5,
+"y": 22.5
+},
+"connector7": {
+"name": "GPIO14",
+"x": 75.5,
+"y": 10.5
+},
+"connector8": {
+"name": "GND",
+"x": 87.5,
+"y": 22.5
+},
+"connector9": {
+"name": "GPIO15",
+"x": 87.5,
+"y": 10.5
+},
+"connector10": {
+"name": "GPIO17",
+"x": 99.5,
+"y": 22.5
+},
+"connector11": {
+"name": "GPIO18",
+"x": 99.5,
+"y": 10.5
+},
+"connector12": {
+"name": "GPIO27",
+"x": 111.5,
+"y": 22.5
+},
+"connector13": {
+"name": "GND",
+"x": 111.5,
+"y": 10.5
+},
+"connector14": {
+"name": "GPIO22",
+"x": 123.5,
+"y": 22.5
+},
+"connector15": {
+"name": "GPIO23",
+"x": 123.5,
+"y": 10.5
+},
+"connector16": {
+"name": "3V3",
+"x": 135.5,
+"y": 22.5
+},
+"connector17": {
+"name": "GPIO24",
+"x": 135.5,
+"y": 10.5
+},
+"connector18": {
+"name": "GPIO10",
+"x": 147.5,
+"y": 22.5
+},
+"connector19": {
+"name": "GND",
+"x": 147.5,
+"y": 10.5
+},
+"connector20": {
+"name": "GPIO9",
+"x": 159.5,
+"y": 22.5
+},
+"connector21": {
+"name": "GPIO25",
+"x": 159.5,
+"y": 10.5
+},
+"connector22": {
+"name": "GPIO11",
+"x": 171.5,
+"y": 22.5
+},
+"connector23": {
+"name": "GPIO8",
+"x": 171.5,
+"y": 10.5
+},
+"connector24": {
+"name": "GND",
+"x": 183.5,
+"y": 22.5
+},
+"connector25": {
+"name": "GPIO7",
+"x": 183.5,
+"y": 10.5
+},
+"connector26": {
+"name": "ID_SD",
+"x": 195.5,
+"y": 22.5
+},
+"connector27": {
+"name": "ID_SC",
+"x": 195.5,
+"y": 10.5
+},
+"connector28": {
+"name": "GPIO5",
+"x": 207.5,
+"y": 22.5
+},
+"connector29": {
+"name": "GND",
+"x": 207.5,
+"y": 10.5
+},
+"connector30": {
+"name": "GPIO6",
+"x": 219.5,
+"y": 22.5
+},
+"connector31": {
+"name": "GPIO12",
+"x": 219.5,
+"y": 10.5
+},
+"connector32": {
+"name": "GPIO13",
+"x": 231.5,
+"y": 22.5
+},
+"connector33": {
+"name": "GND",
+"x": 231.5,
+"y": 10.5
+},
+"connector34": {
+"name": "GPIO19",
+"x": 243.5,
+"y": 22.5
+},
+"connector35": {
+"name": "GPIO16",
+"x": 243.5,
+"y": 10.5
+},
+"connector36": {
+"name": "GPIO26",
+"x": 255.5,
+"y": 22.5
+},
+"connector37": {
+"name": "GPIO20",
+"x": 255.5,
+"y": 10.5
+},
+"connector38": {
+"name": "GND",
+"x": 267.5,
+"y": 22.5
+},
+"connector39": {
+"name": "GPIO21",
+"x": 267.5,
+"y": 10.5
+},
+"connector40": {
+"name": "TR01_TAP",
+"x": 296.5,
+"y": 51.0
+},
+"connector41": {
+"name": "TR00_TAP",
+"x": 284.5,
+"y": 51.0
+},
+"connector42": {
+"name": "TR03_TAP",
+"x": 296.5,
+"y": 39.0
+},
+"connector43": {
+"name": "TR02_TAP",
+"x": 284.5,
+"y": 39.0
+},
+"connector44": {
+"name": "RUN",
+"x": 44.6,
+"y": 167.7
+},
+"connector45": {
+"name": "GND",
+"x": 56.6,
+"y": 167.7
+},
+"connector46": {
+"name": "GLOBAL_EN",
+"x": 68.6,
+"y": 167.7
+}
+},
+"missing": []
+},
+"resistor": {
+"key": "resistor",
+"w": 51.5,
+"h": 11.7,
+"pins": {
+"connector0": {
+"name": "Pin 0",
+"x": 1.2,
+"y": 4.9
+},
+"connector1": {
+"name": "Pin 1",
+"x": 50.3,
+"y": 4.9
+}
+},
+"missing": []
+},
+"servo": {
+"key": "servo",
+"w": 136.8,
+"h": 110.0,
+"pins": {
+"connector0": {
+"name": "gnd",
+"x": 121.7,
+"y": 88.2
+},
+"connector1": {
+"name": "vcc",
+"x": 121.8,
+"y": 84.8
+},
+"connector2": {
+"name": "pulse",
+"x": 121.7,
+"y": 81.5
+}
+},
+"missing": []
+},
+"stepper": {
+"key": "stepper",
+"w": 199.8,
+"h": 327.7,
+"pins": {
+"connector3": {
+"name": "D",
+"x": 133.4,
+"y": 328.8
+},
+"connector0": {
+"name": "A",
+"x": 74.9,
+"y": 323.6
+},
+"connector1": {
+"name": "C",
+"x": 93.1,
+"y": 323.6
+},
+"connector2": {
+"name": "B",
+"x": 111.3,
+"y": 328.8
+}
+},
+"missing": []
+},
+"uno": {
+"key": "uno",
+"w": 354.0,
+"h": 252.0,
+"pins": {
+"connector0": {
+"name": "A0",
+"x": 270.0,
+"y": 240.0
+},
+"connector1": {
+"name": "A1",
+"x": 282.0,
+"y": 240.0
+},
+"connector2": {
+"name": "A2",
+"x": 294.0,
+"y": 240.0
+},
+"connector3": {
+"name": "A3",
+"x": 306.0,
+"y": 240.0
+},
+"connector4": {
+"name": "A4/SDA",
+"x": 318.0,
+"y": 240.0
+},
+"connector5": {
+"name": "A5/SCL",
+"x": 330.0,
+"y": 240.0
+},
+"connector39": {
+"name": "ICSP MISO",
+"x": 330.6,
+"y": 108.0
+},
+"connector40": {
+"name": "5V",
+"x": 342.6,
+"y": 108.0
+},
+"connector41": {
+"name": "ICSP SCK",
+"x": 330.6,
+"y": 120.0
+},
+"connector42": {
+"name": "ICSP MOSI",
+"x": 342.6,
+"y": 120.0
+},
+"connector43": {
+"name": "RESET",
+"x": 330.6,
+"y": 132.0
+},
+"connector44": {
+"name": "GND",
+"x": 342.6,
+"y": 132.0
+},
+"connector45": {
+"name": "ICSP2 MISO",
+"x": 128.4,
+"y": 27.6
+},
+"connector46": {
+"name": "5V",
+"x": 128.4,
+"y": 39.6
+},
+"connector47": {
+"name": "ICSP2 SCK",
+"x": 116.4,
+"y": 27.6
+},
+"connector48": {
+"name": "ICSP2 MOSI",
+"x": 116.4,
+"y": 39.6
+},
+"connector49": {
+"name": "RESET2",
+"x": 104.4,
+"y": 27.6
+},
+"connector50": {
+"name": "GND",
+"x": 104.4,
+"y": 39.6
+},
+"connector51": {
+"name": "D8",
+"x": 226.8,
+"y": 12.0
+},
+"connector52": {
+"name": "D9 PWM",
+"x": 214.8,
+"y": 12.0
+},
+"connector53": {
+"name": "D10 PWM/SS",
+"x": 202.8,
+"y": 12.0
+},
+"connector54": {
+"name": "D11 PWM/MOSI",
+"x": 190.8,
+"y": 12.0
+},
+"connector55": {
+"name": "D12/MISO",
+"x": 178.8,
+"y": 12.0
+},
+"connector56": {
+"name": "D13/SCK",
+"x": 166.8,
+"y": 12.0
+},
+"connector57": {
+"name": "GND",
+"x": 154.8,
+"y": 12.0
+},
+"connector58": {
+"name": "AREF",
+"x": 142.8,
+"y": 12.0
+},
+"connector59": {
+"name": "A4/SDA",
+"x": 130.8,
+"y": 12.0
+},
+"connector60": {
+"name": "A5/SCL",
+"x": 118.8,
+"y": 12.0
+},
+"connector61": {
+"name": "D0/RX",
+"x": 330.0,
+"y": 12.0
+},
+"connector62": {
+"name": "D1/TX",
+"x": 318.0,
+"y": 12.0
+},
+"connector63": {
+"name": "D2",
+"x": 306.0,
+"y": 12.0
+},
+"connector64": {
+"name": "D3 PWM",
+"x": 294.0,
+"y": 12.0
+},
+"connector65": {
+"name": "D4",
+"x": 282.0,
+"y": 12.0
+},
+"connector66": {
+"name": "D5 PWM",
+"x": 270.0,
+"y": 12.0
+},
+"connector67": {
+"name": "D6 PWM",
+"x": 258.0,
+"y": 12.0
+},
+"connector68": {
+"name": "D7",
+"x": 246.0,
+"y": 12.0
+},
+"connector84": {
+"name": "ioref",
+"x": 174.0,
+"y": 240.0
+},
+"connector85": {
+"name": "RESET",
+"x": 186.0,
+"y": 240.0
+},
+"connector86": {
+"name": "3V3",
+"x": 198.0,
+"y": 240.0
+},
+"connector87": {
+"name": "5V",
+"x": 210.0,
+"y": 240.0
+},
+"connector88": {
+"name": "GND",
+"x": 222.0,
+"y": 240.0
+},
+"connector89": {
+"name": "GND",
+"x": 234.0,
+"y": 240.0
+},
+"connector90": {
+"name": "VIN",
+"x": 246.0,
+"y": 240.0
+},
+"connector91": {
+"name": "N/C",
+"x": 162.0,
+"y": 240.0
+}
+},
+"missing": []
+},
+"vl53l1x": {
+"key": "vl53l1x",
+"w": 128.7,
+"h": 84.0,
+"pins": {
+"connector29": {
+"name": "VCC",
+"x": 34.4,
+"y": 72.0
+},
+"connector12": {
+"name": "VCC",
+"x": 124.9,
+"y": 45.5
+},
+"connector18": {
+"name": "VCC",
+"x": 3.8,
+"y": 38.5
+},
+"connector14": {
+"name": "SCL",
+"x": 124.9,
+"y": 30.3
+},
+"connector31": {
+"name": "SCL",
+"x": 58.4,
+"y": 72.0
+},
+"connector20": {
+"name": "SCL",
+"x": 3.8,
+"y": 53.7
+},
+"connector32": {
+"name": "SDA",
+"x": 70.4,
+"y": 72.0
+},
+"connector13": {
+"name": "SDA",
+"x": 124.9,
+"y": 37.8
+},
+"connector19": {
+"name": "SDA",
+"x": 3.8,
+"y": 46.2
+},
+"connector33": {
+"name": "GPIO",
+"x": 82.4,
+"y": 72.0
+},
+"connector34": {
+"name": "XSHUT",
+"x": 94.4,
+"y": 72.0
+},
+"connector30": {
+"name": "GND",
+"x": 46.4,
+"y": 72.0
+},
+"connector11": {
+"name": "GND",
+"x": 124.9,
+"y": 53.0
+},
+"connector17": {
+"name": "GND",
+"x": 3.8,
+"y": 31.0
+}
+},
+"missing": []
+},
+"xl4015": {
+"key": "xl4015",
+"w": 64.7,
+"h": 62.0,
+"pins": {
+"connector0": {
+"name": "Pin 1",
+"x": 7.2,
+"y": 57.8
+},
+"connector1": {
+"name": "Pin 2",
+"x": 19.4,
+"y": 57.8
+},
+"connector2": {
+"name": "Pin 3",
+"x": 31.2,
+"y": 57.8
+},
+"connector3": {
+"name": "pin 4",
+"x": 43.2,
+"y": 57.8
+},
+"connector4": {
+"name": "Pin 5",
+"x": 55.2,
+"y": 57.8
+},
+"connector6": {
+"name": "Tab",
+"x": 31.1,
+"y": 9.3
+}
+},
+"missing": []
+}
+}

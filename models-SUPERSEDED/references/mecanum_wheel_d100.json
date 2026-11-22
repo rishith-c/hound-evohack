@@ -1,0 +1,27 @@
+{
+  "id": "mecanum_wheel_d100",
+  "name": "mecanum wheel d100",
+  "description": "Wheel envelopes, mecanum wheel d100.",
+  "category": "power-transmission",
+  "family": "shaft-hub",
+  "tags": [
+    "hub",
+    "wheel"
+  ],
+  "aliases": [
+    "mecanum_wheel_d100.",
+    "mecanum_wheel_d100",
+    "mecanum_wheel",
+    "wheel type=mecanum_wheel; outer diameter=100 mm; simplified envelope"
+  ],
+  "attributes": {
+    "outsideDiameterMm": 100
+  },
+  "stepUrl": "https://media.githubusercontent.com/media/earthtojake/step.parts/c6113328a5695b976a010a203a90fe86191769bf/catalog/step/mecanum_wheel_d100.step",
+  "glbUrl": "https://8ljrorjug0ps5al0.public.blob.vercel-storage.com/preview/glb/mecanum_wheel_d100-c8fdaf4d1cebc2d3596a3ca7be1b7b9973aeb9ee9f902b811e7586a03bd502fa.glb",
+  "pngUrl": "https://8ljrorjug0ps5al0.public.blob.vercel-storage.com/preview/png/mecanum_wheel_d100-c8fdaf4d1cebc2d3596a3ca7be1b7b9973aeb9ee9f902b811e7586a03bd502fa.png",
+  "byteSize": 10967,
+  "sha256": "c8fdaf4d1cebc2d3596a3ca7be1b7b9973aeb9ee9f902b811e7586a03bd502fa",
+  "pageUrl": "https://www.step.parts/parts/mecanum_wheel_d100",
+  "apiUrl": "https://api.step.parts/v1/parts/mecanum_wheel_d100"
+}

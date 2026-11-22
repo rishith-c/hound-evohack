@@ -1,0 +1,2 @@
+ASIN B0F1B85397 — listing bullets read via the logged-in Amazon session on 2026-09-07
+TOCLUX kit: 20× black 17 × 20 mm inside corner brackets, 40× M5 SLIDING T-nuts, 40× M5 hex socket cap screws, ball-end hex wrench; 'for 6mm T slot'. SLIDING nuts confirmed → every nut goes in before a joint closes (build step P3-01). Design uses 8 brackets, 30 M5×8 (deck + corners).

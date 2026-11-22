@@ -1,0 +1,98 @@
+{
+ "gate 0.75 m \u00b7 1 stop \u00b7 range only": {
+  "median_err_m": 2.19,
+  "p90_err_m": 3.68,
+  "median_along_wall_m": 2.01,
+  "median_depth_m": 0.59
+ },
+ "gate 0.75 m \u00b7 1 stop \u00b7 range + L/R ratio": {
+  "median_err_m": 0.31,
+  "p90_err_m": 0.64,
+  "median_along_wall_m": 0.21,
+  "median_depth_m": 0.18
+ },
+ "gate 0.75 m \u00b7 3 stops \u00b7 range only": {
+  "median_err_m": 0.55,
+  "p90_err_m": 1.35,
+  "median_along_wall_m": 0.52,
+  "median_depth_m": 0.23
+ },
+ "gate 0.75 m \u00b7 3 stops \u00b7 range + L/R ratio": {
+  "median_err_m": 0.19,
+  "p90_err_m": 0.35,
+  "median_along_wall_m": 0.12,
+  "median_depth_m": 0.12
+ },
+ "gate 0.75 m \u00b7 5 stops \u00b7 range only": {
+  "median_err_m": 0.72,
+  "p90_err_m": 1.45,
+  "median_along_wall_m": 0.65,
+  "median_depth_m": 0.24
+ },
+ "gate 0.75 m \u00b7 5 stops \u00b7 range + L/R ratio": {
+  "median_err_m": 0.15,
+  "p90_err_m": 0.3,
+  "median_along_wall_m": 0.08,
+  "median_depth_m": 0.09
+ },
+ "gate 0.75 m \u00b7 9 stops \u00b7 range only": {
+  "median_err_m": 0.69,
+  "p90_err_m": 1.89,
+  "median_along_wall_m": 0.62,
+  "median_depth_m": 0.28
+ },
+ "gate 0.75 m \u00b7 9 stops \u00b7 range + L/R ratio": {
+  "median_err_m": 0.12,
+  "p90_err_m": 0.26,
+  "median_along_wall_m": 0.07,
+  "median_depth_m": 0.08
+ },
+ "gate 0.2 m \u00b7 1 stop \u00b7 range only": {
+  "median_err_m": 2.49,
+  "p90_err_m": 3.8,
+  "median_along_wall_m": 2.18,
+  "median_depth_m": 0.84
+ },
+ "gate 0.2 m \u00b7 1 stop \u00b7 range + L/R ratio": {
+  "median_err_m": 0.22,
+  "p90_err_m": 0.56,
+  "median_along_wall_m": 0.19,
+  "median_depth_m": 0.08
+ },
+ "gate 0.2 m \u00b7 3 stops \u00b7 range only": {
+  "median_err_m": 0.16,
+  "p90_err_m": 0.41,
+  "median_along_wall_m": 0.15,
+  "median_depth_m": 0.04
+ },
+ "gate 0.2 m \u00b7 3 stops \u00b7 range + L/R ratio": {
+  "median_err_m": 0.1,
+  "p90_err_m": 0.3,
+  "median_along_wall_m": 0.08,
+  "median_depth_m": 0.04
+ },
+ "gate 0.2 m \u00b7 5 stops \u00b7 range only": {
+  "median_err_m": 0.16,
+  "p90_err_m": 0.37,
+  "median_along_wall_m": 0.15,
+  "median_depth_m": 0.05
+ },
+ "gate 0.2 m \u00b7 5 stops \u00b7 range + L/R ratio": {
+  "median_err_m": 0.08,
+  "p90_err_m": 0.19,
+  "median_along_wall_m": 0.07,
+  "median_depth_m": 0.03
+ },
+ "gate 0.2 m \u00b7 9 stops \u00b7 range only": {
+  "median_err_m": 0.13,
+  "p90_err_m": 0.29,
+  "median_along_wall_m": 0.11,
+  "median_depth_m": 0.05
+ },
+ "gate 0.2 m \u00b7 9 stops \u00b7 range + L/R ratio": {
+  "median_err_m": 0.07,
+  "p90_err_m": 0.17,
+  "median_along_wall_m": 0.06,
+  "median_depth_m": 0.03
+ }
+}

@@ -1,0 +1,2 @@
+ASIN B0FQHVSX91 — listing bullets read via the logged-in Amazon session on 2026-09-07
+MLX90640-D55 module, 32×24, 55° FoV, I2C up to 1 MHz, 'works with 3.3V/5V logic levels', 20 × 18 mm, < 23 mA, −40 to 300 °C, 0.5–64 Hz refresh. 3.3/5 V logic claim implies onboard regulation/level handling → still meter SDA to GND at 3.3 V power before it meets the Pi (P1-04), and confirm it carries I2C pull-ups (BCM 4/5 have none).

@@ -1,0 +1,122 @@
+metadata:
+  title: 'Hound 1 — power: pack → shield → one buck (servo + fan, sheet 3); Pi on its bank'
+connectors:
+  PACK:
+    type: HOOVO 3S 2200 mAh 80C LiPo — T-plug (Deans)
+    pinlabels:
+    - V+
+    - GND
+    notes: '11.1 V nominal, 12.6 V full, 10.5 V floor. No divider, no alarm: 30-minute timer, then meter it. A pack that reads 6–7 V is dead: never charge it.'
+  PLUG:
+    type: Deans pull-plug on the deck (OliRC 14 AWG extension) = the E-STOP
+    pinlabels:
+    - pack +
+    - pack −
+    - rover +
+    - rover −
+    notes: The mating pair sits at the deck's rear corner where a hand can reach it. Pulling it apart kills everything on the pack side; the Pi keeps running on the bank.
+  SHIELD_PWR:
+    type: CNC Shield v3 — power screw terminal (the only pack splice)
+    pinlabels:
+    - VMOT
+    - GND
+    notes: 'Two wires per screw: the 14 AWG pack lead and the 22 AWG XL4015 input wire, twisted together before insertion, tug-tested. 1000 µF 25 V electrolytic across VMOT/GND at the terminal, stripe (−)
+      to GND.'
+  XL4015:
+    type: HiLetgo XL4015 5 A buck — trim OUT to 5.0 V
+    pinlabels:
+    - IN+
+    - IN−
+    - OUT+
+    - OUT−
+    notes: 'HiLetgo board: four big solder pads, IN+/IN− at the coil end, OUT+/OUT− at the other — tin them and solder the 22 AWG wires (no screw terminals). Set 5.00 V on the meter with nothing on OUT
+      (pot turns counter-clockwise to lower). 4 A continuous, 5 A peak. OUT goes to the PCA9685 terminal, which distributes it to both servos and the fan. 5.0 V (not 6) so the fan can share this rail; the
+      MG996R runs 4.8–7.2 V.'
+  BANK:
+    type: USB power bank 5 V / 3 A (logic island)
+    pinlabels:
+    - USB-A out
+    notes: Genuine 3 A bank. Cable ≤ 0.2 m with 22 AWG or heavier power conductors (a short '3 A fast-charge' cable). Powers ONLY the Pi; the Pi powers the R4, the hub, the adapters, the radars and the
+      webcam.
+  PI_PWR:
+    type: Raspberry Pi 4 — USB-C power in
+    pinlabels:
+    - USB-C
+    notes: Under-voltage warning at 4.63 V. Early Pi 4 (rev 1.1) needs an A-to-C or non-e-marked cable.
+cables:
+  W_PACK:
+    gauge: 14 AWG
+    length: 0.15
+    colors:
+    - RD
+    - BK
+    category: bundle
+    notes: HOOVO T-plug → the deck plug (pack half of the OliRC extension)
+  W_LEAD:
+    gauge: 14 AWG
+    length: 0.3
+    colors:
+    - RD
+    - BK
+    category: bundle
+    notes: deck plug → shield terminal (rover half of the OliRC extension)
+  W_XL_IN:
+    gauge: 22 AWG
+    length: 0.15
+    colors:
+    - RD
+    - BK
+    category: bundle
+    notes: second wire in each shield power screw
+  W_BANK:
+    gauge: 22 AWG
+    length: 0.2
+    colors:
+    - RD
+    category: bundle
+    notes: USB-A → USB-C, ≤ 0.2 m
+connections:
+- - PACK:
+    - V+
+  - W_PACK:
+    - 1
+  - PLUG:
+    - pack +
+- - PACK:
+    - GND
+  - W_PACK:
+    - 2
+  - PLUG:
+    - pack −
+- - PLUG:
+    - rover +
+  - W_LEAD:
+    - 1
+  - SHIELD_PWR:
+    - VMOT
+- - PLUG:
+    - rover −
+  - W_LEAD:
+    - 2
+  - SHIELD_PWR:
+    - GND
+- - SHIELD_PWR:
+    - VMOT
+  - W_XL_IN:
+    - 1
+  - XL4015:
+    - IN+
+- - SHIELD_PWR:
+    - GND
+  - W_XL_IN:
+    - 2
+  - XL4015:
+    - IN−
+- - BANK:
+    - USB-A out
+  - W_BANK:
+    - 1
+  - PI_PWR:
+    - USB-C
+options:
+  bgcolor: '#ffffff'

@@ -1,0 +1,2 @@
+ASIN B09V4DS888 — listing bullets read via the logged-in Amazon session on 2026-09-07
+DWEII VL53L1X ×2. 'Voltage: 3.3-5v', 'Control the module on/off via IO pins' = XSHUT broken out (required for re-addressing two at 0x29), 'Onboard level conversion circuit' → pull-ups follow VIN, so power from the Pi's 3.3 V pin as designed. 400 cm, 50 Hz.

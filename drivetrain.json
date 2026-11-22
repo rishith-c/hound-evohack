@@ -1,0 +1,178 @@
+{
+ "design_mass_kg": 5.292,
+ "subtotal_kg": 4.602,
+ "margin_required": 1.25,
+ "cases": {
+  "A  level cruise, a=0.1": {
+   "force_N": 6.76,
+   "torque_design_Nm": 0.1131,
+   "torque_6kg_Nm": 0.1281
+  },
+  "B  level responsive, a=0.3": {
+   "force_N": 7.82,
+   "torque_design_Nm": 0.1319,
+   "torque_6kg_Nm": 0.1493
+  },
+  "C  5\u00b0 ramp, a=0.3": {
+   "force_N": 12.32,
+   "torque_design_Nm": 0.2068,
+   "torque_6kg_Nm": 0.2342
+  },
+  "D  strafe on carpet, a=0.3": {
+   "force_N": 9.38,
+   "torque_design_Nm": 0.1578,
+   "torque_6kg_Nm": 0.1787
+  },
+  "E  level start, fw a=0.6": {
+   "force_N": 9.41,
+   "torque_design_Nm": 0.1602,
+   "torque_6kg_Nm": 0.1811
+  },
+  "F  strafe start, fw a=0.6": {
+   "force_N": 10.96,
+   "torque_design_Nm": 0.1861,
+   "torque_6kg_Nm": 0.2105
+  },
+  "G  5\u00b0 ramp start, fw a=0.6": {
+   "force_N": 13.91,
+   "torque_design_Nm": 0.2351,
+   "torque_6kg_Nm": 0.266
+  },
+  "H  level stop, fw a=1.8": {
+   "force_N": 3.3,
+   "torque_design_Nm": 0.0507,
+   "torque_6kg_Nm": 0.056
+  },
+  "I  5\u00b0 downhill stop, fw a=1.8": {
+   "force_N": 7.84,
+   "torque_design_Nm": 0.1053,
+   "torque_6kg_Nm": 0.118
+  },
+  "J  strafe stop, fw a=1.8": {
+   "force_N": 1.74,
+   "torque_design_Nm": 0.0319,
+   "torque_6kg_Nm": 0.0347
+  }
+ },
+ "drivers": {
+  "A4988, no cooling": {
+   "i_set_A": 1.0,
+   "t_avail_Nm": 0.1696,
+   "margins_design": [
+    1.5,
+    1.29,
+    0.82,
+    1.07
+   ],
+   "margins_6kg": [
+    1.32,
+    1.14,
+    0.72,
+    0.95
+   ],
+   "margins_firmware": {
+    "E": 1.06,
+    "F": 0.91,
+    "G": 0.72,
+    "H": 3.35,
+    "I": 1.61,
+    "J": 5.31
+   },
+   "pass": false
+  },
+  "A4988, heatsink + fan": {
+   "i_set_A": 1.2,
+   "t_avail_Nm": 0.2035,
+   "margins_design": [
+    1.8,
+    1.54,
+    0.98,
+    1.29
+   ],
+   "margins_6kg": [
+    1.59,
+    1.36,
+    0.87,
+    1.14
+   ],
+   "margins_firmware": {
+    "E": 1.27,
+    "F": 1.09,
+    "G": 0.87,
+    "H": 4.02,
+    "I": 1.93,
+    "J": 6.37
+   },
+   "pass": false
+  },
+  "DRV8825, no cooling": {
+   "i_set_A": 1.5,
+   "t_avail_Nm": 0.2544,
+   "margins_design": [
+    2.25,
+    1.93,
+    1.23,
+    1.61
+   ],
+   "margins_6kg": [
+    1.99,
+    1.7,
+    1.09,
+    1.42
+   ],
+   "margins_firmware": {
+    "E": 1.59,
+    "F": 1.37,
+    "G": 1.08,
+    "H": 5.02,
+    "I": 2.41,
+    "J": 7.96
+   },
+   "pass": false
+  },
+  "DRV8825, heatsink + fan": {
+   "i_set_A": 1.7,
+   "t_avail_Nm": 0.2883,
+   "margins_design": [
+    2.55,
+    2.19,
+    1.39,
+    1.83
+   ],
+   "margins_6kg": [
+    2.25,
+    1.93,
+    1.23,
+    1.61
+   ],
+   "margins_firmware": {
+    "E": 1.8,
+    "F": 1.55,
+    "G": 1.23,
+    "H": 5.69,
+    "I": 2.74,
+    "J": 9.03
+   },
+   "pass": false
+  }
+ },
+ "traction": {
+  "start, forward, \u03bc 0.5": 5.5,
+  "stop, forward, \u03bc 0.5": 1.64,
+  "stop, strafe, \u03bc 0.5": 1.76,
+  "stop, 5\u00b0 downhill, \u03bc 0.5": 1.02,
+  "start, forward, \u03bc 0.3": 3.3,
+  "stop, forward, \u03bc 0.3": 0.99,
+  "stop, strafe, \u03bc 0.3": 1.06,
+  "stop, 5\u00b0 downhill, \u03bc 0.3": 0.61
+ },
+ "as_built": {
+  "setting": "DRV8825, no cooling",
+  "worst_case": "G  5\u00b0 ramp start, fw a=0.6",
+  "worst_margin": 1.08,
+  "level_worst_case": "F  strafe start, fw a=0.6",
+  "level_worst_margin": 1.37
+ },
+ "governing_setting": null,
+ "governing_case": "G  5\u00b0 ramp start, fw a=0.6"
+}

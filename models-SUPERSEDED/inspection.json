@@ -1,0 +1,202 @@
+{
+  "ok": true,
+  "tokens": [
+    {
+      "line": 1,
+      "token": "@cad[rover-design-study/models/rover]",
+      "cadPath": "rover-design-study/models/rover",
+      "stepPath": "rover-design-study/models/rover.step",
+      "stepHash": "d1cd2a9dbd569ab25b6dc33f00624708557d6fecfbf60c2bb532edb8ff004160",
+      "summary": {
+        "kind": "part",
+        "occurrenceCount": 251,
+        "leafOccurrenceCount": 241,
+        "shapeCount": 241,
+        "faceCount": 1679,
+        "edgeCount": 3442,
+        "vertexCount": 0,
+        "bounds": {
+          "min": [
+            -175.0,
+            -259.79899,
+            0.072911
+          ],
+          "max": [
+            175.0,
+            259.79899,
+            277.0
+          ]
+        }
+      },
+      "selections": [],
+      "warnings": [],
+      "entryFacts": {
+        "size": [
+          350.0,
+          519.59798,
+          276.927089
+        ],
+        "extentAxis": "y",
+        "center": [
+          0.0,
+          0.0,
+          138.5364555
+        ],
+        "diag": 684.960344430314,
+        "kind": "part"
+      },
+      "planes": [
+        {
+          "axis": "z",
+          "coordinate": 107.99999999999999,
+          "normalSign": 1,
+          "faceCount": 8,
+          "totalArea": 119420.65947700001,
+          "bbox": {
+            "min": [
+              -172.5,
+              -172.5,
+              108.0
+            ],
+            "max": [
+              172.5,
+              172.5,
+              108.0
+            ]
+          },
+          "selectors": [
+            "o1.21.f3",
+            "o1.22.f3",
+            "o1.23.f3",
+            "o1.24.f3",
+            "o1.34.f3",
+            "o1.36.f5",
+            "o1.69.f20",
+            "o1.70.f20"
+          ]
+        },
+        {
+          "axis": "z",
+          "coordinate": 103.99999999999996,
+          "normalSign": -1,
+          "faceCount": 9,
+          "totalArea": 104651.76983900002,
+          "bbox": {
+            "min": [
+              -172.5,
+              -172.5,
+              104.0
+            ],
+            "max": [
+              172.5,
+              172.5,
+              104.0
+            ]
+          },
+          "selectors": [
+            "o1.21.f5",
+            "o1.22.f5",
+            "o1.23.f5",
+            "o1.24.f5",
+            "o1.25.f3",
+            "o1.26.f2",
+            "o1.27.f2",
+            "o1.28.f2",
+            "o1.29.f2"
+          ]
+        }
+      ],
+      "entryPositioning": {
+        "kind": "part",
+        "bbox": {
+          "min": [
+            -175.0,
+            -259.79899,
+            0.072911
+          ],
+          "max": [
+            175.0,
+            259.79899,
+            277.0
+          ]
+        },
+        "bboxFacts": {
+          "size": [
+            350.0,
+            519.59798,
+            276.927089
+          ],
+          "extentAxis": "y",
+          "center": [
+            0.0,
+            0.0,
+            138.5364555
+          ],
+          "diag": 684.960344430314
+        },
+        "majorPlanes": [
+          {
+            "axis": "z",
+            "coordinate": 107.99999999999999,
+            "normalSign": 1,
+            "faceCount": 8,
+            "totalArea": 119420.65947700001,
+            "bbox": {
+              "min": [
+                -172.5,
+                -172.5,
+                108.0
+              ],
+              "max": [
+                172.5,
+                172.5,
+                108.0
+              ]
+            },
+            "selectors": [
+              "o1.21.f3",
+              "o1.22.f3",
+              "o1.23.f3",
+              "o1.24.f3",
+              "o1.34.f3",
+              "o1.36.f5",
+              "o1.69.f20",
+              "o1.70.f20"
+            ]
+          },
+          {
+            "axis": "z",
+            "coordinate": 103.99999999999996,
+            "normalSign": -1,
+            "faceCount": 9,
+            "totalArea": 104651.76983900002,
+            "bbox": {
+              "min": [
+                -172.5,
+                -172.5,
+                104.0
+              ],
+              "max": [
+                172.5,
+                172.5,
+                104.0
+              ]
+            },
+            "selectors": [
+              "o1.21.f5",
+              "o1.22.f5",
+              "o1.23.f5",
+              "o1.24.f5",
+              "o1.25.f3",
+              "o1.26.f2",
+              "o1.27.f2",
+              "o1.28.f2",
+              "o1.29.f2"
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "errors": []
+}

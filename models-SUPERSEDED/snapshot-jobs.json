@@ -1,0 +1,150 @@
+[
+  {
+    "input": "/Users/rishith/Developer/rover-design-study/models/rover.step",
+    "mode": "view",
+    "outputs": [
+      {
+        "path": "/Users/rishith/Developer/rover-design-study/models/rover-iso.png",
+        "camera": "iso",
+        "width": 1800,
+        "height": 1200
+      },
+      {
+        "path": "/Users/rishith/Developer/rover-design-study/models/rover-top.png",
+        "camera": "top",
+        "width": 1600,
+        "height": 1200
+      },
+      {
+        "path": "/Users/rishith/Developer/rover-design-study/models/rover-front.png",
+        "camera": "front",
+        "width": 1600,
+        "height": 1000
+      }
+    ],
+    "render": {
+      "viewLabels": true,
+      "padding": 0.12
+    }
+  },
+  {
+    "input": "/Users/rishith/Developer/rover-design-study/models/rover_exploded.step",
+    "mode": "view",
+    "outputs": [
+      {
+        "path": "/Users/rishith/Developer/rover-design-study/models/rover-exploded.png",
+        "camera": "iso",
+        "width": 1800,
+        "height": 1400
+      }
+    ]
+  },
+  {
+    "input": "/Users/rishith/Developer/rover-design-study/models/parts/motor_mount.step",
+    "mode": "view",
+    "outputs": [
+      {
+        "path": "/Users/rishith/Developer/rover-design-study/models/parts/motor_mount.png",
+        "camera": "iso",
+        "width": 900,
+        "height": 700
+      }
+    ]
+  },
+  {
+    "input": "/Users/rishith/Developer/rover-design-study/models/parts/wheel_hub.step",
+    "mode": "view",
+    "outputs": [
+      {
+        "path": "/Users/rishith/Developer/rover-design-study/models/parts/wheel_hub.png",
+        "camera": "iso",
+        "width": 900,
+        "height": 700
+      }
+    ]
+  },
+  {
+    "input": "/Users/rishith/Developer/rover-design-study/models/parts/deck_tile.step",
+    "mode": "view",
+    "outputs": [
+      {
+        "path": "/Users/rishith/Developer/rover-design-study/models/parts/deck_tile.png",
+        "camera": "iso",
+        "width": 900,
+        "height": 700
+      }
+    ]
+  },
+  {
+    "input": "/Users/rishith/Developer/rover-design-study/models/parts/battery_cradle.step",
+    "mode": "view",
+    "outputs": [
+      {
+        "path": "/Users/rishith/Developer/rover-design-study/models/parts/battery_cradle.png",
+        "camera": "iso",
+        "width": 900,
+        "height": 700
+      }
+    ]
+  },
+  {
+    "input": "/Users/rishith/Developer/rover-design-study/models/parts/corner_gusset.step",
+    "mode": "view",
+    "outputs": [
+      {
+        "path": "/Users/rishith/Developer/rover-design-study/models/parts/corner_gusset.png",
+        "camera": "iso",
+        "width": 900,
+        "height": 700
+      }
+    ]
+  },
+  {
+    "input": "/Users/rishith/Developer/rover-design-study/models/parts/mast_column.step",
+    "mode": "view",
+    "outputs": [
+      {
+        "path": "/Users/rishith/Developer/rover-design-study/models/parts/mast_column.png",
+        "camera": "iso",
+        "width": 900,
+        "height": 700
+      }
+    ]
+  },
+  {
+    "input": "/Users/rishith/Developer/rover-design-study/models/parts/sensor_carriage.step",
+    "mode": "view",
+    "outputs": [
+      {
+        "path": "/Users/rishith/Developer/rover-design-study/models/parts/sensor_carriage.png",
+        "camera": "iso",
+        "width": 900,
+        "height": 700
+      }
+    ]
+  },
+  {
+    "input": "/Users/rishith/Developer/rover-design-study/models/parts/electronics_tray.step",
+    "mode": "view",
+    "outputs": [
+      {
+        "path": "/Users/rishith/Developer/rover-design-study/models/parts/electronics_tray.png",
+        "camera": "iso",
+        "width": 900,
+        "height": 700
+      }
+    ]
+  },
+  {
+    "input": "/Users/rishith/Developer/rover-design-study/models/parts/deck_joiner.step",
+    "mode": "view",
+    "outputs": [
+      {
+        "path": "/Users/rishith/Developer/rover-design-study/models/parts/deck_joiner.png",
+        "camera": "iso",
+        "width": 900,
+        "height": 700
+      }
+    ]
+  }
+]

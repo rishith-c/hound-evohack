@@ -1,0 +1,14 @@
+Search: Amazon US, 2026-09-05, "NEMA 17 mecanum wheel chassis kit robot"
+Question: is there a chassis kit that assembles the owned JK42HS40 NEMA 17s onto mecanum wheels without custom brackets?
+Answer: NO. All 16 first-page results are TT-motor or DC-gearmotor chassis kits.
+  B093WDD9N5 $36.99  TT motor, 66 mm wheels
+  B0CBRBCFMZ $27.84  TT motor
+  B0FS5VDS7D $34.99  4WD mecanum chassis, motor type unspecified (TT-class)
+  B09VZV35RF $99.99  97 mm mecanum, DC gearmotor
+  B09KL37P43 $73.99  MC200 80 mm mecanum, DC gearmotor
+  B0CBRMTCH2 $119.99 premium metal chassis, DC gearmotor
+  (remaining results: TT motor kits $15-46)
+None list a NEMA 17 (42 mm, 31 mm bolt pattern) motor mount. A DC-gearmotor kit would
+strand the five owned steppers and the verified drivetrain calculation.
+Decision: keep B0DWSWQV4T wheels (5 mm coupling matches the NEMA 17 5 mm flatted shaft)
+on B073QW9RPZ steel L-brackets under 2020 rail. Placement computed in ../../assembly.py.

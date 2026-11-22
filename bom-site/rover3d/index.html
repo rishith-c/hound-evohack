@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hound 3D</title>
+<style>
+  :root{--bg:#eef1f4;--panel:#ffffffee;--ink:#1b2430;--muted:#5a6672;--line:#d8dde3;--acc:#1c7ed6}
+  html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font:14px/1.45 system-ui,-apple-system,Segoe UI,sans-serif;overflow:hidden}
+  #c{position:fixed;inset:0;display:block}
+  #ui{position:fixed;top:12px;left:12px;width:280px;max-height:calc(100vh - 24px);overflow:auto;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;backdrop-filter:blur(6px)}
+  #ui h1{font-size:16px;margin:0 0 4px}#ui .sub{font-size:12px;color:var(--muted);margin-bottom:8px}
+  #ui h2{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:12px 0 4px}
+  label{display:flex;gap:8px;align-items:center;font-size:13px;margin:3px 0}
+  button{font:inherit;font-size:13px;padding:5px 10px;border:1px solid #2a3641;border-radius:6px;background:#172029;color:#fff;cursor:pointer;margin:2px 2px 2px 0}
+  button.sec{background:#fff;color:var(--ink);border-color:var(--line)}
+  #info{position:fixed;right:12px;top:12px;width:320px;max-height:calc(100vh - 24px);overflow:auto;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;display:none}
+  #info h3{margin:0 0 6px;font-size:15px}#info .note{font-size:12px;color:var(--muted)}#info ul{padding-left:18px;margin:6px 0;font-size:12px}
+  #tip{position:fixed;pointer-events:none;background:#101820;color:#fff;font:12px ui-monospace,Menlo,monospace;padding:4px 8px;border-radius:4px;display:none;white-space:nowrap}
+  .lbl{color:#111;font:11px system-ui,sans-serif;background:#ffffffcc;padding:1px 5px;border-radius:3px;border:1px solid #d8dde3;white-space:nowrap;pointer-events:none}
+  #help{position:fixed;left:12px;bottom:12px;font-size:12px;color:var(--muted);background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:6px 10px}
+  input[type=range]{width:120px}
+  @media (prefers-color-scheme: dark){:root{--bg:#11161b;--panel:#1a2129ee;--ink:#e6ebf0;--muted:#98a4b0;--line:#2a3641}button.sec{background:#243040;color:#e6ebf0}.lbl{background:#1a2129cc;color:#e6ebf0;border-color:#2a3641}}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="ui">
+  <h1>Hound — 3D</h1>
+  <div class="sub">Every part where assembly.py puts it, every wire from the net list, pins from the real board artwork. Click a part or a wire.</div>
+  <h2>Move</h2>
+  <div class="sub">Drag = orbit · right-drag = pan · wheel = zoom · <b>W A S D</b> fly, <b>Q E</b> down/up, hold Shift for speed · double-click a part to fly to it</div>
+  <button class="sec" id="vTop">top</button><button class="sec" id="vFront">front</button><button class="sec" id="vRear">rear</button><button class="sec" id="vIso">iso</button><button class="sec" id="vUnder">underneath</button>
+  <h2>Show</h2>
+  <div id="sheets"></div>
+  <label><input type="checkbox" id="labels" checked> part labels</label>
+  <label><input type="checkbox" id="frame" checked> frame, wheels, deck</label>
+  <label><input type="checkbox" id="ghost" checked> off-rover / optional parts</label>
+  <label>lift the deck electronics <input type="range" id="explode" min="0" max="120" value="0"> <span id="explodeV">0</span> mm</label>
+  <h2>Snapshot</h2>
+  <button id="shot">save PNG (2×)</button>
+  <div class="sub" id="stats"></div>
+</div>
+<div id="info"></div>
+<div id="tip"></div>
+<div id="help">Blue outline = selected. Unplugged parts lift and their wires hide.</div>
+
+<script type="importmap">
+{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}
+</script>
+<script type="module">
+import * as THREE from 'three';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+import {STLLoader} from 'three/addons/loaders/STLLoader.js';
+import {CSS2DRenderer, CSS2DObject} from 'three/addons/renderers/CSS2DRenderer.js';
+
+const F = (x, y, z) => new THREE.Vector3(x, z, -y);            // rover frame (x fwd, y left, z up) → three (y up)
+const scene = new THREE.Scene(); scene.background = new THREE.Color('#e9edf1');
+const canvas = document.getElementById('c');
+const renderer = new THREE.WebGLRenderer({canvas, antialias: true, preserveDrawingBuffer: true});
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2)); renderer.setSize(innerWidth, innerHeight);
+renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.outputColorSpace = THREE.SRGBColorSpace;
+const labelR = new CSS2DRenderer(); labelR.setSize(innerWidth, innerHeight); Object.assign(labelR.domElement.style, {position: 'fixed', top: '0', left: '0', pointerEvents: 'none'}); document.body.appendChild(labelR.domElement);
+const camera = new THREE.PerspectiveCamera(45, innerWidth / innerHeight, 1, 6000); camera.position.copy(F(520, 420, 420));
+const controls = new OrbitControls(camera, canvas); controls.target.copy(F(0, 0, 90)); controls.enableDamping = true; controls.dampingFactor = 0.08;
+scene.add(new THREE.HemisphereLight(0xffffff, 0x8899aa, 0.9));
+const sun = new THREE.DirectionalLight(0xffffff, 1.6); sun.position.copy(F(400, 300, 900)); sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048);
+Object.assign(sun.shadow.camera, {left: -600, right: 600, top: 600, bottom: -600, near: 100, far: 2500}); scene.add(sun);
+const floor = new THREE.Mesh(new THREE.PlaneGeometry(3000, 3000), new THREE.MeshStandardMaterial({color: 0xdfe4ea, roughness: 1})); floor.rotation.x = -Math.PI / 2; floor.receiveShadow = true; scene.add(floor);
+const grid = new THREE.GridHelper(2000, 40, 0xb0b8c0, 0xc8cfd6); grid.position.y = 0.5; scene.add(grid);
+
+const S = await (await fetch('scene.json')).json();
+const groups = {frame: new THREE.Group(), parts: new THREE.Group(), ghost: new THREE.Group()}; Object.values(groups).forEach(g => scene.add(g));
+const sheetGroups = {}; S.sheets.forEach(s => { sheetGroups[s] = new THREE.Group(); scene.add(sheetGroups[s]); });
+const partObj = {}, pickables = [], wireMeshes = [], labels = [];
+const loader = new STLLoader(); const texLoader = new THREE.TextureLoader();
+const mat = (color, extra = {}) => new THREE.MeshStandardMaterial({color: new THREE.Color(color), roughness: 0.6, metalness: 0.15, ...extra});
+const stlCache = {};
+function loadSTL(url) { return stlCache[url] ||= new Promise((res, rej) => loader.load(url, g => { g.computeVertexNormals(); res(g); }, undefined, rej)); }
+
+function profile2020() {   // real 2020 V-slot cross-section (mm), origin centre
+  const s = new THREE.Shape(); const h = 10, slot = 3.1, lip = 1.6, depth = 6;
+  const pts = [];
+  const side = (ax) => {   // one side with a slot, walking clockwise
+    pts.push([h, -h]); };
+  // build outline: square with 4 slots (approximation of the V-slot: a 6 mm wide, 6 mm deep opening narrowing to 3.1 mm at the lip)
+  const q = [];
+  const slotEdge = (sx, sy, dx, dy) => {   // sx,sy = slot centre on the edge; dx,dy = edge direction
+    const nx = -dy, ny = dx;                // inward normal
+    q.push([sx - dx * 3.0 - 0, sy - dy * 3.0]); q.push([sx - dx * 3.0 - nx * lip, sy - dy * 3.0 - ny * lip]);
+    q.push([sx - dx * (slot / 2) - nx * lip, sy - dy * (slot / 2) - ny * lip]); q.push([sx - dx * (slot / 2) - nx * depth, sy - dy * (slot / 2) - ny * depth]);
+    q.push([sx + dx * (slot / 2) - nx * depth, sy + dy * (slot / 2) - ny * depth]); q.push([sx + dx * (slot / 2) - nx * lip, sy + dy * (slot / 2) - ny * lip]);
+    q.push([sx + dx * 3.0 - nx * lip, sy + dy * 3.0 - ny * lip]); q.push([sx + dx * 3.0, sy + dy * 3.0]);
+  };
+  q.push([-h, -h]); slotEdge(0, -h, 1, 0); q.push([h, -h]); slotEdge(h, 0, 0, 1); q.push([h, h]); slotEdge(0, h, -1, 0); q.push([-h, h]); slotEdge(-h, 0, 0, -1); q.push([-h, -h]);
+  s.moveTo(q[0][0], q[0][1]); for (let i = 1; i < q.length; i++) s.lineTo(q[i][0], q[i][1]);
+  return s;
+}
+const railShape = profile2020();
+
+function mecanum(size, hand) {
+  const g = new THREE.Group(); const R = size[0] / 2, W = size[1];
+  const hub = new THREE.Mesh(new THREE.CylinderGeometry(R * 0.62, R * 0.62, W * 0.9, 32), mat('#2b2b2b', {metalness: 0.5, roughness: 0.4})); hub.rotation.z = Math.PI / 2; g.add(hub);
+  const disc = new THREE.Mesh(new THREE.CylinderGeometry(R * 0.7, R * 0.7, 3, 32), mat('#c8ccd0', {metalness: 0.8, roughness: 0.3})); disc.rotation.z = Math.PI / 2; g.add(disc);
+  const rollers = 9, rr = 6.5, rl = W * 0.95;
+  const capsule = new THREE.CapsuleGeometry(rr, rl - 2 * rr, 6, 16); capsule.rotateZ(Math.PI / 2);   // capsule axis along the wheel axis (x)
+  for (let i = 0; i < rollers; i++) {
+    const a = i / rollers * Math.PI * 2;
+    const roller = new THREE.Mesh(capsule, mat('#111', {roughness: 0.9}));
+    const holder = new THREE.Group(); holder.rotation.x = a;              // around the wheel axis (x in local)
+    roller.position.y = R - rr; roller.rotation.y = (hand === 'L' ? 1 : -1) * Math.PI / 4;   // 45° roller, tilted about its own radial line
+    holder.add(roller); g.add(holder);
+  }
+  return g;
+}
+
+function board(p) {
+  const [L, W, T] = p.size; const g = new THREE.Group();
+  const slab = new THREE.Mesh(new THREE.BoxGeometry(...(p.face === 'up' ? [L, T, W] : [T, W, L])), mat('#1f3d2b'));
+  const tex = texLoader.load(p.tex); tex.colorSpace = THREE.SRGBColorSpace; tex.anisotropy = 8;
+  const face = new THREE.Mesh(new THREE.PlaneGeometry(p.face === 'up' ? L : L, p.face === 'up' ? W : W), new THREE.MeshStandardMaterial({map: tex, roughness: 0.75}));
+  if (p.face === 'up') { face.rotation.x = -Math.PI / 2; face.position.y = T / 2 + 0.05; }
+  else { face.rotation.y = p.face === '+x' ? Math.PI / 2 : -Math.PI / 2; face.position.x = (p.face === '+x' ? 1 : -1) * (T / 2 + 0.05); }
+  if (p.face === 'up') slab.rotation.set(0, 0, 0); else { slab.geometry = new THREE.BoxGeometry(T, W, L); }
+  g.add(slab); g.add(face);
+  g.rotation.y = THREE.MathUtils.degToRad(p.yaw || 0);      // yaw about vertical (rover +Z → three +Y): positive yaw in the rover frame = CCW seen from above = +Y rotation
+  return g;
+}
+
+function ghostify(obj) { obj.traverse(o => { if (o.material) { o.material = o.material.clone(); o.material.transparent = true; o.material.opacity = 0.35; } }); }
+
+async function build() {
+  for (const p of S.parts) {
+    let obj;
+    if (p.kind === 'rail') {
+      const len = p.along === 'x' ? p.size[0] : p.size[1];
+      const geo = new THREE.ExtrudeGeometry(railShape, {depth: len, bevelEnabled: false}); geo.translate(0, 0, -len / 2);
+      obj = new THREE.Mesh(geo, mat('#c9ced3', {metalness: 0.7, roughness: 0.35}));
+      obj.rotation.y = p.along === 'x' ? Math.PI / 2 : 0;    // extrude along local z → world x for 'x', world -y(=z) for 'y'
+    } else if (p.kind === 'box') {
+      obj = new THREE.Mesh(new THREE.BoxGeometry(p.size[0], p.size[2], p.size[1]), mat(p.color || '#888'));
+    } else if (p.kind === 'mecanum') {
+      obj = mecanum(p.size, p.hand);
+    } else if (p.kind === 'board') {
+      obj = board(p);
+    } else if (p.kind === 'stl') {
+      try {
+        const geo = (await loadSTL(p.model)).clone(); geo.center();
+        obj = new THREE.Mesh(geo, mat(p.color || '#888', {metalness: 0.3, roughness: 0.5}));
+        // orient real models: NEMA 17 shaft along ±Y (rover) = ±(-z) three; fan axis up; servo horn up; deck tiles flat
+        const bb = geo.boundingBox || (geo.computeBoundingBox(), geo.boundingBox); const sz = new THREE.Vector3(); bb.getSize(sz);
+        if (p.model.includes('nema17')) { const ax = ['x', 'y', 'z'][[sz.x, sz.y, sz.z].indexOf(Math.max(sz.x, sz.y, sz.z))];   // longest = shaft axis
+          if (ax === 'z') obj.rotation.x = p.shaft[1] > 0 ? Math.PI / 2 : -Math.PI / 2; else if (ax === 'y') obj.rotation.x = p.shaft[1] > 0 ? Math.PI : 0; else obj.rotation.y = p.shaft[1] > 0 ? -Math.PI / 2 : Math.PI / 2;
+          obj.rotation.x += 0; }
+        if (p.model.includes('fan40')) { const ax = ['x', 'y', 'z'][[sz.x, sz.y, sz.z].indexOf(Math.min(sz.x, sz.y, sz.z))]; if (ax === 'z') obj.rotation.x = -Math.PI / 2; else if (ax === 'x') obj.rotation.z = Math.PI / 2; }
+        if (p.model.includes('deck')) { const ax = ['x', 'y', 'z'][[sz.x, sz.y, sz.z].indexOf(Math.min(sz.x, sz.y, sz.z))]; if (ax === 'z') obj.rotation.x = -Math.PI / 2; else if (ax === 'x') obj.rotation.z = Math.PI / 2; }
+        if (p.model.includes('servo')) { const ax = ['x', 'y', 'z'][[sz.x, sz.y, sz.z].indexOf(Math.max(sz.x, sz.y, sz.z))]; if (ax === 'z') obj.rotation.y = Math.PI / 2; else if (ax === 'y') obj.rotation.z = Math.PI / 2; }
+      } catch (e) { obj = new THREE.Mesh(new THREE.BoxGeometry(p.size[0], p.size[2], p.size[1]), mat(p.color || '#888')); }
+    }
+    obj.traverse(o => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } });
+    const holder = new THREE.Group(); holder.position.copy(F(...p.pos)); holder.add(obj); holder.userData = {part: p, unplugged: false, base: holder.position.clone()};
+    partObj[p.id] ||= []; partObj[p.id].push(holder);
+    const isFrame = ['RAIL', 'CNR', 'BRK', 'DECK', 'PETG', 'PT'].includes(p.id) || p.kind === 'mecanum';
+    (p.ghost ? groups.ghost : isFrame ? groups.frame : groups.parts).add(holder);
+    if (p.ghost) ghostify(obj);
+    obj.traverse(o => { if (o.isMesh) { o.userData.holder = holder; pickables.push(o); } });
+    if (!isFrame || p.kind === 'stl' && p.id.startsWith('M_')) {
+      const div = document.createElement('div'); div.className = 'lbl'; div.textContent = p.label;
+      const lo = new CSS2DObject(div); lo.position.set(0, p.size[2] / 2 + 8, 0); holder.add(lo); labels.push(lo);
+    }
+  }
+  // wires
+  const up = new THREE.Vector3(0, 1, 0);
+  for (const w of S.wires) {
+    const A = F(...w.a), B = F(...w.b), na = F(...w.na), nb = F(...w.nb);
+    const d = A.distanceTo(B); const lift = Math.min(40, 10 + d * 0.06);
+    const a1 = A.clone().addScaledVector(na, 6), b1 = B.clone().addScaledVector(nb, 6);
+    const top = Math.max(a1.y, b1.y) + lift;
+    const a2 = a1.clone(); a2.y = top; const b2 = b1.clone(); b2.y = top;
+    const mid = a2.clone().lerp(b2, 0.5);
+    const curve = new THREE.CatmullRomCurve3([A, a1, a2, mid, b2, b1, B], false, 'centripetal', 0.6);
+    const mesh = new THREE.Mesh(new THREE.TubeGeometry(curve, 64, w.r, 10, false), mat(w.color, {roughness: 0.5, metalness: 0.05}));
+    mesh.castShadow = true; mesh.userData = {wire: w}; sheetGroups[w.sheet].add(mesh); wireMeshes.push(mesh); pickables.push(mesh);
+    for (const [pt, n] of [[A, na], [B, nb]]) { const dot = new THREE.Mesh(new THREE.SphereGeometry(w.r * 1.6, 10, 10), mat('#ffd43b', {emissive: 0x332200})); dot.position.copy(pt); sheetGroups[w.sheet].add(dot); }
+  }
+  document.getElementById('stats').textContent = `${S.parts.length} parts · ${S.wires.length} wires · ${Object.values(S.pins).reduce((n, p) => n + Object.keys(p).length, 0)} pins`;
+}
+await build();
+
+// ── UI ──────────────────────────────────────────────────────────────────────────────────────────────────
+const sheetsDiv = document.getElementById('sheets');
+S.sheets.forEach(s => { const l = document.createElement('label'); const c = document.createElement('input'); c.type = 'checkbox'; c.checked = true; c.onchange = () => sheetGroups[s].visible = c.checked; l.append(c, ' wires: ' + s); sheetsDiv.append(l); });
+let labelsOn = true; const tmpV = new THREE.Vector3();
+document.getElementById('labels').onchange = e => { labelsOn = e.target.checked; labels.forEach(l => l.visible = labelsOn); };
+document.getElementById('frame').onchange = e => groups.frame.visible = e.target.checked;
+document.getElementById('ghost').onchange = e => groups.ghost.visible = e.target.checked;
+const explode = document.getElementById('explode');
+explode.oninput = () => { document.getElementById('explodeV').textContent = explode.value; const dz = +explode.value;
+  groups.parts.children.forEach(h => { const p = h.userData.part; h.position.copy(h.userData.base); if (p.pos[2] > 100) h.position.y += dz + (h.userData.unplugged ? 40 : 0); else if (h.userData.unplugged) h.position.y += 40; });
+  sheetGroups && Object.values(sheetGroups).forEach(g => g.visible = dz === 0 && !g.userData.hidden); };
+const views = {vTop: [0, 0, 1400, 0, 0, 90], vFront: [1100, 0, 300, 0, 0, 120], vRear: [-1100, 0, 300, 0, 0, 120], vIso: [520, 420, 420, 0, 0, 90], vUnder: [400, 300, -260, 0, 0, 60]};
+for (const [id, v] of Object.entries(views)) document.getElementById(id).onclick = () => flyTo(F(v[0], v[1], v[2]), F(v[3], v[4], v[5]));
+let fly = null;
+function flyTo(pos, target) { fly = {p0: camera.position.clone(), t0: controls.target.clone(), p1: pos, t1: target, t: 0}; }
+document.getElementById('shot').onclick = () => { renderer.setPixelRatio(2); renderer.render(scene, camera); const a = document.createElement('a'); a.download = 'hound-3d.png'; a.href = renderer.domElement.toDataURL('image/png'); a.click(); renderer.setPixelRatio(Math.min(devicePixelRatio, 2)); };
+
+// ── picking ─────────────────────────────────────────────────────────────────────────────────────────────
+const ray = new THREE.Raycaster(); const mouse = new THREE.Vector2(); const tip = document.getElementById('tip'); const info = document.getElementById('info');
+let selected = null, selMats = [];
+function pick(ev) { mouse.set((ev.clientX / innerWidth) * 2 - 1, -(ev.clientY / innerHeight) * 2 + 1); ray.setFromCamera(mouse, camera); return ray.intersectObjects(pickables.filter(o => o.visible && (!o.parent || o.parent.visible)), false)[0]; }
+canvas.addEventListener('pointermove', ev => { const h = pick(ev); if (h && h.object.userData.wire) { const w = h.object.userData.wire; tip.style.display = 'block'; tip.style.left = ev.clientX + 14 + 'px'; tip.style.top = ev.clientY + 14 + 'px'; tip.textContent = `${w.fa} → ${w.fb}  (${w.gauge})`; canvas.style.cursor = 'pointer'; }
+  else { tip.style.display = 'none'; canvas.style.cursor = h ? 'pointer' : ''; } });
+function select(holder) {
+  selMats.forEach(([m, e]) => m.emissive.setHex(e)); selMats = []; selected = holder;
+  if (!holder) { info.style.display = 'none'; return; }
+  holder.traverse(o => { if (o.isMesh && o.material.emissive) { selMats.push([o.material, o.material.emissive.getHex()]); o.material = o.material.clone(); o.material.emissive.setHex(0x1c7ed6); selMats[selMats.length - 1][0] = o.material; } });
+  const p = holder.userData.part; const wires = S.wires.filter(w => w.pa === p.id || w.pb === p.id);
+  const pins = S.pins[p.id] ? Object.keys(S.pins[p.id]) : [];
+  info.style.display = 'block';
+  info.innerHTML = `<h3>${p.label}</h3><div class="note">${p.note || ''}</div>` +
+    (pins.length ? `<div class="note" style="margin-top:6px"><b>${pins.length} pins:</b> ${pins.join(' · ')}</div>` : '') +
+    (wires.length ? `<b style="display:block;margin-top:8px">${wires.length} wires</b><ul>` + wires.map(w => `<li><span style="display:inline-block;width:10px;height:10px;background:${w.color};border:1px solid #333;vertical-align:middle"></span> ${w.fa} → ${w.fb} <span class="note">(${w.gauge}, sheet ${w.sheet})</span></li>`).join('') + '</ul>' : '<div class="note" style="margin-top:8px">no wires on this part</div>') +
+    `<div style="margin-top:8px"><button id="unplug">${holder.userData.unplugged ? 'plug back in' : 'unplug'}</button><button class="sec" id="focus">fly here</button><button class="sec" id="close">close</button></div>`;
+  document.getElementById('unplug').onclick = () => { holder.userData.unplugged = !holder.userData.unplugged; holder.position.copy(holder.userData.base); if (holder.userData.unplugged) holder.position.y += 40;
+    wireMeshes.forEach(m => { const w = m.userData.wire; if (w.pa === p.id || w.pb === p.id) m.visible = !holder.userData.unplugged; }); select(holder); };
+  document.getElementById('focus').onclick = () => { const t = holder.position.clone(); flyTo(t.clone().add(new THREE.Vector3(160, 140, 160)), t); };
+  document.getElementById('close').onclick = () => select(null);
+}
+canvas.addEventListener('click', ev => { if (dragged) return; const h = pick(ev); if (!h) { select(null); return; } if (h.object.userData.wire) { const w = h.object.userData.wire; const holder = (partObj[w.pa] || [])[0]; if (holder) select(holder); return; } select(h.object.userData.holder); });
+canvas.addEventListener('dblclick', ev => { const h = pick(ev); if (h) { const t = (h.object.userData.holder || h.object).getWorldPosition(new THREE.Vector3()); flyTo(t.clone().add(new THREE.Vector3(140, 120, 140)), t); } });
+let dragged = false, downAt = null; canvas.addEventListener('pointerdown', e => { downAt = [e.clientX, e.clientY]; dragged = false; }); canvas.addEventListener('pointermove', e => { if (downAt && Math.hypot(e.clientX - downAt[0], e.clientY - downAt[1]) > 4) dragged = true; }); canvas.addEventListener('pointerup', () => { downAt = null; });
+
+// ── fly keys ─────────────────────────────────────────────────────────────────────────────────────────────
+const keys = {}; addEventListener('keydown', e => { if (e.target.tagName === 'INPUT') return; keys[e.key.toLowerCase()] = true; }); addEventListener('keyup', e => keys[e.key.toLowerCase()] = false);
+function flyStep(dt) {
+  const sp = (keys['shift'] ? 900 : 350) * dt; const dir = new THREE.Vector3(); camera.getWorldDirection(dir); dir.y = 0; dir.normalize();
+  const right = new THREE.Vector3().crossVectors(dir, up3); const mv = new THREE.Vector3();
+  if (keys['w']) mv.addScaledVector(dir, sp); if (keys['s']) mv.addScaledVector(dir, -sp); if (keys['d']) mv.addScaledVector(right, sp); if (keys['a']) mv.addScaledVector(right, -sp);
+  if (keys['e']) mv.y += sp; if (keys['q']) mv.y -= sp;
+  if (mv.lengthSq()) { camera.position.add(mv); controls.target.add(mv); }
+}
+const up3 = new THREE.Vector3(0, 1, 0);
+let last = performance.now();
+function loop(now) {
+  const dt = Math.min(0.05, (now - last) / 1000); last = now;
+  if (fly) { fly.t = Math.min(1, fly.t + dt * 1.6); const k = fly.t < 0.5 ? 2 * fly.t * fly.t : 1 - Math.pow(-2 * fly.t + 2, 2) / 2; camera.position.lerpVectors(fly.p0, fly.p1, k); controls.target.lerpVectors(fly.t0, fly.t1, k); if (fly.t >= 1) fly = null; }
+  else flyStep(dt);
+  if (labelsOn) for (const l of labels) { const d = l.getWorldPosition(tmpV).distanceTo(camera.position); l.visible = d < 750; l.element.style.opacity = d < 450 ? 1 : (750 - d) / 300; }
+  controls.update(); renderer.render(scene, camera); labelR.render(scene, camera); requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+addEventListener('resize', () => { camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth, innerHeight); labelR.setSize(innerWidth, innerHeight); });
+</script>
+</body>
+</html>

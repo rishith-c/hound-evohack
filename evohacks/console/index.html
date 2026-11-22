@@ -1,0 +1,314 @@
+<!doctype html><html><head><meta charset=utf-8><title>HOUND Ops</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel=stylesheet>
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+<style>
+:root{--bg:#f4f5f6;--p:#ffffff;--p2:#f7f8f9;--l:#e1e5e9;--l2:#c9d0d6;--t:#14181c;--t2:#4a545e;--t3:#7b858f;--r:#d4442a;--b:#2a6fa8;--g:#2f9e5b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{width:1600px;height:1000px;overflow:hidden;background:var(--bg);color:var(--t);font:11px/1.4 "IBM Plex Mono",ui-monospace,monospace;position:relative;letter-spacing:.01em}
+.u{text-transform:uppercase;letter-spacing:.12em;font-size:9.5px;color:var(--t3)}
+.top{position:absolute;left:0;right:0;top:0;height:40px;border-bottom:1px solid var(--l);display:flex;align-items:center;background:var(--bg);z-index:5}
+.top>div{height:100%;display:flex;align-items:center;padding:0 16px;border-right:1px solid var(--l);gap:10px}
+.logo{font-weight:600;font-size:12px;letter-spacing:.22em}
+.logo i{width:8px;height:8px;background:var(--t);display:inline-block;margin-right:2px}
+.tab{color:var(--t3);letter-spacing:.12em;font-size:10px}
+.tab.on{color:var(--t);box-shadow:inset 0 -2px 0 var(--t)}
+.fill{flex:1;border-right:0!important}
+.kv{color:var(--t3);font-size:10px}.kv b{color:var(--t);font-weight:500;margin-left:6px}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--g)}
+.stop{background:var(--r);color:#fff;font-weight:600;letter-spacing:.16em;font-size:10px;border-right:0!important}
+/* stage */
+#hero{position:absolute;left:-40px;top:150px;width:770px;height:700px;z-index:1}
+#hero img{width:100%;height:100%;object-fit:cover}
+#map{position:absolute;left:330px;top:40px;width:850px;height:800px;overflow:hidden;z-index:2;
+}
+#tiles{position:absolute;filter:grayscale(1) contrast(1.08) brightness(1.1)}
+#tiles img{position:absolute;width:256px;height:256px}
+#map svg{position:absolute;inset:0}
+.shade{position:absolute;left:330px;top:40px;width:850px;height:800px;z-index:3;pointer-events:none;background:linear-gradient(180deg,rgba(255,255,255,.55),transparent 18%,transparent 80%,rgba(255,255,255,.8))}
+.call{position:absolute;z-index:4;display:flex;align-items:center;gap:8px}
+.call .n{border:1px solid var(--l2);background:rgba(255,255,255,.85);padding:5px 8px;line-height:1.35}
+.call .n b{display:block;color:var(--t);font-weight:500;font-size:10.5px}
+.call .n span{color:var(--t3);font-size:9.5px}
+#lead{position:absolute;inset:0;z-index:4;pointer-events:none}
+.title{position:absolute;left:24px;top:64px;z-index:4}
+.title h1{font:500 30px/1.05 "IBM Plex Sans",sans-serif;letter-spacing:-.025em;color:var(--t)}
+.title p{margin-top:8px;color:var(--t2);max-width:300px;font-size:11px;line-height:1.55}
+.mtag{position:absolute;z-index:4;border:1px solid var(--l2);background:rgba(255,255,255,.88);padding:5px 8px;line-height:1.35;white-space:nowrap}
+.mtag b{display:block;font-weight:500;font-size:10.5px}
+.mtag span{color:var(--t3);font-size:9.5px}
+.mtag.r{border-color:var(--r)}.mtag.r b{color:var(--r)}
+/* right */
+.side{position:absolute;right:0;top:40px;bottom:0;width:420px;border-left:1px solid var(--l);background:var(--p);z-index:5;display:flex;flex-direction:column}
+.blk{border-bottom:1px solid var(--l);padding:12px 16px}
+.bh{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:9px}
+.bh b{font-weight:500;color:var(--t);font-size:10px;letter-spacing:.12em;text-transform:uppercase}
+canvas{display:block}
+.heads{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--l);border:1px solid var(--l);margin-top:9px}
+.heads div{background:var(--p2);padding:7px 9px}
+.heads .v{font:500 19px "IBM Plex Sans";letter-spacing:-.02em;margin-top:2px}
+.heads .v small{font-size:10px;color:var(--t3);margin-left:5px;font-family:"IBM Plex Mono"}
+.bar{height:2px;background:var(--l2);margin-top:5px}.bar i{display:block;height:100%;background:var(--t)}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.mini .u{margin-bottom:6px;display:block}
+.tbl{width:100%;border-collapse:collapse}
+.tbl td{padding:3px 0;border-bottom:1px solid var(--l);color:var(--t2);font-size:10px}
+.tbl td:last-child{text-align:right;color:var(--t)}
+/* bottom */
+.bot{position:absolute;left:0;right:420px;bottom:0;height:160px;border-top:1px solid var(--l);background:var(--p);z-index:5;display:grid;grid-template-columns:300px 1fr}
+.bot>div{padding:12px 16px}
+.bot>div+div{border-left:1px solid var(--l)}
+.ev{display:flex;gap:10px;padding:3px 0;color:var(--t2);font-size:10px}
+.ev span{color:var(--t3);width:52px;flex:none}
+.ev.r{color:var(--r)}
+.foot{position:absolute;left:340px;bottom:168px;z-index:4;color:var(--t3);font-size:9px;letter-spacing:.1em;text-transform:uppercase}
+.scale{position:absolute;right:436px;bottom:172px;z-index:4;font-size:9.5px;color:var(--t2)}
+.scale i{display:block;width:82px;height:4px;border:1px solid var(--t2);border-top:0;margin-top:3px}
+
+.left{position:absolute;left:0;top:40px;width:330px;height:800px;background:var(--p);border-right:1px solid var(--l);z-index:5;display:flex;flex-direction:column}
+.left .blk{padding:14px 18px}
+.left h1{font:500 26px/1.08 "IBM Plex Sans",sans-serif;letter-spacing:-.02em;margin:8px 0 7px}
+.left p{color:var(--t2);font-size:10.5px;line-height:1.55}
+.twin{position:relative;height:196px;background:#f4f5f6;border:1px solid var(--l);overflow:hidden}
+.twin img{position:absolute;width:297px;left:-6px;top:-63px}
+.twin .c{position:absolute;width:9px;height:9px;border-color:var(--t2);border-style:solid}
+.twin .k{position:absolute;left:8px;top:7px;font-size:9px;letter-spacing:.12em;color:var(--t3)}
+.twin .k2{position:absolute;right:12px;top:9px;font-size:9px;letter-spacing:.1em;color:var(--t3)}
+.chips{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--l);border:1px solid var(--l);border-top:0}
+.chips div{background:var(--p);padding:5px 7px;font-size:9px;letter-spacing:.08em;color:var(--t2)}
+.chips i{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--g);margin-right:5px;vertical-align:1px}
+.fld{display:flex;justify-content:space-between;align-items:center;border:1px solid var(--l2);padding:6px 9px;margin-bottom:6px;font-size:10.5px}
+.fld span{color:var(--t3);font-size:9px;letter-spacing:.12em}
+.opt{display:flex;align-items:center;gap:8px;font-size:10px;color:var(--t2);margin:7px 0}
+.opt i{width:11px;height:11px;border:1px solid var(--t);display:inline-grid;place-items:center}
+.opt i.on::after{content:"";width:5px;height:5px;background:var(--t)}
+.sum{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--l);margin:10px 0 10px}
+.sum div{padding:6px 8px}.sum div+div{border-left:1px solid var(--l)}
+.sum b{display:block;font:500 15px "IBM Plex Sans";letter-spacing:-.01em;margin-top:2px}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;height:34px;font-size:10px;letter-spacing:.16em;font-weight:600}
+.btn.pri{background:var(--t);color:#fff}
+.btn.sec{border:1px solid var(--t);color:var(--t);margin-top:6px}
+.btn kbd{font:inherit;font-weight:400;opacity:.55;letter-spacing:.05em}
+.mtools{position:absolute;left:346px;top:56px;z-index:6;display:flex;gap:6px}
+.mtools div{background:rgba(255,255,255,.94);border:1px solid var(--l2);padding:5px 8px;font-size:9px;letter-spacing:.12em;color:var(--t2)}
+.mtools div.on{background:var(--t);color:#fff;border-color:var(--t)}
+.zoom{position:absolute;left:1140px;top:56px;z-index:6;display:flex;flex-direction:column;border:1px solid var(--l2);background:rgba(255,255,255,.94)}
+.zoom div{width:24px;height:24px;display:grid;place-items:center;font-size:13px;color:var(--t)}.zoom div+div{border-top:1px solid var(--l2)}
+.mtag.b{border-color:var(--b)}.mtag.b b{color:var(--b)}
+</style></head><body>
+
+<div class=top>
+ <div class=logo><i></i> HOUND</div>
+ <div class="tab on">OPERATION</div><div class=tab>SENSORS</div><div class=tab>MODEL</div><div class=tab>FLEET</div><div class=tab>REPLAY</div>
+ <div class="fill"><span class=kv>INCIDENT<b>M6.4 SCENARIO · BLDG B · GRID C4</b></span></div>
+ <div><span class=dot></span><span class=kv>LINK<b>38 MS</b></span></div>
+ <div><span class=kv>3S<b>11.6 V · 71%</b></span></div>
+ <div><span class=kv>T+<b>00:42:10</b></span></div>
+ <div class=stop>ALL STOP</div>
+</div>
+
+<div id=map><div id=tiles></div><div style="position:absolute;inset:0;background:rgba(246,247,248,.22)"></div><svg viewBox="0 0 850 800" id=ov></svg></div>
+<div class=shade></div>
+
+
+
+<div class=left>
+ <div class=blk>
+  <div class=u>UNIT HOUND-01 · SEARCH ACTIVE</div>
+  <h1>Person found<br>behind wall.</h1>
+  <p>Wi-Fi network, 24 GHz radar and thermal agree on one moving person, 2.6 m past the north wall of room 112.</p>
+ </div>
+ <div class=blk>
+  <div class=bh><b>HOUND-01</b><span class=u>LIVE TWIN</span></div>
+  <div class=twin><img src=rover_white.png>
+   <i class=c style="left:5px;top:5px;border-width:1px 0 0 1px"></i><i class=c style="right:5px;top:5px;border-width:1px 1px 0 0"></i><i class=c style="left:5px;bottom:5px;border-width:0 0 1px 1px"></i><i class=c style="right:5px;bottom:5px;border-width:0 1px 1px 0"></i>
+   <span class=k2>HDG 330° · 0.42 M/S</span></div>
+  <div class=chips><div><i></i>CSI</div><div><i></i>RADAR</div><div><i></i>THERM</div><div><i></i>TOF</div></div>
+ </div>
+ <div class=blk style="border-bottom:0">
+  <div class=bh><b>Route planner</b><span class=u>A* · 0.2 M GRID</span></div>
+  <div class=fld><span>FROM</span>HOUND-01 · S6 · CORRIDOR E</div>
+  <div class=fld><span>TO</span>RM 112 · NORTH WALL · P 0.87</div>
+  <div class=opt><i class=on></i>Avoid shaking MMI VIII and above</div>
+  <div class=opt><i class=on></i>Avoid debris over 40 mm clearance</div>
+  <div class=opt><i></i>Stop + listen every 3 m</div>
+  <div class=sum><div><span class=u>LENGTH</span><b>18.6 m</b></div><div><span class=u>ETA</span><b>0:44</b></div><div><span class=u>AVOIDED</span><b style="color:var(--r)">2</b></div></div>
+  <div class="btn pri">PLAN ROUTE <kbd>⏎</kbd></div>
+  <div class="btn sec">SEND TO HOUND-01</div>
+  <div class=u style="margin-top:9px;text-align:center;letter-spacing:.1em">Operator approval required before motion</div>
+ </div>
+</div>
+<div class=mtools><div class=on>IMAGERY</div><div class=on>ELEVATION</div><div class=on>SHAKE</div><div class=on>DAMAGE</div><div>WI-FI HEAT</div></div>
+<div class=zoom><div>+</div><div>−</div></div>
+<div class="mtag b" id=pt style="left:0;top:0"><b>PLANNED ROUTE · 18.6 M</b><span>3 WAYPOINTS · AWAITING APPROVAL</span></div>
+<div class="mtag r" id=vt style="left:0;top:0"><b>PERSON · MOVING · P 0.87</b><span>RM 112 · 2.6 M · BEHIND DRYWALL</span></div>
+<div class=mtag id=rt style="left:0;top:0"><b>HOUND-01</b><span>HDG 330° · 0.42 M/S · LISTENING</span></div>
+<div class=mtag id=bt style="left:0;top:0"><b style="color:var(--r)">CORRIDOR N BLOCKED</b><span>DEBRIS &gt; 40 CM · RE-ROUTED</span></div>
+<div class=foot>Imagery © Esri, Maxar, Earthstar · contours: shake field + elevation, simulated</div>
+<div class=scale>20 M<i></i></div>
+
+<div class=side>
+ <div class=blk>
+  <div class=bh><b>Wi-Fi neural network</b><span class=u>1-D CNN · NUMPY · ON PI</span></div>
+  <canvas id=nn width=776 height=300 style="width:388px;height:150px"></canvas>
+  <div class=heads>
+   <div><span class=u>PERSON HEAD</span><div class=v>0.94<small>PRESENT</small></div><div class=bar><i style="width:94%"></i></div></div>
+   <div><span class=u>MOVING HEAD</span><div class=v style="color:var(--r)">0.87<small>MOVING</small></div><div class=bar><i style="width:87%;background:var(--r)"></i></div></div>
+  </div>
+ </div>
+ <div class=blk>
+  <div class=g2>
+   <div class=mini><span class=u>THERMAL · MLX90640</span><canvas id=th width=368 height=276 style="width:184px;height:138px"></canvas><div class=u style="margin-top:5px;color:var(--t2)">PEAK 31.4 °C · DOORWAY</div></div>
+   <div class=mini><span class=u>RADAR · LD2450</span><canvas id=rd width=368 height=276 style="width:184px;height:138px"></canvas><div class=u style="margin-top:5px;color:var(--t2)">T1 2.6 M · +0.3 M/S</div></div>
+  </div>
+ </div>
+ <div class=blk>
+  <div class=bh><b>LD2410C · gate energy</b><span class=u>0.75 M / GATE</span></div>
+  <canvas id=gt width=776 height=110 style="width:388px;height:55px"></canvas>
+ </div>
+ <div class=blk style="border-bottom:0">
+  <div class=g2>
+   <table class=tbl><tr><td>TOF FRONT</td><td>1.84 M</td></tr><tr><td>TOF REAR</td><td>0.62 M</td></tr><tr><td>BREATHING</td><td>16 /MIN</td></tr><tr><td>FUSION</td><td style="color:var(--r)">CONFIRMED</td></tr></table>
+   <table class=tbl><tr><td>WINDOW</td><td>10 S</td></tr><tr><td>INFERENCE</td><td>1.1 MS</td></tr><tr><td>PARAMS</td><td>23.4 K</td></tr><tr><td>MODE</td><td>STOP + LISTEN</td></tr></table>
+  </div>
+ </div>
+ <div class=blk style="border-top:1px solid var(--l);border-bottom:0">
+  <div class=bh><b>Model card</b><span class=u>HELD-OUT TEST · SIMULATION</span></div>
+  <table class=tbl>
+   <tr><td>MOVING PERSON FOUND</td><td>86.9 %</td></tr>
+   <tr><td>STILL VS MOVING</td><td>91.5 %</td></tr>
+   <tr><td>FAN FALSE ALARM</td><td>7.9 %</td></tr>
+   <tr><td>STILL PERSON FOUND</td><td style="color:var(--r)">21.4 %</td></tr>
+  </table>
+ </div>
+ <div style="margin-top:auto;padding:10px 16px;border-top:1px solid var(--l)" class=u>Concept · scenario and readings simulated</div>
+</div>
+
+<div class=bot>
+ <div>
+  <div class=bh><b>Events</b><span class=u>HOUND-01</span></div>
+  <div class="ev r"><span>39:55</span>PERSON · RM 112 · P 0.87</div>
+  <div class=ev><span>39:45</span>STOP + LISTEN 10 S</div>
+  <div class=ev><span>38:12</span>RE-ROUTE · CORRIDOR N</div>
+  <div class=ev><span>36:02</span>S3 CLEAR · P 0.06</div>
+  <div class=ev><span>33:40</span>SWEEP START</div>
+ </div>
+ <div>
+  <div class=bh><b>Fused detection · last 10 min</b><span class=u>WI-FI · RADAR · THERMAL</span></div>
+  <canvas id=tl width=1720 height=200 style="width:860px;height:100px"></canvas>
+ </div>
+</div>
+
+<script>
+function hash(x,y){let h=Math.sin(x*127.1+y*311.7)*43758.5453;return h-Math.floor(h)}
+function vn(x,y){const xi=Math.floor(x),yi=Math.floor(y),xf=x-xi,yf=y-yi,u=xf*xf*(3-2*xf),v=yf*yf*(3-2*yf);const a=hash(xi,yi),b=hash(xi+1,yi),c=hash(xi,yi+1),d=hash(xi+1,yi+1);return a+(b-a)*u+(c-a)*v+(a-b-c+d)*u*v}
+function fbm(x,y){let s=0,a=.5,f=1;for(let i=0;i<4;i++){s+=a*vn(x*f,y*f);f*=2;a*=.5}return s}
+// tiles
+const lat=37.48525,lon=-122.14830,z=19,N=2**z;
+const xt=(lon+180)/360*N,yt=(1-Math.log(Math.tan(lat*Math.PI/180)+1/Math.cos(lat*Math.PI/180))/Math.PI)/2*N;
+const cx=470,cy=420,T=document.getElementById('tiles');
+for(let x=Math.floor(xt)-3;x<Math.floor(xt)+4;x++)for(let y=Math.floor(yt)-3;y<Math.floor(yt)+4;y++){const i=new Image();i.src=`https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/${z}/${y}/${x}`;i.style.left=((x-xt)*256+cx)+'px';i.style.top=((y-yt)*256+cy)+'px';T.appendChild(i)}
+// overlays in map coords (850x800)
+const ov=d3.select('#ov'),W=85,H=80,S=10,path=d3.geoPath(d3.geoIdentity().scale(S));
+const el=new Float64Array(W*H);for(let j=0;j<H;j++)for(let i=0;i<W;i++)el[j*W+i]=fbm(i/26+3.1,j/26+7.7)*10+i*.03;
+ov.append('g').selectAll('path').data(d3.contours().size([W,H]).thresholds(d3.range(2,12,.4))(el)).join('path').attr('d',path).attr('fill','none').attr('stroke','#14181c').attr('stroke-opacity',(d,i)=>i%5==0?.45:.16).attr('stroke-width',(d,i)=>i%5==0?1:.6);
+const mm=new Float64Array(W*H);for(let j=0;j<H;j++)for(let i=0;i<W;i++)mm[j*W+i]=9.4-Math.hypot(i+40,j-110)/52+(fbm(i/14,j/14)-.5)*.8;
+const mc=d3.contours().size([W,H]).thresholds([7,7.5,8,8.5])(mm);
+ov.append('g').selectAll('path').data(mc).join('path').attr('d',path).attr('fill','#d4442a').attr('fill-opacity',(d,i)=>.02+i*.025).attr('stroke','#d4442a').attr('stroke-width',1.2).attr('stroke-opacity',.75);
+const defs=ov.append('defs');const p=defs.append('pattern').attr('id','h').attr('width',6).attr('height',6).attr('patternUnits','userSpaceOnUse').attr('patternTransform','rotate(45)');p.append('line').attr('x1',0).attr('y1',0).attr('x2',0).attr('y2',6).attr('stroke','#d4442a').attr('stroke-width',1.6);
+const fan=defs.append('radialGradient').attr('id','fan').attr('cx',0).attr('cy',0).attr('r',1).attr('gradientUnits','userSpaceOnUse').attr('gradientTransform','scale(210)');fan.append('stop').attr('offset',0).attr('stop-color','#14181c').attr('stop-opacity',.32);fan.append('stop').attr('offset',1).attr('stop-color','#14181c').attr('stop-opacity',0);
+// mmi labels
+[[7.5,700,140],[8,520,520],[8.5,370,700]].forEach(([v,x,y])=>{const g=ov.append('g').attr('transform',`translate(${x},${y})`);g.append('rect').attr('x',-24).attr('y',-8).attr('width',48).attr('height',15).attr('fill','#ffffff').attr('stroke','#d4442a');g.append('text').attr('y',3).attr('text-anchor','middle').attr('fill','#d4442a').attr('font-size',8.5).attr('font-family','IBM Plex Mono').attr('letter-spacing','.1em').text('MMI '+{7.5:'VII+',8:'VIII',8.5:'VIII+'}[v])});
+// damage
+[[[370,110],[460,55],[520,140],[430,195]],[[280,430],[360,380],[415,460],[330,510]]].forEach(pts=>ov.append('polygon').attr('points',pts.join(' ')).attr('fill','url(#h)').attr('stroke','#d4442a').attr('stroke-width',1.2));
+// route
+const R=[[190,660],[310,570],[530,560],[570,430],[520,290],[430,305],[370,312]];
+const L=d3.line();
+ov.append('path').attr('d',L([[370,312],[250,340],[170,430]])).attr('fill','none').attr('stroke','#14181c').attr('stroke-width',1.2).attr('stroke-dasharray','2 6').attr('stroke-linecap','round');
+ov.append('path').attr('d',L(R)).attr('fill','none').attr('stroke','#14181c').attr('stroke-width',1.6);
+R.slice(0,-1).forEach(([x,y],i)=>{ov.append('rect').attr('x',x-4).attr('y',y-4).attr('width',8).attr('height',8).attr('fill','#ffffff').attr('stroke','#14181c');ov.append('text').attr('x',x+9).attr('y',y+3).attr('fill','#14181c').attr('font-size',8.5).attr('font-family','IBM Plex Mono').text('S'+(i+1))});
+ov.append('path').attr('d',L([[370,312],[290,262],[230,215]])).attr('fill','none').attr('stroke','#d4442a').attr('stroke-width',1.2).attr('stroke-dasharray','4 4');
+const bx=262,by=245;ov.append('path').attr('d',`M${bx-5} ${by-5}L${bx+5} ${by+5}M${bx+5} ${by-5}L${bx-5} ${by+5}`).attr('stroke','#d4442a').attr('stroke-width',2);
+// victim
+const vx=500,vy=205;[46,30].forEach((r,i)=>ov.append('circle').attr('cx',vx).attr('cy',vy).attr('r',r).attr('fill','none').attr('stroke','#d4442a').attr('stroke-opacity',i?.9:.45).attr('stroke-dasharray',i?'3 3':null));
+ov.append('circle').attr('cx',vx).attr('cy',vy).attr('r',5).attr('fill','#d4442a');
+ov.append('path').attr('d',`M${vx-60} ${vy}H${vx-34}M${vx+34} ${vy}H${vx+60}M${vx} ${vy-60}V${vy-34}M${vx} ${vy+34}V${vy+60}`).attr('stroke','#d4442a').attr('stroke-width',1);
+// planned route
+const PR=[[392,305],[440,292],[452,252],[488,226],[500,212]];
+ov.append('path').attr('d',L(PR)).attr('fill','none').attr('stroke','#ffffff').attr('stroke-width',5).attr('stroke-opacity',.85).attr('stroke-linejoin','round');
+ov.append('path').attr('d',L(PR)).attr('fill','none').attr('stroke','#2a6fa8').attr('stroke-width',2).attr('stroke-dasharray','6 3').attr('stroke-linejoin','round');
+PR.slice(1,-1).forEach(([x,y],i)=>{ov.append('circle').attr('cx',x).attr('cy',y).attr('r',4.5).attr('fill','#ffffff').attr('stroke','#2a6fa8').attr('stroke-width',1.5);ov.append('text').attr('x',x+8).attr('y',y-6).attr('fill','#2a6fa8').attr('font-size',8.5).attr('font-family','IBM Plex Mono').text('P'+(i+1))});
+// rover
+const g=ov.append('g').attr('transform','translate(380 312) rotate(-30)');
+g.append('path').attr('d','M0 0 L190 -95 A213 213 0 0 1 190 95 Z').attr('fill','url(#fan)');
+[70,140,210].forEach(r=>g.append('path').attr('d',`M${r*Math.cos(.46)} ${-r*Math.sin(.46)} A${r} ${r} 0 0 1 ${r*Math.cos(.46)} ${r*Math.sin(.46)}`).attr('fill','none').attr('stroke','#14181c').attr('stroke-opacity',.35));
+g.append('rect').attr('x',-15).attr('y',-11).attr('width',30).attr('height',22).attr('fill','#14181c');
+[[-12,-15],[6,-15],[-12,11],[6,11]].forEach(([x,y])=>g.append('rect').attr('x',x).attr('y',y).attr('width',8).attr('height',4).attr('fill','#14181c').attr('stroke','#ffffff'));
+g.append('path').attr('d','M18 -5 L26 0 L18 5Z').attr('fill','#14181c');
+// tags in page coords
+const ox=330,oy=40,put=(id,x,y)=>{const e=document.getElementById(id);e.style.left=(x+ox)+'px';e.style.top=(y+oy)+'px'};
+put('vt',vx+56,vy-50);put('pt',120,262);put('rt',398,330);put('bt',140,180);
+
+// NN canvas: input spectrogram → 3 conv feature maps → pool → dense → heads
+document.fonts.load('10px "IBM Plex Mono"').then(()=>{
+(()=>{const c=document.getElementById('nn'),x=c.getContext('2d');const s=2;x.scale(s,s);
+ const lab=(t,X,Y)=>{x.fillStyle='#7b858f';x.font='8.5px IBM Plex Mono';x.fillText(t,X,Y)};
+ // input 52x200 → draw 52 rows x 100 cols
+ const iw=118,ih=104,ix=0,iy=14;
+ for(let r=0;r<52;r++)for(let t=0;t<100;t++){const band=r>14&&r<36;const v=.15+(band?.55*Math.abs(Math.sin(t/7+r/5)):0)*(.5+.5*vn(t/6,r/4))+hash(r,t)*.12;const g=250-Math.min(250,v*215|0);x.fillStyle=`rgb(${g},${g},${g})`;x.fillRect(ix+t*iw/100,iy+r*ih/52,iw/100+.3,ih/52+.3)}
+ x.fillStyle='#14181c';x.fillRect(ix,iy+ih+1,iw,1);
+ lab('INPUT 52×200',ix,9);lab('10 S · 20 HZ',ix,iy+ih+12);
+ // conv blocks
+ const blocks=[[134,'CONV1 24×48',48],[184,'CONV2 24×20',20],[226,'CONV3 24×12',12]];
+ blocks.forEach(([bx,name,T],k)=>{const bw=k==0?40:k==1?32:26,bh=104;for(let r=0;r<24;r++)for(let t=0;t<T;t++){const v=Math.max(0,vn(t/(3-k*.6)+k*9,r/2.2+k*4)-.35)*1.9*(r%5==k?1.3:1);const g=Math.min(1,v);x.fillStyle=g>.72?`rgba(212,68,42,${g})`:`rgba(20,24,28,${g*.9})`;x.fillRect(bx+t*bw/T,iy+r*bh/24,bw/T+.3,bh/24-.6)}
+  lab(name.split(' ')[0],bx,9);lab(name.split(' ')[1],bx,iy+ih+12)});
+ // pool + dense nodes
+ const col=(X,n,act)=>{const pts=[];for(let i=0;i<n;i++){const Y=iy+6+i*(ih-12)/(n-1);pts.push([X,Y]);}return pts};
+ const P=col(272,12),D=col(316,9),O=[[360,iy+30],[360,iy+48],[360,iy+70],[360,iy+88]];
+ x.strokeStyle='rgba(20,24,28,.10)';x.lineWidth=.6;
+ for(const a of P)for(const b of D){x.beginPath();x.moveTo(...a);x.lineTo(...b);x.stroke()}
+ for(const a of D)for(const b of O){x.beginPath();x.moveTo(...a);x.lineTo(...b);x.stroke()}
+ x.strokeStyle='rgba(212,68,42,.6)';x.lineWidth=1;[[D[2],O[0]],[D[5],O[0]],[D[6],O[2]],[D[3],O[2]],[P[4],D[2]],[P[8],D[6]],[P[1],D[5]]].forEach(([a,b])=>{x.beginPath();x.moveTo(...a);x.lineTo(...b);x.stroke()});
+ P.forEach(([X,Y],i)=>{x.fillStyle=hash(i,2)>.5?'#14181c':'#cdd3d9';x.fillRect(X-2.5,Y-2.5,5,5)});
+ D.forEach(([X,Y],i)=>{x.beginPath();x.arc(X,Y,3,0,7);x.fillStyle=[2,5,6].includes(i)?'#d4442a':hash(i,5)>.4?'#14181c':'#cdd3d9';x.fill()});
+ lab('POOL 48',260,9);lab('DENSE 32',300,9);lab('HEADS',346,9);
+ [['P',.94,O[0]],['—',.06,O[1]],['M',.87,O[2]],['S',.13,O[3]]].forEach(([t,v,[X,Y]],i)=>{x.beginPath();x.arc(X,Y,4,0,7);x.fillStyle=v>.5?(i==2?'#d4442a':'#14181c'):'#cdd3d9';x.fill();x.fillStyle=v>.5?'#14181c':'#7b858f';x.font='8.5px IBM Plex Mono';x.fillText(v.toFixed(2),X+8,Y+3)});
+ // arrows between stages
+ x.fillStyle='#7b858f';[[124],[178],[218],[256]].forEach(([X])=>{x.beginPath();x.moveTo(X,iy+50);x.lineTo(X+5,iy+52);x.lineTo(X,iy+54);x.fill()});
+})();
+// thermal 32x24 — person partially visible through doorway
+(()=>{const c=document.getElementById('th'),x=c.getContext('2d');const cw=368/32,ch=276/24;
+ for(let j=0;j<24;j++)for(let i=0;i<32;i++){let v=.18+fbm(i/9,j/9)*.18;const d=Math.hypot((i-19)/3.2,(j-11)/5.5);if(i>15)v+=Math.max(0,1-d)*.85;if(i>15&&i<17)v*=.6;
+  v=Math.min(1,v);const t=Math.max(0,(v-.6)/.4),c0=246-v*170;const r=v>.6?230-18*t:c0,g=v>.6?150-82*t:c0+2,b=v>.6?135-93*t:c0+5;
+  x.fillStyle=`rgb(${Math.min(255,r)},${Math.max(0,g)},${Math.max(0,b)})`;x.fillRect(i*cw,j*ch,cw-1,ch-1)}
+ x.strokeStyle='#14181c';x.lineWidth=2;x.strokeRect(19*cw-36,11*ch-60,72,120);
+})();
+// radar
+(()=>{const c=document.getElementById('rd'),x=c.getContext('2d');const W=368,H=276,ox=W/2,oy=H-10;x.fillStyle='#ffffff';x.fillRect(0,0,W,H);
+ x.strokeStyle='#e1e5e9';x.lineWidth=1.5;for(const r of [60,120,180,240]){x.beginPath();x.arc(ox,oy,r,Math.PI*1.17,Math.PI*1.83);x.stroke()}
+ for(const a of [-.33,0,.33]){x.beginPath();x.moveTo(ox,oy);x.lineTo(ox+Math.sin(a*Math.PI*.85)*250,oy-Math.cos(a*Math.PI*.85)*250);x.stroke()}
+ // track history
+ x.fillStyle='rgba(212,68,42,.35)';for(let k=0;k<9;k++){x.beginPath();x.arc(ox+30+k*4,oy-200+k*3,2.2,0,7);x.fill()}
+ x.fillStyle='#d4442a';x.beginPath();x.arc(ox+66,oy-174,6,0,7);x.fill();x.strokeStyle='#d4442a';x.lineWidth=1.5;x.strokeRect(ox+54,oy-186,24,24);
+ x.fillStyle='#7b858f';x.beginPath();x.arc(ox-90,oy-60,3,0,7);x.fill();
+ x.fillStyle='#14181c';x.font='16px IBM Plex Mono';x.fillText('T1',ox+84,oy-170);x.fillStyle='#7b858f';x.fillText('T2 static',ox-80,oy-56);
+})();
+// gates
+(()=>{const c=document.getElementById('gt'),x=c.getContext('2d');const W=776,H=110,e=[22,18,26,41,88,64,30,15,9],s=[14,12,20,35,92,71,22,11,8];const bw=W/9;
+ e.forEach((v,i)=>{x.fillStyle=i==4||i==5?'#d4442a':'#cdd3d9';x.fillRect(i*bw+6,H-26-v*.7,bw/2-8,v*.7);x.fillStyle=i==4||i==5?'rgba(212,68,42,.5)':'#e2e6ea';x.fillRect(i*bw+bw/2,H-26-s[i]*.7,bw/2-8,s[i]*.7);
+  x.fillStyle='#7b858f';x.font='17px IBM Plex Mono';x.fillText('G'+i,i*bw+bw/2-14,H-4)});
+ x.fillStyle='#4a545e';x.font='16px IBM Plex Mono';x.fillText('MOVE / STILL',W-130,18);
+})();
+// timeline
+(()=>{const c=document.getElementById('tl'),x=c.getContext('2d');const W=1720,H=200;x.scale(2,2);const w=860,h=100;
+ x.strokeStyle='#e1e5e9';x.lineWidth=1;for(const y of [10,40,70]){x.beginPath();x.moveTo(0,y);x.lineTo(w,y);x.stroke()}
+ x.setLineDash([3,3]);x.strokeStyle='#7b858f';x.beginPath();x.moveTo(0,40);x.lineTo(w,40);x.stroke();x.setLineDash([]);
+ x.fillStyle='#7b858f';x.font='8.5px IBM Plex Mono';x.fillText('THRESHOLD 0.5',w-78,36);
+ const series=[['#14181c',0],['#7b858f',1],['#b3bbc3',2]];
+ series.forEach(([col,k])=>{x.strokeStyle=col;x.lineWidth=k?1:1.6;x.beginPath();for(let i=0;i<=w;i+=3){const t=i/w;let p=.06+hash(i>>3,k)*.06;if(t>.62)p=.06+(.88-.06)/(1+Math.exp(-(t-.7)*40))-k*.08*(t>.66);if(k==2&&t>.62)p=Math.min(p,.62+hash(i,9)*.05);const y=70-p*60;i?x.lineTo(i,y):x.moveTo(i,y)}x.stroke()});
+ x.fillStyle='rgba(212,68,42,.12)';x.fillRect(w*.7,8,w*.3,64);x.fillStyle='#d4442a';x.fillRect(w*.7,8,1.5,64);x.fillText('PERSON 39:55',w*.7+5,18);
+ x.fillStyle='#7b858f';['32:10','34:10','36:10','38:10','40:10','42:10'].forEach((t,i)=>x.fillText(t,i*w/5.4,92));
+ [['WI-FI','#14181c'],['RADAR','#7b858f'],['THERMAL','#b3bbc3']].forEach(([t,c2],i)=>{x.fillStyle=c2;x.fillRect(8+i*76,4,10,2);x.fillText(t,22+i*76,8)});
+})();
+});
+</script>
+</body></html>

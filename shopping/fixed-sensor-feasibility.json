@@ -1,0 +1,32 @@
+{
+  "status": "SCREENING ONLY; actual mass and running torque unverified",
+  "architecture": "four wheel motors, fixed sensor mounts, fifth motor spare",
+  "mass_ceiling_kg": 6,
+  "speed_m_s": 0.1,
+  "accel_m_s2": 0.1,
+  "wheel_radius_m": 0.04,
+  "rolling_resistance_assumption": 0.08,
+  "efficiency_assumption": 0.65,
+  "force_N": 5.3088,
+  "torque_per_wheel_Nm": 0.08167384615384614,
+  "required_running_torque_with_1_5_reserve_Nm": 0.1225107692307692,
+  "rpm": 23.8732414637843,
+  "microstep_setting": 8,
+  "pulses_s_each": 636.6197723675813,
+  "aggregate_pulses_s_four_equal_speed": 2546.479089470325,
+  "frame_rails_count": 4,
+  "motor_mass_onboard_kg": 0.96,
+  "shaft_height_mm": 40,
+  "rail_underside_nominal_mm": 71,
+  "motor_bottom_nominal_mm": 18.85,
+  "unknown": [
+    "final mass and CG",
+    "motor running torque at chosen current and voltage",
+    "bearing and hub load capacity",
+    "joint strength, slip and fatigue",
+    "sensor models and detection performance",
+    "power bank output and Pi model",
+    "driver temperature",
+    "firmware timing and missed steps"
+  ]
+}

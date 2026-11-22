@@ -1,0 +1,2 @@
+ASIN B0B24YS695 — listing bullets read via the logged-in Amazon session on 2026-09-07
+AITIAO CNC Shield V3.0 + 4× DRV8825 + 4× heatsinks. DRV8825 confirmed by bullets ('full to 1/32 step, adjustable current limit, overcurrent/overtemperature protection'). 'D12 and D13 ... custom firmware to perform the complete axis 4' matches the A-axis plan. No jumper caps listed — user owns them (needs 6).

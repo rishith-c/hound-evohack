@@ -1,0 +1,140 @@
+{
+ "pack": {
+  "v_open": 10.5,
+  "i_lead": 6.518360621454724,
+  "v_shield_vmot": 10.32757632484128,
+  "v_xl4015_in": 10.277460948474332,
+  "i_xl4015_in": 2.5183606214547236,
+  "drop_lead_mV": 172.42367515872024,
+  "drop_xl_branch_mV": 50.11537636694818
+ },
+ "bank": {
+  "i_bank": 2.3000000000000003,
+  "v_bank_loaded": 4.8965,
+  "v_pi_in": 4.77874,
+  "v_pi_usb": 4.72874,
+  "v_hub_in": 4.64984,
+  "v_ld2450": 4.63044,
+  "v_webcam": 4.52804,
+  "v_fan": 4.937296,
+  "i_pi_usb": 1.0,
+  "i_header": 0.0
+ },
+ "checks": [
+  {
+   "name": "VMOT at the shield terminal vs DRV8825 UVLO 8.2 V (DS) + 1 V margin",
+   "value": 10.328,
+   "limit": 9.2,
+   "unit": "V",
+   "ok": true
+  },
+  {
+   "name": "XL4015 input vs 5.0 V out + 1.0 V dropout (DS)",
+   "value": 10.277,
+   "limit": 6.0,
+   "unit": "V",
+   "ok": true
+  },
+  {
+   "name": "pack lead current vs 14 AWG / Deans 50 A",
+   "value": 6.518,
+   "limit": 20.0,
+   "unit": "A",
+   "ok": true
+  },
+  {
+   "name": "lead drop (pack \u2192 shield) as a fraction of 10.5 V",
+   "value": 0.016,
+   "limit": 0.03,
+   "unit": "",
+   "ok": true
+  },
+  {
+   "name": "bank current vs 3.0 A rating",
+   "value": 2.3,
+   "limit": 3.0,
+   "unit": "A",
+   "ok": true
+  },
+  {
+   "name": "Pi input vs its 4.63 V under-voltage warning + 0.1 V",
+   "value": 4.779,
+   "limit": 4.73,
+   "unit": "V",
+   "ok": true
+  },
+  {
+   "name": "Pi USB total vs the 1.2 A shared limit (Pi docs)",
+   "value": 1.0,
+   "limit": 1.2,
+   "unit": "A",
+   "ok": true
+  },
+  {
+   "name": "XL4015 output (both servos stalled + fan, momentary) vs its 5 A peak rating",
+   "value": 4.4,
+   "limit": 5.0,
+   "unit": "A",
+   "ok": true
+  },
+  {
+   "name": "LD2450 supply at the radar vs its 5 V \u00b110 % floor (DS 4.5 V)",
+   "value": 4.63,
+   "limit": 4.5,
+   "unit": "V",
+   "ok": true
+  },
+  {
+   "name": "webcam supply on its captive 1.5 m cable vs the ~4.4 V most cameras still run at (USB spec floor is 4.75: run 720p if it drops out)",
+   "value": 4.528,
+   "limit": 4.4,
+   "unit": "V",
+   "ok": true
+  },
+  {
+   "name": "fan supply on the XL4015 rail during a servo stall vs 4.5 V",
+   "value": 4.937,
+   "limit": 4.5,
+   "unit": "V",
+   "ok": true
+  }
+ ],
+ "i2c3": {
+  "10000": {
+   "r": 10000,
+   "c_pf": 60,
+   "t_rise_ns": 508.37999999999994,
+   "ok_100k": true,
+   "ok_400k": false,
+   "ok_1M": false,
+   "i_sink_mA": 0.33
+  },
+  "4700": {
+   "r": 4700,
+   "c_pf": 60,
+   "t_rise_ns": 238.93860000000006,
+   "ok_100k": true,
+   "ok_400k": true,
+   "ok_1M": false,
+   "i_sink_mA": 0.7021276595744681
+  },
+  "2200": {
+   "r": 2200,
+   "c_pf": 60,
+   "t_rise_ns": 111.8436,
+   "ok_100k": true,
+   "ok_400k": true,
+   "ok_1M": true,
+   "i_sink_mA": 1.4999999999999998
+  }
+ },
+ "i2c1": {
+  "r": 3506.493506493506,
+  "c_pf": 80,
+  "t_rise_ns": 237.6841558441558,
+  "ok_100k": true,
+  "ok_400k": true,
+  "ok_1M": false,
+  "i_sink_mA": 0.9411111111111111
+ }
+}

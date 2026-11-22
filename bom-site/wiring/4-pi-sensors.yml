@@ -1,0 +1,271 @@
+metadata:
+  title: 'Hound 4 — Pi 40-pin header: thermal + ToF ×2 (I2C-1), microphone (I2S), LD2450 radar (UART)'
+connectors:
+  PI:
+    type: Raspberry Pi 4 — 40-pin header (used pins only)
+    pinlabels:
+    - 1 3V3
+    - 3 SDA1 BCM2
+    - 4 5V
+    - 5 SCL1 BCM3
+    - 8 BCM14 UART-TXD
+    - 9 GND
+    - 10 BCM15 UART-RXD
+    - 12 BCM18 I2S-BCLK
+    - 13 BCM27 XSHUT-rear
+    - 14 GND
+    - 15 BCM22 XSHUT-front
+    - 17 3V3
+    - 20 GND
+    - 30 GND
+    - 34 GND
+    - 35 BCM19 I2S-LRCLK
+    - 38 BCM20 I2S-DIN
+    - 39 GND
+    notes: 'Physical pin numbers (odd = inner row from the SD-card end). One I2C bus (pins 3/5) for thermal + both ToFs; three boards share it, so chain through their second headers or a mini breadboard
+      — one female per Pi pin. Pins 4/8/10/34 = the LD2450: 5 V on pin 4 only, never on 8 or 10.'
+  MLX:
+    type: MLX90640 thermal array breakout (0x33)
+    pinlabels:
+    - VIN 3V3
+    - GND
+    - SCL
+    - SDA
+    notes: 'On I2C-1 with the two ToFs (no address clash: 0x33 / 0x29 / 0x30). 400 kHz gives 8 fps; station.py uses 4. Rides beside the webcam on the tilt bracket.'
+  TOF_F:
+    type: VL53L1X ToF FRONT (0x29 → re-addressed 0x30 by XSHUT)
+    pinlabels:
+    - VIN 3V3
+    - GND
+    - SDA
+    - SCL
+    - XSHUT
+    notes: Both ToFs share I2C-1 and boot at 0x29. At every start sensing/tof.py holds BOTH XSHUT low, wakes FRONT alone and moves it to 0x30, then wakes REAR (0x29). Waking both before the change would
+      move both.
+  TOF_R:
+    type: VL53L1X ToF REAR (0x29)
+    pinlabels:
+    - VIN 3V3
+    - GND
+    - SDA
+    - SCL
+    - XSHUT
+    notes: XSHUT on BCM 27 so the Pi can reset it independently.
+  MIC:
+    type: INMP441 I2S microphone
+    pinlabels:
+    - VDD 3V3
+    - GND
+    - SCK
+    - WS
+    - SD
+    - L/R
+    notes: L/R tied to GND = left channel. On the post front face, 120 mm up (assembly.py).
+  LD2450:
+    type: HLK-LD2450 (centre, x/y tracker)
+    pinlabels:
+    - 5V
+    - GND
+    - TX
+    - RX
+    notes: 'Silkscreen 5V GND TX RX; 5 V supply, 3.3 V UART, 256000 baud. No adapter: straight onto the Pi header — the Pi''s own UART (/dev/ttyAMA0 once pi/enable_gpio_uart.sh has run). Powered OFF by
+      default: same 24 GHz band as the LD2410Cs, interference untested.'
+cables:
+  W_MLX:
+    gauge: 26 AWG
+    length: 0.35
+    colors:
+    - RD
+    - BK
+    - YE
+    - BU
+    category: bundle
+    notes: 'to the turret: leave a service loop for tilt'
+  W_TOF_F:
+    gauge: 26 AWG
+    length: 0.25
+    colors:
+    - RD
+    - BK
+    - BU
+    - YE
+    - WH
+    category: bundle
+  W_TOF_R:
+    gauge: 26 AWG
+    length: 0.35
+    colors:
+    - RD
+    - BK
+    - BU
+    - YE
+    - WH
+    category: bundle
+  W_MIC:
+    gauge: 26 AWG
+    length: 0.25
+    colors:
+    - RD
+    - BK
+    - GN
+    - OG
+    - VT
+    - BK
+    category: bundle
+  W_LD2450:
+    gauge: 26 AWG
+    length: 0.25
+    colors:
+    - RD
+    - BK
+    - GN
+    - WH
+    category: bundle
+    notes: 5V, GND, radar TX → Pi RXD, radar RX ← Pi TXD — one 4-wire Dupont lead
+connections:
+- - PI:
+    - 1 3V3
+  - W_MLX:
+    - 1
+  - MLX:
+    - VIN 3V3
+- - PI:
+    - 9 GND
+  - W_MLX:
+    - 2
+  - MLX:
+    - GND
+- - PI:
+    - 5 SCL1 BCM3
+  - W_MLX:
+    - 3
+  - MLX:
+    - SCL
+- - PI:
+    - 3 SDA1 BCM2
+  - W_MLX:
+    - 4
+  - MLX:
+    - SDA
+- - PI:
+    - 17 3V3
+  - W_TOF_F:
+    - 1
+  - TOF_F:
+    - VIN 3V3
+- - PI:
+    - 14 GND
+  - W_TOF_F:
+    - 2
+  - TOF_F:
+    - GND
+- - PI:
+    - 3 SDA1 BCM2
+  - W_TOF_F:
+    - 3
+  - TOF_F:
+    - SDA
+- - PI:
+    - 5 SCL1 BCM3
+  - W_TOF_F:
+    - 4
+  - TOF_F:
+    - SCL
+- - PI:
+    - 15 BCM22 XSHUT-front
+  - W_TOF_F:
+    - 5
+  - TOF_F:
+    - XSHUT
+- - PI:
+    - 17 3V3
+  - W_TOF_R:
+    - 1
+  - TOF_R:
+    - VIN 3V3
+- - PI:
+    - 20 GND
+  - W_TOF_R:
+    - 2
+  - TOF_R:
+    - GND
+- - PI:
+    - 3 SDA1 BCM2
+  - W_TOF_R:
+    - 3
+  - TOF_R:
+    - SDA
+- - PI:
+    - 5 SCL1 BCM3
+  - W_TOF_R:
+    - 4
+  - TOF_R:
+    - SCL
+- - PI:
+    - 13 BCM27 XSHUT-rear
+  - W_TOF_R:
+    - 5
+  - TOF_R:
+    - XSHUT
+- - PI:
+    - 17 3V3
+  - W_MIC:
+    - 1
+  - MIC:
+    - VDD 3V3
+- - PI:
+    - 39 GND
+  - W_MIC:
+    - 2
+  - MIC:
+    - GND
+- - PI:
+    - 12 BCM18 I2S-BCLK
+  - W_MIC:
+    - 3
+  - MIC:
+    - SCK
+- - PI:
+    - 35 BCM19 I2S-LRCLK
+  - W_MIC:
+    - 4
+  - MIC:
+    - WS
+- - PI:
+    - 38 BCM20 I2S-DIN
+  - W_MIC:
+    - 5
+  - MIC:
+    - SD
+- - PI:
+    - 30 GND
+  - W_MIC:
+    - 6
+  - MIC:
+    - L/R
+- - PI:
+    - 4 5V
+  - W_LD2450:
+    - 1
+  - LD2450:
+    - 5V
+- - PI:
+    - 34 GND
+  - W_LD2450:
+    - 2
+  - LD2450:
+    - GND
+- - LD2450:
+    - TX
+  - W_LD2450:
+    - 3
+  - PI:
+    - 10 BCM15 UART-RXD
+- - LD2450:
+    - RX
+  - W_LD2450:
+    - 4
+  - PI:
+    - 8 BCM14 UART-TXD
+options:
+  bgcolor: '#ffffff'

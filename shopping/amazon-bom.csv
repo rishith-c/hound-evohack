@@ -1,0 +1,31 @@
+category,status,asin,item,packs,pack_price,total,url
+Drivetrain,buy,B0DWSWQV4T,SmaringRobot 4× 80 mm mecanum wheels with 5 mm couplings,1,29.99,29.99,https://www.amazon.com/dp/B0DWSWQV4T
+Drivetrain,buy,B073QW9RPZ,Anndason 6× steel NEMA 17 L-brackets with screws,1,16.99,16.99,https://www.amazon.com/dp/B073QW9RPZ
+Frame,buy,B099M9DMSL,VICHSAMWY 4× 350 mm 2020 V-slot aluminium extrusion,1,16.59,16.59,https://www.amazon.com/dp/B099M9DMSL
+Frame,buy,B0F1B85397,TOCLUX 20× 2020 corner brackets with M5 screws and T-nuts,1,14.99,14.99,https://www.amazon.com/dp/B0F1B85397
+Frame,buy,B0FQ55VFDK,"Bemaka 2020 T-nut kit, M3/M4/M5, with M4×10 and M4×12 screws",1,13.99,13.99,https://www.amazon.com/dp/B0FQ55VFDK
+Motion control,buy,B0B24YS695,CNC Shield V3 kit with 4× DRV8825 drivers and heatsinks,1,15.99,15.99,https://www.amazon.com/dp/B0B24YS695
+Motion control,buy,B0DY6GQMJX,SIXQJZML 2× 40 × 40 × 10 mm 5 V fans,1,5.99,5.99,https://www.amazon.com/dp/B0DY6GQMJX
+Sensing and compute,buy,B0FQHVSX91,"MLX90640-D55 thermal camera, 32×24, 55° FoV",1,66.30,66.30,https://www.amazon.com/dp/B0FQHVSX91
+Sensing and compute,buy,B09V4DS888,DWEII 2× VL53L1X time-of-flight distance modules,1,14.99,14.99,https://www.amazon.com/dp/B09V4DS888
+Fasteners and assembly,buy,B0FGV5FCBN,"Fgruh 750-piece M3 screw, nut and washer assortment",1,9.99,9.99,https://www.amazon.com/dp/B0FGV5FCBN
+Fasteners and assembly,buy,B0DFWWFY4Q,"645-piece M2 stainless screw, nut and washer set, button head",1,6.99,6.99,https://www.amazon.com/dp/B0DFWWFY4Q
+Fasteners and assembly,buy,B0F9T5G2J5,ALLWIN 100 cable mounts + 100 cable ties,1,6.99,6.99,https://www.amazon.com/dp/B0F9T5G2J5
+Only if the gel-blaster pack falls short,optional,B08CZF373Y,"OVONIC 3S 11.1 V 2200 mAh 50 C LiPo, Deans T-plug",1,16.99,16.99,https://www.amazon.com/dp/B08CZF373Y
+Only if the gel-blaster pack falls short,optional,B0CV64ZB2L,"SKYRC B6AC Neo balance charger, 60 W AC",1,53.00,53.00,https://www.amazon.com/dp/B0CV64ZB2L
+Only if the gel-blaster pack falls short,optional,B072KKHR73,"2× T-plug to 4 mm banana charge leads, 14 AWG, 30 cm",1,8.98,8.98,https://www.amazon.com/dp/B072KKHR73
+Only if the gel-blaster pack falls short,optional,B0D9NSWLJS,"Deans T-plug connectors, 5 pairs with 14 AWG silicone pigtails",1,7.99,7.99,https://www.amazon.com/dp/B0D9NSWLJS
+Only if the gel-blaster pack falls short,optional,B07VR4SV8C,AOICRIE 2× 1S–8S cell voltage alarms,1,6.59,6.59,https://www.amazon.com/dp/B07VR4SV8C
+Only if the gel-blaster pack falls short,optional,B08QCMMGJT,Tenergy LiPo charging bag,1,8.99,8.99,https://www.amazon.com/dp/B08QCMMGJT
+Only if the gel-blaster pack falls short,optional,B08N42RQF6,Bicmice US IEC C7 mains cord 6 ft,1,6.99,6.99,https://www.amazon.com/dp/B08N42RQF6
+Only if you lack it,optional,B07PGYHYV8,OVERTURE black PETG 1 kg 1.75 mm,1,14.69,14.69,https://www.amazon.com/dp/B07PGYHYV8
+Only if you lack it,optional,B07YGZQ4H8,"Kingston Canvas Select Plus 64 GB microSD, A1",1,17.99,17.99,https://www.amazon.com/dp/B07YGZQ4H8
+Only if you lack it,optional,B01MFA3OFA,Ginsco 580-piece heat-shrink assortment,1,7.99,7.99,https://www.amazon.com/dp/B01MFA3OFA
+"Extra senses, if budget allows",optional,B0F6MRMNLH,"SCD41 CO2 + temperature + humidity module, I2C",1,26.99,26.99,https://www.amazon.com/dp/B0F6MRMNLH
+"Extra senses, if budget allows",optional,B0GSZJFJVM,3× INMP441 I2S microphone modules with Dupont cables,1,8.49,8.49,https://www.amazon.com/dp/B0GSZJFJVM
+Tools,optional,B0GGHDNZWJ,MEIYA hanging scale,1,7.99,7.99,https://www.amazon.com/dp/B0GGHDNZWJ
+Tools,optional,B08Y8M54M9,Jiavarry 150 mm digital caliper,1,21.98,21.98,https://www.amazon.com/dp/B08Y8M54M9
+Tools,optional,B0DYJ465TC,Westinghouse MM600V15 multimeter,1,34.89,34.89,https://www.amazon.com/dp/B0DYJ465TC
+Tools,optional,B087767KNW,Q-MING soldering iron kit,1,12.59,12.59,https://www.amazon.com/dp/B087767KNW
+Tools,optional,B0CJBRYQF3,AMTOVL metric hex key set,1,9.99,9.99,https://www.amazon.com/dp/B0CJBRYQF3
+Tools,optional,B08Y6GDS61,DOWELL wire strippers,1,9.99,9.99,https://www.amazon.com/dp/B08Y6GDS61

@@ -1,0 +1,9 @@
+ASIN B0GSZJFJVM
+3Pcs INMP441 Omnidirectional Microphone Module with Dupont Cable
+Observed 2026-09-05 on Amazon US search results, page 1, query "INMP441 I2S microphone module"
+Price: $8.49 (3 pack)
+Delivery: FREE delivery tomorrow, Sep 6
+Rating: 4.6 out of 5 stars
+Why selected: cheapest INMP441 pack that includes cables (B0FKFR1WFX $8.99 4.4; B0H1D77BN8 $9.99 4.8; 5-packs $11.69-12.51).
+Role: OPTIONAL. I2S digital mic to Pi GPIO 18/19/20. Rescue listening devices detect calling, knocking, movement; one mic gives energy only, two give a coarse bearing.
+Not verified from this capture: board hole size, cable length.

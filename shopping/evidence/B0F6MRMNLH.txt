@@ -1,0 +1,9 @@
+ASIN B0F6MRMNLH
+SCD41 Gas Sensor Module 2.4-5.5V, 2 in 1 Gas Sensor Module Detects CO2 Carbon Dioxide, Temperature and Humidity, I2C
+Observed 2026-09-05 on Amazon US search results, page 1, query "SCD41 CO2 sensor module"
+Price: $26.99
+Delivery: FREE delivery tomorrow 7-11 AM
+Rating: 4.1 out of 5 stars
+Why selected: reviewed listing at mid price. B0GWQJZ7LY is $22.99 but 5.0 stars on very few reviews; B0FDLDBLTM $28.97 4.0; HiLetgo B0CDWXWCS5 $28.99 3.7. SCD40 variants ($19.99) have a narrower 400-2000 ppm range - SCD41 reads to 5000 ppm.
+Role: OPTIONAL. SAR literature (MDPI Sensors 18(3):852) uses CO2 to narrow the search area; a person in a closed room raises CO2 by hundreds of ppm over minutes. Photoacoustic, I2C 0x62.
+Not verified from this capture: board dimensions and hole spacing.

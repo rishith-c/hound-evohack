@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+.vercel/
+.DS_Store
+models/.*.glb
+models/parts/.*.glb
+
+# Wi-Fi credentials for the ESP32 firmware (see firmware/csi_rx_udp): never in git
+secrets.h
+
+# Wi-Fi network data: simulated windows are rebuilt by ml/simulate_csi.py; recordings stay on the machine that made them
+ml/data/*.npz
+ml/data/real/

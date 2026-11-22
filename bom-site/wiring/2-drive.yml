@@ -1,0 +1,241 @@
+metadata:
+  title: Hound 2 — UNO R4 WiFi + CNC Shield v3 + DRV8825 ×4 + NEMA 17 ×4 (frozen v1.0 drive)
+connectors:
+  R4:
+    type: Arduino UNO R4 WiFi — under the shield (stacked, no wires)
+    pinlabels:
+    - D2 X STEP
+    - D5 X DIR
+    - D3 Y STEP
+    - D6 Y DIR
+    - D4 Z STEP
+    - D7 Z DIR
+    - D12 A STEP
+    - D13 A DIR
+    - D8 EN (all four)
+    - A4 SDA → PCA9685
+    - A5 SCL → PCA9685
+    - USB-C → Pi hub
+    notes: 'Stack the shield on the R4; the pins listed are what the shield takes. Firmware r4_drive v1.0-best-drive: 30 kHz step ISR, 1/32, 415 mm/s. Logic 5 V. USB from the Pi hub; ENABLE_WIFI 0.'
+  SHIELD_CTRL:
+    type: CNC Shield v3 — jumpers (no wires)
+    pinlabels:
+    - A-axis jumper D12
+    - A-axis jumper D13
+    - MS1 cap ×4
+    - MS2 (open) ×4
+    - MS3 cap ×4
+    notes: 'AS BUILT: caps on MS1 + MS3 under every driver = 1/32 (M0+M2 high, M1 low — Pololu table), MS2 open. Two jumpers on the A header = D12/D13 drive the A axis. No EN pull-up: the pack is unplugged
+      whenever the R4 is being flashed or reset.'
+  DRV:
+    type: DRV8825 ×4 in sockets X Y Z A (plug-in, no wires)
+    pinlabels:
+    - EN pin over the socket's EN label
+    - Vref 0.75 V = 1.5 A (I = 2·Vref on Pololu-pattern carriers)
+    - heatsink on
+    notes: 'Orientation: the driver''s EN pin over the socket''s EN label; trimpot toward the power terminal on Pololu layouts, clones vary — go by the label. Backwards = dead driver. Set Vref with motors
+      UNPLUGGED, meter black on the shield GND pin, red on the trimpot screw.'
+  X_MOT:
+    type: CNC Shield v3 — X driver motor header (BL)
+    pinlabels:
+    - 2B
+    - 2A
+    - 1A
+    - 1B
+    notes: '4-pin male header beside the X socket. Driver STEP = D2, DIR = D5, EN = D8 shared. Firmware map: BL = X.'
+  Y_MOT:
+    type: CNC Shield v3 — Y driver motor header (FL)
+    pinlabels:
+    - 2B
+    - 2A
+    - 1A
+    - 1B
+    notes: '4-pin male header beside the Y socket. Driver STEP = D3, DIR = D6, EN = D8 shared. Firmware map: FL = Y.'
+  Z_MOT:
+    type: CNC Shield v3 — Z driver motor header (BR)
+    pinlabels:
+    - 2B
+    - 2A
+    - 1A
+    - 1B
+    notes: '4-pin male header beside the Z socket. Driver STEP = D4, DIR = D7, EN = D8 shared. Firmware map: BR = Z.'
+  A_MOT:
+    type: CNC Shield v3 — A driver motor header (FR)
+    pinlabels:
+    - 2B
+    - 2A
+    - 1A
+    - 1B
+    notes: '4-pin male header beside the A socket. Driver STEP = D12, DIR = D13, EN = D8 shared. Firmware map: FR = A.'
+  M_BL:
+    type: JK42HS40 NEMA 17 — BL back-left (axis X)
+    pinlabels:
+    - coil A +
+    - coil A −
+    - coil B +
+    - coil B −
+    notes: 'Find the pairs with the meter: the two leads that read ~1.5–2 Ω are ONE coil. Lead colours vary between batches — the meter, not the colour, decides.'
+  M_FL:
+    type: JK42HS40 NEMA 17 — FL front-left (axis Y)
+    pinlabels:
+    - coil A +
+    - coil A −
+    - coil B +
+    - coil B −
+    notes: 'Find the pairs with the meter: the two leads that read ~1.5–2 Ω are ONE coil. Lead colours vary between batches — the meter, not the colour, decides.'
+  M_BR:
+    type: JK42HS40 NEMA 17 — BR back-right (axis Z)
+    pinlabels:
+    - coil A +
+    - coil A −
+    - coil B +
+    - coil B −
+    notes: 'Find the pairs with the meter: the two leads that read ~1.5–2 Ω are ONE coil. Lead colours vary between batches — the meter, not the colour, decides.'
+  M_FR:
+    type: JK42HS40 NEMA 17 — FR front-right (axis A)
+    pinlabels:
+    - coil A +
+    - coil A −
+    - coil B +
+    - coil B −
+    notes: 'Find the pairs with the meter: the two leads that read ~1.5–2 Ω are ONE coil. Lead colours vary between batches — the meter, not the colour, decides.'
+cables:
+  W_BL:
+    gauge: 26 AWG
+    length: 0.4
+    colors:
+    - RD
+    - BU
+    - GN
+    - BK
+    category: bundle
+    notes: '4-pin Dupont, 1.5 A per phase (2 A contacts): any pin that warms in the wheels-up test gets re-crimped'
+  W_FL:
+    gauge: 26 AWG
+    length: 0.4
+    colors:
+    - RD
+    - BU
+    - GN
+    - BK
+    category: bundle
+    notes: '4-pin Dupont, 1.5 A per phase (2 A contacts): any pin that warms in the wheels-up test gets re-crimped'
+  W_BR:
+    gauge: 26 AWG
+    length: 0.4
+    colors:
+    - RD
+    - BU
+    - GN
+    - BK
+    category: bundle
+    notes: '4-pin Dupont, 1.5 A per phase (2 A contacts): any pin that warms in the wheels-up test gets re-crimped'
+  W_FR:
+    gauge: 26 AWG
+    length: 0.4
+    colors:
+    - RD
+    - BU
+    - GN
+    - BK
+    category: bundle
+    notes: '4-pin Dupont, 1.5 A per phase (2 A contacts): any pin that warms in the wheels-up test gets re-crimped'
+connections:
+- - X_MOT:
+    - 2B
+  - W_BL:
+    - 1
+  - M_BL:
+    - coil B +
+- - X_MOT:
+    - 2A
+  - W_BL:
+    - 2
+  - M_BL:
+    - coil B −
+- - X_MOT:
+    - 1A
+  - W_BL:
+    - 3
+  - M_BL:
+    - coil A +
+- - X_MOT:
+    - 1B
+  - W_BL:
+    - 4
+  - M_BL:
+    - coil A −
+- - Y_MOT:
+    - 2B
+  - W_FL:
+    - 1
+  - M_FL:
+    - coil B +
+- - Y_MOT:
+    - 2A
+  - W_FL:
+    - 2
+  - M_FL:
+    - coil B −
+- - Y_MOT:
+    - 1A
+  - W_FL:
+    - 3
+  - M_FL:
+    - coil A +
+- - Y_MOT:
+    - 1B
+  - W_FL:
+    - 4
+  - M_FL:
+    - coil A −
+- - Z_MOT:
+    - 2B
+  - W_BR:
+    - 1
+  - M_BR:
+    - coil B +
+- - Z_MOT:
+    - 2A
+  - W_BR:
+    - 2
+  - M_BR:
+    - coil B −
+- - Z_MOT:
+    - 1A
+  - W_BR:
+    - 3
+  - M_BR:
+    - coil A +
+- - Z_MOT:
+    - 1B
+  - W_BR:
+    - 4
+  - M_BR:
+    - coil A −
+- - A_MOT:
+    - 2B
+  - W_FR:
+    - 1
+  - M_FR:
+    - coil B +
+- - A_MOT:
+    - 2A
+  - W_FR:
+    - 2
+  - M_FR:
+    - coil B −
+- - A_MOT:
+    - 1A
+  - W_FR:
+    - 3
+  - M_FR:
+    - coil A +
+- - A_MOT:
+    - 1B
+  - W_FR:
+    - 4
+  - M_FR:
+    - coil A −
+options:
+  bgcolor: '#ffffff'

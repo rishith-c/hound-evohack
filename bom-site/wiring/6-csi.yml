@@ -1,0 +1,36 @@
+metadata:
+  title: 'Hound 6 — WiFi CSI nodes: ESP32-S3 no.3 on the rover on its own power bank, no.2 off the rover'
+connectors:
+  ESP3:
+    type: ESP32-S3 DevKitC no.3 — csi_rx_udp, ON the rover
+    pinlabels:
+    - USB-C
+    notes: 'Powered by its own small bank strapped next to it: nothing else plugs into the devkit. Joins the Pi hotspot (channel 6) and streams the CSI of every probe to the Pi, UDP 5005. secrets.h holds
+      the hotspot name and password (git-ignored).'
+  BANK2:
+    type: Second USB power bank (any, ≥ 1 A) — ESP32 no.3 only
+    pinlabels:
+    - USB-A out
+    notes: Velcro it to the deck beside the devkit. It never touches the rover's electronics.
+  ESP2:
+    type: ESP32-S3 DevKitC no.2 — csi_tx, OFF the rover
+    pinlabels:
+    - USB-C from any 5 V charger
+    notes: Dropped ~3 m along the wall. 100 Hz ESP-NOW probes on channel 6. Radio link only — no wire to the rover.
+cables:
+  W_ESP:
+    gauge: 28 AWG
+    length: 0.3
+    colors:
+    - WH
+    category: bundle
+    notes: any short USB-A → USB-C cable
+connections:
+- - BANK2:
+    - USB-A out
+  - W_ESP:
+    - 1
+  - ESP3:
+    - USB-C
+options:
+  bgcolor: '#ffffff'

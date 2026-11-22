@@ -1,0 +1,10 @@
+ASIN B08CZF373Y
+OVONIC 3S Lipo Battery 50C 2200mAh 11.1V Lipo Battery with Dean-Style T Connector for RC Airplane Quadcopter Helicopter FPV Drone
+Observed 2026-09-05 on the Amazon US product page (user-supplied link), variant 1pcs
+Price: $16.99
+Delivery: FREE delivery Wednesday, September 9
+Listing bullets: 11.1 V, 3S, 2200 mAh, 50C discharge, charging plug JST-XHR-4P, discharging plug Dean-Style T connector, soft case.
+Dimensions (+/-3 mm): 105 x 33 x 20 mm. Weight (+/-5 g): 179 g per bullet; spec table says "Battery Weight 126 g" - the bullet figure is used as the conservative design value.
+Why selected: user's choice, replacing Zeee B0972RKJDS (5200 mAh, 343 g, $34.99). Saves 164 g and $18; runtime falls from ~2 h to ~40-55 min at 1.5-1.7 A/phase, which is fine for a hackathon with the charger on hand.
+Consequence: T-plug connector. XT60 pigtails (B07BF8154S) and XT60 charge extension (B09CT5VGPW) in the battery group no longer mate; replaced with T-plug equivalents.
+Not verified from this capture: actual mass (two figures on the listing), balance-lead length.

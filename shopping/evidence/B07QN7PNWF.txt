@@ -1,0 +1,4 @@
+ASIN B07QN7PNWF — OliRC 2× T-plug (Deans) male-to-female extension, 14 AWG, 30 cm
+Checked 2026-09-06. $7.59, In Stock, FREE delivery tomorrow Sep 7. Rating 4.6. Bullets: "Male Deans to Female Deans Adapter Wire", "Wire: 14awg 30cm", "Quantity: 2pcs".
+Use: one whole = pack (under deck) → e-stop mating pair on the deck top rear corner (~200 mm path; 30 cm reaches). The second one is cut at the middle: two 15 cm pigtails, one of each gender. The pigtail whose plug MATES WITH THE BATTERY (opposite gender to the pack lead) is stripped into the 5-way Wago pair as the harness side; the other is the spare / battery-gender for a bench lead.
+Why this and not an adapter: an XT60↔Deans adapter is one more joint in the 4 A path and needs XT60 pigtails as well. This replaces the XT60 pigtail line (B07BF8154S, $6.99) outright: net +$0.60, both genders guaranteed, 14 AWG (7 A burst budget is 4 A).
